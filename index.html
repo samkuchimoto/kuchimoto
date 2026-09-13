@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kuchimoto Studio — Independent Engineering Lab, Paris</title>
+<meta name="description" content="Kuchimoto Studio is an independent software engineering practice in Paris led by Samuel Louissaint. Custom production web platforms in TypeScript. No no-code stacks, no plugin bloat.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#000000">
+<link rel="canonical" href="https://kuchimoto.com/">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kuchimoto.com/">
+<meta property="og:title" content="Kuchimoto Studio — Independent Engineering Lab, Paris">
+<meta property="og:description" content="Custom production web platforms, engineered from the ground up in TypeScript. Led by Samuel Louissaint, Paris.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@SamLouissaint_">
+
+<!-- Inline SVG favicon: one request saved, and it scales. -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000'/><text x='16' y='23' font-family='monospace' font-size='20' font-weight='700' fill='%23fff' text-anchor='middle'>K</text></svg>">
+
+<style>
+/* ---------------------------------------------------------------------
+   No webfonts, on purpose.
+
+   The page opposite claims sub-second delivery and zero asset bloat, so
+   it does not open by requesting two font families from a third-party
+   CDN — that is a render-blocking round trip to fonts.googleapis.com
+   plus the files themselves, spent on a page whose entire argument is
+   that it does not spend things like that. The stacks below prefer
+   Inter/Geist if the visitor happens to have them, then fall back to the
+   platform UI face, which on every target OS is already a tight,
+   neutral grotesque. Zero network cost, zero layout shift, no FOUT.
+   --------------------------------------------------------------------- */
+:root {
+  --bg: #000000;
+  --fg: #ffffff;
+  --muted: #888888;      /* 5.9:1 on black — clears WCAG AA for body text */
+  --line: #1f1f1f;
+  --line-strong: #262626;
+  --sans: Inter, Geist, "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  --mono: "Geist Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  --gutter: clamp(1.25rem, 4vw, 3.5rem);
+  --maxw: 1400px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.011em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: inherit; text-decoration: none; }
+
+:focus-visible {
+  outline: 1px solid var(--fg);
+  outline-offset: 3px;
+}
+
+.mono {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.muted { color: var(--muted); }
+
+.shell {
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+}
+.skip:focus {
+  left: var(--gutter);
+  top: 0.5rem;
+  z-index: 100;
+  background: var(--fg);
+  color: var(--bg);
+  padding: 0.5rem 0.85rem;
+}
+
+/* ---------------------------------- header */
+.statusbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.statusbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-block: 0.9rem;
+}
+.brand { display: flex; align-items: baseline; gap: 0.5rem; flex-wrap: wrap; }
+.brand b { font-weight: 600; letter-spacing: 0.02em; }
+
+/* The live-status dot. A 6px square, not a circle: the whole page is
+   built from 1px rectangles and this keeps that vocabulary. */
+.pulse {
+  width: 6px; height: 6px;
+  background: var(--fg);
+  display: inline-block;
+  flex: none;
+  animation: blink 2.4s steps(1, end) infinite;
+}
+@keyframes blink { 0%, 60% { opacity: 1; } 61%, 100% { opacity: 0.25; } }
+@media (prefers-reduced-motion: reduce) {
+  .pulse { animation: none; }
+}
+
+.availability { display: flex; align-items: center; gap: 0.55rem; }
+
+.nav { display: flex; gap: 1.5rem; }
+.nav a { position: relative; transition: opacity 0.15s ease; }
+.nav a:hover { opacity: 0.55; }
+
+/* Two of the three status-bar zones collapse on narrow screens. The
+   availability line is the first to go: it is the least load-bearing of
+   the three and the only one that is pure prose. */
+@media (max-width: 1080px) { .availability { display: none; } }
+@media (max-width: 720px) {
+  .nav a:not(.nav-cta) { display: none; }
+  .statusbar-inner { padding-block: 0.75rem; }
+}
+
+/* ---------------------------------- hero */
+.hero { border-bottom: 1px solid var(--line); }
+.hero-inner { padding-block: clamp(4rem, 14vh, 9rem) clamp(3rem, 9vh, 6rem); }
+
+h1 {
+  margin: 1.75rem 0 0;
+  font-size: clamp(2rem, 5.4vw, 4.25rem);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  font-weight: 600;
+  max-width: 22ch;
+  text-wrap: balance;
+}
+h1 .dim { color: var(--muted); }
+
+.lede {
+  margin: 1.75rem 0 0;
+  max-width: 58ch;
+  font-size: clamp(0.95rem, 1.15vw, 1.0625rem);
+  color: var(--muted);
+  line-height: 1.65;
+  letter-spacing: -0.005em;
+}
+.lede strong { color: var(--fg); font-weight: 500; }
+
+.actions {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.4rem;
+  border: 1px solid var(--fg);
+  background: var(--fg);
+  color: var(--bg);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.btn:hover { background: transparent; color: var(--fg); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--fg);
+  border-color: var(--line-strong);
+}
+.btn-ghost:hover { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+
+/* ---------------------------------- section scaffolding */
+section { border-bottom: 1px solid var(--line); }
+
+.sec-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-block: 1.1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+/* ---------------------------------- work */
+.work {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.work > article { padding: clamp(1.75rem, 3.5vw, 3rem) 0; }
+.work > article:first-child {
+  border-right: 1px solid var(--line);
+  padding-right: clamp(1.75rem, 3.5vw, 3rem);
+}
+.work > article:last-child { padding-left: clamp(1.75rem, 3.5vw, 3rem); }
+
+@media (max-width: 900px) {
+  .work { grid-template-columns: minmax(0, 1fr); }
+  .work > article:first-child {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    padding-right: 0;
+  }
+  .work > article:last-child { padding-left: 0; }
+}
+
+/* Reserve two lines for the tag whatever its length. Card 02's tag wraps
+   and card 01's doesn't, which dropped the second project title half a
+   line lower than the first — the one thing the eye actually checks when
+   two cards sit side by side. */
+.work .tag { min-height: 2.8em; }
+@media (max-width: 900px) { .work .tag { min-height: 0; } }
+
+.work h3 {
+  margin: 1rem 0 0;
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+}
+.work h3 .jp {
+  font-size: 0.58em;
+  color: var(--muted);
+  font-weight: 400;
+  letter-spacing: 0;
+  margin-left: 0.45rem;
+}
+.work p:not(.mono) {
+  margin: 1rem 0 0;
+  color: var(--muted);
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  max-width: 52ch;
+}
+
+dl.spec {
+  margin: 1.75rem 0 0;
+  border-top: 1px solid var(--line);
+}
+dl.spec > div {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  gap: 1rem;
+  padding-block: 0.7rem;
+  border-bottom: 1px solid var(--line);
+}
+dl.spec dt { color: var(--muted); }
+dl.spec dd { margin: 0; font-size: 0.8125rem; line-height: 1.55; word-break: break-word; }
+dl.spec dd.mono { font-size: 0.75rem; text-transform: none; letter-spacing: 0.02em; }
+
+@media (max-width: 460px) {
+  dl.spec > div { grid-template-columns: minmax(0, 1fr); gap: 0.3rem; }
+}
+
+.work .actions { margin-top: 1.5rem; }
+.work .btn { padding: 0.7rem 1.1rem; font-size: 0.8125rem; }
+
+/* ---------------------------------- standards */
+.standards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.standards > div {
+  padding: clamp(1.75rem, 3vw, 2.75rem) clamp(1.25rem, 2vw, 2rem);
+  border-right: 1px solid var(--line);
+}
+.standards > div:first-child { padding-left: 0; }
+.standards > div:last-child { border-right: 0; padding-right: 0; }
+.standards h3 {
+  margin: 1.25rem 0 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+.standards p:not(.mono) {
+  margin: 0.6rem 0 0;
+  color: var(--muted);
+  font-size: 0.8125rem;
+  line-height: 1.65;
+}
+
+@media (max-width: 1000px) {
+  .standards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .standards > div:nth-child(2n) { border-right: 0; padding-right: 0; }
+  .standards > div:nth-child(2n+1) { padding-left: 0; }
+  .standards > div:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+}
+@media (max-width: 560px) {
+  .standards { grid-template-columns: minmax(0, 1fr); }
+  .standards > div {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    padding-inline: 0;
+  }
+  .standards > div:last-child { border-bottom: 0; }
+}
+
+/* ---------------------------------- contact */
+.contact-inner {
+  padding-block: clamp(4rem, 12vh, 7.5rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+}
+@media (max-width: 860px) {
+  .contact-inner { grid-template-columns: minmax(0, 1fr); }
+}
+
+.contact h2 {
+  margin: 1.25rem 0 0;
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  line-height: 1.08;
+  letter-spacing: -0.032em;
+  font-weight: 600;
+  max-width: 18ch;
+  text-wrap: balance;
+}
+.contact p:not(.mono) {
+  margin: 1.25rem 0 0;
+  color: var(--muted);
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  max-width: 46ch;
+}
+
+.channels { border-top: 1px solid var(--line); }
+.channels a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1.05rem;
+  border-bottom: 1px solid var(--line);
+  transition: padding-left 0.15s ease, opacity 0.15s ease;
+}
+.channels a:hover { padding-left: 0.5rem; opacity: 0.65; }
+.channels .label { font-size: 0.875rem; font-weight: 500; }
+.channels .val { text-transform: none; letter-spacing: 0.02em; }
+
+/* ---------------------------------- footer */
+footer .shell {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  justify-content: space-between;
+  padding-block: 1.5rem 2.5rem;
+}
+</style>
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="statusbar">
+  <div class="shell statusbar-inner">
+    <div class="brand mono">
+      <b>KUCHIMOTO STUDIO</b>
+      <span class="muted">[クチモト]</span>
+      <span class="muted">// PARIS, FR (48.8566&deg; N, 2.3522&deg; E)</span>
+    </div>
+
+    <!-- EDIT ME each quarter. Written as an absolute window rather than
+         "this quarter" so a stale line is obvious instead of subtly
+         wrong. -->
+    <div class="availability mono muted">
+      <span class="pulse" aria-hidden="true"></span>
+      <span>Available for Q4 2026 &ndash; Q1 2027 engineering &amp; product builds</span>
+    </div>
+
+    <nav class="nav mono" aria-label="Primary">
+      <a href="#work">[Work]</a>
+      <a href="#standards">[Standards]</a>
+      <a class="nav-cta" href="#contact">[Scope a Project]</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero">
+    <div class="shell hero-inner">
+      <p class="mono muted" style="margin:0">// INDEPENDENT ENGINEERING LAB</p>
+
+      <h1>
+        We engineer custom digital platforms from the ground up.
+        <span class="dim">Zero no-code stacks. Zero plugin bloat. Pure performance.</span>
+      </h1>
+
+      <p class="lede">
+        Led by <strong>Samuel Louissaint</strong>, Lead Engineer. We build production web
+        applications, subscription platforms, and bespoke digital infrastructure for founders
+        and businesses worldwide &mdash; shipped as source code you own outright.
+      </p>
+
+      <div class="actions">
+        <!-- BOOKING LINK — appears TWICE: here, and on the "Book a
+             15-minute technical scope" row in Section 03. Swap both for a
+             Cal.com/Calendly URL when one exists. mailto is the
+             placeholder precisely because it cannot 404, cannot
+             rate-limit, and needs no third-party script — no modal
+             library is loaded for it, which keeps the page at one
+             network request. -->
+        <a class="btn" href="mailto:samuel@kuchimoto.com?subject=Technical%20scope%20(15%20min)&amp;body=What%20are%20you%20building%3F%0A%0AStack%20or%20constraints%20so%20far%3A%0A%0ATimeline%3A%0A">
+          Book Technical Scope (15 min)
+        </a>
+        <a class="btn btn-ghost" href="https://github.com/samkuchimoto" target="_blank" rel="noopener">
+          Inspect GitHub Architecture &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="shell">
+      <div class="sec-head mono">
+        <span>Section 01 &mdash; Selected Works</span>
+        <span class="muted">02 flagship deployments</span>
+      </div>
+
+      <div class="work">
+
+        <article>
+          <p class="mono muted tag" style="margin:0">[01] Platform Engineering / Consumer PWA</p>
+          <h3>Ittsui France<span class="jp">一対</span></h3>
+          <p>
+            An anti-calendar relationship ritual platform, engineered to protect real human
+            connection against schedule decay. One proposal a week, one tap to confirm, and
+            silence in between. The invited party needs no account and no install &mdash; the
+            invitation is a plain web link, which is also the product&rsquo;s entire distribution
+            model. A single TypeScript codebase ships the web app, the installable PWA, and
+            native iOS and Android builds.
+          </p>
+          <dl class="spec">
+            <div>
+              <dt class="mono">Stack</dt>
+              <dd>Next.js 14 &middot; React 18 &middot; TypeScript &middot; Tailwind &middot; Firebase&nbsp;/&nbsp;Firestore &middot; Capacitor (iOS&nbsp;/&nbsp;Android) &middot; Stripe &middot; Vercel</dd>
+            </div>
+            <div>
+              <dt class="mono">Engineering</dt>
+              <dd>Passkey authentication (WebAuthn), push notifications, one-tap calendar export, scheduled server cron, graceful three-tier venue fallback</dd>
+            </div>
+            <div>
+              <dt class="mono">Measured</dt>
+              <dd class="mono">TTFB 38&nbsp;ms &middot; FCP 420&nbsp;ms &middot; load 409&nbsp;ms</dd>
+            </div>
+          </dl>
+          <div class="actions">
+            <a class="btn" href="https://www.ittsui.fr/" target="_blank" rel="noopener">Visit Platform &#8599;</a>
+            <a class="btn btn-ghost" href="https://github.com/samkuchimoto/Ittsui-france" target="_blank" rel="noopener">View Codebase &#8599;</a>
+          </div>
+        </article>
+
+        <article>
+          <p class="mono muted tag" style="margin:0">[02] Consumer Platform / Subscription Commerce</p>
+          <h3>Amora Asia</h3>
+          <p>
+            A serious-intent relationship platform for Southeast Asia, built around a verified
+            member directory rather than an endless swipe queue. Custom headless architecture
+            with tiered Stripe billing, image pipeline and identity verification built in-house
+            instead of assembled from plugins &mdash; no recurring licence surface, no vendor
+            holding the roadmap hostage.
+          </p>
+          <dl class="spec">
+            <div>
+              <dt class="mono">Stack</dt>
+              <dd>Next.js 16 &middot; React &middot; TypeScript &middot; Tailwind v4 &middot; Firebase&nbsp;/&nbsp;Firestore &middot; Stripe Billing &middot; Vercel Blob &middot; PostHog &middot; Vercel Edge</dd>
+            </div>
+            <div>
+              <dt class="mono">Engineering</dt>
+              <dd>Multi-currency subscription ladder, verified-member showcase API with edge revalidation, transactional email on a verified sending domain</dd>
+            </div>
+            <div>
+              <dt class="mono">Measured</dt>
+              <dd class="mono">TTFB 38&nbsp;ms &middot; FCP 324&nbsp;ms &middot; load 539&nbsp;ms</dd>
+            </div>
+          </dl>
+          <div class="actions">
+            <a class="btn" href="https://amoraasia.com/" target="_blank" rel="noopener">Visit Platform &#8599;</a>
+            <a class="btn btn-ghost" href="https://github.com/samkuchimoto/AmoraAsia" target="_blank" rel="noopener">View Codebase &#8599;</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="standards">
+    <div class="shell">
+      <div class="sec-head mono">
+        <span>Section 02 &mdash; Studio Engineering Standards</span>
+        <span class="muted">04 non-negotiables</span>
+      </div>
+
+      <div class="standards">
+        <div>
+          <p class="mono muted" style="margin:0">[01 / Zero No-Code]</p>
+          <h3>You own the source</h3>
+          <p>
+            No Webflow, no Bubble, no Squarespace. Every platform is written in clean,
+            maintainable TypeScript on modern web primitives. You own 100% of the codebase and
+            can hand it to any engineer on earth.
+          </p>
+        </div>
+        <div>
+          <p class="mono muted" style="margin:0">[02 / Sub-Second Performance]</p>
+          <h3>Measured, not asserted</h3>
+          <p>
+            Both deployments above paint in well under half a second from a cold cache &mdash;
+            the figures on each card are real measurements, median of three runs, not targets.
+            Zero asset bloat, aggressive edge caching.
+          </p>
+        </div>
+        <div>
+          <p class="mono muted" style="margin:0">[03 / Direct Access]</p>
+          <h3>You talk to the engineer</h3>
+          <p>
+            No account managers, no junior subcontractors, no agency markup. You interface
+            directly with the engineer designing, writing and shipping your codebase.
+          </p>
+        </div>
+        <div>
+          <p class="mono muted" style="margin:0">[04 / Continuous Deployment]</p>
+          <h3>Shipped, not delivered</h3>
+          <p>
+            Full Git hygiene, automated CI/CD, reproducible builds and deployment on modern
+            edge infrastructure. Every change is traceable to a commit and a reason.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="shell contact-inner">
+      <div>
+        <p class="mono muted" style="margin:0">Section 03 &mdash; Direct Engagement</p>
+        <h2>Ready to engineer your platform?</h2>
+        <p>
+          We work with selected seed startups, luxury brands and high-intent businesses across
+          France, the United States and Asia. Bring a problem, a deadline, or a codebase
+          somebody else left behind.
+        </p>
+      </div>
+
+      <div class="channels">
+        <a href="mailto:samuel@kuchimoto.com?subject=Technical%20scope%20(15%20min)&amp;body=What%20are%20you%20building%3F%0A%0AStack%20or%20constraints%20so%20far%3A%0A%0ATimeline%3A%0A">
+          <span class="label">Book a 15-minute technical scope</span>
+          <span class="mono muted val">&rarr;</span>
+        </a>
+        <a href="mailto:samuel@kuchimoto.com">
+          <span class="label">Email directly</span>
+          <span class="mono muted val">samuel@kuchimoto.com</span>
+        </a>
+        <a href="https://github.com/samkuchimoto" target="_blank" rel="noopener">
+          <span class="label">GitHub</span>
+          <span class="mono muted val">github.com/samkuchimoto &#8599;</span>
+        </a>
+        <a href="https://x.com/SamLouissaint_" target="_blank" rel="noopener">
+          <span class="label">X</span>
+          <span class="mono muted val">@SamLouissaint_ &#8599;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="shell mono muted">
+    <span>&copy; 2026 Kuchimoto Studio. Paris, France. All rights reserved.</span>
+    <span>Built with custom code. Deployed on edge network.</span>
+  </div>
+</footer>
+
+</body>
+</html>
