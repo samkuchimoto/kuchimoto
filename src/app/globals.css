@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens. White paper, sumi ink, hairlines, and one accent per
+ * division. Every accent is used for text too, so each clears WCAG AA on
+ * white (4.5:1) by a wide margin:
+ *   ink #1b1a19 17.4:1 · ink-soft #57534e 7.6:1 (6.9:1 on washi)
+ *   Happy Homes #2c6652 6.7:1 · BambooTails #a3322c 6.9:1 · Lab #2a4785 9.0:1
+ *   (each still 6:1 or more on its own pale wash)
+ *   seal #a8241c 7.2:1 (the company mark)
+ */
+@theme {
+  --color-paper: #ffffff;
+  --color-washi: #f6f4ef;
+  --color-ink: #1b1a19;
+  --color-ink-soft: #57534e;
+  --color-line: #e4e0d8;
+  /* Form field borders need 3:1 against the page (WCAG 1.4.11): 3.6:1. */
+  --color-field: #8a857d;
+  --color-seal: #a8241c;
+  --color-hh: #2c6652;
+  --color-hh-wash: #eef4f1;
+  --color-bt: #a3322c;
+  --color-bt-wash: #f8eeec;
+  --color-lab: #2a4785;
+  --color-lab-wash: #eef1f8;
+  --color-danger: #a1251b;
+  /* Placeholders still to fill: dark amber on pale amber, 7.6:1. */
+  --color-todo: #6b4500;
+  --color-todo-wash: #fff1cf;
+}
+
+@theme inline {
+  --font-sans: var(--font-gothic), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-mincho), ui-serif, Georgia, serif;
+}
+
+@utility eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+@utility hairline {
+  border-color: var(--color-line);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 6rem;
+  }
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* The "skip to content" link: visible only when focused. */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 60;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  padding: 0.75rem 1rem;
+}
+.skip-link:focus {
+  top: 1rem;
+}

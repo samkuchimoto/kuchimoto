@@ -1,51 +1,41 @@
-# Kuchimoto Studio
+# KUCHIMOTO
 
-Single-page site for [kuchimoto.com](https://kuchimoto.com) — independent
-software engineering practice, Paris.
+Site of KUCHIMOTO SAS at [kuchimoto.com](https://kuchimoto.com): one French
+company, three businesses (Happy Homes, BambooTails, Kuchimoto Lab).
+French at the root, English under `/en`.
 
-## What this is
+Next.js 16 (App Router), Tailwind CSS 4, deployed on Vercel.
 
-One file: `index.html`. No build step, no framework, no dependencies, no
-JavaScript, no webfont requests. ~16 KB uncompressed, a single HTTP request
-for the whole page plus an inline SVG favicon.
-
-That is deliberate rather than lazy. The page argues that the studio ships
-platforms without plugin bloat or render-blocking third-party weight; a
-portfolio that opened by pulling two font families off a CDN would be
-arguing against itself. Fonts fall back through `Inter` → `Geist` →
-`Helvetica Neue` → the platform UI face, all of which are tight neutral
-grotesques already present on the target systems.
-
-## Deploying
-
-Static hosting, anywhere. On Vercel:
+## Run it
 
 ```
-vercel --prod
+npm install
+npm run dev      # http://localhost:3000
+npm run build
+npm run lint     # ESLint, then a check that no em dash is used anywhere
 ```
 
-No configuration needed — Vercel serves `index.html` at the root as-is.
+## Where things are
 
-## Editing
+| What | Where |
+|---|---|
+| Company facts, contact, opening dates, Thailand prices | `src/config/site.ts` |
+| Every word on the site (French, then English) | `src/i18n/dictionaries/fr.ts`, `en.ts` |
+| Legal texts (mentions légales, CGV, confidentialité) | `src/i18n/legal/` |
+| Pages | `src/app/[lang]/` |
+| Forms and their emails | `src/app/api/contact`, `src/app/api/booking` |
+| Card payment (Stripe Checkout) and its confirmation | `src/app/api/booking`, `src/app/api/stripe/webhook` |
+| Cookie banner | `src/components/CookieBanner.tsx` |
 
-Everything lives in `index.html`. Two spots are marked with HTML comments
-and are the ones that go stale:
+Write French with ordinary spaces: the non-breaking spaces before `: ; ! ?`
+are added automatically. Never use the em dash; `npm run lint` fails on one.
 
-- **Availability window** in the status bar. Written as an absolute range
-  ("Q4 2026 – Q1 2027") rather than "this quarter", so an out-of-date line
-  is visibly wrong instead of quietly wrong.
-- **Booking link.** Currently a `mailto:` with a pre-filled subject and
-  body. Swap both occurrences for a Calendly/Cal.com URL when one exists.
+## To fill in before going live
 
-## The performance figures
-
-The `Measured` row on each project card is real: median of three cold-cache
-loads via headless Chromium against the live production sites, on
-2026-09-13.
-
-| Site | TTFB | FCP | load |
-|---|---|---|---|
-| ittsui.fr | 38 ms | 420 ms | 409 ms |
-| amoraasia.com | 38 ms | 324 ms | 539 ms |
-
-Re-measure before quoting them again — they are dated for a reason.
+- `src/config/site.ts`: `CONTACT.email`, `CONTACT.phone` (shown as
+  `[e-mail]` and `[téléphone]` until then), `COMPANY.vatNumber`,
+  `COMPANY.mediator`, and the registration once the RCS number exists.
+- The CGV placeholders marked `[À COMPLÉTER : …]` in `src/i18n/legal/terms.tsx`.
+- Photos: every `PhotoPlaceholder` (home of each division, About portrait).
+- Environment variables: see `.env.example` (Resend for the forms, Stripe
+  for card payments).
