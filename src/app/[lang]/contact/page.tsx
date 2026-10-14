@@ -51,13 +51,9 @@ export default async function Contact() {
             <div>
               <dt className="text-sm text-ink-soft">{dict.common.phone}</dt>
               <dd className="mt-1 text-lg">
-                {CONTACT.phone ? (
-                  <a href={`tel:${CONTACT.phone.replace(/[^\d+]/g, "")}`} className="underline-offset-4 hover:underline">
-                    {CONTACT.phone}
-                  </a>
-                ) : (
-                  <Todo>{dict.common.placeholderPhone}</Todo>
-                )}
+                <a href={CONTACT.phoneHref} className="underline-offset-4 hover:underline">
+                  {CONTACT.phone[lang]}
+                </a>
               </dd>
             </div>
             <div>

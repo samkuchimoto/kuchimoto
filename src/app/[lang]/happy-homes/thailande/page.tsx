@@ -6,7 +6,7 @@ import { getLang } from "@/i18n/server";
 import { baht } from "@/lib/format";
 import { pageMetadata } from "@/lib/seo";
 import { paymentsEnabled } from "@/lib/stripe";
-import { Container, PageHeader, PhotoPlaceholder } from "@/components/ui";
+import { Container, PageHeader } from "@/components/ui";
 import { CountryTabs, NoHousingNotice } from "@/components/happy-homes";
 import { BookingForm } from "@/components/forms/BookingForm";
 
@@ -31,8 +31,8 @@ export default async function Thailand() {
       </PageHeader>
       <CountryTabs lang={lang} dict={dict} current="thailande" />
 
-      <Container className="grid gap-12 py-16 sm:py-20 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
-        <section aria-labelledby="prices">
+      <Container className="py-16 sm:py-20">
+        <section aria-labelledby="prices" className="max-w-3xl">
           <h2 id="prices" className="text-2xl sm:text-3xl">
             {p.title}
           </h2>
@@ -87,7 +87,6 @@ export default async function Thailand() {
           </dl>
         </section>
 
-        <PhotoPlaceholder alt={t.photoAlt} label={dict.common.photo} />
       </Container>
 
       <section aria-labelledby="villa-care" className="border-y hairline bg-hh-wash">
@@ -117,7 +116,7 @@ export default async function Thailand() {
           <h2 id="booking" className="text-3xl">
             {dict.booking.title}
           </h2>
-          <p className="mt-3 text-ink-soft">{dict.booking.intro}</p>
+          <p className="mt-3 text-ink-soft">{paymentsEnabled() ? dict.booking.intro : dict.booking.introRequest}</p>
           <div className="mt-10">
             <BookingForm
               lang={lang}

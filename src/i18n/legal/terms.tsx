@@ -7,7 +7,7 @@ import Link from "next/link";
 import { COMPANY, CONTACT } from "@/config/site";
 import { localizedPath, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
-import { CompanyIdentity, ToComplete, type LegalSection } from "@/components/LegalPage";
+import { CompanyIdentity, type LegalSection } from "@/components/LegalPage";
 import { Todo } from "@/components/ui";
 import { frenchSpacing as f } from "@/lib/typography";
 import { companyRows } from "./identity";
@@ -15,7 +15,6 @@ import { companyRows } from "./identity";
 const link = "underline underline-offset-4";
 
 export function termsContent(lang: Locale, dict: Dictionary) {
-  const todo = (what: string) => <ToComplete dict={dict} what={what} />;
   const mail = CONTACT.email ? (
     <a href={`mailto:${CONTACT.email}`} className={link}>
       {CONTACT.email}
@@ -59,10 +58,10 @@ export function termsContent(lang: Locale, dict: Dictionary) {
         title: "Prix",
         body: (
           <>
-            <p>{f("Les prix sont indiqués en bahts thaïlandais (THB). Le prix applicable est celui affiché au moment de la réservation.")}</p>
             <p>
-              {f("Taxes :")} {todo("régime de TVA applicable aux prestations réalisées en Thaïlande")}.
+              {f("Prix en bahts. TVA française non applicable : prestation liée à un bien immobilier situé en Thaïlande (article 259 A, 2° du CGI).")}
             </p>
+            <p>{f("Le prix applicable est celui affiché au moment de la réservation.")}</p>
           </>
         ),
       },
@@ -74,8 +73,10 @@ export function termsContent(lang: Locale, dict: Dictionary) {
               {f("Le client réserve au moyen du formulaire en ligne. Pour une prestation à prix fixe, il paie par carte bancaire au moment de la réservation, par l'intermédiaire de Stripe, prestataire de paiement sécurisé ; les données de carte sont saisies chez Stripe et ne sont jamais transmises au prestataire. Le contrat est conclu à la réception du paiement, confirmée par e-mail.")}
             </p>
             <p>
-              {f("Pour une formule mensuelle (formule hebdomadaire, Villa Care), le premier mois est payé à la réservation. Mois suivants :")}{" "}
-              {todo("modalités de paiement et de résiliation des mois suivants")}.
+              {f("Pour une formule mensuelle (formule hebdomadaire, Villa Care), le premier mois est payé à la réservation. Les mois suivants sont payés par carte, automatiquement, à la date anniversaire de la souscription. Résiliation à tout moment par e-mail, effective à la fin du mois déjà payé ; le mois entamé n'est pas remboursé.")}
+            </p>
+            <p>
+              {f("Droit de rétractation de 14 jours à compter de la souscription (article L221-18 du Code de la consommation). Si le client demande que la prestation commence avant la fin de ce délai et se rétracte ensuite, il paie la part déjà réalisée (article L221-25).")}
             </p>
           </>
         ),
@@ -89,15 +90,14 @@ export function termsContent(lang: Locale, dict: Dictionary) {
         ),
       },
       {
-        title: "Report et annulation",
+        title: "Annulation",
         body: (
           <>
             <p>
-              {f("Le client peut reporter ou annuler une prestation sans frais jusqu'à 24 heures avant l'heure prévue, en écrivant à")}{" "}
-              {mail}. {f("En cas d'annulation, le montant payé est remboursé intégralement.")}
+              {f("Annulation gratuite jusqu'à 24 heures avant la prestation. Moins de 24 heures avant, 50 % du prix reste dû.")}
             </p>
             <p>
-              {f("Moins de 24 heures avant :")} {todo("conditions de report ou d'annulation tardive")}.
+              {f("Le client annule en écrivant à")} {mail}.
             </p>
           </>
         ),
@@ -157,8 +157,7 @@ export function termsContent(lang: Locale, dict: Dictionary) {
           </p>
         ) : (
           <p>
-            {f("Après une réclamation écrite préalable restée sans solution, le client peut saisir gratuitement le médiateur de la consommation (article L612-1 du Code de la consommation) :")}{" "}
-            {todo("nom, adresse et site du médiateur de la consommation")}.
+            {f("Médiateur de la consommation : désignation en cours. Ses coordonnées seront publiées ici avant l'ouverture du paiement en ligne.")}
           </p>
         ),
       },
@@ -211,8 +210,11 @@ export function termsContent(lang: Locale, dict: Dictionary) {
       title: "Prices",
       body: (
         <>
-          <p>Prices are in Thai baht (THB). The applicable price is the one shown when the booking is made.</p>
-          <p>Taxes: {todo("VAT rules applicable to services performed in Thailand")}.</p>
+          <p>
+            Prices in baht. French VAT does not apply: the service relates to a property located in Thailand (article
+            259 A, 2° of the French General Tax Code).
+          </p>
+          <p>The applicable price is the one shown when the booking is made.</p>
         </>
       ),
     },
@@ -226,8 +228,15 @@ export function termsContent(lang: Locale, dict: Dictionary) {
             provider. The contract is concluded when payment is received, confirmed by email.
           </p>
           <p>
-            For a monthly package (weekly plan, Villa Care), the first month is paid when booking. Following months:{" "}
-            {todo("payment and cancellation terms for the following months")}.
+            For a monthly package (weekly plan, Villa Care), the first month is paid when booking. The following months
+            are paid by card, automatically, on the anniversary date of the subscription. The subscription can be
+            cancelled at any time by email, taking effect at the end of the month already paid; a month that has begun
+            is not refunded.
+          </p>
+          <p>
+            Right of withdrawal of 14 days from the subscription (article L221-18 of the French Consumer Code). If the
+            customer asks for the service to start before the end of that period and then withdraws, they pay for the
+            part already carried out (article L221-25).
           </p>
         </>
       ),
@@ -242,14 +251,14 @@ export function termsContent(lang: Locale, dict: Dictionary) {
       ),
     },
     {
-      title: "Rescheduling and cancellation",
+      title: "Cancellation",
       body: (
         <>
           <p>
-            The customer may reschedule or cancel a service free of charge up to 24 hours before the planned time, by
-            writing to {mail}. On cancellation, the amount paid is refunded in full.
+            Free cancellation up to 24 hours before the service. Less than 24 hours before, 50% of the price remains
+            due.
           </p>
-          <p>Less than 24 hours before: {todo("terms for late rescheduling or cancellation")}.</p>
+          <p>The customer cancels by writing to {mail}.</p>
         </>
       ),
     },
@@ -316,9 +325,8 @@ export function termsContent(lang: Locale, dict: Dictionary) {
         </p>
       ) : (
         <p>
-          After a prior written complaint that was not resolved, the customer may refer the matter free of charge to
-          the consumer mediator (article L612-1 of the French Consumer Code):{" "}
-          {todo("name, address and website of the consumer mediator")}.
+          Consumer mediator: appointment in progress. Their details will be published here before online payment
+          opens.
         </p>
       ),
     },

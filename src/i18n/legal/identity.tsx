@@ -18,20 +18,21 @@ export function companyRows(lang: Locale, dict: Dictionary): [string, ReactNode]
   ) : (
     <Todo>{dict.common.placeholderEmail}</Todo>
   );
-  const phone = CONTACT.phone ?? <Todo>{dict.common.placeholderPhone}</Todo>;
-  const vat = COMPANY.vatNumber ?? <Todo>{dict.legal.toComplete(fr ? "numéro de TVA intracommunautaire" : "intra-community VAT number")}</Todo>;
+  const phone = (
+    <a href={CONTACT.phoneHref} className="underline underline-offset-4">
+      {CONTACT.phone[lang]}
+    </a>
+  );
 
   return [
-    [fr ? "Dénomination" : "Company", COMPANY.legalName],
+    [fr ? "Dénomination" : "Company", COMPANY.name],
     [
       fr ? "Forme" : "Legal form",
-      fr
-        ? `Société par actions simplifiée unipersonnelle (SASU), au capital de ${COMPANY.capital}`
-        : `Single-shareholder simplified joint-stock company (SASU), share capital ${COMPANY.capital}`,
+      fr ? `${COMPANY.form.fr}, au capital de ${COMPANY.capital}` : `${COMPANY.form.en}, share capital ${COMPANY.capital}`,
     ],
     [fr ? "Siège social" : "Registered office", COMPANY.address],
     [fr ? "Immatriculation" : "Registration", COMPANY.registration[lang]],
-    [fr ? "TVA intracommunautaire" : "VAT number", vat],
+    [fr ? "SIREN et numéro de TVA intracommunautaire" : "SIREN and intra-community VAT number", COMPANY.numbersPending[lang]],
     [fr ? "Président" : "President", COMPANY.president],
     [fr ? "E-mail" : "Email", email],
     [fr ? "Téléphone" : "Phone", phone],

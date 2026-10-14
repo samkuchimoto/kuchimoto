@@ -10,6 +10,11 @@ export const SITE_URL = "https://kuchimoto.com";
 export const COMPANY = {
   name: "KUCHIMOTO",
   legalName: "KUCHIMOTO SAS",
+  /** As in the bank file. */
+  form: {
+    fr: "SAS à associé unique en cours d'immatriculation",
+    en: "Single-shareholder SAS, registration in progress",
+  },
   capital: "8 000 €",
   address: "13 rue André Chénier, 92260 Fontenay-aux-Roses, France",
   /** Shown as given until the registration number exists. */
@@ -18,8 +23,11 @@ export const COMPANY = {
     en: "Nanterre Trade and Companies Register (registration in progress)",
   },
   president: "Samuel Louissaint",
-  /** Intra-community VAT number, once issued. */
-  vatNumber: null as string | null,
+  /** SIREN and VAT number: none until the company is registered. */
+  numbersPending: {
+    fr: "Attribués après l'immatriculation (en cours)",
+    en: "Assigned after registration (in progress)",
+  },
   /** Where the site is hosted (Vercel, the platform it is deployed on). */
   host: {
     name: "Vercel Inc.",
@@ -33,10 +41,12 @@ export const COMPANY = {
   mediator: null as { name: string; address: string; url: string } | null,
 };
 
-/** Public contact details. null shows "[e-mail]" / "[téléphone]" on the site. */
+/** Public contact details. The phone is written the French way on French
+ *  pages and in international form on English ones. */
 export const CONTACT = {
-  email: null as string | null,
-  phone: null as string | null,
+  email: "samuelclermont.contact@gmail.com",
+  phone: { fr: "07 43 79 88 60", en: "+33 7 43 79 88 60" },
+  phoneHref: "tel:+33743798860",
 };
 
 /** Opening dates, written out where they are shown. */

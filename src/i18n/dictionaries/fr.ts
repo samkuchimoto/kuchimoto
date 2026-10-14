@@ -126,9 +126,9 @@ const fr = {
     where: {
       title: "Où nous travaillons",
       france: ["France", "Siège social"],
-      thailand: ["Thaïlande", "Pattaya aujourd'hui, Bangkok à partir de juillet 2028"],
-      canada: ["Canada", "À partir de juillet 2028"],
-      usa: ["États-Unis", "Denver et Floride, à partir de janvier 2029"],
+      thailand: ["Thaïlande", "Pattaya aujourd'hui. Bangkok : à venir, à partir de juillet 2028"],
+      canada: ["Canada", "À venir, à partir de juillet 2028"],
+      usa: ["États-Unis", "À venir : Denver et Floride, à partir de janvier 2029"],
     },
     contact: {
       title: "Un projet, une question ?",
@@ -140,22 +140,22 @@ const fr = {
   happyHomes: {
     label: "Services à domicile",
     title: "Happy Homes",
-    intro: "Le ménage, la piscine et le jardin, pris en charge pays par pays par une équipe locale.",
+    intro: "Le ménage, la piscine et le jardin, pris en charge, pays par pays.",
     countriesTitle: "Nos pays",
     countries: {
       thailande: {
         name: "Thaïlande",
-        status: "Pattaya aujourd'hui, Bangkok à partir de juillet 2028",
+        status: "Pattaya aujourd'hui. Bangkok : à venir, juillet 2028",
         body: "Ménage de villas et de condos, et Villa Care, la formule mensuelle pour les propriétaires absents. Réservation et paiement en ligne.",
       },
       canada: {
         name: "Canada",
-        status: "À partir de juillet 2028",
+        status: "À venir, à partir de juillet 2028",
         body: "Ménage, nettoyage de bureaux, entretien de piscines, aménagement paysager et déneigement.",
       },
       "etats-unis": {
         name: "États-Unis",
-        status: "Denver et Floride, à partir de janvier 2029",
+        status: "À venir : Denver et Floride, janvier 2029",
         body: "Ménage, et formules piscine et jardin.",
       },
     } as Record<string, { name: string; status: string; body: string }>,
@@ -179,7 +179,7 @@ const fr = {
   thailand: {
     label: "Happy Homes Thaïlande",
     title: "Ménage et Villa Care à Pattaya",
-    status: "Pattaya : ouvert. Bangkok : à partir de juillet 2028.",
+    status: "Pattaya : ouvert. Bangkok : à venir, à partir de juillet 2028.",
     intro: "Des prix fixes, connus avant de réserver. Les villas sont chiffrées d'après des photos.",
     photoAlt: "Photo : une villa avec piscine à Pattaya",
     prices: {
@@ -211,7 +211,7 @@ const fr = {
 
   canada: {
     label: "Happy Homes Canada",
-    title: "Au Canada à partir de juillet 2028",
+    title: "Canada : à venir, à partir de juillet 2028",
     intro: "Inscrivez-vous sur la liste d'attente : vous serez prévenu dès l'ouverture dans votre ville.",
     photoAlt: "Photo : une maison canadienne en hiver",
     servicesTitle: "Services prévus",
@@ -226,7 +226,7 @@ const fr = {
 
   usa: {
     label: "Happy Homes États-Unis",
-    title: "À Denver et en Floride à partir de janvier 2029",
+    title: "États-Unis : à venir, Denver et Floride à partir de janvier 2029",
     intro: "Inscrivez-vous sur la liste d'attente : vous serez prévenu dès l'ouverture.",
     photoAlt: "Photo : une maison avec jardin et piscine",
     servicesTitle: "Services prévus",
@@ -283,7 +283,7 @@ const fr = {
       ],
       [
         "Sous-traitance informatique",
-        "Une équipe en renfort sur vos projets, pour une mission ou dans la durée.",
+        "Un renfort technique sur vos projets, pour une mission ou dans la durée.",
       ],
       [
         "Testeurs encadrés pour Google Play",
@@ -305,15 +305,15 @@ const fr = {
     photoAlt: "Photo : portrait de Samuel Louissaint",
     pathTitle: "Parcours",
     path: [
-      "Vente technique et ingénierie partenaires pour Google Cloud, X et GoDaddy.",
-      "Expérience de terrain chez Gib-San Pools, à Toronto : construction et rénovation de piscines.",
+      "Vente technique et ingénierie partenaires : Google Cloud (via Concentrix, 2025), X (via Teleperformance, 2024), GoDaddy (Barcelone).",
+      "Expérience de terrain chez Gib-San Pools (Toronto) : construction et rénovation de piscines.",
       "Artiste visuel, auteur des personnages BambooTails.",
     ],
     companyTitle: "La société",
     companyRows: {
       name: "Dénomination",
       form: "Forme",
-      formValue: "Société par actions simplifiée unipersonnelle (SASU)",
+      formValue: "SAS à associé unique en cours d'immatriculation",
       capital: "Capital",
       office: "Siège",
       registration: "Immatriculation",
@@ -380,6 +380,8 @@ const fr = {
   booking: {
     title: "Réserver",
     intro: "Choisissez le service et la date. Pour une prestation à prix fixe, vous payez par carte à la réservation.",
+    /** While card payment is not open: bookings are requests. */
+    introRequest: "Choisissez le service et la date. Nous confirmons votre demande par e-mail.",
     service: "Service",
     services: {
       oneOff: "Ménage ponctuel",

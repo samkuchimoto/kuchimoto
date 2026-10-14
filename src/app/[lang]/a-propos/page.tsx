@@ -3,7 +3,7 @@ import { COMPANY } from "@/config/site";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getLang } from "@/i18n/server";
 import { pageMetadata } from "@/lib/seo";
-import { Container, PageHeader, PhotoPlaceholder } from "@/components/ui";
+import { Container, PageHeader } from "@/components/ui";
 
 export async function generateMetadata(): Promise<Metadata> {
   const lang = await getLang();
@@ -21,9 +21,8 @@ export default async function About() {
     <>
       <PageHeader eyebrow={t.label} title={t.title} intro={t.intro} />
 
-      <Container className="grid gap-12 py-16 sm:py-20 md:grid-cols-[1fr_1.3fr] md:gap-16">
-        <PhotoPlaceholder alt={t.photoAlt} label={dict.common.photo} ratio="aspect-[4/5]" />
-        <section aria-labelledby="path">
+      <Container className="py-16 sm:py-20">
+        <section aria-labelledby="path" className="max-w-3xl">
           <h2 id="path" className="text-2xl sm:text-3xl">
             {t.pathTitle}
           </h2>
@@ -44,7 +43,7 @@ export default async function About() {
           </h2>
           <dl className="mt-8 grid max-w-3xl gap-x-10 gap-y-5 text-sm sm:grid-cols-[auto_1fr]">
             {[
-              [rows.name, COMPANY.legalName],
+              [rows.name, COMPANY.name],
               [rows.form, rows.formValue],
               [rows.capital, COMPANY.capital],
               [rows.office, COMPANY.address],

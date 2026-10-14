@@ -6,7 +6,7 @@ import { CONTACT } from "@/config/site";
 import { localizedPath, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { DivisionKey } from "@/lib/forms/options";
-import { Container, PageHeader, PhotoPlaceholder } from "@/components/ui";
+import { Container, PageHeader } from "@/components/ui";
 import { CountryTabs, NoHousingNotice, type Country } from "@/components/happy-homes";
 import { InquiryForm } from "@/components/forms/InquiryForm";
 
@@ -38,7 +38,6 @@ export function WaitlistPage({
               </li>
             ))}
           </ul>
-          <PhotoPlaceholder alt={copy.photoAlt} label={dict.common.photo} className="mt-10" />
         </div>
 
         <section aria-labelledby="waitlist" className="lg:pt-1">

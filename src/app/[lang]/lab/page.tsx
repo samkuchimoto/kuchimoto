@@ -4,7 +4,7 @@ import { localizedPath } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getLang } from "@/i18n/server";
 import { pageMetadata } from "@/lib/seo";
-import { ButtonLink, Container, PageHeader, PhotoPlaceholder } from "@/components/ui";
+import { ButtonLink, Container, PageHeader } from "@/components/ui";
 import { InquiryForm } from "@/components/forms/InquiryForm";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -22,8 +22,8 @@ export default async function Lab() {
     <>
       <PageHeader eyebrow={t.label} title={t.title} intro={t.intro} accent="lab" />
 
-      <Container className="grid gap-12 py-16 sm:py-20 lg:grid-cols-[1.3fr_1fr] lg:gap-16">
-        <section aria-labelledby="services">
+      <Container className="py-16 sm:py-20">
+        <section aria-labelledby="services" className="max-w-3xl">
           <h2 id="services" className="text-2xl sm:text-3xl">
             {t.servicesTitle}
           </h2>
@@ -41,7 +41,6 @@ export default async function Lab() {
             </ButtonLink>
           </div>
         </section>
-        <PhotoPlaceholder alt={t.photoAlt} label={dict.common.photo} ratio="aspect-[4/5]" />
       </Container>
 
       <section aria-labelledby="project" className="border-t hairline bg-lab-wash">

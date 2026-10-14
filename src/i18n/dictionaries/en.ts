@@ -124,9 +124,9 @@ const en: Dictionary = {
     where: {
       title: "Where we work",
       france: ["France", "Head office"],
-      thailand: ["Thailand", "Pattaya today, Bangkok from July 2028"],
-      canada: ["Canada", "From July 2028"],
-      usa: ["United States", "Denver and Florida, from January 2029"],
+      thailand: ["Thailand", "Pattaya today. Bangkok: upcoming, from July 2028"],
+      canada: ["Canada", "Upcoming, from July 2028"],
+      usa: ["United States", "Upcoming: Denver and Florida, from January 2029"],
     },
     contact: {
       title: "A project, a question?",
@@ -138,22 +138,22 @@ const en: Dictionary = {
   happyHomes: {
     label: "Home services",
     title: "Happy Homes",
-    intro: "Housekeeping, pools and gardens, taken care of country by country by a local team.",
+    intro: "Housekeeping, pools and gardens, taken care of, country by country.",
     countriesTitle: "Our countries",
     countries: {
       thailande: {
         name: "Thailand",
-        status: "Pattaya today, Bangkok from July 2028",
+        status: "Pattaya today. Bangkok: upcoming, July 2028",
         body: "Villa and condo housekeeping, and Villa Care, the monthly package for owners who are away. Book and pay online.",
       },
       canada: {
         name: "Canada",
-        status: "From July 2028",
+        status: "Upcoming, from July 2028",
         body: "Housekeeping, office cleaning, pool maintenance, landscaping and snow removal.",
       },
       "etats-unis": {
         name: "United States",
-        status: "Denver and Florida, from January 2029",
+        status: "Upcoming: Denver and Florida, January 2029",
         body: "Housekeeping, and pool and garden packages.",
       },
     },
@@ -176,7 +176,7 @@ const en: Dictionary = {
   thailand: {
     label: "Happy Homes Thailand",
     title: "Housekeeping and Villa Care in Pattaya",
-    status: "Pattaya: open. Bangkok: from July 2028.",
+    status: "Pattaya: open. Bangkok: upcoming, from July 2028.",
     intro: "Fixed prices, known before you book. Villas are quoted from photos.",
     photoAlt: "Photo: a villa with a pool in Pattaya",
     prices: {
@@ -208,7 +208,7 @@ const en: Dictionary = {
 
   canada: {
     label: "Happy Homes Canada",
-    title: "In Canada from July 2028",
+    title: "Canada: upcoming, from July 2028",
     intro: "Join the waiting list: we will let you know as soon as we open in your city.",
     photoAlt: "Photo: a Canadian house in winter",
     servicesTitle: "Planned services",
@@ -217,7 +217,7 @@ const en: Dictionary = {
 
   usa: {
     label: "Happy Homes United States",
-    title: "In Denver and Florida from January 2029",
+    title: "United States: upcoming, Denver and Florida from January 2029",
     intro: "Join the waiting list: we will let you know as soon as we open.",
     photoAlt: "Photo: a house with a garden and a pool",
     servicesTitle: "Planned services",
@@ -271,7 +271,7 @@ const en: Dictionary = {
         "IT and AI consulting",
         "Choosing an architecture, a cloud provider or an AI model, and putting it in place.",
       ],
-      ["IT subcontracting", "A team to reinforce your projects, for one assignment or for the long run."],
+      ["IT subcontracting", "Extra technical hands on your projects, for one assignment or for the long run."],
       [
         "Managed testers for Google Play",
         "Google Play asks new personal developer accounts to have their app tested by a group of testers before publishing it. We provide those testers and follow the test.",
@@ -289,15 +289,15 @@ const en: Dictionary = {
     photoAlt: "Photo: portrait of Samuel Louissaint",
     pathTitle: "Background",
     path: [
-      "Technical sales and partner engineering for Google Cloud, X and GoDaddy.",
-      "Field experience at Gib-San Pools in Toronto: pool construction and renovation.",
+      "Technical sales and partner engineering: Google Cloud (via Concentrix, 2025), X (via Teleperformance, 2024), GoDaddy (Barcelona).",
+      "Field experience at Gib-San Pools (Toronto): pool construction and renovation.",
       "Visual artist, author of the BambooTails characters.",
     ],
     companyTitle: "The company",
     companyRows: {
       name: "Name",
       form: "Legal form",
-      formValue: "Single-shareholder simplified joint-stock company (SASU)",
+      formValue: "Single-shareholder SAS, registration in progress",
       capital: "Share capital",
       office: "Head office",
       registration: "Registration",
@@ -364,6 +364,7 @@ const en: Dictionary = {
   booking: {
     title: "Book",
     intro: "Choose the service and the date. For a fixed-price service, you pay by card when you book.",
+    introRequest: "Choose the service and the date. We confirm your request by email.",
     service: "Service",
     services: {
       oneOff: "One-off clean",

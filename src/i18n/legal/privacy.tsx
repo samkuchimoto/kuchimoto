@@ -75,7 +75,7 @@ export function privacyContent(lang: Locale, dict: Dictionary) {
               <li>{f("à Vercel Inc. (États-Unis), qui héberge le site ;")}</li>
               <li>{f("à Resend (États-Unis), qui achemine les formulaires jusqu'à notre messagerie ;")}</li>
               <li>{f("à Stripe Payments Europe, Ltd. (Irlande), pour le paiement ;")}</li>
-              <li>{f("à l'équipe qui réalise la prestation, pour une réservation (adresse, date, précisions).")}</li>
+              <li>{f("à l'intervenant qui réalise la prestation, pour une réservation (adresse, date, précisions).")}</li>
             </ul>
             <p>
               {f("Lorsque des données sont traitées hors de l'Union européenne, ce transfert est encadré par les garanties prévues par le RGPD (décision d'adéquation ou clauses contractuelles types).")}
@@ -171,7 +171,7 @@ export function privacyContent(lang: Locale, dict: Dictionary) {
             <li>Vercel Inc. (United States), which hosts the site;</li>
             <li>Resend (United States), which carries the forms to our inbox;</li>
             <li>Stripe Payments Europe, Ltd. (Ireland), for payment;</li>
-            <li>the team carrying out the service, for a booking (address, date, details).</li>
+            <li>whoever carries out the service, for a booking (address, date, details).</li>
           </ul>
           <p>
             Where data is processed outside the European Union, the transfer is covered by the safeguards provided for
