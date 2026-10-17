@@ -43,6 +43,11 @@ const fr = {
       description:
         "Conseil informatique et IA, sous-traitance informatique, testeurs encadrés pour Google Play et applications maison, dont Ittsui.",
     },
+    studio: {
+      title: "Kuchimoto Studio, agents IA pour les créatifs",
+      description:
+        "Kuchimoto Studio, une offre de Kuchimoto Lab : des agents IA autonomes pour les agences créatives, les marques et les entrepreneurs. Lancement de produits, suivi des clients, localisation entre marchés.",
+    },
     about: {
       title: "À propos",
       description:
@@ -295,7 +300,94 @@ const fr = {
       ],
     ] as [string, string][],
     ittsui: "Découvrir Ittsui",
+    studio: {
+      label: "Agents IA pour les créatifs",
+      title: "Kuchimoto Studio",
+      body: "Des agents IA qui exécutent le travail autour de la création, pour les agences, les marques et les entrepreneurs.",
+      cta: "Découvrir Kuchimoto Studio",
+    },
     formTitle: "Parlez-nous de votre projet",
+  },
+
+  studio: {
+    label: "Une offre de Kuchimoto Lab",
+    title: "Kuchimoto Studio",
+    intro: "Des agents IA qui exécutent le travail autour de la création.",
+    lead: "Nous ne construisons pas de simples chatbots : nous déployons des agents IA autonomes qui prennent en charge les opérations créatives en plusieurs étapes, la localisation entre marchés et l'exécution de campagnes multicanales.",
+    audit: "Demander un audit",
+    seePackages: "Voir les formules",
+    photoAlt: "Un artiste dessine à sa table de travail, à Tokyo, vu de dos.",
+    photoCaption: "Un artiste au travail, Tokyo.",
+    photoCredit: "Photo : Habib Beaini, Unsplash",
+    who: {
+      title: "Pour ceux qui créent, et passent trop de temps sur tout le reste.",
+      items: [
+        "Agences créatives",
+        "Marques e-commerce de mode et d'art de vivre",
+        "Agences marketing",
+        "Entrepreneurs et artistes indépendants",
+      ],
+    },
+    agentsTitle: "Les agents",
+    agents: [
+      [
+        "Pour les fondateurs",
+        "Lancement et marque",
+        "Part d'une idée de produit et coordonne le lancement : création des visuels, fiches produit pour la boutique en ligne et TikTok Shop, variantes publicitaires, suivi des étapes de conformité.",
+      ],
+      [
+        "Pour les artistes et indépendants",
+        "Clients et contrats",
+        "Suit les étapes de chaque projet, rédige les propositions commerciales, gère les relances et déclenche la facturation de base.",
+      ],
+      [
+        "Pour les marques à l'international",
+        "Marchés internationaux",
+        "Traduit, localise et adapte vos textes et vos parcours de vente pour chaque marché, avec le ton attendu à Paris, à Tokyo ou aux États-Unis.",
+      ],
+    ] as [string, string, string][],
+    packages: {
+      title: "Trois étapes, trois formules.",
+      intro: "On commence par comprendre où part votre temps, puis on construit, puis on fait vivre les agents.",
+      items: {
+        audit: {
+          name: "Audit et plan d'agents",
+          unit: "HT, une fois",
+          body: "Analyse de vos blocages créatifs et opérationnels, et plan d'une architecture d'agents sur mesure.",
+        },
+        deployment: {
+          name: "Déploiement sur mesure",
+          unit: "HT, au projet",
+          body: "Conception et intégration d'agents adaptés à vos outils : reprise de contenus, localisation multilingue, accueil des clients.",
+        },
+        monthly: {
+          name: "Suivi mensuel des agents",
+          unit: "HT, par mois",
+          body: "Surveillance, ajustement des instructions, maintenance des API et montée en charge des agents.",
+        },
+      },
+      note: "Le prix exact dépend du périmètre, fixé ensemble après l'audit.",
+    },
+    method: {
+      title: "Utilisé chez nous avant de l'être chez vous.",
+      items: [
+        [
+          "D'abord sur nos propres marques",
+          "Chaque agent est d'abord mis en service sur les activités de KUCHIMOTO, la marque BambooTails et les services Happy Homes, avant d'être proposé à un client.",
+        ],
+        [
+          "Programme pilote",
+          "Les premiers clients bénéficient d'un déploiement pilote à tarif réduit. Écrivez-nous pour en parler.",
+        ],
+      ] as [string, string][],
+    },
+    partOfLab: "Kuchimoto Studio est une offre de Kuchimoto Lab, notre activité de conseil informatique et IA.",
+    toLab: "Découvrir Kuchimoto Lab",
+    contact: {
+      title: "Parlons de votre activité.",
+      body: "Dites-nous ce que vous faites et ce qui vous prend le plus de temps. Nous revenons vers vous pour organiser l'audit.",
+      subject: "Kuchimoto Studio",
+    },
   },
 
   about: {

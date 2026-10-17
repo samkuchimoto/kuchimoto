@@ -22,6 +22,7 @@ export function pageMetadata({
   description,
   absoluteTitle = false,
   noindex = false,
+  image,
 }: {
   lang: Locale;
   /** The French path, e.g. "/contact". */
@@ -31,6 +32,8 @@ export function pageMetadata({
   /** For the home page, whose title already carries the company name. */
   absoluteTitle?: boolean;
   noindex?: boolean;
+  /** The picture shown when the page is shared, from the public folder. */
+  image?: { url: string; width: number; height: number; alt: string };
 }): Metadata {
   const url = localizedPath(lang, path);
   const fullTitle = absoluteTitle ? title : `${title} | ${COMPANY.name}`;
@@ -46,8 +49,9 @@ export function pageMetadata({
       description,
       locale: localeMeta[lang].ogLocale,
       alternateLocale: locales.filter((l) => l !== lang).map((l) => localeMeta[l].ogLocale),
+      ...(image && { images: [image] }),
     },
-    twitter: { card: "summary", title: fullTitle, description },
+    twitter: { card: image ? "summary_large_image" : "summary", title: fullTitle, description },
     ...(noindex && { robots: { index: false } }),
   };
 }

@@ -19,11 +19,11 @@ export function Header({ lang, dict }: { lang: Locale; dict: Dictionary }) {
   const items = navItems(lang, dict);
   return (
     <header className="sticky top-0 z-40 border-b hairline bg-paper/95 backdrop-blur">
-      <Container className="relative flex h-18 items-center justify-between gap-6">
+      <Container className="relative flex h-18 items-center justify-between gap-3 sm:gap-6">
         <Link href={localizedPath(lang, "/")} aria-label={`KUCHIMOTO, ${dict.nav.links.home}`}>
           <Logo />
         </Link>
-        <div className="flex items-center gap-4 lg:gap-8">
+        <div className="flex items-center gap-1 sm:gap-4 lg:gap-8">
           <NavLinks items={items} label={dict.nav.label} />
           <LanguageToggle lang={lang} label={dict.nav.language} />
           <MobileMenu items={items} label={dict.nav.label} open={dict.nav.menu} close={dict.nav.close} />

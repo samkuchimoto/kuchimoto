@@ -23,7 +23,7 @@ export function Logo({ className = "" }: { className?: string }) {
       <span aria-hidden className="grid size-7 place-items-center bg-seal font-display text-sm text-paper">
         K
       </span>
-      <span className="font-display text-lg tracking-[0.22em]">KUCHIMOTO</span>
+      <span className="font-display text-base tracking-[0.18em] sm:text-lg sm:tracking-[0.22em]">KUCHIMOTO</span>
     </span>
   );
 }

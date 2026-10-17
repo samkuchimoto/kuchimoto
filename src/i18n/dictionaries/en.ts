@@ -41,6 +41,11 @@ const en: Dictionary = {
       description:
         "IT and AI consulting, IT subcontracting, managed testers for Google Play and in-house apps, including Ittsui.",
     },
+    studio: {
+      title: "Kuchimoto Studio, AI agents for creatives",
+      description:
+        "Kuchimoto Studio, a Kuchimoto Lab offer: autonomous AI agents for creative agencies, brands and entrepreneurs. Product launches, client follow-up, localisation across markets.",
+    },
     about: {
       title: "About",
       description:
@@ -279,7 +284,94 @@ const en: Dictionary = {
       ["In-house apps", "We also build our own apps, including Ittsui."],
     ],
     ittsui: "Discover Ittsui",
+    studio: {
+      label: "AI agents for creatives",
+      title: "Kuchimoto Studio",
+      body: "AI agents that carry out the work around creative work, for agencies, brands and entrepreneurs.",
+      cta: "Discover Kuchimoto Studio",
+    },
     formTitle: "Tell us about your project",
+  },
+
+  studio: {
+    label: "A Kuchimoto Lab offer",
+    title: "Kuchimoto Studio",
+    intro: "AI agents that carry out the work around creative work.",
+    lead: "We don't just build chatbots: we deploy autonomous AI agents that handle multi-step creative operations, cross-border localisation and multichannel campaign execution.",
+    audit: "Request an audit",
+    seePackages: "See the packages",
+    photoAlt: "An artist drawing at a worktable in Tokyo, seen from behind.",
+    photoCaption: "An artist at work, Tokyo.",
+    photoCredit: "Photo: Habib Beaini, Unsplash",
+    who: {
+      title: "For people who create, and spend too much time on everything else.",
+      items: [
+        "Creative agencies",
+        "Fashion and lifestyle e-commerce brands",
+        "Marketing agencies",
+        "Independent entrepreneurs and artists",
+      ],
+    },
+    agentsTitle: "The agents",
+    agents: [
+      [
+        "For founders",
+        "Launch & Brand",
+        "Takes a product idea and coordinates the launch: asset creation, product descriptions for the online shop and TikTok Shop, ad variations, compliance steps tracked.",
+      ],
+      [
+        "For artists and freelancers",
+        "Client & Contract",
+        "Tracks each project's milestones, drafts client proposals, handles follow-ups and triggers basic invoicing.",
+      ],
+      [
+        "For brands selling abroad",
+        "Cross-Border Market",
+        "Translates, localises and adapts your copy and sales funnels for each market, in the tone expected in Paris, Tokyo or the United States.",
+      ],
+    ],
+    packages: {
+      title: "Three steps, three packages.",
+      intro: "First we find where your time goes, then we build, then we keep the agents running.",
+      items: {
+        audit: {
+          name: "Workflow audit & agent blueprint",
+          unit: "One-time, excl. VAT",
+          body: "Analysis of your creative and operational bottlenecks, and the design of a custom multi-agent architecture.",
+        },
+        deployment: {
+          name: "Custom agent deployment",
+          unit: "Per project, excl. VAT",
+          body: "Building and integrating agents into your tools: content repurposing, multilingual localisation, client onboarding.",
+        },
+        monthly: {
+          name: "Monthly agent operations",
+          unit: "Per month, excl. VAT",
+          body: "Monitoring, prompt fine-tuning, API upkeep and scaling agent capacity.",
+        },
+      },
+      note: "The exact price depends on the scope, agreed together after the audit.",
+    },
+    method: {
+      title: "Used in our own businesses before yours.",
+      items: [
+        [
+          "Our own brands first",
+          "Every agent is first put to work in KUCHIMOTO's own businesses, the BambooTails brand and the Happy Homes services, before it is offered to a client.",
+        ],
+        [
+          "Pilot programme",
+          "Our first clients get a pilot deployment at a reduced rate. Write to us to talk it over.",
+        ],
+      ],
+    },
+    partOfLab: "Kuchimoto Studio is an offer from Kuchimoto Lab, our IT and AI consulting business.",
+    toLab: "Discover Kuchimoto Lab",
+    contact: {
+      title: "Let's talk about your business.",
+      body: "Tell us what you do and what takes up most of your time. We will get back to you to set up the audit.",
+      subject: "Kuchimoto Studio",
+    },
   },
 
   about: {

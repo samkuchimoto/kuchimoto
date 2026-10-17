@@ -80,3 +80,18 @@ export const BAMBOOTAILS = {
 };
 
 export const ITTSUI_URL = "https://ittsui.fr";
+
+/**
+ * Kuchimoto Studio, the Lab's AI agents for creatives: price ranges in
+ * euros excluding VAT, the exact price set after the audit. The photo is
+ * Habib Beaini's, under the Unsplash License.
+ */
+export const STUDIO = {
+  prices: {
+    audit: [1500, 3000],
+    deployment: [5000, 12000],
+    monthly: [1000, 2500],
+  },
+  photo: { src: "/images/studio/tokyo-artist.jpg", width: 1600, height: 1217 },
+  photoCreditUrl: "https://unsplash.com/photos/nfzmJv_OAbA",
+} as const;

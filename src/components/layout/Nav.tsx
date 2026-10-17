@@ -99,7 +99,9 @@ export function MobileMenu({
         aria-expanded={open}
         aria-controls="mobile-menu"
         onClick={() => setOpen((value) => !value)}
-        className="grid min-h-11 min-w-11 place-items-center text-sm"
+        // -mr-3 lines the icon up with the page edge; the 44px tap area
+        // runs into the margin, so the header fits a 360px phone.
+        className="-mr-3 grid min-h-11 min-w-11 place-items-center text-sm"
       >
         <span className="sr-only">{open ? closeLabel : openLabel}</span>
         <span aria-hidden className="flex w-5 flex-col gap-1.5">

@@ -43,6 +43,21 @@ export default async function Lab() {
         </section>
       </Container>
 
+      <section aria-labelledby="studio" className="border-t hairline">
+        <Container className="py-16 sm:py-20">
+          <p className="eyebrow text-lab">{t.studio.label}</p>
+          <h2 id="studio" className="mt-4 text-2xl sm:text-3xl">
+            {t.studio.title}
+          </h2>
+          <p className="mt-4 max-w-2xl text-ink-soft">{t.studio.body}</p>
+          <div className="mt-8">
+            <ButtonLink href={localizedPath(lang, "/studio")} accent="lab">
+              {t.studio.cta}
+            </ButtonLink>
+          </div>
+        </Container>
+      </section>
+
       <section aria-labelledby="project" className="border-t hairline bg-lab-wash">
         <Container className="py-16 sm:py-20">
           <div className="mx-auto max-w-2xl">

@@ -11,6 +11,7 @@ const ROUTES = [
   "/happy-homes/etats-unis",
   "/bambootails",
   "/lab",
+  "/studio",
   "/a-propos",
   "/contact",
   "/mentions-legales",
