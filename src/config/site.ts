@@ -81,6 +81,16 @@ export const BAMBOOTAILS = {
 
 export const ITTSUI_URL = "https://ittsui.fr";
 
+/** Happy Homes Thailand's own site, where bookings reach us by email. */
+export const HAPPY_HOMES_THAILAND = { url: "https://happyhomesthailand.com", domain: "happyhomesthailand.com" };
+
+/**
+ * Kuchimoto Lab fixed-price sprints, in euros excluding VAT. Ordered by
+ * email: the scope is confirmed, then a quote follows. No online payment
+ * until the company is registered.
+ */
+export const LAB_SPRINTS = { testers: 99, ai: 490, mvp: 1290 } as const;
+
 /**
  * Kuchimoto Studio, the Lab's AI agents for creatives: price ranges in
  * euros excluding VAT, the exact price set after the audit. The photo is
@@ -92,6 +102,8 @@ export const STUDIO = {
     deployment: [5000, 12000],
     monthly: [1000, 2500],
   },
+  /** The 48-hour agent prototype, deducted from the deployment. */
+  prototype: 490,
   photo: { src: "/images/studio/tokyo-artist.jpg", width: 1600, height: 1217 },
   photoCreditUrl: "https://unsplash.com/photos/nfzmJv_OAbA",
 } as const;

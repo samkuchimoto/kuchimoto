@@ -117,6 +117,14 @@ export function ButtonLink({
       ? `${accent === "company" ? "bg-ink" : ACCENT[accent].bg} text-paper hover:opacity-90`
       : `border ${accent === "company" ? "border-ink text-ink" : `${ACCENT[accent].border} ${ACCENT[accent].text}`} hover:bg-washi`;
   const className = `${base} ${style}`;
+  // An email or phone link opens the visitor's app: a plain link, same tab.
+  if (/^(mailto|tel):/.test(href)) {
+    return (
+      <a href={href} className={className}>
+        {children}
+      </a>
+    );
+  }
   if (external) {
     return (
       <a href={href} target="_blank" rel="noopener noreferrer" className={className}>

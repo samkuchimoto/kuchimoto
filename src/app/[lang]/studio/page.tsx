@@ -5,7 +5,8 @@ import { CONTACT, STUDIO } from "@/config/site";
 import { localizedPath } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getLang } from "@/i18n/server";
-import { euroRange } from "@/lib/format";
+import { euroRange, wholeEuros } from "@/lib/format";
+import { mailto } from "@/lib/mailto";
 import { pageMetadata } from "@/lib/seo";
 import { ButtonLink, Container, PageHeader } from "@/components/ui";
 
@@ -31,7 +32,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Studio() {
   const lang = await getLang();
   const t = getDictionary(lang).studio;
-  const mailto = `mailto:${CONTACT.email}?subject=${encodeURIComponent(t.contact.subject)}`;
+  const audit = t.packages.items.audit;
 
   return (
     <>
@@ -112,11 +113,36 @@ export default async function Studio() {
                   <p className="mt-6 font-display text-2xl">{euroRange(min, max, lang)}</p>
                   <p className="mt-1 text-sm text-ink-soft">{item.unit}</p>
                   <p className="mt-6 border-t hairline pt-5 text-ink-soft">{item.body}</p>
+                  {key === "audit" && (
+                    <div className="mt-auto pt-8">
+                      <ButtonLink href={mailto(audit.mail)} accent="lab">
+                        {audit.cta}
+                      </ButtonLink>
+                    </div>
+                  )}
                 </li>
               );
             })}
           </ol>
           <p className="mt-6 text-sm text-ink-soft">{t.packages.note}</p>
+
+          <div className="mt-12 flex flex-col gap-6 border border-lab p-6 sm:p-8 md:flex-row md:items-end md:justify-between">
+            <div className="max-w-2xl">
+              <p className="eyebrow text-lab">{t.prototype.label}</p>
+              <h3 className="mt-3 text-2xl">{t.prototype.title}</h3>
+              <p className="mt-3 text-ink-soft">{t.prototype.body}</p>
+              <p className="mt-5">
+                <span className="font-display text-2xl">{wholeEuros(STUDIO.prototype, lang)}</span>{" "}
+                <span className="text-sm text-ink-soft">{t.prototype.unit}</span>
+              </p>
+              <p className="mt-1 text-xs text-ink-soft">{t.prototype.note}</p>
+            </div>
+            <div className="shrink-0">
+              <ButtonLink href={mailto(t.prototype.mail)} accent="lab">
+                {t.prototype.cta}
+              </ButtonLink>
+            </div>
+          </div>
         </Container>
       </section>
 
@@ -149,7 +175,7 @@ export default async function Studio() {
           </h2>
           <p className="mt-4 max-w-2xl text-ink-soft">{t.contact.body}</p>
           <p className="mt-8 break-words font-display text-2xl sm:text-3xl">
-            <a href={mailto} className="underline decoration-line underline-offset-8 hover:decoration-ink">
+            <a href={mailto({ subject: t.contact.subject })} className="underline decoration-line underline-offset-8 hover:decoration-ink">
               {CONTACT.email}
             </a>
           </p>

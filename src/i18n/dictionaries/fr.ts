@@ -186,6 +186,7 @@ const fr = {
     title: "Ménage et Villa Care à Pattaya",
     status: "Pattaya : ouvert. Bangkok : à venir, à partir de juillet 2028.",
     intro: "Des prix fixes, connus avant de réserver. Les villas sont chiffrées d'après des photos.",
+    bookOnline: "Réserver sur happyhomesthailand.com",
     photoAlt: "Photo : une villa avec piscine à Pattaya",
     prices: {
       title: "Nos prix",
@@ -300,6 +301,47 @@ const fr = {
       ],
     ] as [string, string][],
     ittsui: "Découvrir Ittsui",
+    sprints: {
+      title: "Sprints à prix fixe",
+      intro:
+        "Un livrable clair et un prix connu d'avance. Écrivez-nous : nous validons le périmètre avec vous, puis vous recevez le devis. Réponse sous 24 heures.",
+      items: {
+        testers: {
+          label: "Google Play",
+          name: "Pack testeurs Google Play",
+          unit: "HT, par application",
+          body: "Les testeurs du test fermé que Google Play exige des nouveaux comptes de développeur personnels, le suivi pendant toute la durée du test et un rapport de leurs retours.",
+          cta: "Commander le pack testeurs",
+          mail: {
+            subject: "Pack testeurs Google Play",
+            body: "Bonjour,\n\nJe souhaite commander le pack testeurs Google Play.\n\nNom de l'application :\nDate de début du test fermé souhaitée :\n",
+          },
+        },
+        ai: {
+          label: "IA et automatisation",
+          name: "Sprint IA ou débogage, 48 heures",
+          unit: "HT, par sprint",
+          body: "Un agent IA, une automatisation ou un script sur mesure, ou la résolution d'un blocage technique urgent.",
+          cta: "Réserver ce sprint",
+          mail: {
+            subject: "Sprint IA ou débogage, 48 heures",
+            body: "Bonjour,\n\nJe souhaite réserver un sprint IA ou débogage de 48 heures.\n\nLe besoin :\nLes outils ou le code concernés :\nÉchéance :\n",
+          },
+        },
+        mvp: {
+          label: "Développement",
+          name: "Sprint MVP web ou mobile, 7 jours",
+          unit: "HT, au forfait",
+          body: "Un prototype fonctionnel, web ou mobile, prêt à être testé par vos premiers utilisateurs.",
+          cta: "Lancer mon MVP",
+          mail: {
+            subject: "Sprint MVP web ou mobile, 7 jours",
+            body: "Bonjour,\n\nJe souhaite lancer un sprint MVP.\n\nLe produit en une phrase :\nWeb ou mobile :\nDate de démarrage souhaitée :\n",
+          },
+        },
+      },
+      note: "Prix hors taxes, pour les professionnels. Les délais commencent une fois le périmètre validé.",
+    },
     studio: {
       label: "Agents IA pour les créatifs",
       title: "Kuchimoto Studio",
@@ -354,6 +396,11 @@ const fr = {
           name: "Audit et plan d'agents",
           unit: "HT, une fois",
           body: "Analyse de vos blocages créatifs et opérationnels, et plan d'une architecture d'agents sur mesure.",
+          cta: "Demander un appel de 15 minutes",
+          mail: {
+            subject: "Appel de 15 minutes : audit Kuchimoto Studio",
+            body: "Bonjour,\n\nJe souhaite un appel de 15 minutes pour parler d'un audit.\n\nMon activité :\nCe qui me prend le plus de temps :\nMes disponibilités cette semaine :\n",
+          },
         },
         deployment: {
           name: "Déploiement sur mesure",
@@ -367,6 +414,18 @@ const fr = {
         },
       },
       note: "Le prix exact dépend du périmètre, fixé ensemble après l'audit.",
+    },
+    prototype: {
+      label: "Pour commencer",
+      title: "Un prototype d'agent en 48 heures",
+      body: "Nous construisons en 48 heures un prototype fonctionnel sur votre tâche la plus chronophage : vous voyez l'agent travailler avant de vous engager.",
+      unit: "HT, déduits du déploiement si vous continuez",
+      note: "Les 48 heures commencent une fois le périmètre validé.",
+      cta: "Commander le prototype",
+      mail: {
+        subject: "Prototype d'agent en 48 heures",
+        body: "Bonjour,\n\nJe souhaite un prototype d'agent en 48 heures.\n\nMon activité :\nLa tâche à confier à l'agent :\nLes outils que j'utilise :\n",
+      },
     },
     method: {
       title: "Utilisé chez nous avant de l'être chez vous.",
@@ -474,6 +533,7 @@ const fr = {
     intro: "Choisissez le service et la date. Pour une prestation à prix fixe, vous payez par carte à la réservation.",
     /** While card payment is not open: bookings are requests. */
     introRequest: "Choisissez le service et la date. Nous confirmons votre demande par e-mail.",
+    alsoOn: "Vous pouvez aussi réserver sur le site de Happy Homes Thaïlande :",
     service: "Service",
     services: {
       oneOff: "Ménage ponctuel",

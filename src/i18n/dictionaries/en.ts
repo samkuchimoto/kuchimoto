@@ -183,6 +183,7 @@ const en: Dictionary = {
     title: "Housekeeping and Villa Care in Pattaya",
     status: "Pattaya: open. Bangkok: upcoming, from July 2028.",
     intro: "Fixed prices, known before you book. Villas are quoted from photos.",
+    bookOnline: "Book on happyhomesthailand.com",
     photoAlt: "Photo: a villa with a pool in Pattaya",
     prices: {
       title: "Our prices",
@@ -284,6 +285,47 @@ const en: Dictionary = {
       ["In-house apps", "We also build our own apps, including Ittsui."],
     ],
     ittsui: "Discover Ittsui",
+    sprints: {
+      title: "Fixed-price sprints",
+      intro:
+        "A clear deliverable and a price known up front. Write to us: we agree the scope with you, then you get the quote. We reply within 24 hours.",
+      items: {
+        testers: {
+          label: "Google Play",
+          name: "Google Play testers pack",
+          unit: "Per app, excl. VAT",
+          body: "The testers for the closed test Google Play requires of new personal developer accounts, follow-up for the whole test, and a report of their feedback.",
+          cta: "Order the testers pack",
+          mail: {
+            subject: "Google Play testers pack",
+            body: "Hello,\n\nI would like to order the Google Play testers pack.\n\nApp name:\nPreferred start date for the closed test:\n",
+          },
+        },
+        ai: {
+          label: "AI and automation",
+          name: "AI or debugging sprint, 48 hours",
+          unit: "Per sprint, excl. VAT",
+          body: "An AI agent, an automation or a custom script, or a fix for an urgent technical blocker.",
+          cta: "Book this sprint",
+          mail: {
+            subject: "AI or debugging sprint, 48 hours",
+            body: "Hello,\n\nI would like to book a 48-hour AI or debugging sprint.\n\nThe need:\nThe tools or code involved:\nDeadline:\n",
+          },
+        },
+        mvp: {
+          label: "Development",
+          name: "Web or mobile MVP sprint, 7 days",
+          unit: "Fixed price, excl. VAT",
+          body: "A working prototype, web or mobile, ready for your first users to test.",
+          cta: "Start my MVP",
+          mail: {
+            subject: "Web or mobile MVP sprint, 7 days",
+            body: "Hello,\n\nI would like to start an MVP sprint.\n\nThe product in one sentence:\nWeb or mobile:\nPreferred start date:\n",
+          },
+        },
+      },
+      note: "Prices excluding VAT, for businesses. Lead times start once the scope is agreed.",
+    },
     studio: {
       label: "AI agents for creatives",
       title: "Kuchimoto Studio",
@@ -338,6 +380,11 @@ const en: Dictionary = {
           name: "Workflow audit & agent blueprint",
           unit: "One-time, excl. VAT",
           body: "Analysis of your creative and operational bottlenecks, and the design of a custom multi-agent architecture.",
+          cta: "Request a 15-minute call",
+          mail: {
+            subject: "15-minute call: Kuchimoto Studio audit",
+            body: "Hello,\n\nI would like a 15-minute call about an audit.\n\nMy business:\nWhat takes up most of my time:\nWhen I am free this week:\n",
+          },
         },
         deployment: {
           name: "Custom agent deployment",
@@ -351,6 +398,18 @@ const en: Dictionary = {
         },
       },
       note: "The exact price depends on the scope, agreed together after the audit.",
+    },
+    prototype: {
+      label: "To start",
+      title: "An agent prototype in 48 hours",
+      body: "In 48 hours we build a working prototype on your most time-consuming task, so you see the agent at work before you commit.",
+      unit: "Excl. VAT, deducted from the deployment if you go ahead",
+      note: "The 48 hours start once the scope is agreed.",
+      cta: "Order the prototype",
+      mail: {
+        subject: "Agent prototype in 48 hours",
+        body: "Hello,\n\nI would like an agent prototype in 48 hours.\n\nMy business:\nThe task for the agent:\nThe tools I use:\n",
+      },
     },
     method: {
       title: "Used in our own businesses before yours.",
@@ -457,6 +516,7 @@ const en: Dictionary = {
     title: "Book",
     intro: "Choose the service and the date. For a fixed-price service, you pay by card when you book.",
     introRequest: "Choose the service and the date. We confirm your request by email.",
+    alsoOn: "You can also book on the Happy Homes Thailand website:",
     service: "Service",
     services: {
       oneOff: "One-off clean",

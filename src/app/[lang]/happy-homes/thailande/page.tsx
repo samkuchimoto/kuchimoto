@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { CONTACT, THAILAND_PRICES } from "@/config/site";
+import { CONTACT, HAPPY_HOMES_THAILAND, THAILAND_PRICES } from "@/config/site";
 import { localizedPath } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getLang } from "@/i18n/server";
 import { baht } from "@/lib/format";
 import { pageMetadata } from "@/lib/seo";
 import { paymentsEnabled } from "@/lib/stripe";
-import { Container, PageHeader } from "@/components/ui";
+import { ButtonLink, Container, PageHeader } from "@/components/ui";
 import { CountryTabs, NoHousingNotice } from "@/components/happy-homes";
 import { BookingForm } from "@/components/forms/BookingForm";
 
@@ -28,6 +28,11 @@ export default async function Thailand() {
     <>
       <PageHeader eyebrow={t.label} title={t.title} intro={t.intro} accent="hh">
         <p className="mt-6 text-sm font-medium text-hh">{t.status}</p>
+        <div className="mt-8">
+          <ButtonLink href={HAPPY_HOMES_THAILAND.url} accent="hh" external externalLabel={dict.bambootails.external}>
+            {t.bookOnline}
+          </ButtonLink>
+        </div>
       </PageHeader>
       <CountryTabs lang={lang} dict={dict} current="thailande" />
 
@@ -117,6 +122,18 @@ export default async function Thailand() {
             {dict.booking.title}
           </h2>
           <p className="mt-3 text-ink-soft">{paymentsEnabled() ? dict.booking.intro : dict.booking.introRequest}</p>
+          <p className="mt-3 text-sm text-ink-soft">
+            {dict.booking.alsoOn}{" "}
+            <a
+              href={HAPPY_HOMES_THAILAND.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-hh underline underline-offset-4"
+            >
+              {HAPPY_HOMES_THAILAND.domain}
+              <span className="sr-only"> {dict.bambootails.external}</span>
+            </a>
+          </p>
           <div className="mt-10">
             <BookingForm
               lang={lang}
