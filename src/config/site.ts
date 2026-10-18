@@ -89,7 +89,7 @@ export const HAPPY_HOMES_THAILAND = { url: "https://happyhomesthailand.com", dom
  * email: the scope is confirmed, then a quote follows. No online payment
  * until the company is registered.
  */
-export const LAB_SPRINTS = { testers: 99, ai: 490, mvp: 1290 } as const;
+export const LAB_SPRINTS = { ai: 490, mvp: 1290 } as const;
 
 /**
  * Kuchimoto Studio, the Lab's AI agents for creatives: price ranges in

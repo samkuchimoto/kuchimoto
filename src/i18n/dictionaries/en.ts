@@ -290,17 +290,6 @@ const en: Dictionary = {
       intro:
         "A clear deliverable and a price known up front. Write to us: we agree the scope with you, then you get the quote. We reply within 24 hours.",
       items: {
-        testers: {
-          label: "Google Play",
-          name: "Google Play testers pack",
-          unit: "Per app, excl. VAT",
-          body: "The testers for the closed test Google Play requires of new personal developer accounts, follow-up for the whole test, and a report of their feedback.",
-          cta: "Order the testers pack",
-          mail: {
-            subject: "Google Play testers pack",
-            body: "Hello,\n\nI would like to order the Google Play testers pack.\n\nApp name:\nPreferred start date for the closed test:\n",
-          },
-        },
         ai: {
           label: "AI and automation",
           name: "AI or debugging sprint, 48 hours",

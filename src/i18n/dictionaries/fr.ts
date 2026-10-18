@@ -306,17 +306,6 @@ const fr = {
       intro:
         "Un livrable clair et un prix connu d'avance. Écrivez-nous : nous validons le périmètre avec vous, puis vous recevez le devis. Réponse sous 24 heures.",
       items: {
-        testers: {
-          label: "Google Play",
-          name: "Pack testeurs Google Play",
-          unit: "HT, par application",
-          body: "Les testeurs du test fermé que Google Play exige des nouveaux comptes de développeur personnels, le suivi pendant toute la durée du test et un rapport de leurs retours.",
-          cta: "Commander le pack testeurs",
-          mail: {
-            subject: "Pack testeurs Google Play",
-            body: "Bonjour,\n\nJe souhaite commander le pack testeurs Google Play.\n\nNom de l'application :\nDate de début du test fermé souhaitée :\n",
-          },
-        },
         ai: {
           label: "IA et automatisation",
           name: "Sprint IA ou débogage, 48 heures",

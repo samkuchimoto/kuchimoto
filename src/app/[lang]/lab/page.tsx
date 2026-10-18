@@ -9,7 +9,7 @@ import { pageMetadata } from "@/lib/seo";
 import { ButtonLink, Container, PageHeader } from "@/components/ui";
 import { InquiryForm } from "@/components/forms/InquiryForm";
 
-const SPRINTS = ["testers", "ai", "mvp"] as const;
+const SPRINTS = ["ai", "mvp"] as const;
 
 export async function generateMetadata(): Promise<Metadata> {
   const lang = await getLang();
@@ -53,7 +53,7 @@ export default async function Lab() {
             {t.sprints.title}
           </h2>
           <p className="mt-4 max-w-2xl text-ink-soft">{t.sprints.intro}</p>
-          <ul className="mt-10 grid gap-px border hairline bg-line md:grid-cols-3">
+          <ul className="mt-10 grid gap-px border hairline bg-line md:grid-cols-2">
             {SPRINTS.map((key) => {
               const sprint = t.sprints.items[key];
               return (
