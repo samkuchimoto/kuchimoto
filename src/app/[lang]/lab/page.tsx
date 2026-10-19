@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import { CONTACT, ITTSUI_URL, LAB_SPRINTS } from "@/config/site";
+import { CONTACT, ITTSUI_URL } from "@/config/site";
 import { localizedPath } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getLang } from "@/i18n/server";
-import { wholeEuros } from "@/lib/format";
 import { mailto } from "@/lib/mailto";
 import { pageMetadata } from "@/lib/seo";
 import { ButtonLink, Container, PageHeader } from "@/components/ui";
@@ -61,8 +60,8 @@ export default async function Lab() {
                 <li key={key} className="flex flex-col bg-paper p-6 sm:p-8">
                   <p className="eyebrow text-lab">{sprint.label}</p>
                   <h3 className="mt-3 text-xl">{sprint.name}</h3>
-                  <p className="mt-6 font-display text-2xl">{wholeEuros(LAB_SPRINTS[key], lang)}</p>
-                  <p className="mt-1 text-sm text-ink-soft">{sprint.unit}</p>
+                  <p className="mt-6 font-display text-2xl">{t.sprints.quote}</p>
+                  <p className="mt-1 text-sm text-ink-soft">{t.sprints.scope}</p>
                   <p className="mt-6 border-t hairline pt-5 text-ink-soft">{sprint.body}</p>
                   <div className="mt-auto pt-8">
                     <ButtonLink href={mailto(sprint.mail)} accent="lab">

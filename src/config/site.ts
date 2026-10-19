@@ -89,13 +89,6 @@ export const ITTSUI_URL = "https://www.ittsui.fr/";
 export const HAPPY_HOMES_THAILAND = { url: "https://happyhomesthailand.com", domain: "happyhomesthailand.com" };
 
 /**
- * Kuchimoto Lab fixed-price sprints, in euros excluding VAT. Ordered by
- * email: the scope is confirmed, then a quote follows. No online payment
- * until the company is registered.
- */
-export const LAB_SPRINTS = { ai: 490, mvp: 1290 } as const;
-
-/**
  * Kuchimoto Studio, the Lab's AI agents for creatives: price ranges in
  * euros excluding VAT, the exact price set after the audit. The photo is
  * Habib Beaini's, under the Unsplash License.

@@ -1,13 +1,13 @@
-// /src/components/TriageDemo.tsx
-// The interactive part of /demo-triage: one button "generates" the
-// three-minute executive brief from the simulated inbox. Nothing is sent
-// anywhere; the brief is written in advance from fictional messages.
+// /src/components/demo-triage/BriefDemo.tsx
+// One button "generates" the three-minute executive brief from the
+// simulated inbox. Nothing is sent anywhere; the brief is written in
+// advance from the fictional messages.
 
 "use client";
 
 import { useEffect, useRef, useState } from "react";
 
-export type TriageBrief = {
+export type BriefStrings = {
   button: string;
   generating: string;
   title: string;
@@ -18,7 +18,7 @@ export type TriageBrief = {
   footnote: string;
 };
 
-export function TriageDemo({ t, ctaHref, ctaLabel }: { t: TriageBrief; ctaHref: string; ctaLabel: string }) {
+export function BriefDemo({ t }: { t: BriefStrings }) {
   const [state, setState] = useState<"idle" | "generating" | "done">("idle");
   const report = useRef<HTMLDivElement>(null);
 
@@ -31,6 +31,17 @@ export function TriageDemo({ t, ctaHref, ctaLabel }: { t: TriageBrief; ctaHref: 
   useEffect(() => {
     if (state === "done") report.current?.focus();
   }, [state]);
+
+  const bullets = (items: string[]) => (
+    <ul className="mt-5 space-y-3">
+      {items.map((item) => (
+        <li key={item} className="flex gap-3">
+          <span aria-hidden className="mt-3 block h-px w-4 shrink-0 bg-lab" />
+          <span className="text-ink-soft">{item}</span>
+        </li>
+      ))}
+    </ul>
+  );
 
   return (
     <div className="mt-8">
@@ -73,14 +84,7 @@ export function TriageDemo({ t, ctaHref, ctaLabel }: { t: TriageBrief; ctaHref: 
 
             <section className="border-t hairline pt-8">
               <h4 className="eyebrow text-lab">{t.agile.title}</h4>
-              <ul className="mt-5 space-y-3">
-                {t.agile.items.map((item) => (
-                  <li key={item} className="flex gap-3">
-                    <span aria-hidden className="mt-3 block h-px w-4 shrink-0 bg-lab" />
-                    <span className="text-ink-soft">{item}</span>
-                  </li>
-                ))}
-              </ul>
+              {bullets(t.agile.items)}
             </section>
 
             <section className="border-t hairline pt-8">
@@ -90,26 +94,11 @@ export function TriageDemo({ t, ctaHref, ctaLabel }: { t: TriageBrief; ctaHref: 
               <div aria-hidden className="mt-3 h-2 max-w-md bg-line">
                 <div className="h-2 bg-lab" style={{ width: `${t.station.kpiShare}%` }} />
               </div>
-              <ul className="mt-6 space-y-3">
-                {t.station.items.map((item) => (
-                  <li key={item} className="flex gap-3">
-                    <span aria-hidden className="mt-3 block h-px w-4 shrink-0 bg-lab" />
-                    <span className="text-ink-soft">{item}</span>
-                  </li>
-                ))}
-              </ul>
+              {bullets(t.station.items)}
             </section>
           </div>
 
-          <div className="flex flex-col gap-4 border-t hairline px-6 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-8">
-            <p className="text-xs text-ink-soft">{t.footnote}</p>
-            <a
-              href={ctaHref}
-              className="inline-flex min-h-12 shrink-0 items-center justify-center bg-lab px-6 py-3 text-sm font-medium tracking-wide text-paper hover:opacity-90"
-            >
-              {ctaLabel}
-            </a>
-          </div>
+          <p className="border-t hairline px-6 py-4 text-xs text-ink-soft sm:px-8">{t.footnote}</p>
         </div>
       )}
     </div>

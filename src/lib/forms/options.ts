@@ -12,6 +12,10 @@ export const US_LOCATIONS = ["denver", "florida"] as const;
 export const FORM_KINDS = ["contact", "waitlist", "project"] as const;
 export type FormKind = (typeof FORM_KINDS)[number];
 
+/** Every kind /api/contact accepts: the three above, plus the pilot
+ *  request on /demo-triage (one "email or phone" field, no division). */
+export const API_KINDS = [...FORM_KINDS, "pilot"] as const;
+
 /** Thailand booking: what can be booked, for which home. */
 export const BOOKING_SERVICES = ["oneOff", "weekly", "deepClean", "aircon", "villaCare", "villaQuote"] as const;
 export type BookingService = (typeof BOOKING_SERVICES)[number];

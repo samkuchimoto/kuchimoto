@@ -286,14 +286,15 @@ const en: Dictionary = {
     ],
     ittsui: "Discover Ittsui",
     sprints: {
-      title: "Fixed-price sprints",
+      title: "Short sprints",
       intro:
-        "A clear deliverable and a price known up front. Write to us: we agree the scope with you, then you get the quote. We reply within 24 hours.",
+        "A clear deliverable, a scope set with you. Write to us: we agree the scope together, then you get the quote. We reply within 24 hours.",
+      quote: "On quote",
+      scope: "Custom scope",
       items: {
         ai: {
           label: "AI and automation",
           name: "AI or debugging sprint, 48 hours",
-          unit: "Per sprint, excl. VAT",
           body: "An AI agent, an automation or a custom script, or a fix for an urgent technical blocker.",
           cta: "Book this sprint",
           mail: {
@@ -304,7 +305,6 @@ const en: Dictionary = {
         mvp: {
           label: "Development",
           name: "Web or mobile MVP sprint, 7 days",
-          unit: "Fixed price, excl. VAT",
           body: "A working prototype, web or mobile, ready for your first users to test.",
           cta: "Start my MVP",
           mail: {
@@ -313,7 +313,7 @@ const en: Dictionary = {
           },
         },
       },
-      note: "Prices excluding VAT, for businesses. Lead times start once the scope is agreed.",
+      note: "For businesses. Lead times start once the scope is agreed.",
     },
     studio: {
       label: "AI agents for creatives",

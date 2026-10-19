@@ -302,14 +302,15 @@ const fr = {
     ] as [string, string][],
     ittsui: "Découvrir Ittsui",
     sprints: {
-      title: "Sprints à prix fixe",
+      title: "Sprints courts",
       intro:
-        "Un livrable clair et un prix connu d'avance. Écrivez-nous : nous validons le périmètre avec vous, puis vous recevez le devis. Réponse sous 24 heures.",
+        "Un livrable clair, un périmètre défini avec vous. Écrivez-nous : nous validons le périmètre ensemble, puis vous recevez le devis. Réponse sous 24 heures.",
+      quote: "Sur devis",
+      scope: "Périmètre sur mesure",
       items: {
         ai: {
           label: "IA et automatisation",
           name: "Sprint IA ou débogage, 48 heures",
-          unit: "HT, par sprint",
           body: "Un agent IA, une automatisation ou un script sur mesure, ou la résolution d'un blocage technique urgent.",
           cta: "Réserver ce sprint",
           mail: {
@@ -320,7 +321,6 @@ const fr = {
         mvp: {
           label: "Développement",
           name: "Sprint MVP web ou mobile, 7 jours",
-          unit: "HT, au forfait",
           body: "Un prototype fonctionnel, web ou mobile, prêt à être testé par vos premiers utilisateurs.",
           cta: "Lancer mon MVP",
           mail: {
@@ -329,7 +329,7 @@ const fr = {
           },
         },
       },
-      note: "Prix hors taxes, pour les professionnels. Les délais commencent une fois le périmètre validé.",
+      note: "Pour les professionnels. Les délais commencent une fois le périmètre validé.",
     },
     studio: {
       label: "Agents IA pour les créatifs",

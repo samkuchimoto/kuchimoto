@@ -1,20 +1,26 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { STUDIO } from "@/config/site";
+import { CONTACT } from "@/config/site";
+import { localizedPath } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
 import { getLang } from "@/i18n/server";
-import { wholeEuros } from "@/lib/format";
-import { mailto } from "@/lib/mailto";
 import { pageMetadata } from "@/lib/seo";
-import { NBSP, withFrenchSpacing } from "@/lib/typography";
+import { withFrenchSpacing } from "@/lib/typography";
 import { Container, PageHeader } from "@/components/ui";
-import { TriageDemo, type TriageBrief } from "@/components/TriageDemo";
+import { InboxDemo, type DemoMessage, type InboxStrings } from "@/components/demo-triage/InboxDemo";
+import { BriefDemo, type BriefStrings } from "@/components/demo-triage/BriefDemo";
+import { MessageSummary, type SummaryStrings } from "@/components/demo-triage/MessageSummary";
+import { PilotForm, type PilotStrings } from "@/components/demo-triage/PilotForm";
 
 /**
  * /demo-triage: a standalone demo of the executive triage agent, in
  * French only, linked from nowhere on the site and kept out of search
  * engines. Entirely generic: no real organisation, no internal acronym,
- * and every message and figure on it is fictional (the page says so).
+ * no price, and every message and figure on it is fictional (the page
+ * says so). The pilot request goes through /api/contact like every form.
  */
+
+const URGENCY = { high: "Urgence haute", medium: "Urgence moyenne", info: "Info" };
 
 const DEMO = withFrenchSpacing({
   label: "Démonstration",
@@ -31,15 +37,83 @@ const DEMO = withFrenchSpacing({
     title: "Une direction digitale saturée",
     intro:
       "Des centaines de flux quotidiens : coordination multi-opérateurs, alertes SI, suivi équipements voyageurs, retours Product Owners.",
-    box: "Boîte de réception, direction digitale",
-    unread: "247 non lus",
-    messages: [
-      ["Opérateur B", "Écart de données temps réel sur trois lignes de bus : quelle source fait foi ?", "07:42"],
-      ["Alerte SI", "Supervision : interruption du flux d'information voyageurs, secteur Est", "07:58"],
-      ["Équipements voyageurs", "Douze écrans d'information hors service en gare : maintenance à planifier", "08:05"],
-      ["Product Owner", "Sprint 14 : deux demandes contradictoires à arbitrer avant la revue", "08:11"],
-    ] as [string, string, string][],
   },
+  inboxUi: {
+    box: "Boîte de réception, direction digitale",
+    hint: "Cliquez sur un message pour le lire et voir comment l'agent le classe.",
+    filtersLabel: "Filtrer les flux",
+    filters: { all: "Tous les flux", decisions: "Arbitrages requis", resolved: "Résolus automatiquement" },
+    counts: { all: 247, decisions: 3, resolved: 244 },
+    more: {
+      all: "Et 243 autres flux, triés par l'agent. Seuls 3 demandent une décision de votre part.",
+      resolved: "Et 243 autres flux résolus automatiquement : accusés de réception, doublons, notifications de routine.",
+    },
+    urgency: URGENCY,
+    labels: {
+      from: "De",
+      to: "À",
+      received: "Reçu à",
+      raw: "Message reçu",
+      analysis: "Analyse de l'agent",
+      urgency: "Urgence",
+      category: "Catégorie",
+      action: "Action de l'agent",
+    },
+  } satisfies InboxStrings,
+  messages: [
+    {
+      id: "operateur",
+      tag: "Opérateur B",
+      subject: "Écart de données temps réel sur trois lignes de bus : quelle source fait foi ?",
+      time: "07:42",
+      from: "Centre d'exploitation, opérateur B",
+      to: "Direction digitale",
+      body: "Bonjour,\n\nDepuis 6 h 30, nos données de passage en temps réel divergent de celles de la supervision sur les lignes 12, 14 et 21 : jusqu'à six minutes d'écart sur certains arrêts.\n\nLes annonces aux voyageurs ne sont plus cohérentes entre les applications et les écrans. Merci de nous indiquer avant 9 h quelle source fait foi, pour que nous alignions les annonces.\n\nCentre d'exploitation, opérateur B",
+      urgency: "high",
+      category: "Coordination multi-opérateurs",
+      action: "Ajouté au brief : arbitrage n° 1, avec une recommandation.",
+      status: "decision",
+    },
+    {
+      id: "alerte",
+      tag: "Alerte SI",
+      subject: "Supervision : interruption du flux d'information voyageurs, secteur Est",
+      time: "07:58",
+      from: "Supervision SI (alerte automatique)",
+      to: "Astreinte SI, direction digitale",
+      body: "ALERTE NIVEAU 2\n\nService : flux d'information voyageurs, secteur Est\nÉtat : interrompu depuis 07:58\nPérimètre : 9 gares, 41 écrans et l'application mobile\nCause probable : perte de connexion avec la passerelle de diffusion\n\nAction attendue : décision de passage en mode dégradé.",
+      urgency: "high",
+      category: "Alertes SI",
+      action: "Ajouté au brief : arbitrage n° 2. L'astreinte est déjà prévenue.",
+      status: "decision",
+    },
+    {
+      id: "equipements",
+      tag: "Équipements voyageurs",
+      subject: "Douze écrans d'information hors service en gare : maintenance à planifier",
+      time: "08:05",
+      from: "Outil de suivi des équipements",
+      to: "Direction digitale (copie)",
+      body: "Rapport quotidien des équipements voyageurs\n\n12 écrans d'information hors service dans 3 gares, signalés entre 22 h et 6 h.\nAucun ne concerne un quai principal.\nContrat de maintenance : intervention sous 48 heures.\n\nAucune action requise de la direction.",
+      urgency: "info",
+      category: "Suivi équipements voyageurs",
+      action: "Résolu automatiquement : ticket de maintenance créé et prestataire prévenu. Rien à décider.",
+      status: "resolved",
+    },
+    {
+      id: "po",
+      tag: "Product Owner",
+      subject: "Sprint 14 : deux demandes contradictoires à arbitrer avant la revue",
+      time: "08:11",
+      from: "Product Owner, équipe Applications",
+      to: "Direction digitale",
+      body: "Bonjour,\n\nPour le sprint 14, l'équipe ne peut pas tenir deux demandes ensemble : la refonte des alertes voyageurs, demandée par l'exploitation, et l'export des données pour le reporting, demandé par la direction financière.\n\nPouvez-vous arbitrer avant la revue de jeudi ? Sans décision, l'équipe démarre par la refonte des alertes.\n\nMerci,\nProduct Owner, équipe Applications",
+      urgency: "medium",
+      category: "Retours Product Owners",
+      action: "Ajouté au brief : arbitrage n° 3, avec une recommandation.",
+      status: "decision",
+    },
+  ] satisfies DemoMessage[],
   brief: {
     title: "Le brief exécutif, en un clic",
     intro: "L'agent lit, trie et résume. Il ne garde que ce qui demande une décision de votre part.",
@@ -54,15 +128,15 @@ const DEMO = withFrenchSpacing({
       items: [
         [
           "Source de référence temps réel",
-          "L'opérateur B et la supervision divergent sur trois lignes. Recommandation : retenir la supervision comme référence jusqu'à 10 h, le temps de la vérification.",
+          "L'opérateur B et la supervision divergent sur trois lignes, jusqu'à six minutes d'écart. Recommandation : retenir la supervision comme référence. Réponse attendue avant 9 h.",
         ],
         [
           "Information voyageurs, secteur Est",
-          "Flux interrompu depuis 07:58. Recommandation : afficher le message de mode dégradé dans les gares concernées et prévenir les équipes terrain.",
+          "Flux interrompu depuis 07:58 sur 9 gares et l'application. Recommandation : passer en mode dégradé maintenant et prévenir les équipes terrain.",
         ],
         [
           "Arbitrage du sprint 14",
-          "Deux demandes s'opposent : refonte des alertes ou export des données. Recommandation : les alertes d'abord, elles allègent la charge des équipes dès cette semaine.",
+          "Refonte des alertes ou export des données. Recommandation : les alertes d'abord, elles allègent la charge des équipes dès cette semaine. Réponse avant la revue de jeudi.",
         ],
       ],
     },
@@ -85,10 +159,29 @@ const DEMO = withFrenchSpacing({
       ],
     },
     footnote: "Démonstration : messages et chiffres fictifs.",
-  } satisfies TriageBrief,
-  mail: {
-    subject: "Prototype d'agent de triage en 48 heures",
-    body: "Bonjour,\n\nJ'ai vu la démo de l'agent de triage exécutif et je souhaite tester un prototype en 48 heures.\n\nMon organisation :\nLes flux à trier en priorité :\n",
+  } satisfies BriefStrings,
+  test: {
+    title: "Tester sur un message réel",
+    intro: "Collez un e-mail ou une alerte de votre quotidien : la démo en tire une synthèse en trois lignes.",
+  },
+  summary: {
+    label: "Collez un e-mail ou une alerte",
+    placeholder: "Objet : …\n\nCollez ici le texte d'un e-mail ou d'une alerte.",
+    submit: "Synthétiser ce message",
+    example: "Essayer avec un exemple",
+    exampleText:
+      "Objet : Retard de livraison des nouveaux écrans, gare Nord\n\nBonjour,\n\nLe fournisseur nous informe que les 20 écrans prévus pour la gare Nord seront livrés avec trois semaines de retard. L'ouverture de l'espace voyageurs prévue le 15 risque d'être décalée.\n\nPouvez-vous valider avant vendredi si nous gardons la date en installant les anciens écrans à titre provisoire ?\n\nCordialement,\nResponsable projet",
+    empty: "Collez d'abord un message, ou essayez avec l'exemple.",
+    title: "Synthèse exécutive",
+    finding: "Constat",
+    impact: "Impact",
+    decision: "Décision recommandée",
+    urgency: URGENCY,
+    note: "Pour la démonstration, la synthèse est produite dans votre navigateur par des règles simples : le texte n'est envoyé nulle part. Le prototype réel s'appuie sur un modèle d'IA, dans un environnement isolé.",
+  } satisfies SummaryStrings,
+  pilot: {
+    title: "Un pilote sur votre périmètre",
+    intro: "Dites-nous quels flux vous submergent. Nous revenons vers vous sous 24 heures pour cadrer un pilote.",
   },
 });
 
@@ -105,6 +198,22 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function DemoTriage() {
   const lang = await getLang();
   if (lang !== "fr") notFound();
+  const forms = getDictionary(lang).forms;
+
+  const pilot: PilotStrings = withFrenchSpacing({
+    name: "Nom",
+    contact: "E-mail ou téléphone",
+    contactHint: "Pour vous répondre.",
+    contactError: "Indiquez un e-mail ou un numéro de téléphone valide.",
+    message: "Message",
+    messagePlaceholder: "Votre périmètre : les flux à trier, le nombre de personnes concernées, vos outils.",
+    submit: "Demander un pilote sur votre périmètre",
+    sending: forms.sending,
+    privacy: "Vos coordonnées servent uniquement à vous répondre. Voir notre",
+    privacyLink: forms.privacyLink,
+    success: "Merci, votre demande est envoyée. Nous vous répondons sous 24 heures.",
+    errors: forms.errors,
+  });
 
   return (
     <>
@@ -126,21 +235,7 @@ export default async function DemoTriage() {
             {DEMO.inbox.title}
           </h2>
           <p className="mt-4 max-w-2xl text-ink-soft">{DEMO.inbox.intro}</p>
-          <div className="mt-8 border hairline">
-            <div className="flex flex-wrap items-center justify-between gap-2 border-b hairline bg-washi px-5 py-3 text-sm">
-              <span className="font-medium">{DEMO.inbox.box}</span>
-              <span className="text-ink-soft tabular-nums">{DEMO.inbox.unread}</span>
-            </div>
-            <ul className="divide-y divide-line">
-              {DEMO.inbox.messages.map(([tag, subject, time]) => (
-                <li key={subject} className="flex flex-col gap-1 px-5 py-4 sm:flex-row sm:items-baseline sm:gap-6">
-                  <span className="shrink-0 text-xs font-medium tracking-wide text-lab sm:w-40">{tag}</span>
-                  <span className="flex-1">{subject}</span>
-                  <span className="shrink-0 text-xs text-ink-soft tabular-nums">{time}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <InboxDemo t={DEMO.inboxUi} messages={DEMO.messages} />
         </section>
       </Container>
 
@@ -150,11 +245,29 @@ export default async function DemoTriage() {
             {DEMO.brief.title}
           </h2>
           <p className="mt-4 max-w-2xl text-ink-soft">{DEMO.brief.intro}</p>
-          <TriageDemo
-            t={DEMO.report}
-            ctaHref={mailto(DEMO.mail)}
-            ctaLabel={`Tester ce prototype en 48${NBSP}h (${wholeEuros(STUDIO.prototype, lang)}${NBSP}HT)`}
-          />
+          <BriefDemo t={DEMO.report} />
+        </Container>
+      </section>
+
+      <section aria-labelledby="test" className="border-t hairline">
+        <Container className="py-16 sm:py-20">
+          <h2 id="test" className="text-2xl sm:text-3xl">
+            {DEMO.test.title}
+          </h2>
+          <p className="mt-4 max-w-2xl text-ink-soft">{DEMO.test.intro}</p>
+          <MessageSummary t={DEMO.summary} />
+        </Container>
+      </section>
+
+      <section aria-labelledby="pilot" className="border-t hairline bg-lab-wash">
+        <Container className="py-16 sm:py-20">
+          <h2 id="pilot" className="text-2xl sm:text-3xl">
+            {DEMO.pilot.title}
+          </h2>
+          <p className="mt-4 max-w-2xl text-ink-soft">{DEMO.pilot.intro}</p>
+          <div className="mt-10">
+            <PilotForm t={pilot} privacyHref={localizedPath(lang, "/confidentialite")} contactEmail={CONTACT.email} />
+          </div>
         </Container>
       </section>
     </>
