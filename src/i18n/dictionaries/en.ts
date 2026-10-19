@@ -427,6 +427,12 @@ const en: Dictionary = {
     },
   },
 
+  proof: {
+    demo: "Live demo: try the triage agent on your own emails",
+    demoLang: " (in French)",
+    notes: "Architecture note: urban mobility & stations (Paris ↔ Tokyo)",
+  },
+
   notes: {
     title: "Proposed architectures & strategic notes",
     tags: ["Public transport in Île-de-France · Passenger information systems", "Stations · Tokyo model"],
@@ -438,6 +444,7 @@ const en: Dictionary = {
     problem:
       "Digital departments overloaded by multi-operator coordination, and station retail that makes less use of digital tools than in Japan (ekinaka, Tokyo).",
     proposalLabel: "Architecture proposed by Kuchimoto",
+    demoLink: "See this agent's demo (in French)",
     proposals: [
       [
         "Executive triage & IT governance AI agent",

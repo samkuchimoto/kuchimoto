@@ -8,6 +8,7 @@ import { pageMetadata } from "@/lib/seo";
 import { ButtonLink, Container, PageHeader } from "@/components/ui";
 import { InquiryForm } from "@/components/forms/InquiryForm";
 import { StrategicNotes } from "@/components/StrategicNotes";
+import { ProofLinks } from "@/components/ProofLinks";
 
 const SPRINTS = ["ai", "mvp"] as const;
 
@@ -24,7 +25,9 @@ export default async function Lab() {
 
   return (
     <>
-      <PageHeader eyebrow={t.label} title={t.title} intro={t.intro} accent="lab" />
+      <PageHeader eyebrow={t.label} title={t.title} intro={t.intro} accent="lab">
+        <ProofLinks t={dict.proof} />
+      </PageHeader>
 
       <Container className="py-16 sm:py-20">
         <section aria-labelledby="services" className="max-w-3xl">

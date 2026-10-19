@@ -12,7 +12,8 @@ import { PilotForm, type PilotStrings } from "@/components/demo-triage/PilotForm
 
 /**
  * /demo-triage: a working demo of the executive triage agent, in French
- * only, linked from nowhere on the site and kept out of search engines.
+ * only, linked from the Lab and Studio pages (ProofLinks, StrategicNotes)
+ * but not from the menu, and kept out of search engines.
  * Visitors paste their own emails or a screenshot of their inbox; the
  * engine (lib/triage) reads and triages them in the browser. No price;
  * the pilot request goes through /api/contact like every form.

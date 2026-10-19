@@ -443,6 +443,14 @@ const fr = {
     },
   },
 
+  /** Under the Lab and Studio titles: the two things to see first. */
+  proof: {
+    demo: "Démo en ligne : testez l'agent de triage sur vos propres e-mails",
+    /** The demo exists in French only: said on the other languages. */
+    demoLang: "",
+    notes: "Note d'architecture : mobilité urbaine & gares (Paris ↔ Tokyo)",
+  },
+
   /** On /lab and /studio: proposals and studies, not client work. */
   notes: {
     title: "Architectures proposées & Notes stratégiques",
@@ -455,6 +463,7 @@ const fr = {
     problem:
       "Des directions digitales saturées par la coordination multi-opérateurs, et des commerces de gares moins exploités numériquement qu'au Japon (ekinaka, Tokyo).",
     proposalLabel: "Architecture proposée par Kuchimoto",
+    demoLink: "Voir la démo de cet agent",
     proposals: [
       [
         "Agent IA de triage exécutif & gouvernance SI",

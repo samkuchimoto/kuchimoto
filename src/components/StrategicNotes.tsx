@@ -3,6 +3,7 @@
 // architecture proposals and studies. Worded as proposals, never as past
 // client work, and naming no organisation.
 
+import Link from "next/link";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { Container } from "@/components/ui";
 
@@ -34,10 +35,22 @@ export function StrategicNotes({ t }: { t: Dictionary["notes"] }) {
           </dl>
           <h4 className="mt-10 text-sm font-medium">{t.proposalLabel}</h4>
           <dl className="mt-4 grid gap-8 md:grid-cols-2">
-            {t.proposals.map(([name, detail]) => (
+            {t.proposals.map(([name, detail], i) => (
               <div key={name} className="border-t border-lab pt-5">
                 <dt className="font-display text-lg">{name}</dt>
                 <dd className="mt-2 text-ink-soft">{detail}</dd>
+                {/* The first proposal, the triage agent, has a live demo. */}
+                {i === 0 && (
+                  <dd className="mt-3 text-sm">
+                    <Link href="/demo-triage" hrefLang="fr" className="font-medium text-lab underline underline-offset-4 hover:no-underline">
+                      {t.demoLink}
+                    </Link>
+                    <span aria-hidden className="text-lab">
+                      {" "}
+                      →
+                    </span>
+                  </dd>
+                )}
               </div>
             ))}
           </dl>

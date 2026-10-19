@@ -10,6 +10,7 @@ import { mailto } from "@/lib/mailto";
 import { pageMetadata } from "@/lib/seo";
 import { ButtonLink, Container, PageHeader } from "@/components/ui";
 import { StrategicNotes } from "@/components/StrategicNotes";
+import { ProofLinks } from "@/components/ProofLinks";
 
 /** Kuchimoto Studio, the Lab's AI agents for creatives. Reached from the
  *  Lab page, not the main menu: the site keeps its three divisions. */
@@ -46,6 +47,7 @@ export default async function Studio() {
             {t.seePackages}
           </ButtonLink>
         </div>
+        <ProofLinks t={dict.proof} />
       </PageHeader>
 
       <Container className="pt-12 sm:pt-16">
