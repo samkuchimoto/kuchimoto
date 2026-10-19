@@ -1,6 +1,6 @@
 // /src/i18n/legal/terms.tsx
 // /cgv: the terms of sale for Happy Homes bookings on kuchimoto.com, in
-// French (the reference) and English. Standard French consumer-law
+// French (the reference), English and Japanese. Standard French consumer-law
 // clauses; every fact not yet decided is a visible placeholder.
 
 import Link from "next/link";
@@ -177,6 +177,151 @@ export function termsContent(lang: Locale, dict: Dictionary) {
     return {
       title: "Conditions générales de vente Happy Homes",
       description: f("Conditions générales de vente des prestations Happy Homes réservées sur kuchimoto.com : réservation, paiement, annulation, rétractation."),
+      sections,
+    };
+  }
+
+  if (lang === "ja") {
+    const sections: LegalSection[] = [
+      {
+        title: "目的",
+        body: (
+          <p>
+            本利用規約は、kuchimoto.comで予約されたHappy Homesのサービスについて、{COMPANY.legalName}
+            （以下「提供者」）と、事業以外の目的で行動する個人（以下「お客様」）との間に適用されます。ご予約をもって、予約日に有効な本規約に同意したものとみなします。
+          </p>
+        ),
+      },
+      { title: "提供者", body: <CompanyIdentity rows={companyRows(lang, dict)} /> },
+      {
+        title: "サービス",
+        body: (
+          <>
+            <p>
+              提供するサービス（単発の清掃、週1回プラン、入居時、退去時の大掃除、エアコンクリーニング、Villa Care）とその内容は、
+              {page("/happy-homes/thailande", "Happy Homes タイ")}
+              のページに記載しています。サービスはタイのパタヤで行います。
+            </p>
+            <p>ヴィラの清掃は、お客様からお送りいただいた写真をもとにお見積もりします。オンラインでのお支払いはありません。</p>
+          </>
+        ),
+      },
+      {
+        title: "料金",
+        body: (
+          <>
+            <p>
+              料金はタイバーツで表示します。フランスの付加価値税（TVA）は適用されません。タイにある不動産に関するサービスのためです（フランス租税一般法典第259A条2°）。
+            </p>
+            <p>適用される料金は、ご予約の時点で表示されている料金です。</p>
+          </>
+        ),
+      },
+      {
+        title: "予約とお支払い",
+        body: (
+          <>
+            <p>
+              お客様は、オンラインのフォームでご予約いただきます。定額のサービスは、ご予約の際に、安全な決済サービスであるStripeを通じて、クレジットカードでお支払いいただきます。カード情報はStripe上で入力され、提供者に送られることはありません。契約は、お支払いの受領をもって成立し、メールで確認をお送りします。
+            </p>
+            <p>
+              月額プラン（週1回プラン、Villa Care）は、ご予約の際に初月分をお支払いいただきます。翌月以降は、お申し込み日と同じ日付に、カードで自動的にお支払いいただきます。解約はメールでいつでもでき、お支払い済みの月の末日に有効となります。始まった月の分は返金しません。
+            </p>
+            <p>
+              お申し込みから14日間の撤回権があります（フランス消費法典L221-18条）。お客様がこの期間の終了前にサービスの開始を求め、その後に撤回した場合は、すでに提供された分をお支払いいただきます（L221-25条）。
+            </p>
+          </>
+        ),
+      },
+      {
+        title: "サービスの実施",
+        body: (
+          <p>
+            サービスの日時は、メールでお客様に確認します。お客様は、約束の時間に住居に入れるようにし、特別な事情（入館の方法、ペットなど）がある場合は、ご予約の際にお知らせください。
+          </p>
+        ),
+      },
+      {
+        title: "キャンセル",
+        body: (
+          <>
+            <p>サービスの24時間前までは、無料でキャンセルできます。24時間前を過ぎた場合は、料金の50％をお支払いいただきます。</p>
+            <p>キャンセルは、{mail}へのメールで承ります。</p>
+          </>
+        ),
+      },
+      {
+        title: "撤回権",
+        body: (
+          <>
+            <p>
+              フランス消費法典L221-18条以下の規定により、お客様は、契約の締結から14日以内であれば、理由を示すことなく契約を撤回できます。撤回の意思は、たとえば{mail}
+              へのメールや下記の書式など、明確な意思表示によって提供者にお知らせください。提供者は、お知らせを受けてから14日以内に、お支払いと同じ方法で返金します。
+            </p>
+            <p>
+              お客様が撤回期間の終了前にサービスの開始をはっきりと求めた場合、サービスが完全に提供された時点で撤回権は失われます（L221-28条1°）。サービスの開始後に撤回した場合は、撤回の時点までに提供された分に応じた金額をお支払いいただきます（L221-25条）。
+            </p>
+            <div className="border hairline bg-washi p-5 text-sm">
+              <p className="font-medium">撤回の書式（ひな形）</p>
+              <p className="mt-2">
+                宛先：{COMPANY.legalName}、{COMPANY.address}、メール：{mail}
+              </p>
+              <p className="mt-2">私（私たち）（*）は、以下のサービスの提供に関する私（私たち）（*）の契約を撤回することを、ここに通知します。</p>
+              <p className="mt-2">
+                予約日：
+                <br />
+                消費者の氏名：
+                <br />
+                消費者の住所：
+                <br />
+                消費者の署名（書面で通知する場合のみ）：
+                <br />
+                日付：
+              </p>
+              <p className="mt-2 text-xs">（*）不要なものを消してください。</p>
+            </div>
+          </>
+        ),
+      },
+      {
+        title: "苦情",
+        body: (
+          <p>
+            苦情は、{mail}へのメール、または{COMPANY.address}への郵送で、書面にて提供者にお送りください。
+          </p>
+        ),
+      },
+      {
+        title: "消費者調停",
+        body: mediator ? (
+          <p>
+            書面での苦情で解決しなかった場合、お客様は無料で消費者調停人に申し立てることができます（フランス消費法典L612-1条）：
+            {mediator.name}、{mediator.address}、
+            <a href={mediator.url} className={link}>
+              {mediator.url.replace("https://", "")}
+            </a>
+            。
+          </p>
+        ) : (
+          <p>消費者調停人：選任の手続き中です。オンライン決済が始まる前に、ここに連絡先を掲載します。</p>
+        ),
+      },
+      {
+        title: "個人情報",
+        body: <p>ご予約の際にお送りいただいた情報は、{page("/confidentialite", "プライバシーポリシー")}に従って取り扱います。</p>,
+      },
+      {
+        title: "準拠法",
+        body: (
+          <p>
+            本規約はフランス法に準拠します。消費者であるお客様は、お住まいの国の法律の強行規定による保護を引き続き受けられます。紛争が生じた場合は、まず話し合いによる解決を目指します。
+          </p>
+        ),
+      },
+    ];
+    return {
+      title: "Happy Homes 利用規約",
+      description: "kuchimoto.comで予約するHappy Homesのサービスの利用規約：予約、お支払い、キャンセル、撤回。",
       sections,
     };
   }

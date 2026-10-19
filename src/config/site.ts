@@ -14,6 +14,7 @@ export const COMPANY = {
   form: {
     fr: "SAS à associé unique en cours d'immatriculation",
     en: "Single-shareholder SAS, registration in progress",
+    ja: "SAS（単独株主の簡易株式会社）、登記手続き中",
   },
   capital: "8 000 €",
   address: "13 rue André Chénier, 92260 Fontenay-aux-Roses, France",
@@ -21,12 +22,14 @@ export const COMPANY = {
   registration: {
     fr: "RCS Nanterre (immatriculation en cours)",
     en: "Nanterre Trade and Companies Register (registration in progress)",
+    ja: "ナンテール商業・会社登記簿（RCS Nanterre、登記手続き中）",
   },
   president: "Samuel Louissaint",
   /** SIREN and VAT number: none until the company is registered. */
   numbersPending: {
     fr: "Attribués après l'immatriculation (en cours)",
     en: "Assigned after registration (in progress)",
+    ja: "登記の完了後に付与されます（手続き中）",
   },
   /** Where the site is hosted (Vercel, the platform it is deployed on). */
   host: {
@@ -34,6 +37,7 @@ export const COMPANY = {
     address: {
       fr: "440 N Barranca Avenue #4133, Covina, CA 91723, États-Unis",
       en: "440 N Barranca Avenue #4133, Covina, CA 91723, United States",
+      ja: "440 N Barranca Avenue #4133, Covina, CA 91723, アメリカ合衆国",
     },
     url: "https://vercel.com",
   },
@@ -42,18 +46,18 @@ export const COMPANY = {
 };
 
 /** Public contact details. The phone is written the French way on French
- *  pages and in international form on English ones. */
+ *  pages and in international form on the others. */
 export const CONTACT = {
   email: "samuelclermont.contact@gmail.com",
-  phone: { fr: "07 43 79 88 60", en: "+33 7 43 79 88 60" },
+  phone: { fr: "07 43 79 88 60", en: "+33 7 43 79 88 60", ja: "+33 7 43 79 88 60" },
   phoneHref: "tel:+33743798860",
 };
 
 /** Opening dates, written out where they are shown. */
 export const OPENINGS = {
-  bangkok: { fr: "juillet 2028", en: "July 2028" },
-  canada: { fr: "juillet 2028", en: "July 2028" },
-  usa: { fr: "janvier 2029", en: "January 2029" },
+  bangkok: { fr: "juillet 2028", en: "July 2028", ja: "2028年7月" },
+  canada: { fr: "juillet 2028", en: "July 2028", ja: "2028年7月" },
+  usa: { fr: "janvier 2029", en: "January 2029", ja: "2029年1月" },
 };
 
 /**

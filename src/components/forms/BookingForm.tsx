@@ -9,7 +9,7 @@
 import Link from "next/link";
 import { useEffect, useState, type FormEvent } from "react";
 import type { Dictionary } from "@/i18n/dictionaries";
-import type { Locale } from "@/i18n/config";
+import { wordSpace, type Locale } from "@/i18n/config";
 import { baht } from "@/lib/format";
 import { BOOKING_SERVICES, HOME_SIZES, SIZED_SERVICES, TIMES, type BookingService, type HomeSize } from "@/lib/forms/options";
 import { MAX_AIRCON_UNITS, bookingTotal } from "@/lib/pricing";
@@ -185,18 +185,20 @@ export function BookingForm({
       </div>
 
       <Checkbox name="terms" required error={errorFor("terms")}>
-        {t.terms}{" "}
+        {t.terms}
+        {wordSpace(lang)}
         <Link href={termsHref} className="underline underline-offset-4">
           {t.termsLink}
         </Link>
-        .
+        {t.termsEnd}
       </Checkbox>
       <p className="pl-8 text-sm text-ink-soft">
-        {t.privacyNote}{" "}
+        {t.privacyNote}
+        {wordSpace(lang)}
         <Link href={privacyHref} className="underline underline-offset-4">
           {f.privacyLink}
         </Link>
-        .
+        {t.privacyNoteEnd}
       </p>
       {payNow && (
         <Checkbox name="waiver" required error={errorFor("waiver")}>

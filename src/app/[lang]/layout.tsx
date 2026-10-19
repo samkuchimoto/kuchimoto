@@ -9,8 +9,8 @@ import { CookieBanner } from "@/components/CookieBanner";
 import { fontVariables } from "../fonts";
 import "../globals.css";
 
-// French and English only; any other first segment falls through to
-// app/global-not-found.tsx.
+// French, English and Japanese only; any other first segment falls
+// through to app/global-not-found.tsx.
 export const dynamicParams = false;
 
 export function generateStaticParams() {

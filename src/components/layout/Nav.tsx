@@ -1,5 +1,5 @@
 // /src/components/layout/Nav.tsx
-// The navigation links, the FR | EN switch and the phone menu. Client
+// The navigation links, the FR | EN | 日本語 switch and the phone menu. Client
 // side because each needs the current page, which is read from the
 // layout tree: proxy.ts rewrites the URL, so the server and the browser
 // would disagree on it.
@@ -9,7 +9,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useSelectedLayoutSegment, useSelectedLayoutSegments } from "next/navigation";
-import { localeMeta, localizedPath, type Locale } from "@/i18n/config";
+import { localeMeta, locales, localizedPath, type Locale } from "@/i18n/config";
 
 export type NavItem = { href: string; label: string; segment: string | null };
 
@@ -41,15 +41,13 @@ export function NavLinks({ items, label }: { items: NavItem[]; label: string }) 
   );
 }
 
-const ORDER: Locale[] = ["fr", "en"];
-
-export function LanguageToggle({ lang, label }: { lang: Locale; label: string }) {
+export function LanguageToggle({ lang, label, className = "" }: { lang: Locale; label: string; className?: string }) {
   const segments = useSelectedLayoutSegments().filter((s) => !s.startsWith("(") && !s.startsWith("__"));
   const path = `/${segments.join("/")}`;
   return (
-    <nav aria-label={label}>
+    <nav aria-label={label} className={className}>
       <ul className="flex items-center text-xs tracking-widest">
-        {ORDER.map((locale, i) => (
+        {locales.map((locale, i) => (
           <li key={locale} className="flex items-center">
             {i > 0 && <span aria-hidden className="px-1.5 text-line">|</span>}
             <Link
@@ -76,11 +74,15 @@ export function MobileMenu({
   label,
   open: openLabel,
   close: closeLabel,
+  lang,
+  languageLabel,
 }: {
   items: NavItem[];
   label: string;
   open: string;
   close: string;
+  lang: Locale;
+  languageLabel: string;
 }) {
   const [open, setOpen] = useState(false);
   const isActive = useIsActive();
@@ -128,6 +130,11 @@ export function MobileMenu({
               </li>
             ))}
           </ul>
+          {/* On a phone the language switch lives here: three languages
+              do not fit beside the wordmark. */}
+          <div className="mx-auto max-w-6xl border-t hairline px-5 py-2 sm:hidden">
+            <LanguageToggle lang={lang} label={languageLabel} />
+          </div>
         </nav>
       )}
     </div>

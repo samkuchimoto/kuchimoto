@@ -25,8 +25,15 @@ export function Header({ lang, dict }: { lang: Locale; dict: Dictionary }) {
         </Link>
         <div className="flex items-center gap-1 sm:gap-4 lg:gap-8">
           <NavLinks items={items} label={dict.nav.label} />
-          <LanguageToggle lang={lang} label={dict.nav.language} />
-          <MobileMenu items={items} label={dict.nav.label} open={dict.nav.menu} close={dict.nav.close} />
+          <LanguageToggle lang={lang} label={dict.nav.language} className="hidden sm:block" />
+          <MobileMenu
+            items={items}
+            label={dict.nav.label}
+            open={dict.nav.menu}
+            close={dict.nav.close}
+            lang={lang}
+            languageLabel={dict.nav.language}
+          />
         </div>
       </Container>
     </header>

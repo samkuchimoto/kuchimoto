@@ -1,7 +1,7 @@
 // /src/components/LegalPage.tsx
 // The frame of the legal pages: plain type, a narrow column, numbered
 // articles where useful. The texts are in src/i18n/legal/, in French (the
-// reference) and English.
+// reference), English and Japanese.
 
 import type { ReactNode } from "react";
 import Link from "next/link";
@@ -12,7 +12,7 @@ import { Container, Todo } from "@/components/ui";
 export type LegalSection = { id?: string; title: string; body: ReactNode };
 
 /** The date the legal texts were last changed, in each language. */
-export const LEGAL_UPDATED = { fr: "14 octobre 2026", en: "14 October 2026" };
+export const LEGAL_UPDATED: Record<Locale, string> = { fr: "14 octobre 2026", en: "14 October 2026", ja: "2026年10月14日" };
 
 export function LegalPage({
   lang,

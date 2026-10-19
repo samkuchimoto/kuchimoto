@@ -9,7 +9,7 @@
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import type { Dictionary } from "@/i18n/dictionaries";
-import type { Locale } from "@/i18n/config";
+import { wordSpace, type Locale } from "@/i18n/config";
 import { DIVISIONS, PROJECT_TYPES, US_LOCATIONS, type DivisionKey, type FormKind } from "@/lib/forms/options";
 import { Checkbox, Field, Honeypot, Status, inputClass } from "./Fields";
 
@@ -170,11 +170,12 @@ export function InquiryForm({
       )}
 
       <Checkbox name="consent" required error={errorFor("consent")}>
-        {t.consent}{" "}
+        {t.consent}
+        {wordSpace(lang)}
         <Link href={privacyHref} className="underline underline-offset-4">
           {t.privacyLink}
         </Link>
-        .
+        {t.consentEnd}
       </Checkbox>
 
       {error && (

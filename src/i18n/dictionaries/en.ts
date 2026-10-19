@@ -481,6 +481,7 @@ const en: Dictionary = {
     locations: { denver: "Denver", florida: "Florida" },
     consent: "I agree that my data is used to handle my request, as described in the",
     privacyLink: "privacy policy",
+    consentEnd: ".",
     send: "Send",
     join: "Join the waiting list",
     sending: "Sending…",
@@ -530,7 +531,9 @@ const en: Dictionary = {
     monthlyNote: "For a monthly package, you pay the first month here.",
     terms: "I accept the",
     termsLink: "terms of sale",
+    termsEnd: ".",
     privacyNote: "Your data is handled as described in our",
+    privacyNoteEnd: ".",
     waiver:
       "I ask for the service to start before the end of the 14-day withdrawal period, and I acknowledge that I lose my right of withdrawal once the service has been fully performed.",
     pay: "Pay {total} by card",

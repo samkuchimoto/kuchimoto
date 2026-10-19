@@ -497,6 +497,8 @@ const fr = {
     locations: { denver: "Denver", florida: "Floride" } as Record<string, string>,
     consent: "J'accepte que mes données soient utilisées pour traiter ma demande, comme décrit dans la",
     privacyLink: "politique de confidentialité",
+    /** What follows the link: a full stop here, a whole clause in Japanese. */
+    consentEnd: ".",
     send: "Envoyer",
     join: "Rejoindre la liste d'attente",
     sending: "Envoi…",
@@ -547,7 +549,9 @@ const fr = {
     monthlyNote: "Pour une formule mensuelle, vous payez ici le premier mois.",
     terms: "J'accepte les",
     termsLink: "conditions générales de vente",
+    termsEnd: ".",
     privacyNote: "Vos données sont traitées comme décrit dans notre",
+    privacyNoteEnd: ".",
     waiver:
       "Je demande que la prestation commence avant la fin du délai de rétractation de 14 jours, et je reconnais perdre mon droit de rétractation une fois la prestation entièrement exécutée.",
     /** {total} is replaced by the amount. */

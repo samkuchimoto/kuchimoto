@@ -71,6 +71,11 @@
   p {
     text-wrap: pretty;
   }
+  /* Japanese puts no spaces between words: break lines between phrases
+     rather than inside one, where the browser can. */
+  :lang(ja) {
+    word-break: auto-phrase;
+  }
   :focus-visible {
     outline: 2px solid var(--color-ink);
     outline-offset: 3px;

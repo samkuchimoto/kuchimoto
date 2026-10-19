@@ -1,5 +1,5 @@
 // /src/i18n/legal/privacy.tsx
-// /confidentialite, in French (the reference) and English.
+// /confidentialite, in French (the reference), English and Japanese.
 //
 // What the code actually does: the forms (/api/contact, /api/booking)
 // email each submission to the company through Resend; card payments go
@@ -124,6 +124,103 @@ export function privacyContent(lang: Locale, dict: Dictionary) {
     return {
       title: "Politique de confidentialité",
       description: f("Données personnelles collectées sur kuchimoto.com : lesquelles, pourquoi, combien de temps, et vos droits."),
+      sections,
+    };
+  }
+
+  if (lang === "ja") {
+    const sections: LegalSection[] = [
+      {
+        title: "個人情報の管理者",
+        body: (
+          <p>
+            {COMPANY.legalName}、{COMPANY.address}。連絡先：{mail}
+          </p>
+        ),
+      },
+      {
+        title: "収集する情報",
+        body: (
+          <ul className={list}>
+            <li>お問い合わせフォーム：該当する事業、お名前、メールアドレス、電話番号（ご記入の場合）、メッセージ。</li>
+            <li>ウェイティングリスト（カナダ、アメリカ）：お名前、メールアドレス、都市または地域、ご興味のあるサービス。</li>
+            <li>Kuchimoto Labのプロジェクト：お名前、メールアドレス、会社名（ご記入の場合）、プロジェクトの種類、メッセージ。</li>
+            <li>Happy Homes タイのご予約：サービス、住居、希望の日付と時間帯、サービスを行う住所、お名前、メールアドレス、電話番号、補足事項。</li>
+            <li>お支払い：Stripeが処理します。カード情報はStripe上で入力され、当社に送られることはありません。当社が受け取るのは、お支払い完了の通知です。</li>
+            <li>技術データ：ホスティング事業者が、サイトの運用と安全のために技術ログ（IPアドレス、表示されたページ）を記録します。</li>
+          </ul>
+        ),
+      },
+      {
+        title: "利用目的と法的根拠",
+        body: (
+          <ul className={list}>
+            <li>メッセージやプロジェクトのご相談への回答：お客様のご依頼による契約前の措置、または回答に関する当社の正当な利益。</li>
+            <li>お住まいの国でのサービス開始のお知らせ：お客様の同意（いつでも撤回できます）。</li>
+            <li>ご予約の履行と管理：契約の履行。</li>
+            <li>会計記録の保持：法的義務。</li>
+            <li>サイトの安全の確保：正当な利益。</li>
+          </ul>
+        ),
+      },
+      {
+        title: "提供先",
+        body: (
+          <>
+            <p>お客様の情報を販売したり、譲渡したりすることはありません。提供先は次に限られます。</p>
+            <ul className={list}>
+              <li>Vercel Inc.（アメリカ合衆国）：サイトのホスティング。</li>
+              <li>Resend（アメリカ合衆国）：フォームの内容を当社のメールに届けるため。</li>
+              <li>Stripe Payments Europe, Ltd.（アイルランド）：お支払いのため。</li>
+              <li>サービスを担当する者：ご予約の場合（住所、日付、補足事項）。</li>
+            </ul>
+            <p>
+              欧州連合の域外で情報が処理される場合、その移転は、GDPRが定める保護措置（十分性認定または標準契約条項）のもとで行われます。
+            </p>
+          </>
+        ),
+      },
+      {
+        title: "保存期間",
+        body: (
+          <ul className={list}>
+            <li>メッセージとご依頼：最後のやり取りから3年間。</li>
+            <li>ウェイティングリスト：サービス開始をお知らせするまで、または登録を解除されるまで。最長3年間。</li>
+            <li>ご予約：取引関係が続く期間。会計書類は10年間保存します（フランス商法典L123-22条）。</li>
+            <li>技術ログ：ホスティング事業者が定める限られた期間。</li>
+          </ul>
+        ),
+      },
+      {
+        id: "cookies",
+        title: "Cookie",
+        body: (
+          <>
+            <p>
+              本サイトは、動作に必要なCookieとストレージだけを使用します。広告やアクセス解析は使用していません。Cookieバナーでの選択は、再びお尋ねしないようにブラウザ（ローカルストレージ）に保存され、それ以外には使われません。
+            </p>
+            <p>
+              今後、任意のツールを加える場合も、お客様の同意を得てから動作させます。各ページ下部の「Cookieの設定」から、いつでも選択を変更できます。Stripeの決済ページには、Stripe独自のポリシーが適用されます。
+            </p>
+          </>
+        ),
+      },
+      {
+        title: "お客様の権利",
+        body: (
+          <>
+            <p>
+              お客様は、ご自身の情報へのアクセス、訂正、削除、処理の制限、処理への異議、データポータビリティを求めること、また同意を撤回することができます。{mail}
+              までご連絡ください。1か月以内に回答します。
+            </p>
+            <p>フランスのデータ保護機関であるCNIL（{cnil}）に、苦情を申し立てることもできます。</p>
+          </>
+        ),
+      },
+    ];
+    return {
+      title: "プライバシーポリシー",
+      description: "kuchimoto.comで収集する個人情報：その内容、目的、保存期間、お客様の権利。",
       sections,
     };
   }

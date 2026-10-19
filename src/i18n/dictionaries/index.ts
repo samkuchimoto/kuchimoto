@@ -6,8 +6,9 @@ import type { Locale } from "../config";
 import { withFrenchSpacing } from "@/lib/typography";
 import fr, { type Dictionary } from "./fr";
 import en from "./en";
+import ja from "./ja";
 
-const dictionaries: Record<Locale, Dictionary> = { fr: withFrenchSpacing(fr), en };
+const dictionaries: Record<Locale, Dictionary> = { fr: withFrenchSpacing(fr), en, ja };
 
 export function getDictionary(lang: Locale): Dictionary {
   return dictionaries[lang];

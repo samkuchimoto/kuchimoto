@@ -1,6 +1,6 @@
 // /src/i18n/legal/notice.tsx
-// /mentions-legales, in French (the reference) and English. Loi n° 2004-575
-// du 21 juin 2004 (LCEN), art. 6. Facts from config/site.ts.
+// /mentions-legales, in French (the reference), English and Japanese. Loi
+// n° 2004-575 du 21 juin 2004 (LCEN), art. 6. Facts from config/site.ts.
 
 import Link from "next/link";
 import { BAMBOOTAILS, COMPANY } from "@/config/site";
@@ -59,6 +59,43 @@ export function noticeContent(lang: Locale, dict: Dictionary) {
         <p>
           Informations prévues par l&apos;article 6 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans
           l&apos;économie numérique, pour le site kuchimoto.com.
+        </p>
+      ),
+      sections,
+    };
+  }
+
+  if (lang === "ja") {
+    const sections: LegalSection[] = [
+      { title: "サイト運営者", body: <CompanyIdentity rows={companyRows(lang, dict)} /> },
+      { title: "発行責任者", body: <p>{COMPANY.president}（代表者）</p> },
+      { title: "ホスティング事業者", body: host },
+      {
+        title: "知的財産",
+        body: (
+          <>
+            <p>
+              本サイトの文章、イラスト、画像は、特に記載がない限り、{COMPANY.legalName}
+              または各制作者に帰属します。事前の書面による許可なく複製することを禁じます。
+            </p>
+            <p>
+              BAMBOOTAILSはSamuel Louissaintの商標（INPI番号{BAMBOOTAILS.inpi}）で、{COMPANY.name}
+              が使用しています。BambooTailsのキャラクターは、Samuel Louissaintの創作物です。
+            </p>
+          </>
+        ),
+      },
+      {
+        title: "個人情報",
+        body: <p>本サイトで収集する情報とお客様の権利については、{privacy("プライバシーポリシー")}をご覧ください。</p>,
+      },
+    ];
+    return {
+      title: "法的表示",
+      description: "kuchimoto.comの法的表示：サイト運営者、発行責任者、ホスティング事業者。",
+      intro: (
+        <p>
+          デジタル経済における信頼のための2004年6月21日付フランス法第2004-575号（LCEN）第6条に基づく、kuchimoto.comに関する情報です。
         </p>
       ),
       sections,
