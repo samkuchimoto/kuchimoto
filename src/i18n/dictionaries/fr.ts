@@ -443,6 +443,30 @@ const fr = {
     },
   },
 
+  /** On /lab and /studio: proposals and studies, not client work. */
+  notes: {
+    title: "Architectures proposées & Notes stratégiques",
+    tags: ["Transport public francilien · SI voyageurs", "Gares · Modèle Tokyo"],
+    caseTitle: "Mobilité urbaine & écosystèmes de gares (Paris ↔ Tokyo)",
+    contextLabel: "Contexte",
+    context:
+      "Étude d'architecture autour des systèmes d'information voyageurs d'un réseau multi-opérateurs ouvert à la concurrence, et des gares de demain en Île-de-France.",
+    problemLabel: "Problématique",
+    problem:
+      "Des directions digitales saturées par la coordination multi-opérateurs, et des commerces de gares moins exploités numériquement qu'au Japon (ekinaka, Tokyo).",
+    proposalLabel: "Architecture proposée par Kuchimoto",
+    proposals: [
+      [
+        "Agent IA de triage exécutif & gouvernance SI",
+        "Filtrage, synthèse quotidienne et routage automatisé des alertes opérateurs/SI pour libérer les chefs de département de la surcharge email.",
+      ],
+      [
+        "Pont Paris–Tokyo pour les gares de demain",
+        "Transposition des parcours numériques des gares de Tokyo (services locaux, flux temps réel, fidélisation locale) aux gares franciliennes.",
+      ],
+    ] as [string, string][],
+  },
+
   about: {
     label: "À propos",
     title: "Samuel Louissaint, fondateur",

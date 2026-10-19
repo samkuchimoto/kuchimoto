@@ -8,6 +8,7 @@ import { mailto } from "@/lib/mailto";
 import { pageMetadata } from "@/lib/seo";
 import { ButtonLink, Container, PageHeader } from "@/components/ui";
 import { InquiryForm } from "@/components/forms/InquiryForm";
+import { StrategicNotes } from "@/components/StrategicNotes";
 
 const SPRINTS = ["ai", "mvp"] as const;
 
@@ -75,6 +76,8 @@ export default async function Lab() {
           <p className="mt-6 text-sm text-ink-soft">{t.sprints.note}</p>
         </Container>
       </section>
+
+      <StrategicNotes t={dict.notes} />
 
       <section aria-labelledby="studio" className="border-t hairline">
         <Container className="py-16 sm:py-20">

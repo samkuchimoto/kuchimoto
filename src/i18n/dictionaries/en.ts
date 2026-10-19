@@ -427,6 +427,29 @@ const en: Dictionary = {
     },
   },
 
+  notes: {
+    title: "Proposed architectures & strategic notes",
+    tags: ["Public transport in Île-de-France · Passenger information systems", "Stations · Tokyo model"],
+    caseTitle: "Urban mobility & station ecosystems (Paris ↔ Tokyo)",
+    contextLabel: "Context",
+    context:
+      "Architecture study on the passenger information systems of a multi-operator network opening to competition, and on the stations of tomorrow in Île-de-France.",
+    problemLabel: "The problem",
+    problem:
+      "Digital departments overloaded by multi-operator coordination, and station retail that makes less use of digital tools than in Japan (ekinaka, Tokyo).",
+    proposalLabel: "Architecture proposed by Kuchimoto",
+    proposals: [
+      [
+        "Executive triage & IT governance AI agent",
+        "Filtering, a daily summary and automated routing of operator and IT alerts, to free department heads from email overload.",
+      ],
+      [
+        "A Paris–Tokyo bridge for the stations of tomorrow",
+        "Bringing the digital journeys of Tokyo stations (local services, real-time information, local loyalty) to stations in Île-de-France.",
+      ],
+    ],
+  },
+
   about: {
     label: "About",
     title: "Samuel Louissaint, founder",
