@@ -12,7 +12,7 @@ import { Container, Todo } from "@/components/ui";
 export type LegalSection = { id?: string; title: string; body: ReactNode };
 
 /** The date the legal texts were last changed, in each language. */
-export const LEGAL_UPDATED: Record<Locale, string> = { fr: "14 octobre 2026", en: "14 October 2026", ja: "2026年10月14日" };
+export const LEGAL_UPDATED: Record<Locale, string> = { fr: "19 octobre 2026", en: "19 October 2026", ja: "2026年10月19日" };
 
 export function LegalPage({
   lang,

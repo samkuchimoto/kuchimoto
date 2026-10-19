@@ -51,6 +51,7 @@ export function privacyContent(lang: Locale, dict: Dictionary) {
             <li>{f("Réservations Happy Homes Thaïlande : service, logement, date et moment souhaités, adresse de la prestation, nom, adresse e-mail, téléphone, précisions.")}</li>
             <li>{f("Paiement : il est traité par Stripe. Vos données de carte sont saisies chez Stripe et ne nous sont jamais transmises ; nous recevons la confirmation du paiement.")}</li>
             <li>{f("Données techniques : notre hébergeur enregistre des journaux techniques (adresse IP, pages demandées) pour faire fonctionner et sécuriser le site.")}</li>
+            <li>{f("Démo d'analyse d'e-mails (/demo-triage) : les e-mails ou la capture que vous y déposez sont lus et analysés dans votre navigateur, sans nous être envoyés ; la lecture d'une capture télécharge le programme de reconnaissance de texte depuis cdn.jsdelivr.net. Si l'analyse approfondie par IA vous est proposée et que vous la cochez, le contenu est transmis à notre prestataire d'IA pour produire la synthèse.")}</li>
           </ul>
         ),
       },
@@ -74,6 +75,7 @@ export function privacyContent(lang: Locale, dict: Dictionary) {
             <ul className={list}>
               <li>{f("à Vercel Inc. (États-Unis), qui héberge le site ;")}</li>
               <li>{f("à Resend (États-Unis), qui achemine les formulaires jusqu'à notre messagerie ;")}</li>
+              <li>{f("à notre prestataire d'IA (Anthropic ou OpenAI, États-Unis), uniquement si vous cochez l'analyse approfondie par IA de la démo /demo-triage ;")}</li>
               <li>{f("à Stripe Payments Europe, Ltd. (Irlande), pour le paiement ;")}</li>
               <li>{f("à l'intervenant qui réalise la prestation, pour une réservation (adresse, date, précisions).")}</li>
             </ul>
@@ -91,6 +93,7 @@ export function privacyContent(lang: Locale, dict: Dictionary) {
             <li>{f("Listes d'attente : jusqu'à l'ouverture et votre information, ou jusqu'à votre désinscription, et au plus trois ans.")}</li>
             <li>{f("Réservations : le temps de la relation commerciale ; les pièces comptables sont conservées dix ans (article L123-22 du Code de commerce).")}</li>
             <li>{f("Journaux techniques : la durée limitée fixée par l'hébergeur.")}</li>
+            <li>{f("Démo /demo-triage : rien n'est conservé par KUCHIMOTO ; avec l'analyse par IA, le prestataire peut garder le contenu une durée limitée, selon ses propres conditions.")}</li>
           </ul>
         ),
       },
@@ -148,6 +151,9 @@ export function privacyContent(lang: Locale, dict: Dictionary) {
             <li>Happy Homes タイのご予約：サービス、住居、希望の日付と時間帯、サービスを行う住所、お名前、メールアドレス、電話番号、補足事項。</li>
             <li>お支払い：Stripeが処理します。カード情報はStripe上で入力され、当社に送られることはありません。当社が受け取るのは、お支払い完了の通知です。</li>
             <li>技術データ：ホスティング事業者が、サイトの運用と安全のために技術ログ（IPアドレス、表示されたページ）を記録します。</li>
+            <li>
+              メール分析のデモ（/demo-triage）：お客様が入力したメールやスクリーンショットは、お使いのブラウザの中で読み取り、分析され、当社に送られることはありません。スクリーンショットの読み取りでは、文字認識プログラムをcdn.jsdelivr.netからダウンロードします。AIによる詳細分析が提供され、お客様がそれを選択した場合は、要約を作成するため、内容が当社のAI事業者に送られます。
+            </li>
           </ul>
         ),
       },
@@ -171,6 +177,7 @@ export function privacyContent(lang: Locale, dict: Dictionary) {
             <ul className={list}>
               <li>Vercel Inc.（アメリカ合衆国）：サイトのホスティング。</li>
               <li>Resend（アメリカ合衆国）：フォームの内容を当社のメールに届けるため。</li>
+              <li>当社のAI事業者（AnthropicまたはOpenAI、アメリカ合衆国）：デモ /demo-triage でAIによる詳細分析を選択した場合に限ります。</li>
               <li>Stripe Payments Europe, Ltd.（アイルランド）：お支払いのため。</li>
               <li>サービスを担当する者：ご予約の場合（住所、日付、補足事項）。</li>
             </ul>
@@ -188,6 +195,7 @@ export function privacyContent(lang: Locale, dict: Dictionary) {
             <li>ウェイティングリスト：サービス開始をお知らせするまで、または登録を解除されるまで。最長3年間。</li>
             <li>ご予約：取引関係が続く期間。会計書類は10年間保存します（フランス商法典L123-22条）。</li>
             <li>技術ログ：ホスティング事業者が定める限られた期間。</li>
+            <li>デモ /demo-triage：KUCHIMOTOは何も保存しません。AIによる分析を選んだ場合、AI事業者が自社の規約に従い、限られた期間、内容を保持することがあります。</li>
           </ul>
         ),
       },
@@ -244,6 +252,12 @@ export function privacyContent(lang: Locale, dict: Dictionary) {
           <li>Happy Homes Thailand bookings: service, home, preferred date and time, address of the service, name, email address, phone, details.</li>
           <li>Payment: handled by Stripe. Your card details are entered with Stripe and never reach us; we receive the payment confirmation.</li>
           <li>Technical data: our host records technical logs (IP address, pages requested) to run and secure the site.</li>
+          <li>
+            Email triage demo (/demo-triage): the emails or the screenshot you add are read and analysed in your browser
+            and are not sent to us; reading a screenshot downloads the text-recognition program from cdn.jsdelivr.net. If
+            the in-depth AI analysis is offered and you tick it, the content is sent to our AI provider to produce the
+            summary.
+          </li>
         </ul>
       ),
     },
@@ -267,6 +281,7 @@ export function privacyContent(lang: Locale, dict: Dictionary) {
           <ul className={list}>
             <li>Vercel Inc. (United States), which hosts the site;</li>
             <li>Resend (United States), which carries the forms to our inbox;</li>
+            <li>our AI provider (Anthropic or OpenAI, United States), only if you tick the in-depth AI analysis on the /demo-triage demo;</li>
             <li>Stripe Payments Europe, Ltd. (Ireland), for payment;</li>
             <li>whoever carries out the service, for a booking (address, date, details).</li>
           </ul>
@@ -285,6 +300,7 @@ export function privacyContent(lang: Locale, dict: Dictionary) {
           <li>Waiting lists: until we open and tell you, or until you unsubscribe, and at most three years.</li>
           <li>Bookings: for the length of the business relationship; accounting records are kept for ten years (article L123-22 of the French Commercial Code).</li>
           <li>Technical logs: the limited period set by the host.</li>
+          <li>The /demo-triage demo: KUCHIMOTO keeps nothing; with the AI analysis, the provider may keep the content for a limited period under its own terms.</li>
         </ul>
       ),
     },
