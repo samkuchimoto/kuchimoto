@@ -48,7 +48,7 @@ export const COMPANY = {
 /** Public contact details. The phone is written the French way on French
  *  pages and in international form on the others. */
 export const CONTACT = {
-  email: "samuelclermont.contact@gmail.com",
+  email: "samuel@kuchimoto.com",
   phone: { fr: "07 43 79 88 60", en: "+33 7 43 79 88 60", ja: "+33 7 43 79 88 60" },
   phoneHref: "tel:+33743798860",
 };
