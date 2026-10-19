@@ -403,6 +403,11 @@ const ja: Dictionary = {
         ["パイロットプログラム", "最初のお客様には、割引料金でのパイロット導入をご提供します。お気軽にご相談ください。"],
       ],
     },
+    ittsui: {
+      title: "Ittsui、私たちのアプリ",
+      body: "企画から開発、リリースまで、すべて自社で手がけました。Ittsuiは、大切な人との予定を毎週ひとつ提案し、ワンクリックで確定できます。招待された人は、アカウントもアプリも必要ありません。現在アーリーアクセス中です。",
+      cta: "Ittsuiを見る",
+    },
     partOfLab: "Kuchimoto Studioは、ITとAIのコンサルティングを行うKuchimoto Labのサービスです。",
     toLab: "Kuchimoto Labを見る",
     contact: {

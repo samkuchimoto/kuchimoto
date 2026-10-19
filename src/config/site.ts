@@ -83,7 +83,7 @@ export const BAMBOOTAILS = {
   prices: { bandana: 34.9, collar: 39.9 },
 };
 
-export const ITTSUI_URL = "https://ittsui.fr";
+export const ITTSUI_URL = "https://www.ittsui.fr/";
 
 /** Happy Homes Thailand's own site, where bookings reach us by email. */
 export const HAPPY_HOMES_THAILAND = { url: "https://happyhomesthailand.com", domain: "happyhomesthailand.com" };

@@ -413,6 +413,11 @@ const en: Dictionary = {
         ],
       ],
     },
+    ittsui: {
+      title: "Ittsui, our own app",
+      body: "Designed, built and launched in-house. Ittsui suggests one meetup a week with the people who matter, confirmed in one click, with no account or app needed for guests. In early access.",
+      cta: "See Ittsui",
+    },
     partOfLab: "Kuchimoto Studio is an offer from Kuchimoto Lab, our IT and AI consulting business.",
     toLab: "Discover Kuchimoto Lab",
     contact: {

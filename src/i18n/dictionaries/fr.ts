@@ -429,6 +429,11 @@ const fr = {
         ],
       ] as [string, string][],
     },
+    ittsui: {
+      title: "Ittsui, notre application",
+      body: "Conçue, développée et lancée en interne. Ittsui propose chaque semaine un rendez-vous avec vos proches, validé en un clic, sans compte ni application pour les invités. En accès anticipé.",
+      cta: "Voir Ittsui",
+    },
     partOfLab: "Kuchimoto Studio est une offre de Kuchimoto Lab, notre activité de conseil informatique et IA.",
     toLab: "Découvrir Kuchimoto Lab",
     contact: {

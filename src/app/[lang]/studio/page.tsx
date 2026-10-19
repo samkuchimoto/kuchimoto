@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { CONTACT, STUDIO } from "@/config/site";
+import { CONTACT, ITTSUI_URL, STUDIO } from "@/config/site";
 import { localizedPath } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getLang } from "@/i18n/server";
@@ -31,7 +31,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Studio() {
   const lang = await getLang();
-  const t = getDictionary(lang).studio;
+  const dict = getDictionary(lang);
+  const t = dict.studio;
   const audit = t.packages.items.audit;
 
   return (
@@ -142,6 +143,26 @@ export default async function Studio() {
                 {t.prototype.cta}
               </ButtonLink>
             </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Our own app, built in-house: the same block and button as
+          "Applications maison" on the Lab page. */}
+      <section aria-labelledby="ittsui" className="border-t hairline">
+        <Container className="py-16 sm:py-20">
+          <dl className="max-w-3xl">
+            <div className="border-t border-lab pt-5">
+              <dt id="ittsui" className="font-display text-xl">
+                {t.ittsui.title}
+              </dt>
+              <dd className="mt-2 text-ink-soft">{t.ittsui.body}</dd>
+            </div>
+          </dl>
+          <div className="mt-10">
+            <ButtonLink href={ITTSUI_URL} accent="lab" variant="outline" external externalLabel={dict.bambootails.external}>
+              {t.ittsui.cta}
+            </ButtonLink>
           </div>
         </Container>
       </section>
