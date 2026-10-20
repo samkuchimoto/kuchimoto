@@ -30,7 +30,7 @@ export function noticeContent(lang: Locale, dict: Dictionary) {
   if (lang === "fr") {
     const sections: LegalSection[] = [
       { title: "Éditeur du site", body: <CompanyIdentity rows={companyRows(lang, dict)} /> },
-      { title: "Directeur de la publication", body: <p>{COMPANY.president}, président.</p> },
+      { title: "Directeur de la publication", body: <p>{COMPANY.director}.</p> },
       { title: "Hébergeur", body: host },
       {
         title: "Propriété intellectuelle",
@@ -68,7 +68,7 @@ export function noticeContent(lang: Locale, dict: Dictionary) {
   if (lang === "ja") {
     const sections: LegalSection[] = [
       { title: "サイト運営者", body: <CompanyIdentity rows={companyRows(lang, dict)} /> },
-      { title: "発行責任者", body: <p>{COMPANY.president}（代表者）</p> },
+      { title: "発行責任者", body: <p>{COMPANY.director}</p> },
       { title: "ホスティング事業者", body: host },
       {
         title: "知的財産",
@@ -104,7 +104,7 @@ export function noticeContent(lang: Locale, dict: Dictionary) {
 
   const sections: LegalSection[] = [
     { title: "Publisher", body: <CompanyIdentity rows={companyRows(lang, dict)} /> },
-    { title: "Director of publication", body: <p>{COMPANY.president}, president.</p> },
+    { title: "Director of publication", body: <p>{COMPANY.director}.</p> },
     { title: "Host", body: host },
     {
       title: "Intellectual property",

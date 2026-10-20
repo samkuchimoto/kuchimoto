@@ -59,12 +59,12 @@ function organizationJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: COMPANY.legalName,
+    name: COMPANY.name,
     url: SITE_URL,
-    founder: { "@type": "Person", name: COMPANY.president },
+    founder: { "@type": "Person", name: COMPANY.director },
     address: {
       "@type": "PostalAddress",
-      streetAddress: "13 rue André Chénier",
+      streetAddress: "13 rue André Chénier, porte 506",
       postalCode: "92260",
       addressLocality: "Fontenay-aux-Roses",
       addressCountry: "FR",

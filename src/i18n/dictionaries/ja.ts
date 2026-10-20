@@ -49,7 +49,7 @@ const ja: Dictionary = {
         "Kuchimoto Labのサービス、Kuchimoto Studio。クリエイティブエージェンシー、ブランド、起業家のための自律型AIエージェント。商品のローンチ、顧客対応、各市場向けのローカライズ。",
     },
     about: {
-      title: "会社概要",
+      title: "プロフィール",
       description:
         "KUCHIMOTOは、フランスとカナダの国籍を持つSamuel Louissaintが創業しました。テック業界でのテクニカルセールスとパートナーエンジニアリング、プール工事の現場経験、そして絵。",
     },
@@ -74,7 +74,7 @@ const ja: Dictionary = {
       happyHomes: "Happy Homes",
       bambootails: "BambooTails",
       lab: "Kuchimoto Lab",
-      about: "会社概要",
+      about: "プロフィール",
       contact: "お問い合わせ",
     },
   },
@@ -110,7 +110,7 @@ const ja: Dictionary = {
   home: {
     eyebrow: "国際グループ＆スタジオ",
     title: "KUCHIMOTO、3つの事業を営む国際グループ＆スタジオ（テクノロジー・サービス・クリエイティブ）。",
-    intro: "本社はフランス。事業地域はタイ、カナダ、アメリカ。",
+    intro: "フランスとタイを拠点とするスタジオ。事業地域はタイ、カナダ、アメリカ。",
     divisions: {
       happyHomes: {
         label: "ハウスサービス",
@@ -130,7 +130,7 @@ const ja: Dictionary = {
     },
     where: {
       title: "事業地域",
-      france: ["フランス", "本社"],
+      france: ["フランス", "スタジオ"],
       thailand: ["タイ", "現在はパタヤ。バンコク：2028年7月から開始予定"],
       canada: ["カナダ", "2028年7月から開始予定"],
       usa: ["アメリカ", "デンバーとフロリダ：2029年1月から開始予定"],
@@ -448,9 +448,9 @@ const ja: Dictionary = {
   },
 
   about: {
-    label: "会社概要",
+    label: "プロフィール",
     title: "創業者、Samuel Louissaint",
-    intro: "フランスとカナダの国籍を持つ、KUCHIMOTOの代表。",
+    intro: "フランスとカナダの国籍を持つ、KUCHIMOTOの創業者。",
     photoAlt: "写真：Samuel Louissaintのポートレート",
     pathTitle: "経歴",
     path: [
@@ -458,14 +458,11 @@ const ja: Dictionary = {
       "Gib-San Pools（トロント）での現場経験：プールの施工と改修。",
       "ビジュアルアーティスト。BambooTailsのキャラクターの作者。",
     ],
-    companyTitle: "会社情報",
+    companyTitle: "サイト運営者",
     companyRows: {
-      name: "商号",
-      form: "法人形態",
-      formValue: "SAS（単独株主）、登記手続き中",
-      capital: "資本金",
-      office: "本店所在地",
-      registration: "登記",
+      name: "氏名",
+      status: "区分",
+      address: "住所",
     },
   },
 

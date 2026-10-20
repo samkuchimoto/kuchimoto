@@ -6,31 +6,21 @@
 
 export const SITE_URL = "https://kuchimoto.com";
 
-/** The company, as it appears in the legal notice. */
+/**
+ * Who publishes the site and provides its services, as the legal notice,
+ * the terms of sale and the privacy policy state it. KUCHIMOTO will be a
+ * US company, KUCHIMOTO LLC (Wyoming), not a French SAS; until its
+ * registration details exist, that is Samuel Louissaint himself, as an
+ * individual (2026-10-20). Put the LLC's details here once they arrive.
+ */
 export const COMPANY = {
   name: "KUCHIMOTO",
-  legalName: "KUCHIMOTO SAS",
-  /** As in the bank file. */
-  form: {
-    fr: "SAS à associé unique en cours d'immatriculation",
-    en: "Single-shareholder SAS, registration in progress",
-    ja: "SAS（単独株主の簡易株式会社）、登記手続き中",
-  },
-  capital: "8 000 €",
-  address: "13 rue André Chénier, 92260 Fontenay-aux-Roses, France",
-  /** Shown as given until the registration number exists. */
-  registration: {
-    fr: "RCS Nanterre (immatriculation en cours)",
-    en: "Nanterre Trade and Companies Register (registration in progress)",
-    ja: "ナンテール商業・会社登記簿（RCS Nanterre、登記手続き中）",
-  },
-  president: "Samuel Louissaint",
-  /** SIREN and VAT number: none until the company is registered. */
-  numbersPending: {
-    fr: "Attribués après l'immatriculation (en cours)",
-    en: "Assigned after registration (in progress)",
-    ja: "登記の完了後に付与されます（手続き中）",
-  },
+  /** The person (later, the company) legally behind the site. */
+  legalName: "Samuel Louissaint",
+  status: { fr: "Personne physique", en: "Individual", ja: "個人" },
+  address: "13 rue André Chénier, porte 506, 92260 Fontenay-aux-Roses, France",
+  /** Publisher and director of publication. */
+  director: "Samuel Louissaint",
   /** Where the site is hosted (Vercel, the platform it is deployed on). */
   host: {
     name: "Vercel Inc.",

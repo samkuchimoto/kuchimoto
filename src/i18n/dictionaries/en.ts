@@ -108,7 +108,7 @@ const en: Dictionary = {
   home: {
     eyebrow: "International group & studio",
     title: "KUCHIMOTO, an international group & studio (Technology, Services & Creative), three businesses.",
-    intro: "Head office in France. Operations in Thailand, Canada and the United States.",
+    intro: "Studio based in France and Thailand. Operations in Thailand, Canada and the United States.",
     divisions: {
       happyHomes: {
         label: "Home services",
@@ -128,7 +128,7 @@ const en: Dictionary = {
     },
     where: {
       title: "Where we work",
-      france: ["France", "Head office"],
+      france: ["France", "Studio"],
       thailand: ["Thailand", "Pattaya today. Bangkok: upcoming, from July 2028"],
       canada: ["Canada", "Upcoming, from July 2028"],
       usa: ["United States", "Upcoming: Denver and Florida, from January 2029"],
@@ -460,7 +460,7 @@ const en: Dictionary = {
   about: {
     label: "About",
     title: "Samuel Louissaint, founder",
-    intro: "French and Canadian, president of KUCHIMOTO.",
+    intro: "French and Canadian, founder of KUCHIMOTO.",
     photoAlt: "Photo: portrait of Samuel Louissaint",
     pathTitle: "Background",
     path: [
@@ -468,14 +468,11 @@ const en: Dictionary = {
       "Field experience at Gib-San Pools (Toronto): pool construction and renovation.",
       "Visual artist, author of the BambooTails characters.",
     ],
-    companyTitle: "The company",
+    companyTitle: "Publisher",
     companyRows: {
       name: "Name",
-      form: "Legal form",
-      formValue: "Single-shareholder SAS, registration in progress",
-      capital: "Share capital",
-      office: "Head office",
-      registration: "Registration",
+      status: "Status",
+      address: "Address",
     },
   },
 

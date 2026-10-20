@@ -110,7 +110,7 @@ const fr = {
   home: {
     eyebrow: "Groupe & studio international",
     title: "KUCHIMOTO, groupe & studio international (Technologie, Services & Création), trois métiers.",
-    intro: "Siège en France. Activités en Thaïlande, au Canada et aux États-Unis.",
+    intro: "Studio basé en France et en Thaïlande. Activités en Thaïlande, au Canada et aux États-Unis.",
     divisions: {
       happyHomes: {
         label: "Services à domicile",
@@ -130,7 +130,7 @@ const fr = {
     },
     where: {
       title: "Où nous travaillons",
-      france: ["France", "Siège social"],
+      france: ["France", "Studio"],
       thailand: ["Thaïlande", "Pattaya aujourd'hui. Bangkok : à venir, à partir de juillet 2028"],
       canada: ["Canada", "À venir, à partir de juillet 2028"],
       usa: ["États-Unis", "À venir : Denver et Floride, à partir de janvier 2029"],
@@ -479,7 +479,7 @@ const fr = {
   about: {
     label: "À propos",
     title: "Samuel Louissaint, fondateur",
-    intro: "Français et Canadien, président de KUCHIMOTO.",
+    intro: "Français et Canadien, fondateur de KUCHIMOTO.",
     photoAlt: "Photo : portrait de Samuel Louissaint",
     pathTitle: "Parcours",
     path: [
@@ -487,14 +487,11 @@ const fr = {
       "Expérience de terrain chez Gib-San Pools (Toronto) : construction et rénovation de piscines.",
       "Artiste visuel, auteur des personnages BambooTails.",
     ],
-    companyTitle: "La société",
+    companyTitle: "Éditeur du site",
     companyRows: {
-      name: "Dénomination",
-      form: "Forme",
-      formValue: "SAS à associé unique en cours d'immatriculation",
-      capital: "Capital",
-      office: "Siège",
-      registration: "Immatriculation",
+      name: "Nom",
+      status: "Statut",
+      address: "Adresse",
     },
   },
 
