@@ -7,9 +7,9 @@ const en: Dictionary = {
   meta: {
     siteName: "KUCHIMOTO",
     home: {
-      title: "KUCHIMOTO | One French company, three businesses",
+      title: "KUCHIMOTO | International group & studio (Technology, Services & Creative), three businesses",
       description:
-        "KUCHIMOTO, a French company: Happy Homes (home services in Thailand, Canada and the United States), BambooTails (dog accessories) and Kuchimoto Lab (IT and AI consulting).",
+        "KUCHIMOTO, an international group & studio (Technology, Services & Creative): Happy Homes (home services in Thailand, Canada and the United States), BambooTails (dog accessories) and Kuchimoto Lab (IT and AI consulting).",
     },
     happyHomes: {
       title: "Happy Homes, home services",
@@ -78,7 +78,7 @@ const en: Dictionary = {
   },
 
   footer: {
-    tagline: "One French company, three businesses.",
+    tagline: "International group & studio (Technology, Services & Creative), three businesses.",
     divisions: "Businesses",
     company: "Company",
     legal: "Legal",
@@ -106,8 +106,8 @@ const en: Dictionary = {
   },
 
   home: {
-    eyebrow: "A French company",
-    title: "KUCHIMOTO, one French company, three businesses.",
+    eyebrow: "International group & studio",
+    title: "KUCHIMOTO, an international group & studio (Technology, Services & Creative), three businesses.",
     intro: "Head office in France. Operations in Thailand, Canada and the United States.",
     divisions: {
       happyHomes: {

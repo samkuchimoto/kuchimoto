@@ -9,9 +9,9 @@ const ja: Dictionary = {
   meta: {
     siteName: "KUCHIMOTO",
     home: {
-      title: "KUCHIMOTO | 3つの事業を営むフランスの会社",
+      title: "KUCHIMOTO | 3つの事業を営む国際グループ＆スタジオ（テクノロジー・サービス・クリエイティブ）",
       description:
-        "フランスの会社KUCHIMOTO。Happy Homes（タイ、カナダ、アメリカのハウスサービス）、BambooTails（犬のアクセサリー）、Kuchimoto Lab（ITとAIのコンサルティング）。",
+        "国際グループ＆スタジオ（テクノロジー・サービス・クリエイティブ）のKUCHIMOTO。Happy Homes（タイ、カナダ、アメリカのハウスサービス）、BambooTails（犬のアクセサリー）、Kuchimoto Lab（ITとAIのコンサルティング）。",
     },
     happyHomes: {
       title: "Happy Homes、ハウスサービス",
@@ -80,7 +80,7 @@ const ja: Dictionary = {
   },
 
   footer: {
-    tagline: "3つの事業を営むフランスの会社。",
+    tagline: "3つの事業を営む国際グループ＆スタジオ（テクノロジー・サービス・クリエイティブ）。",
     divisions: "事業",
     company: "会社",
     legal: "法的情報",
@@ -108,8 +108,8 @@ const ja: Dictionary = {
   },
 
   home: {
-    eyebrow: "フランスの会社",
-    title: "KUCHIMOTO、3つの事業を営むフランスの会社。",
+    eyebrow: "国際グループ＆スタジオ",
+    title: "KUCHIMOTO、3つの事業を営む国際グループ＆スタジオ（テクノロジー・サービス・クリエイティブ）。",
     intro: "本社はフランス。事業地域はタイ、カナダ、アメリカ。",
     divisions: {
       happyHomes: {
