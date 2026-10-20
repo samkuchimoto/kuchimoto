@@ -110,7 +110,7 @@ const ja: Dictionary = {
   home: {
     eyebrow: "国際グループ＆スタジオ",
     title: "KUCHIMOTO、3つの事業を営む国際グループ＆スタジオ（テクノロジー・サービス・クリエイティブ）。",
-    intro: "フランスとタイを拠点とするスタジオ。事業地域はタイ、カナダ、アメリカ。",
+    intro: "事業地域はタイ、カナダ、アメリカ。",
     divisions: {
       happyHomes: {
         label: "ハウスサービス",

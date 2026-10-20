@@ -108,7 +108,7 @@ const en: Dictionary = {
   home: {
     eyebrow: "International group & studio",
     title: "KUCHIMOTO, an international group & studio (Technology, Services & Creative), three businesses.",
-    intro: "Studio based in France and Thailand. Operations in Thailand, Canada and the United States.",
+    intro: "Operations in Thailand, Canada and the United States.",
     divisions: {
       happyHomes: {
         label: "Home services",

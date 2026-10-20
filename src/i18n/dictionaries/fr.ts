@@ -110,7 +110,7 @@ const fr = {
   home: {
     eyebrow: "Groupe & studio international",
     title: "KUCHIMOTO, groupe & studio international (Technologie, Services & Création), trois métiers.",
-    intro: "Studio basé en France et en Thaïlande. Activités en Thaïlande, au Canada et aux États-Unis.",
+    intro: "Activités en Thaïlande, au Canada et aux États-Unis.",
     divisions: {
       happyHomes: {
         label: "Services à domicile",

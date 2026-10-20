@@ -62,13 +62,8 @@ function organizationJsonLd() {
     name: COMPANY.name,
     url: SITE_URL,
     founder: { "@type": "Person", name: COMPANY.director },
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "13 rue André Chénier, porte 506",
-      postalCode: "92260",
-      addressLocality: "Fontenay-aux-Roses",
-      addressCountry: "FR",
-    },
+    // No postal address: it's Samuel's home, kept to the legal pages, not
+    // handed to search engines.
   };
 }
 

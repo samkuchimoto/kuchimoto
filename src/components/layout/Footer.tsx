@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CONTACT, COMPANY } from "@/config/site";
+import { CONTACT } from "@/config/site";
 import { localizedPath, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { Container, Logo, Todo } from "@/components/ui";
@@ -16,8 +16,9 @@ export function Footer({ lang, dict }: { lang: Locale; dict: Dictionary }) {
         <div>
           <Logo />
           <p className="mt-5 max-w-xs text-sm text-ink-soft">{t.tagline}</p>
-          <p className="mt-5 text-sm text-ink-soft">{COMPANY.address}</p>
-          <p className="mt-2 text-sm">
+          {/* No postal address here: it's Samuel's own, and it stays where the
+              law asks for it (legal notice, terms, privacy, contact page). */}
+          <p className="mt-5 text-sm">
             {CONTACT.email ? (
               <a href={`mailto:${CONTACT.email}`} className={link}>
                 {CONTACT.email}
