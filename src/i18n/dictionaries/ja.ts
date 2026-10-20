@@ -11,7 +11,7 @@ const ja: Dictionary = {
     home: {
       title: "KUCHIMOTO | 国際グループ＆スタジオ",
       description:
-        "国際グループ＆スタジオ（テクノロジー・サービス・クリエイティブ）のKUCHIMOTO。Happy Homes（タイ、カナダ、アメリカのハウスサービス）、BambooTails（犬のアクセサリー）、Kuchimoto Lab（ITとAIのコンサルティング）。",
+        "国際グループ＆スタジオ、KUCHIMOTO。Happy Homes（タイ、カナダ、アメリカのハウスサービス）、BambooTails（犬のアクセサリー）、Kuchimoto Lab（ITとAIのコンサルティング）。",
     },
     happyHomes: {
       title: "Happy Homes、ハウスサービス",
@@ -80,7 +80,7 @@ const ja: Dictionary = {
   },
 
   footer: {
-    tagline: "国際グループ＆スタジオ。テクノロジー・サービス・クリエイティブ。",
+    tagline: "国際グループ＆スタジオ。",
     divisions: "事業",
     company: "会社",
     legal: "法的情報",
@@ -108,7 +108,7 @@ const ja: Dictionary = {
   },
 
   home: {
-    eyebrow: "テクノロジー・サービス・クリエイティブ",
+    eyebrow: "国際グループ＆スタジオ",
     title: "KUCHIMOTO、国際グループ＆スタジオ。",
     intro: "KUCHIMOTO LLC（米国ワイオミング州）、設立手続き中。",
     divisions: {

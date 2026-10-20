@@ -11,7 +11,7 @@ const fr = {
     home: {
       title: "KUCHIMOTO | Groupe & studio international",
       description:
-        "KUCHIMOTO, groupe & studio international (Technologie, Services & Création) : Happy Homes (services à domicile en Thaïlande, au Canada et aux États-Unis), BambooTails (accessoires pour chiens) et Kuchimoto Lab (conseil informatique et IA).",
+        "KUCHIMOTO, groupe & studio international : Happy Homes (services à domicile en Thaïlande, au Canada et aux États-Unis), BambooTails (accessoires pour chiens) et Kuchimoto Lab (conseil informatique et IA).",
     },
     happyHomes: {
       title: "Happy Homes, services à domicile",
@@ -80,7 +80,7 @@ const fr = {
   },
 
   footer: {
-    tagline: "Groupe & studio international. Technologie, Services & Création.",
+    tagline: "Groupe & studio international.",
     divisions: "Métiers",
     company: "Société",
     legal: "Informations légales",
@@ -108,7 +108,7 @@ const fr = {
   },
 
   home: {
-    eyebrow: "Technologie, Services & Création",
+    eyebrow: "Groupe & studio international",
     title: "KUCHIMOTO, groupe & studio international.",
     intro: "KUCHIMOTO LLC (Wyoming, États-Unis), en cours de création.",
     divisions: {
