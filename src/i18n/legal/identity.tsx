@@ -9,10 +9,13 @@ import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { Todo } from "@/components/ui";
 
-const LABELS: Record<Locale, { name: string; status: string; address: string; email: string; phone: string }> = {
-  fr: { name: "Nom", status: "Statut", address: "Adresse", email: "E-mail", phone: "Téléphone" },
-  en: { name: "Name", status: "Status", address: "Address", email: "Email", phone: "Phone" },
-  ja: { name: "氏名", status: "区分", address: "住所", email: "メール", phone: "電話" },
+const LABELS: Record<
+  Locale,
+  { name: string; status: string; company: string; address: string; email: string; phone: string }
+> = {
+  fr: { name: "Nom", status: "Statut", company: "Société", address: "Adresse", email: "E-mail", phone: "Téléphone" },
+  en: { name: "Name", status: "Status", company: "Company", address: "Address", email: "Email", phone: "Phone" },
+  ja: { name: "氏名", status: "区分", company: "法人", address: "住所", email: "メール", phone: "電話" },
 };
 
 export function companyRows(lang: Locale, dict: Dictionary): [string, ReactNode][] {
@@ -33,6 +36,7 @@ export function companyRows(lang: Locale, dict: Dictionary): [string, ReactNode]
   return [
     [l.name, COMPANY.legalName],
     [l.status, COMPANY.status[lang]],
+    [l.company, COMPANY.formation[lang]],
     [l.address, COMPANY.address],
     [l.email, email],
     [l.phone, phone],

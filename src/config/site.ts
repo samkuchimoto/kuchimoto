@@ -21,6 +21,16 @@ export const COMPANY = {
   address: "13 rue André Chénier, porte 506, 92260 Fontenay-aux-Roses, France",
   /** Publisher and director of publication. */
   director: "Samuel Louissaint",
+  /**
+   * The company being formed (2026-10-20, Samuel's call that the process
+   * is under way). "de création" rather than "d'immatriculation": that
+   * word means the Wyoming filing is submitted; switch to it then.
+   */
+  formation: {
+    fr: "KUCHIMOTO LLC (Wyoming, États-Unis), en cours de création",
+    en: "KUCHIMOTO LLC (Wyoming, United States), formation in progress",
+    ja: "KUCHIMOTO LLC（米国ワイオミング州）、設立手続き中",
+  },
   /** Where the site is hosted (Vercel, the platform it is deployed on). */
   host: {
     name: "Vercel Inc.",

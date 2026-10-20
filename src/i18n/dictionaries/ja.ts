@@ -110,7 +110,7 @@ const ja: Dictionary = {
   home: {
     eyebrow: "国際グループ＆スタジオ",
     title: "KUCHIMOTO、3つの事業を営む国際グループ＆スタジオ（テクノロジー・サービス・クリエイティブ）。",
-    intro: "事業地域はタイ、カナダ、アメリカ。",
+    intro: "KUCHIMOTO LLC（米国ワイオミング州）、設立手続き中。",
     divisions: {
       happyHomes: {
         label: "ハウスサービス",
@@ -462,6 +462,7 @@ const ja: Dictionary = {
     companyRows: {
       name: "氏名",
       status: "区分",
+      company: "法人",
       address: "住所",
     },
   },

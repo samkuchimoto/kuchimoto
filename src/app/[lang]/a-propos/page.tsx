@@ -45,6 +45,7 @@ export default async function About() {
             {[
               [rows.name, COMPANY.legalName],
               [rows.status, COMPANY.status[lang]],
+              [rows.company, COMPANY.formation[lang]],
               [rows.address, COMPANY.address],
             ].map(([term, detail]) => (
               <div key={term} className="contents">

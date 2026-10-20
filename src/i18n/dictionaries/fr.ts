@@ -110,7 +110,7 @@ const fr = {
   home: {
     eyebrow: "Groupe & studio international",
     title: "KUCHIMOTO, groupe & studio international (Technologie, Services & Création), trois métiers.",
-    intro: "Activités en Thaïlande, au Canada et aux États-Unis.",
+    intro: "KUCHIMOTO LLC (Wyoming, États-Unis), en cours de création.",
     divisions: {
       happyHomes: {
         label: "Services à domicile",
@@ -491,6 +491,7 @@ const fr = {
     companyRows: {
       name: "Nom",
       status: "Statut",
+      company: "Société",
       address: "Adresse",
     },
   },
