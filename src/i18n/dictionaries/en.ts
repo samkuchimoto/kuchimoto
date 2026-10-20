@@ -7,7 +7,7 @@ const en: Dictionary = {
   meta: {
     siteName: "KUCHIMOTO",
     home: {
-      title: "KUCHIMOTO | International group & studio (Technology, Services & Creative), three businesses",
+      title: "KUCHIMOTO | International group & studio",
       description:
         "KUCHIMOTO, an international group & studio (Technology, Services & Creative): Happy Homes (home services in Thailand, Canada and the United States), BambooTails (dog accessories) and Kuchimoto Lab (IT and AI consulting).",
     },
@@ -78,7 +78,7 @@ const en: Dictionary = {
   },
 
   footer: {
-    tagline: "International group & studio (Technology, Services & Creative), three businesses.",
+    tagline: "International group & studio. Technology, Services & Creative.",
     divisions: "Businesses",
     company: "Company",
     legal: "Legal",
@@ -106,8 +106,8 @@ const en: Dictionary = {
   },
 
   home: {
-    eyebrow: "International group & studio",
-    title: "KUCHIMOTO, an international group & studio (Technology, Services & Creative), three businesses.",
+    eyebrow: "Technology, Services & Creative",
+    title: "KUCHIMOTO, an international group & studio.",
     intro: "KUCHIMOTO LLC (Wyoming, United States), formation in progress.",
     divisions: {
       happyHomes: {
