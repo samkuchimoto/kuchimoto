@@ -4,8 +4,9 @@ import { localizedPath } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getLang } from "@/i18n/server";
 import { pageMetadata } from "@/lib/seo";
+import { leadFormProps } from "@/lib/leads/props";
 import { Container, PageHeader, Todo } from "@/components/ui";
-import { InquiryForm } from "@/components/forms/InquiryForm";
+import { ContactForms } from "@/components/forms/ContactForms";
 
 export async function generateMetadata(): Promise<Metadata> {
   const lang = await getLang();
@@ -23,12 +24,14 @@ export default async function Contact() {
       <PageHeader eyebrow={t.label} title={t.title} intro={t.intro} />
 
       <Container className="grid gap-14 py-16 sm:py-20 lg:grid-cols-[1.5fr_1fr] lg:gap-20">
-        <InquiryForm
-          kind="contact"
+        {/* ?business=lab, studio, happy-homes or bambootails preselects the business. */}
+        <ContactForms
           lang={lang}
-          t={dict.forms}
+          forms={dict.forms}
+          studioLabel={t.studio}
           privacyHref={localizedPath(lang, "/confidentialite")}
           contactEmail={CONTACT.email}
+          lead={leadFormProps(lang)}
         />
 
         <aside aria-labelledby="direct" className="lg:border-l lg:hairline lg:pl-10">

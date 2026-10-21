@@ -40,12 +40,36 @@ export const KIND_LABEL: Record<Kind, string> = {
   other: "Autres informations",
 };
 
+/** The language the engine writes in: the page's, French or English. */
+export type OutputLang = "fr" | "en";
+
+const KIND_LABEL_EN: Record<Kind, string> = {
+  client: "Client replies & conversations",
+  contract: "Contracts & quotes",
+  bank: "Banking & payments",
+  alert: "Alerts",
+  expiry: "Expiries & renewals",
+  deadline: "Deadlines & meetings",
+  otp: "Security codes",
+  security: "Account security",
+  terms: "Terms & privacy",
+  confirmation: "Confirmations",
+  update: "Updates",
+  newsletter: "Newsletters",
+  jobs: "Job offers",
+  promo: "Promotions",
+  social: "Social networks",
+  other: "Other information",
+};
+
+export const KIND_LABELS: Record<OutputLang, Record<Kind, string>> = { fr: KIND_LABEL, en: KIND_LABEL_EN };
+
 export type RawEmail = { sender: string; subject: string; snippet: string; received: string };
 
 export type TriageEmail = RawEmail & {
   category: Category;
   kind: Kind;
-  /** One line, in French. */
+  /** One line, in the output language. */
   summary: string;
   /** A date or limit found in the email, as written ("5 novembre", "Oct 24"). */
   deadline: string;
@@ -173,12 +197,13 @@ function deadlineTime(date: string, now = new Date()): number {
   return time;
 }
 
-/** "avant le 5 novembre", "avant vendredi", "d'ici demain", "aujourd'hui". */
-function due(date: string): string {
+/** "avant le 5 novembre", "avant vendredi", "d'ici demain", "aujourd'hui"; in English "by Nov 5". */
+function due(date: string, lang: OutputLang): string {
   if (!date) return "";
   const d = fold(date);
   if (/^(aujourd'hui|today|ce soir|tonight)$/.test(d)) return ` ${date}`;
   if (/^(dans|in) /.test(d)) return ` ${date}`;
+  if (lang === "en") return ` by ${date}`;
   if (/^fin /.test(d)) return ` d'ici la ${date}`;
   if (/^(demain|apres-demain|tomorrow|end of)/.test(d)) return ` d'ici ${date}`;
   if (new RegExp(`^(${DAY_FR}|${DAY_EN})$`).test(d)) return ` avant ${date}`;
@@ -441,64 +466,87 @@ function cleanSubject(subject: string): string {
   );
 }
 
-const shortName = (sender: string) => sender.replace(/\s*[,;].*$/, "") || "l'expéditeur";
+const shortName = (sender: string, lang: OutputLang) =>
+  sender.replace(/\s*[,;].*$/, "") || (lang === "en" ? "the sender" : "l'expéditeur");
 
-function oneLine(email: RawEmail): string {
-  const subject = cleanSubject(email.subject) || "(sans objet)";
+function oneLine(email: RawEmail, lang: OutputLang): string {
+  const subject = cleanSubject(email.subject) || (lang === "en" ? "(no subject)" : "(sans objet)");
   const sentence = squash(email.snippet).match(/^[^.!?]{3,160}[.!?]?/)?.[0]?.trim() ?? "";
   const add = subject.length < 60 && sentence && !fold(subject).includes(fold(sentence).slice(0, 18));
-  return shorten(add ? `${subject}${NBSP}: ${sentence}` : subject, 160);
+  const colon = lang === "en" ? ":" : `${NBSP}:`;
+  return shorten(add ? `${subject}${colon} ${sentence}` : subject, 160);
 }
 
-function actionFor(kind: Kind, email: RawEmail, t: string, date: string): string {
-  const who = shortName(email.sender);
-  const by = due(date);
+function actionFor(kind: Kind, email: RawEmail, t: string, date: string, lang: OutputLang): string {
+  const who = shortName(email.sender, lang);
+  const by = due(date, lang);
+  const en = lang === "en";
   switch (kind) {
     case "client":
-      return `Répondre à ${who}${RX.contract.test(t) ? " et envoyer le document demandé" : ""}${by}.`;
+      return en
+        ? `Reply to ${who}${RX.contract.test(t) ? " and send the requested document" : ""}${by}.`
+        : `Répondre à ${who}${RX.contract.test(t) ? " et envoyer le document demandé" : ""}${by}.`;
     case "contract":
-      if (/(signature|a signer|signer|sign)/.test(t)) return `Relire et signer le document${by}.`;
-      if (/(devis|quote)/.test(t)) return `Valider ou négocier le devis${by}.`;
-      return `Relire le contrat et répondre${by}.`;
+      if (/(signature|a signer|signer|sign)/.test(t)) return en ? `Review and sign the document${by}.` : `Relire et signer le document${by}.`;
+      if (/(devis|quote)/.test(t)) return en ? `Approve or negotiate the quote${by}.` : `Valider ou négocier le devis${by}.`;
+      return en ? `Review the contract and reply${by}.` : `Relire le contrat et répondre${by}.`;
     case "bank": {
       const amount = `${email.subject} ${email.snippet}`.match(/(\d[\d\s.,]*\d\s?(?:€|eur\b|euros?)|\d\s?(?:€|eur\b|euros?)|\$\s?\d[\d.,]*)/i)?.[1];
       const sum = amount ? ` ${squash(amount)}` : "";
-      if (RX.bankFailure.test(t)) return `Régulariser le paiement${sum}${by}, depuis l'espace client officiel (pas via le lien de l'e-mail).`;
-      if (RX.bankIssue.test(t)) return `Régler${sum || " le montant dû"}${by}, depuis l'espace client officiel.`;
-      return `Vérifier le montant${sum} et la date du paiement${by}.`;
+      if (RX.bankFailure.test(t))
+        return en
+          ? `Settle the payment${sum}${by}, from the official customer area (not the link in the email).`
+          : `Régulariser le paiement${sum}${by}, depuis l'espace client officiel (pas via le lien de l'e-mail).`;
+      if (RX.bankIssue.test(t))
+        return en
+          ? `Pay${sum || " the amount due"}${by}, from the official customer area.`
+          : `Régler${sum || " le montant dû"}${by}, depuis l'espace client officiel.`;
+      return en ? `Check the amount${sum} and the payment date${by}.` : `Vérifier le montant${sum} et la date du paiement${by}.`;
     }
     case "alert":
-      if (RX.account.test(t)) return "Rétablir l'accès depuis le site officiel du service, jamais via le lien reçu.";
-      if (/(deploiement|deploy|build)/.test(t)) return "Corriger puis relancer le déploiement.";
-      return "Vérifier l'incident et prévenir la personne concernée.";
+      if (RX.account.test(t))
+        return en
+          ? "Restore access from the service's official site, never through the link you received."
+          : "Rétablir l'accès depuis le site officiel du service, jamais via le lien reçu.";
+      if (/(deploiement|deploy|build)/.test(t)) return en ? "Fix the deployment and run it again." : "Corriger puis relancer le déploiement.";
+      return en ? "Check the incident and tell the person concerned." : "Vérifier l'incident et prévenir la personne concernée.";
     case "expiry":
-      if (/(nom de domaine|\bdomaine\b|\bdomain\b)/.test(t)) return `Renouveler le nom de domaine${by}.`;
-      if (/attestation/.test(t)) return `Envoyer la nouvelle attestation${by}.`;
-      if (/(carte|card)/.test(t)) return `Mettre à jour la carte${by}.`;
-      if (/(abonnement|subscription|essai|trial)/.test(t)) return `Renouveler ou résilier l'abonnement${by}.`;
-      return `Renouveler${by || " avant l'échéance"}.`;
+      if (/(nom de domaine|\bdomaine\b|\bdomain\b)/.test(t)) return en ? `Renew the domain name${by}.` : `Renouveler le nom de domaine${by}.`;
+      if (/attestation/.test(t)) return en ? `Send the new certificate${by}.` : `Envoyer la nouvelle attestation${by}.`;
+      if (/(carte|card)/.test(t)) return en ? `Update the card${by}.` : `Mettre à jour la carte${by}.`;
+      if (/(abonnement|subscription|essai|trial)/.test(t))
+        return en ? `Renew or cancel the subscription${by}.` : `Renouveler ou résilier l'abonnement${by}.`;
+      return en ? `Renew${by || " before the deadline"}.` : `Renouveler${by || " avant l'échéance"}.`;
     case "deadline":
-      if (/(rendez-vous|\brdv\b|convocation|entretien|meeting|reunion|invitation)/.test(t)) return `Confirmer le rendez-vous${date ? ` (${date})` : ""}.`;
-      if (RX.request.test(t)) return `Envoyer les documents demandés à ${who}${by}.`;
-      return `Traiter${by || " aujourd'hui"}.`;
+      if (/(rendez-vous|\brdv\b|convocation|entretien|meeting|reunion|invitation)/.test(t))
+        return en ? `Confirm the meeting${date ? ` (${date})` : ""}.` : `Confirmer le rendez-vous${date ? ` (${date})` : ""}.`;
+      if (RX.request.test(t)) return en ? `Send the requested documents to ${who}${by}.` : `Envoyer les documents demandés à ${who}${by}.`;
+      return en ? `Handle it${by || " today"}.` : `Traiter${by || " aujourd'hui"}.`;
     default:
       return "";
   }
 }
 
-function followLine(kind: Kind, email: RawEmail, text: string, date: string): string {
+function followLine(kind: Kind, email: RawEmail, text: string, date: string, lang: OutputLang): string {
+  const en = lang === "en";
   switch (kind) {
     case "otp": {
       const code = `${email.subject} ${email.snippet}`.match(/\b(\d{4,8})\b/)?.[1];
       const masked = code ? `${code.slice(0, 2)}${"•".repeat(code.length - 2)}` : "";
-      return `Code de vérification reçu${masked ? ` (${masked})` : ""}${NBSP}: à ne jamais partager.`;
+      return en
+        ? `Verification code received${masked ? ` (${masked})` : ""}: never share it.`
+        : `Code de vérification reçu${masked ? ` (${masked})` : ""}${NBSP}: à ne jamais partager.`;
     }
     case "security":
-      return `Connexion ou changement signalé sur le compte${NBSP}: si ce n'était pas vous, changez le mot de passe.`;
+      return en
+        ? "Sign-in or change reported on the account: if it wasn't you, change the password."
+        : `Connexion ou changement signalé sur le compte${NBSP}: si ce n'était pas vous, changez le mot de passe.`;
     case "terms":
-      return `Mise à jour des conditions ou de la confidentialité${date ? ` (en vigueur${NBSP}: ${date})` : ""}.`;
+      return en
+        ? `Update to the terms or privacy policy${date ? ` (effective: ${date})` : ""}.`
+        : `Mise à jour des conditions ou de la confidentialité${date ? ` (en vigueur${NBSP}: ${date})` : ""}.`;
     default:
-      return oneLine(email);
+      return oneLine(email, lang);
   }
 }
 
@@ -545,30 +593,30 @@ function decide(email: RawEmail, t: string, limit: boolean): [Category, Kind] {
 }
 
 /** Classes one email, finds its date and writes its line and next step. */
-export function classifyEmail(email: RawEmail): TriageEmail {
+export function classifyEmail(email: RawEmail, lang: OutputLang = "fr"): TriageEmail {
   const t = fold(`${email.sender} ${email.subject} ${email.snippet}`);
   const { date, limit } = findDate(`${email.subject} ${email.snippet}`);
   const [category, kind] = decide(email, t, limit);
 
-  const summary = category === "follow" ? followLine(kind, email, t, date) : oneLine(email);
+  const summary = category === "follow" ? followLine(kind, email, t, date, lang) : oneLine(email, lang);
   return {
     ...email,
-    sender: email.sender || "Expéditeur inconnu",
+    sender: email.sender || (lang === "en" ? "Unknown sender" : "Expéditeur inconnu"),
     category,
     kind,
     summary,
     deadline: category === "priority" || kind === "terms" ? date : "",
-    action: category === "priority" ? actionFor(kind, email, t, date) : "",
+    action: category === "priority" ? actionFor(kind, email, t, date, lang) : "",
   };
 }
 
 // ---------------------------------------------------------------- the brief
 
-export function buildBrief(emails: TriageEmail[], now = new Date()): Brief {
+export function buildBrief(emails: TriageEmail[], now = new Date(), lang: OutputLang = "fr"): Brief {
   const of = (category: Category) => emails.filter((email) => email.category === category);
   const grouped = (items: TriageEmail[], kinds: Kind[]): BriefGroup[] =>
     kinds
-      .map((kind) => ({ kind, label: KIND_LABEL[kind], items: items.filter((email) => email.kind === kind) }))
+      .map((kind) => ({ kind, label: KIND_LABELS[lang][kind], items: items.filter((email) => email.kind === kind) }))
       .filter((group) => group.items.length > 0);
 
   // Closest deadline first; an alert with no date is for today.
@@ -599,8 +647,14 @@ export function buildBrief(emails: TriageEmail[], now = new Date()): Brief {
 }
 
 /** The whole local pipeline: pasted text in, brief out. Never throws. */
-export function triage(input: string, now = new Date()): Brief {
-  return buildBrief(parseEmails(input).slice(0, 300).map(classifyEmail), now);
+export function triage(input: string, now = new Date(), lang: OutputLang = "fr"): Brief {
+  return buildBrief(
+    parseEmails(input)
+      .slice(0, 300)
+      .map((email) => classifyEmail(email, lang)),
+    now,
+    lang,
+  );
 }
 
 const CATEGORIES = Object.keys(KINDS) as Category[];
@@ -609,7 +663,7 @@ const CATEGORIES = Object.keys(KINDS) as Category[];
  * Emails returned by an AI analysis, checked field by field: a bad or
  * missing value is replaced by what the local engine decides.
  */
-export function fromAi(items: unknown): TriageEmail[] {
+export function fromAi(items: unknown, lang: OutputLang = "fr"): TriageEmail[] {
   if (!Array.isArray(items)) return [];
   return items.slice(0, 300).flatMap((item) => {
     if (!item || typeof item !== "object") return [];
@@ -624,7 +678,7 @@ export function fromAi(items: unknown): TriageEmail[] {
       received: value("received", 40),
     };
     if (!raw.sender && !raw.subject && !raw.snippet) return [];
-    const local = classifyEmail(raw);
+    const local = classifyEmail(raw, lang);
     const category = value("category", 20) as Category;
     const kind = value("kind", 20) as Kind;
     const valid = CATEGORIES.includes(category) && KINDS[category].includes(kind);

@@ -2,35 +2,31 @@
 // "Testez l'agent sur vos vrais emails maintenant": paste inbox rows or
 // whole emails, drop or paste a screenshot of an inbox (read in the
 // browser), or load fifteen sample emails; then one button triages them
-// and shows the brief. The local engine runs in the browser and is always
-// available; an AI analysis is offered only when the server has a key,
-// and only when the visitor ticks it, after being told where it goes.
+// and shows the brief, then the lead form passed as afterBrief. The local
+// engine runs in the browser and is always available; an AI analysis is
+// offered only when the server has a key, and only when the visitor ticks
+// it, after being told where it goes. French or English (lib/triage/copy.ts).
 
 "use client";
 
-import { useCallback, useEffect, useRef, useState, type ClipboardEvent, type DragEvent } from "react";
+import { useCallback, useEffect, useRef, useState, type ClipboardEvent, type DragEvent, type ReactNode } from "react";
 import { buildBrief, fromAi, triage, type Brief } from "@/lib/triage/engine";
-import { SAMPLE_INBOX } from "@/lib/triage/sample";
+import { demoCopy, type DemoLang } from "@/lib/triage/copy";
 import { readScreenshot, screenshotForAi, type OcrProgress } from "@/lib/triage/ocr";
 import { inputClass } from "@/components/forms/Fields";
 import { BriefView } from "./BriefView";
-
-const NBSP = " ";
 
 type Tab = "text" | "image" | "sample";
 type Ocr = { status: "idle" | "running" | "done" | "error"; stage: OcrProgress["stage"]; progress: number; text: string };
 type Result = { brief: Brief; mode: string };
 
-const TABS: [Tab, string][] = [
-  ["text", "Coller mes e-mails (texte brut)"],
-  ["image", "Capture d'écran de boîte mail"],
-  ["sample", "Charger un exemple réel"],
-];
+const TABS: Tab[] = ["text", "image", "sample"];
 
 const IMAGE_TYPES = /^image\/(png|jpe?g|webp)$/;
-const LOCAL_MODE = `Analyse locale, dans votre navigateur${NBSP}: rien n'a été envoyé.`;
 
-export function TriageTool() {
+export function TriageTool({ lang, afterBrief }: { lang: DemoLang; afterBrief?: ReactNode }) {
+  const s = demoCopy(lang);
+  const tt = s.tool;
   const [tab, setTab] = useState<Tab>("text");
   const [text, setText] = useState("");
   const [image, setImage] = useState<{ blob: Blob; url: string } | null>(null);
@@ -62,11 +58,11 @@ export function TriageTool() {
   const acceptImage = useCallback((file: Blob | null) => {
     if (!file) return;
     if (!IMAGE_TYPES.test(file.type)) {
-      setError(`Formats acceptés${NBSP}: PNG, JPG ou WebP.`);
+      setError(tt.imageTypes);
       return;
     }
     if (file.size > 15 * 1024 * 1024) {
-      setError("Image trop lourde (15 Mo au maximum).");
+      setError(tt.imageTooLarge);
       return;
     }
     setError(null);
@@ -76,7 +72,7 @@ export function TriageTool() {
     readScreenshot(file, (progress) => setOcr((current) => ({ ...current, ...progress })))
       .then((read) => setOcr({ status: "done", stage: "reading", progress: 1, text: read }))
       .catch(() => setOcr({ status: "error", stage: "reading", progress: 0, text: "" }));
-  }, []);
+  }, [tt]);
 
   // Ctrl+V anywhere on the screenshot tab pastes the image.
   useEffect(() => {
@@ -105,17 +101,17 @@ export function TriageTool() {
         const response = await fetch("/api/triage", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body),
+          body: JSON.stringify({ ...body, lang }),
         });
         const data = (await response.json().catch(() => ({}))) as { ok?: boolean; provider?: string; emails?: unknown };
-        const emails = data.ok ? fromAi(data.emails) : [];
+        const emails = data.ok ? fromAi(data.emails, lang) : [];
         if (emails.length) {
-          setResult({ brief: buildBrief(emails), mode: `Analyse IA (${data.provider ?? ai.provider}).` });
+          setResult({ brief: buildBrief(emails, new Date(), lang), mode: tt.aiMode(data.provider ?? ai.provider ?? "") });
           return;
         }
-        note = ` L'analyse IA n'a pas abouti${NBSP}: voici le résultat du moteur local.`;
+        note = tt.aiFailed;
       } catch {
-        note = ` L'analyse IA n'a pas abouti${NBSP}: voici le résultat du moteur local.`;
+        note = tt.aiFailed;
       } finally {
         setBusy(false);
       }
@@ -126,25 +122,25 @@ export function TriageTool() {
       setError(
         fromImage
           ? ocr.status === "running"
-            ? "La capture est encore en cours de lecture."
-            : "Aucun texte lu sur la capture. Essayez une capture plus nette, ou collez le texte."
-          : "Collez d'abord des e-mails, ajoutez une capture, ou chargez l'exemple.",
+            ? tt.stillReading
+            : tt.nothingRead
+          : tt.nothingPasted,
       );
       return;
     }
-    const brief = triage(input);
+    const brief = triage(input, new Date(), lang);
     if (!brief.counts.total) {
       setResult(null);
-      setError("Aucun e-mail reconnu. Collez des lignes de votre boîte de réception, ou un e-mail complet avec De et Objet.");
+      setError(tt.noEmail);
       return;
     }
-    setResult({ brief, mode: `${LOCAL_MODE}${note}` });
+    setResult({ brief, mode: `${tt.localMode}${note}` });
   }
 
   function loadSample() {
-    setText(SAMPLE_INBOX);
+    setText(s.sample);
     setTab("text");
-    void analyze(SAMPLE_INBOX);
+    void analyze(s.sample);
   }
 
   const onDrop = (event: DragEvent<HTMLDivElement>) => {
@@ -164,8 +160,8 @@ export function TriageTool() {
 
   return (
     <div className="mt-8">
-      <div role="tablist" aria-label="Source des e-mails" className="flex flex-wrap gap-2">
-        {TABS.map(([key, label]) => (
+      <div role="tablist" aria-label={tt.tablist} className="flex flex-wrap gap-2">
+        {TABS.map((key) => (
           <button
             key={key}
             type="button"
@@ -178,7 +174,7 @@ export function TriageTool() {
               tab === key ? "border-ink bg-ink text-paper" : "border-line text-ink hover:bg-washi"
             }`}
           >
-            {label}
+            {tt.tabs[key]}
           </button>
         ))}
       </div>
@@ -187,18 +183,17 @@ export function TriageTool() {
         {tab === "text" && (
           <div role="tabpanel" id="panel-text" aria-labelledby="tab-text">
             <label htmlFor="triage-text" className="block text-sm font-medium">
-              Collez vos e-mails
+              {tt.textLabel}
             </label>
             <p className="mt-1 text-sm text-ink-soft">
-              Dans Gmail ou Outlook, sélectionnez 10 à 100 lignes de la boîte de réception (ou Ctrl+A), copiez avec Ctrl+C
-              et collez ici. Les fils complets (De, Objet, Date) fonctionnent aussi.
+              {tt.textHint}
             </p>
             <textarea
               id="triage-text"
               rows={12}
               value={text}
               onChange={(event) => setText(event.target.value)}
-              placeholder={"Expéditeur\tObjet - extrait du message\t10:42\n…"}
+              placeholder={tt.textPlaceholder}
               className={`mt-3 font-mono text-sm ${inputClass}`}
             />
           </div>
@@ -223,11 +218,11 @@ export function TriageTool() {
             >
               {image ? (
                 // eslint-disable-next-line @next/next/no-img-element -- a local preview (blob URL), not an optimisable asset
-                <img src={image.url} alt="Votre capture de boîte de réception" className="max-h-72 w-auto border hairline" />
+                <img src={image.url} alt={tt.previewAlt} className="max-h-72 w-auto border hairline" />
               ) : (
                 <div>
-                  <p className="font-medium">Glissez une capture ici, collez-la (Ctrl+V) ou cliquez pour la choisir</p>
-                  <p className="mt-1 text-sm text-ink-soft">Capture de Gmail ou d&apos;Outlook, en PNG, JPG ou WebP.</p>
+                  <p className="font-medium">{tt.drop}</p>
+                  <p className="mt-1 text-sm text-ink-soft">{tt.dropHint}</p>
                 </div>
               )}
             </div>
@@ -243,9 +238,7 @@ export function TriageTool() {
             {ocr.status === "running" && (
               <div className="mt-4" aria-live="polite">
                 <p className="text-sm">
-                  {ocr.stage === "loading"
-                    ? "Chargement de la lecture de texte (une fois par visite)…"
-                    : `Lecture de la capture… ${percent}${NBSP}%`}
+                  {ocr.stage === "loading" ? tt.ocrLoading : tt.ocrReading(percent)}
                 </p>
                 <div aria-hidden className="mt-2 h-1.5 bg-line">
                   <div className="h-1.5 bg-lab transition-[width]" style={{ width: `${ocr.stage === "loading" ? 8 : Math.max(8, percent)}%` }} />
@@ -253,19 +246,19 @@ export function TriageTool() {
               </div>
             )}
             {ocr.status === "error" && (
-              <p className="mt-4 text-sm text-danger">La capture n&apos;a pas pu être lue. Essayez une autre image, ou collez le texte.</p>
+              <p className="mt-4 text-sm text-danger">{tt.ocrError}</p>
             )}
             {ocr.status === "done" && (
               <details className="mt-4">
                 <summary className="cursor-pointer text-sm">
-                  Texte lu sur la capture ({ocr.text.split("\n").filter(Boolean).length} lignes) : vérifier ou corriger
+                  {tt.ocrText(ocr.text.split("\n").filter(Boolean).length)}
                 </summary>
                 <textarea
                   rows={8}
                   value={ocr.text}
                   onChange={(event) => setOcr((current) => ({ ...current, text: event.target.value }))}
                   className={`mt-2 font-mono text-sm ${inputClass}`}
-                  aria-label="Texte lu sur la capture"
+                  aria-label={tt.ocrTextLabel}
                 />
               </details>
             )}
@@ -275,15 +268,14 @@ export function TriageTool() {
         {tab === "sample" && (
           <div role="tabpanel" id="panel-sample" aria-labelledby="tab-sample">
             <p className="text-ink-soft">
-              Quinze e-mails bruts, tels que Gmail les donne quand on copie des lignes de la boîte de réception (expéditeurs
-              fictifs). Ils sont placés dans la zone de texte et analysés aussitôt.
+              {tt.sampleBody}
             </p>
             <button
               type="button"
               onClick={loadSample}
               className="mt-4 inline-flex min-h-12 items-center justify-center border border-ink px-6 py-3 text-sm font-medium hover:bg-washi"
             >
-              Charger les 15 e-mails d&apos;exemple
+              {tt.sampleButton}
             </button>
           </div>
         )}
@@ -296,10 +288,7 @@ export function TriageTool() {
               onChange={(event) => setUseAi(event.target.checked)}
               className="mt-0.5 size-5 shrink-0 accent-[var(--color-ink)]"
             />
-            <span>
-              Analyse approfondie par IA ({ai.provider}). Le contenu est alors envoyé à ce prestataire pour l&apos;analyse ;
-              KUCHIMOTO ne le conserve pas.
-            </span>
+            <span>{tt.aiConsent(ai.provider ?? "")}</span>
           </label>
         )}
 
@@ -310,12 +299,10 @@ export function TriageTool() {
             disabled={busy || reading}
             className="inline-flex min-h-12 items-center justify-center bg-ink px-6 py-3 text-sm font-medium tracking-wide text-paper transition-opacity hover:opacity-90 disabled:opacity-60"
           >
-            {busy ? "Analyse en cours…" : reading ? `Lecture de la capture… ${percent}${NBSP}%` : "Analyser et résumer mes emails →"}
+            {busy ? tt.analyzing : reading ? tt.ocrReading(percent) : tt.analyze}
           </button>
           <p className="text-xs text-ink-soft">
-            {useAi && ai.available
-              ? "Le contenu sera envoyé pour l'analyse par IA."
-              : `Tout se passe dans votre navigateur${NBSP}: vos e-mails et captures ne sont envoyés nulle part.`}
+            {useAi && ai.available ? tt.aiNote : tt.localNote}
           </p>
         </div>
         {error && (
@@ -328,7 +315,8 @@ export function TriageTool() {
       <div ref={output} className="scroll-mt-24">
         {result && (
           <div className="mt-12">
-            <BriefView brief={result.brief} mode={result.mode} />
+            <BriefView brief={result.brief} mode={result.mode} t={s.brief} />
+            {afterBrief}
           </div>
         )}
       </div>

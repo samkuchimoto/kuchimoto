@@ -6,6 +6,11 @@ import { getDictionary } from "@/i18n/dictionaries";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
+import { Analytics } from "@/components/Analytics";
+import { AttributionCapture } from "@/components/AttributionCapture";
+import { MobilePrototypeBar } from "@/components/PrototypeCta";
+import { LAB } from "@/config/site";
+import { fill, wholeEuros } from "@/lib/format";
 import { fontVariables } from "../fonts";
 import "../globals.css";
 
@@ -91,6 +96,12 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
           {children}
         </main>
         <Footer lang={lang} dict={dict} />
+        <MobilePrototypeBar
+          label={fill(dict.cta.bar, { price: wholeEuros(LAB.prototype, lang) })}
+          fallbackHref={`${localizedPath(lang, "/lab")}#start`}
+        />
+        <AttributionCapture />
+        <Analytics />
         <CookieBanner
           title={dict.cookies.title}
           body={dict.cookies.body}

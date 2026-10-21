@@ -2,6 +2,7 @@ import Link from "next/link";
 import { localizedPath, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { Container, Logo } from "@/components/ui";
+import { HeaderPrototypeButton } from "@/components/PrototypeCta";
 import { LanguageToggle, MobileMenu, NavLinks, type NavItem } from "./Nav";
 
 export function navItems(lang: Locale, dict: Dictionary): NavItem[] {
@@ -25,6 +26,8 @@ export function Header({ lang, dict }: { lang: Locale; dict: Dictionary }) {
         </Link>
         <div className="flex items-center gap-1 sm:gap-4 lg:gap-8">
           <NavLinks items={items} label={dict.nav.label} />
+          {/* On /lab, /studio and /demo-triage only (phones get the bottom bar instead). */}
+          <HeaderPrototypeButton label={dict.cta.header} fallbackHref={`${localizedPath(lang, "/lab")}#start`} />
           <LanguageToggle lang={lang} label={dict.nav.language} className="hidden sm:block" />
           <MobileMenu
             items={items}

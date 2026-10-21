@@ -90,8 +90,8 @@ export const HAPPY_HOMES_THAILAND = { url: "https://happyhomesthailand.com", dom
 
 /**
  * Kuchimoto Studio, the Lab's AI agents for creatives: price ranges in
- * euros excluding VAT, the exact price set after the audit. The photo is
- * Habib Beaini's, under the Unsplash License.
+ * euros excluding VAT, the exact price set after the audit. Its 48-hour
+ * prototype is LAB.prototype.
  */
 export const STUDIO = {
   prices: {
@@ -99,8 +99,16 @@ export const STUDIO = {
     deployment: [5000, 12000],
     monthly: [1000, 2500],
   },
-  /** The 48-hour agent prototype, deducted from the deployment. */
+} as const;
+
+/**
+ * Kuchimoto Lab's fixed offers, in euros excluding VAT (Samuel's lead-
+ * generation brief, 2026-10-21): the 48-hour prototype, deducted from the
+ * full build if the client continues, the 7-day MVP sprint's starting
+ * price, and the budget ranges the lead form offers.
+ */
+export const LAB = {
   prototype: 490,
-  photo: { src: "/images/studio/tokyo-artist.jpg", width: 1600, height: 1217 },
-  photoCreditUrl: "https://unsplash.com/photos/nfzmJv_OAbA",
+  mvpFrom: 1500,
+  budgets: { mid: [1500, 5000], high: [5000, 12000] },
 } as const;

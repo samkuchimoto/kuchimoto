@@ -1,21 +1,19 @@
 // /src/components/CookieBanner.tsx
-// The cookie consent banner. Today the site sets no cookie that needs
-// consent, and the banner says so; it exists so that nothing non-essential
-// can ever run without a "yes". Anything optional added later (audience
-// measurement, a chat widget) must call hasConsent() first, and listen for
-// CONSENT_EVENT, before it loads. Refusing is as easy as accepting, and
-// the footer link "Gérer les cookies" reopens the banner at any time.
+// The cookie consent banner. Google Analytics and Google Ads
+// (components/Analytics.tsx) start with every storage denied (Consent
+// Mode v2) and are granted only by "Accept" here; the gclid of an ad
+// click is kept only then (lib/leads/attribution.ts). Anything optional
+// added later must call hasConsent() first and listen for CONSENT_EVENT.
+// Refusing is as easy as accepting, and the footer link "Gérer les
+// cookies" reopens the banner at any time.
 
 "use client";
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { CONSENT_EVENT, CONSENT_STORAGE_KEY as STORAGE_KEY, OPEN_CONSENT_EVENT } from "@/lib/consent";
 
-const STORAGE_KEY = "kuchimoto-consent";
-/** Fired on window when the visitor answers; detail is "granted" or "denied". */
-export const CONSENT_EVENT = "kuchimoto-consent";
-/** Fired by the footer link to show the banner again. */
-export const OPEN_CONSENT_EVENT = "kuchimoto-consent-open";
+export { CONSENT_EVENT, OPEN_CONSENT_EVENT };
 
 type Choice = "granted" | "denied";
 
@@ -76,8 +74,9 @@ export function CookieBanner({
       aria-label={title}
       className="fixed inset-x-0 bottom-0 z-50 border-t hairline bg-paper shadow-[0_-8px_24px_rgba(0,0,0,0.06)]"
     >
-      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-5 sm:px-8 md:flex-row md:items-center md:justify-between">
-        <p className="max-w-3xl text-sm text-ink-soft">
+      {/* Compact on phones, so a visitor from an ad still sees the form above it. */}
+      <div className="mx-auto flex max-w-6xl flex-col gap-2.5 px-5 py-3 sm:gap-4 sm:px-8 sm:py-5 md:flex-row md:items-center md:justify-between">
+        <p className="max-w-3xl text-[0.8125rem] leading-snug text-ink-soft sm:text-sm sm:leading-relaxed">
           <strong className="font-medium text-ink">{title}. </strong>
           {body}{" "}
           <Link href={privacyHref} className="underline underline-offset-4 hover:text-ink">
@@ -88,14 +87,14 @@ export function CookieBanner({
           <button
             type="button"
             onClick={() => decide("denied")}
-            className="min-h-11 border border-ink px-5 text-sm font-medium hover:bg-washi"
+            className="min-h-10 border border-ink px-4 text-sm font-medium hover:bg-washi sm:min-h-11 sm:px-5"
           >
             {refuse}
           </button>
           <button
             type="button"
             onClick={() => decide("granted")}
-            className="min-h-11 bg-ink px-5 text-sm font-medium text-paper hover:opacity-90"
+            className="min-h-10 bg-ink px-4 text-sm font-medium text-paper hover:opacity-90 sm:min-h-11 sm:px-5"
           >
             {accept}
           </button>

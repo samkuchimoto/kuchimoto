@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { LAB } from "@/config/site";
 import { localizedPath } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getLang } from "@/i18n/server";
+import { fill, wholeEuros } from "@/lib/format";
 import { pageMetadata } from "@/lib/seo";
 import { ACCENT, ButtonLink, Container, type Division } from "@/components/ui";
 
@@ -30,6 +32,17 @@ export default async function Home() {
           <p className="eyebrow text-seal">{t.eyebrow}</p>
           <h1 className="mt-6 max-w-4xl text-4xl leading-[1.15] sm:text-6xl">{t.title}</h1>
           <p className="mt-8 max-w-xl text-lg text-ink-soft">{t.intro}</p>
+        </Container>
+      </section>
+
+      <section aria-label="Kuchimoto Lab" className="border-b hairline bg-lab-wash">
+        <Container className="flex flex-col gap-5 py-8 sm:flex-row sm:items-center sm:justify-between">
+          <p className="max-w-2xl text-lg">{fill(dict.homeStrip.text, { price: wholeEuros(LAB.prototype, lang) })}</p>
+          <div className="shrink-0">
+            <ButtonLink href={localizedPath(lang, "/lab")} accent="lab">
+              {dict.homeStrip.cta}
+            </ButtonLink>
+          </div>
         </Container>
       </section>
 

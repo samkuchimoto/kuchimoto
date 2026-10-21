@@ -37,14 +37,14 @@ const en: Dictionary = {
         "BambooTails, dog accessories born from a universe of original characters: bandanas and collars made in France.",
     },
     lab: {
-      title: "Kuchimoto Lab, IT and AI consulting",
+      title: "AI Agents, n8n & Make Automation, MVPs | Kuchimoto Lab",
       description:
-        "IT and AI consulting, IT subcontracting, managed testers for Google Play and in-house apps, including Ittsui.",
+        "Custom AI agents, n8n and Make workflows, web and mobile MVPs. Working prototype in 48 hours for €490, deducted if you continue.",
     },
     studio: {
-      title: "Kuchimoto Studio, AI agents for creatives",
+      title: "AI Agents for Creative Brands, Led by a Painter | Kuchimoto Studio",
       description:
-        "Kuchimoto Studio, a Kuchimoto Lab offer: autonomous AI agents for creative agencies, brands and entrepreneurs. Product launches, client follow-up, localisation across markets.",
+        "AI agents for creative brands, led by a painter: product listings, ad variants and localisation that keep your brand's look. Working prototype in 48 hours for €490, deducted if you continue.",
     },
     about: {
       title: "About",
@@ -58,6 +58,10 @@ const en: Dictionary = {
     bookingThanks: {
       title: "Booking received",
       description: "Your Happy Homes Thailand booking is confirmed.",
+    },
+    thankYou: {
+      title: "Request received",
+      description: "Your request is received: you'll get a fixed price within 24 hours.",
     },
   },
 
@@ -267,81 +271,81 @@ const en: Dictionary = {
   },
 
   lab: {
-    label: "Technology",
-    title: "Kuchimoto Lab",
-    intro: "Consulting, development and testing for companies building digital products.",
-    photoAlt: "Photo: a developer's workstation",
-    servicesTitle: "What we do",
-    services: [
-      [
-        "IT and AI consulting",
-        "Choosing an architecture, a cloud provider or an AI model, and putting it in place.",
-      ],
-      ["IT subcontracting", "Extra technical hands on your projects, for one assignment or for the long run."],
-      [
-        "Managed testers for Google Play",
-        "Google Play asks new personal developer accounts to have their app tested by a group of testers before publishing it. We provide those testers and follow the test.",
-      ],
-      ["In-house apps", "We also build our own apps, including Ittsui."],
-    ],
-    ittsui: "Discover Ittsui",
-    sprints: {
-      title: "Short sprints",
-      intro:
-        "A clear deliverable, a scope set with you. Write to us: we agree the scope together, then you get the quote. We reply within 24 hours.",
-      quote: "On quote",
-      scope: "Custom scope",
-      items: {
-        ai: {
-          label: "AI and automation",
-          name: "AI or debugging sprint, 48 hours",
-          body: "An AI agent, an automation or a custom script, or a fix for an urgent technical blocker.",
-          cta: "Book this sprint",
-          mail: {
-            subject: "AI or debugging sprint, 48 hours",
-            body: "Hello,\n\nI would like to book a 48-hour AI or debugging sprint.\n\nThe need:\nThe tools or code involved:\nDeadline:\n",
-          },
+    label: "Kuchimoto Lab",
+    title: "AI agents, automation and MVPs. Fixed price, delivered fast.",
+    intro:
+      "We build custom AI agents, n8n and Make workflows, and web and mobile MVPs. Start with a working prototype in 48 hours for {price}, deducted from the full build if you continue.",
+    demoLink: "Try the live triage demo",
+    demoLang: "",
+    prototype: {
+      title: "Hire an AI agent and automation developer",
+      cards: {
+        agent: {
+          title: "48-hour AI prototype: {price} fixed",
+          body: "A working AI agent or automation on your most time-consuming task. The {price} is deducted from the full build if you continue.",
+          cta: "Start with {price}",
         },
         mvp: {
-          label: "Development",
-          name: "Web or mobile MVP sprint, 7 days",
-          body: "A working prototype, web or mobile, ready for your first users to test.",
-          cta: "Start my MVP",
-          mail: {
-            subject: "Web or mobile MVP sprint, 7 days",
-            body: "Hello,\n\nI would like to start an MVP sprint.\n\nThe product in one sentence:\nWeb or mobile:\nPreferred start date:\n",
-          },
+          title: "Web or mobile MVP sprint: from {price}",
+          body: "A working product for your first users in 7 days.",
+          cta: "Scope my MVP",
+        },
+        whitelabel: {
+          title: "White-label for agencies",
+          body: "We build under your brand. You keep the client and the margin. Fixed price per sprint.",
+          cta: "Partner with us",
         },
       },
-      note: "For businesses. Lead times start once the scope is agreed.",
+      also: "Also available: IT and AI consulting, IT subcontracting, managed Google Play testers.",
     },
-    studio: {
-      label: "AI agents for creatives",
-      title: "Kuchimoto Studio",
-      body: "AI agents that carry out the work around creative work, for agencies, brands and entrepreneurs.",
-      cta: "Discover Kuchimoto Studio",
+    how: {
+      title: "How it works",
+      steps: [
+        "Tell us the task. It takes 2 minutes.",
+        "Fixed price and scope within 24 hours.",
+        "Working prototype 48 hours after you approve, then you decide.",
+      ],
     },
-    formTitle: "Tell us about your project",
+    demo: {
+      label: "Live demo",
+      title: "An AI triage agent, on your own emails",
+      body: "Paste your emails or a screenshot of your inbox: the agent sorts them and writes a three-minute executive brief. The analysis runs in your browser.",
+      cta: "Try the live triage demo",
+    },
+    notesIntro:
+      "Architecture proposal presented to the head of digital of a major French public-transport organization (2026): an executive triage agent and a Paris to Tokyo station model.",
+    ittsui: {
+      title: "Ittsui, our own app",
+      body: "Designed, built and launched in-house. Ittsui suggests one meetup a week with the people who matter, confirmed in one click, with no account or app needed for guests. In early access.",
+      cta: "See Ittsui",
+    },
+    contactTitle: "Tell us the task. Get a fixed price in 24 hours.",
   },
 
   studio: {
-    label: "A Kuchimoto Lab offer",
-    title: "Kuchimoto Studio",
-    intro: "AI agents that carry out the work around creative work.",
-    lead: "We don't just build chatbots: we deploy autonomous AI agents that handle multi-step creative operations, cross-border localisation and multichannel campaign execution.",
-    audit: "Request an audit",
-    seePackages: "See the packages",
-    photoAlt: "An artist drawing at a worktable in Tokyo, seen from behind.",
-    photoCaption: "An artist at work, Tokyo.",
-    photoCredit: "Photo: Habib Beaini, Unsplash",
-    who: {
-      title: "For people who create, and spend too much time on everything else.",
-      items: [
-        "Creative agencies",
-        "Fashion and lifestyle e-commerce brands",
-        "Marketing agencies",
-        "Independent entrepreneurs and artists",
+    label: "Kuchimoto Studio",
+    title: "AI agents for creative brands, led by a painter.",
+    intro:
+      "Product listings, ad variants and localisation handled by agents that keep your brand's look. Start with a working prototype in 48 hours for {price}, deducted if you continue.",
+    art: {
+      title: "The eye behind the agents",
+      body: "Ten years of painting and illustration. Every agent we ship is judged by the same eye.",
+      caption: "Samuel Louissaint",
+      alts: [
+        "Samurai in a red kimono holding a sword, with handwritten text",
+        "Portrait in red and pink on a deep blue ground",
+        "Abstract painting in red, white and blue",
+        "Green abstract painting with black lines",
+        "Orange circle and a white figure on black",
+        "Face in black, white and red",
+        "Dense abstract of red, black and green strokes",
+        "Green abstract with an orange form",
       ],
+      open: "Enlarge",
+      close: "Close",
+      prev: "Previous artwork",
+      next: "Next artwork",
+      dialog: "Artworks by Samuel Louissaint",
     },
     agentsTitle: "The agents",
     agents: [
@@ -361,6 +365,14 @@ const en: Dictionary = {
         "Translates, localises and adapts your copy and sales funnels for each market, in the tone expected in Paris, Tokyo or the United States.",
       ],
     ],
+    prototype: {
+      label: "To start",
+      title: "An agent prototype in 48 hours",
+      body: "In 48 hours we build a working prototype on your most time-consuming task, so you see the agent at work before you commit.",
+      unit: "Excl. VAT, deducted from the deployment if you go ahead",
+      note: "The 48 hours start once the scope is agreed.",
+      cta: "Order the prototype",
+    },
     packages: {
       title: "Three steps, three packages.",
       intro: "First we find where your time goes, then we build, then we keep the agents running.",
@@ -370,10 +382,6 @@ const en: Dictionary = {
           unit: "One-time, excl. VAT",
           body: "Analysis of your creative and operational bottlenecks, and the design of a custom multi-agent architecture.",
           cta: "Request a 15-minute call",
-          mail: {
-            subject: "15-minute call: Kuchimoto Studio audit",
-            body: "Hello,\n\nI would like a 15-minute call about an audit.\n\nMy business:\nWhat takes up most of my time:\nWhen I am free this week:\n",
-          },
         },
         deployment: {
           name: "Custom agent deployment",
@@ -388,49 +396,21 @@ const en: Dictionary = {
       },
       note: "The exact price depends on the scope, agreed together after the audit.",
     },
-    prototype: {
-      label: "To start",
-      title: "An agent prototype in 48 hours",
-      body: "In 48 hours we build a working prototype on your most time-consuming task, so you see the agent at work before you commit.",
-      unit: "Excl. VAT, deducted from the deployment if you go ahead",
-      note: "The 48 hours start once the scope is agreed.",
-      cta: "Order the prototype",
-      mail: {
-        subject: "Agent prototype in 48 hours",
-        body: "Hello,\n\nI would like an agent prototype in 48 hours.\n\nMy business:\nThe task for the agent:\nThe tools I use:\n",
-      },
-    },
-    method: {
-      title: "Used in our own businesses before yours.",
-      items: [
-        [
-          "Our own brands first",
-          "Every agent is first put to work in KUCHIMOTO's own businesses, the BambooTails brand and the Happy Homes services, before it is offered to a client.",
-        ],
-        [
-          "Pilot programme",
-          "Our first clients get a pilot deployment at a reduced rate. Write to us to talk it over.",
-        ],
-      ],
-    },
-    ittsui: {
-      title: "Ittsui, our own app",
-      body: "Designed, built and launched in-house. Ittsui suggests one meetup a week with the people who matter, confirmed in one click, with no account or app needed for guests. In early access.",
-      cta: "See Ittsui",
-    },
-    partOfLab: "Kuchimoto Studio is an offer from Kuchimoto Lab, our IT and AI consulting business.",
-    toLab: "Discover Kuchimoto Lab",
-    contact: {
-      title: "Let's talk about your business.",
-      body: "Tell us what you do and what takes up most of your time. We will get back to you to set up the audit.",
-      subject: "Kuchimoto Studio",
-    },
+    pilot: [
+      "Pilot programme",
+      "Our first clients get a pilot deployment at a reduced rate. Write to us to talk it over.",
+    ],
+    toLab: { text: "Need automation or an app built?", link: "See Kuchimoto Lab" },
   },
 
   proof: {
-    demo: "Live demo: try the triage agent on your own emails",
-    demoLang: " (in French)",
-    notes: "Architecture note: urban mobility & stations (Paris ↔ Tokyo)",
+    label: "Proof",
+    items: [
+      "Ittsui: our live app, built in-house",
+      "Live AI triage demo on your own emails",
+      "Proposal presented to a head of digital in French public transport",
+      "Reply within 24 hours",
+    ],
   },
 
   notes: {
@@ -444,7 +424,7 @@ const en: Dictionary = {
     problem:
       "Digital departments overloaded by multi-operator coordination, and station retail that makes less use of digital tools than in Japan (ekinaka, Tokyo).",
     proposalLabel: "Architecture proposed by Kuchimoto",
-    demoLink: "See this agent's demo (in French)",
+    demoLink: "See this agent's live demo",
     proposals: [
       [
         "Executive triage & IT governance AI agent",
@@ -457,6 +437,78 @@ const en: Dictionary = {
     ],
   },
 
+  lead: {
+    email: "Work email",
+    needLabel: "What do you need?",
+    needs: {
+      agent: "AI agent or automation",
+      mvp: "Web or mobile MVP",
+      creative: "Creative AI for my brand",
+      whitelabel: "White-label for my agency",
+      other: "Something else",
+    },
+    submit: "Get my fixed price",
+    notice: "Reply within 24 hours. No newsletter. We use your details only to answer you.",
+    privacyLink: "Privacy policy",
+    step2: "Step 2 of 2",
+    name: "Name",
+    company: "Company or website",
+    optional: "optional",
+    message: "What should we build or automate?",
+    messagePlaceholder: "Example: we spend 6 hours a week writing product listings in 3 languages.",
+    budgetLabel: "Budget",
+    budgets: { prototype: "{price} prototype first", unsure: "Not sure yet" },
+    timelineLabel: "Timeline",
+    timelines: { week: "This week", month: "This month", exploring: "Just exploring" },
+    send: "Send my request",
+    sending: "Sending…",
+    errors: {
+      email: "Enter a valid email address.",
+      need: "Choose what you need.",
+      name: "Enter your name.",
+      invalid: "Please check the fields marked.",
+      rate_limited: "Too many requests in a short time. Try again in a few minutes.",
+      server: "That did not send. Try again, or write to {email}.",
+      network: "No connection. Check your network and try again.",
+    },
+  },
+  cta: {
+    header: "Get a 48h prototype",
+    bar: "Get a 48h prototype · {price}",
+  },
+  thankYou: {
+    title: "Received. You'll get a fixed price within 24 hours.",
+    book: "Skip the wait: book 15 minutes now",
+    next: "What happens next",
+    steps: [
+      "You receive a fixed price and scope by email within 24 hours.",
+      "Once you approve, your prototype is ready in 48 hours.",
+      "You decide whether to continue. The {price} is deducted if you do.",
+    ],
+  },
+  homeStrip: {
+    text: "Need AI or an app built? A working prototype in 48 hours for {price}.",
+    cta: "See Kuchimoto Lab",
+  },
+  founder: {
+    title: "Who builds it",
+    body: "Samuel Louissaint, founder. Developer (RNCP web and mobile, 2021) with a background in partner engineering and technical sales on Google Cloud AI/ML, X and GoDaddy programs, and a painter for ten years. I build myself and bring in trusted specialists from my network in France, Israel and Asia when a project needs more hands.",
+    photoAlt: "Samuel Louissaint",
+  },
+  faq: {
+    title: "Frequently asked questions",
+    items: [
+      ["Is the {price} really deducted?", "Yes, from the full build if you continue."],
+      ["Who owns the code?", "You do, once paid."],
+      ["Do you sign NDAs?", "Yes."],
+      [
+        "Which tools do you use?",
+        "n8n, Make, OpenAI and Anthropic APIs, Python, JavaScript and TypeScript, web and mobile frameworks.",
+      ],
+      ["Where are you based?", "Paris, working remotely with clients across Europe and Asia. Invoiced from France."],
+      ["How fast do you reply?", "Within 24 hours."],
+    ],
+  },
   about: {
     label: "About",
     title: "Samuel Louissaint, founder",
@@ -482,6 +534,7 @@ const en: Dictionary = {
     title: "Write to us",
     intro: "Choose the business your message is about: it goes straight to the right person.",
     direct: "Or directly",
+    studio: "Kuchimoto Studio",
   },
 
   forms: {
@@ -585,7 +638,7 @@ const en: Dictionary = {
 
   cookies: {
     title: "Cookies",
-    body: "This site only uses cookies it needs to work. If we ever add audience measurement, it will only run with your consent, which you can withdraw at any time.",
+    body: "With your consent, we use Google Analytics and Google Ads to measure visits and the results of our ads. Refusing changes nothing on the site, and you can change your mind at any time.",
     accept: "Accept",
     refuse: "Refuse",
     more: "Learn more",

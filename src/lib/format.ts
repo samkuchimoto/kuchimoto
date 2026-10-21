@@ -36,3 +36,8 @@ export function euros(amount: number, lang: Locale): string {
   if (lang === "ja") return `${amount.toFixed(2)}ユーロ（税込）`;
   return `€${amount.toFixed(2)}`;
 }
+
+/** Fills "{price}"-style slots: fill("From {price}", { price: "€1,500" }). */
+export function fill(template: string, values: Record<string, string>): string {
+  return template.replace(/\{(\w+)\}/g, (slot, key: string) => values[key] ?? slot);
+}

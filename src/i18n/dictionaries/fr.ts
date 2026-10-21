@@ -39,14 +39,14 @@ const fr = {
         "BambooTails, des accessoires pour chiens nés d'un univers de personnages originaux : bandanas et colliers fabriqués en France.",
     },
     lab: {
-      title: "Kuchimoto Lab, conseil informatique et IA",
+      title: "Agents IA, automatisation n8n et Make, MVP | Kuchimoto Lab",
       description:
-        "Conseil informatique et IA, sous-traitance informatique, testeurs encadrés pour Google Play et applications maison, dont Ittsui.",
+        "Agents IA sur mesure, workflows n8n et Make, MVP web et mobile. Prototype fonctionnel en 48 heures pour 490 €, déduit si vous poursuivez.",
     },
     studio: {
-      title: "Kuchimoto Studio, agents IA pour les créatifs",
+      title: "Agents IA pour marques créatives, dirigés par un peintre | Kuchimoto Studio",
       description:
-        "Kuchimoto Studio, une offre de Kuchimoto Lab : des agents IA autonomes pour les agences créatives, les marques et les entrepreneurs. Lancement de produits, suivi des clients, localisation entre marchés.",
+        "Agents IA pour marques créatives, dirigés par un peintre : fiches produits, variantes publicitaires et localisation, dans le style de votre marque. Prototype fonctionnel en 48 heures pour 490 €, déduit si vous poursuivez.",
     },
     about: {
       title: "À propos",
@@ -60,6 +60,10 @@ const fr = {
     bookingThanks: {
       title: "Réservation reçue",
       description: "Votre réservation Happy Homes Thaïlande est enregistrée.",
+    },
+    thankYou: {
+      title: "Demande reçue",
+      description: "Votre demande est bien reçue : vous recevrez un prix fixe sous 24 heures.",
     },
   },
 
@@ -277,87 +281,81 @@ const fr = {
   },
 
   lab: {
-    label: "Technologie",
-    title: "Kuchimoto Lab",
-    intro: "Conseil, développement et tests pour les entreprises qui construisent des produits numériques.",
-    photoAlt: "Photo : un poste de travail de développeur",
-    servicesTitle: "Ce que nous faisons",
-    services: [
-      [
-        "Conseil informatique et IA",
-        "Choisir une architecture, un fournisseur cloud ou un modèle d'IA, et le mettre en place.",
-      ],
-      [
-        "Sous-traitance informatique",
-        "Un renfort technique sur vos projets, pour une mission ou dans la durée.",
-      ],
-      [
-        "Testeurs encadrés pour Google Play",
-        "Google Play demande aux nouveaux comptes de développeur personnels de faire tester leur application par un groupe de testeurs avant de la publier. Nous fournissons ces testeurs et suivons le test.",
-      ],
-      [
-        "Applications maison",
-        "Nous développons aussi nos propres applications, dont Ittsui.",
-      ],
-    ] as [string, string][],
-    ittsui: "Découvrir Ittsui",
-    sprints: {
-      title: "Sprints courts",
-      intro:
-        "Un livrable clair, un périmètre défini avec vous. Écrivez-nous : nous validons le périmètre ensemble, puis vous recevez le devis. Réponse sous 24 heures.",
-      quote: "Sur devis",
-      scope: "Périmètre sur mesure",
-      items: {
-        ai: {
-          label: "IA et automatisation",
-          name: "Sprint IA ou débogage, 48 heures",
-          body: "Un agent IA, une automatisation ou un script sur mesure, ou la résolution d'un blocage technique urgent.",
-          cta: "Réserver ce sprint",
-          mail: {
-            subject: "Sprint IA ou débogage, 48 heures",
-            body: "Bonjour,\n\nJe souhaite réserver un sprint IA ou débogage de 48 heures.\n\nLe besoin :\nLes outils ou le code concernés :\nÉchéance :\n",
-          },
+    label: "Kuchimoto Lab",
+    title: "Agents IA, automatisation et MVP. Prix fixe, livraison rapide.",
+    intro:
+      "Nous concevons des agents IA sur mesure, des workflows n8n et Make, et des MVP web et mobile. Commencez par un prototype fonctionnel en 48 heures pour {price}, déduit du projet complet si vous poursuivez.",
+    demoLink: "Essayer la démo de triage en direct",
+    demoLang: "",
+    prototype: {
+      title: "Engagez un développeur d'agents IA et d'automatisation",
+      cards: {
+        agent: {
+          title: "Prototype IA en 48 heures : {price}, prix fixe",
+          body: "Un agent IA ou une automatisation qui fonctionne, sur votre tâche la plus chronophage. Les {price} sont déduits du projet complet si vous poursuivez.",
+          cta: "Commencer avec {price}",
         },
         mvp: {
-          label: "Développement",
-          name: "Sprint MVP web ou mobile, 7 jours",
-          body: "Un prototype fonctionnel, web ou mobile, prêt à être testé par vos premiers utilisateurs.",
-          cta: "Lancer mon MVP",
-          mail: {
-            subject: "Sprint MVP web ou mobile, 7 jours",
-            body: "Bonjour,\n\nJe souhaite lancer un sprint MVP.\n\nLe produit en une phrase :\nWeb ou mobile :\nDate de démarrage souhaitée :\n",
-          },
+          title: "Sprint MVP web ou mobile : à partir de {price}",
+          body: "Un produit fonctionnel pour vos premiers utilisateurs en 7 jours.",
+          cta: "Cadrer mon MVP",
+        },
+        whitelabel: {
+          title: "Marque blanche pour les agences",
+          body: "Nous développons sous votre marque. Vous gardez le client et la marge. Prix fixe par sprint.",
+          cta: "Devenir partenaire",
         },
       },
-      note: "Pour les professionnels. Les délais commencent une fois le périmètre validé.",
+      also: "Également disponibles : conseil IT et IA, sous-traitance informatique, testeurs Google Play encadrés.",
     },
-    studio: {
-      label: "Agents IA pour les créatifs",
-      title: "Kuchimoto Studio",
-      body: "Des agents IA qui exécutent le travail autour de la création, pour les agences, les marques et les entrepreneurs.",
-      cta: "Découvrir Kuchimoto Studio",
+    how: {
+      title: "Comment ça marche",
+      steps: [
+        "Décrivez-nous la tâche. Cela prend 2 minutes.",
+        "Prix fixe et périmètre sous 24 heures.",
+        "Prototype fonctionnel 48 heures après votre accord, puis vous décidez.",
+      ],
     },
-    formTitle: "Parlez-nous de votre projet",
+    demo: {
+      label: "Démo en direct",
+      title: "Un agent de triage IA, sur vos propres e-mails",
+      body: "Collez vos e-mails ou une capture de votre boîte de réception : l'agent les trie et en tire un brief exécutif de trois minutes. L'analyse se fait dans votre navigateur.",
+      cta: "Essayer la démo de triage en direct",
+    },
+    notesIntro:
+      "Proposition d'architecture présentée au responsable du numérique d'un grand organisme français de transport public (2026) : un agent de triage exécutif et un modèle de gares de Paris à Tokyo.",
+    ittsui: {
+      title: "Ittsui, notre application",
+      body: "Conçue, développée et lancée en interne. Ittsui propose chaque semaine un rendez-vous avec vos proches, validé en un clic, sans compte ni application pour les invités. En accès anticipé.",
+      cta: "Voir Ittsui",
+    },
+    contactTitle: "Décrivez-nous la tâche. Recevez un prix fixe sous 24 heures.",
   },
 
   studio: {
-    label: "Une offre de Kuchimoto Lab",
-    title: "Kuchimoto Studio",
-    intro: "Des agents IA qui exécutent le travail autour de la création.",
-    lead: "Nous ne construisons pas de simples chatbots : nous déployons des agents IA autonomes qui prennent en charge les opérations créatives en plusieurs étapes, la localisation entre marchés et l'exécution de campagnes multicanales.",
-    audit: "Demander un audit",
-    seePackages: "Voir les formules",
-    photoAlt: "Un artiste dessine à sa table de travail, à Tokyo, vu de dos.",
-    photoCaption: "Un artiste au travail, Tokyo.",
-    photoCredit: "Photo : Habib Beaini, Unsplash",
-    who: {
-      title: "Pour ceux qui créent, et passent trop de temps sur tout le reste.",
-      items: [
-        "Agences créatives",
-        "Marques e-commerce de mode et d'art de vivre",
-        "Agences marketing",
-        "Entrepreneurs et artistes indépendants",
+    label: "Kuchimoto Studio",
+    title: "Des agents IA pour les marques créatives, dirigés par un peintre.",
+    intro:
+      "Fiches produits, variantes publicitaires et localisation, confiées à des agents qui gardent le style de votre marque. Commencez par un prototype fonctionnel en 48 heures pour {price}, déduit si vous poursuivez.",
+    art: {
+      title: "L'œil derrière les agents",
+      body: "Dix ans de peinture et d'illustration. Chaque agent que nous livrons est jugé par le même œil.",
+      caption: "Samuel Louissaint",
+      alts: [
+        "Samouraï en kimono rouge tenant un sabre, avec un texte manuscrit",
+        "Portrait en rouge et rose sur un fond bleu profond",
+        "Peinture abstraite en rouge, blanc et bleu",
+        "Peinture abstraite verte aux lignes noires",
+        "Cercle orange et silhouette blanche sur fond noir",
+        "Visage en noir, blanc et rouge",
+        "Abstraction dense de traits rouges, noirs et verts",
+        "Abstraction verte avec une forme orange",
       ],
+      open: "Agrandir",
+      close: "Fermer",
+      prev: "Œuvre précédente",
+      next: "Œuvre suivante",
+      dialog: "Œuvres de Samuel Louissaint",
     },
     agentsTitle: "Les agents",
     agents: [
@@ -377,6 +375,14 @@ const fr = {
         "Traduit, localise et adapte vos textes et vos parcours de vente pour chaque marché, avec le ton attendu à Paris, à Tokyo ou aux États-Unis.",
       ],
     ] as [string, string, string][],
+    prototype: {
+      label: "Pour commencer",
+      title: "Un prototype d'agent en 48 heures",
+      body: "Nous construisons en 48 heures un prototype fonctionnel sur votre tâche la plus chronophage : vous voyez l'agent travailler avant de vous engager.",
+      unit: "HT, déduits du déploiement si vous continuez",
+      note: "Les 48 heures commencent une fois le périmètre validé.",
+      cta: "Commander le prototype",
+    },
     packages: {
       title: "Trois étapes, trois formules.",
       intro: "On commence par comprendre où part votre temps, puis on construit, puis on fait vivre les agents.",
@@ -386,10 +392,6 @@ const fr = {
           unit: "HT, une fois",
           body: "Analyse de vos blocages créatifs et opérationnels, et plan d'une architecture d'agents sur mesure.",
           cta: "Demander un appel de 15 minutes",
-          mail: {
-            subject: "Appel de 15 minutes : audit Kuchimoto Studio",
-            body: "Bonjour,\n\nJe souhaite un appel de 15 minutes pour parler d'un audit.\n\nMon activité :\nCe qui me prend le plus de temps :\nMes disponibilités cette semaine :\n",
-          },
         },
         deployment: {
           name: "Déploiement sur mesure",
@@ -404,51 +406,22 @@ const fr = {
       },
       note: "Le prix exact dépend du périmètre, fixé ensemble après l'audit.",
     },
-    prototype: {
-      label: "Pour commencer",
-      title: "Un prototype d'agent en 48 heures",
-      body: "Nous construisons en 48 heures un prototype fonctionnel sur votre tâche la plus chronophage : vous voyez l'agent travailler avant de vous engager.",
-      unit: "HT, déduits du déploiement si vous continuez",
-      note: "Les 48 heures commencent une fois le périmètre validé.",
-      cta: "Commander le prototype",
-      mail: {
-        subject: "Prototype d'agent en 48 heures",
-        body: "Bonjour,\n\nJe souhaite un prototype d'agent en 48 heures.\n\nMon activité :\nLa tâche à confier à l'agent :\nLes outils que j'utilise :\n",
-      },
-    },
-    method: {
-      title: "Utilisé chez nous avant de l'être chez vous.",
-      items: [
-        [
-          "D'abord sur nos propres marques",
-          "Chaque agent est d'abord mis en service sur les activités de KUCHIMOTO, la marque BambooTails et les services Happy Homes, avant d'être proposé à un client.",
-        ],
-        [
-          "Programme pilote",
-          "Les premiers clients bénéficient d'un déploiement pilote à tarif réduit. Écrivez-nous pour en parler.",
-        ],
-      ] as [string, string][],
-    },
-    ittsui: {
-      title: "Ittsui, notre application",
-      body: "Conçue, développée et lancée en interne. Ittsui propose chaque semaine un rendez-vous avec vos proches, validé en un clic, sans compte ni application pour les invités. En accès anticipé.",
-      cta: "Voir Ittsui",
-    },
-    partOfLab: "Kuchimoto Studio est une offre de Kuchimoto Lab, notre activité de conseil informatique et IA.",
-    toLab: "Découvrir Kuchimoto Lab",
-    contact: {
-      title: "Parlons de votre activité.",
-      body: "Dites-nous ce que vous faites et ce qui vous prend le plus de temps. Nous revenons vers vous pour organiser l'audit.",
-      subject: "Kuchimoto Studio",
-    },
+    pilot: [
+      "Programme pilote",
+      "Les premiers clients bénéficient d'un déploiement pilote à tarif réduit. Écrivez-nous pour en parler.",
+    ] as [string, string],
+    toLab: { text: "Besoin d'une automatisation ou d'une application ?", link: "Voir Kuchimoto Lab" },
   },
 
   /** Under the Lab and Studio titles: the two things to see first. */
   proof: {
-    demo: "Démo en ligne : testez l'agent de triage sur vos propres e-mails",
-    /** The demo exists in French only: said on the other languages. */
-    demoLang: "",
-    notes: "Note d'architecture : mobilité urbaine & gares (Paris ↔ Tokyo)",
+    label: "Preuves",
+    items: [
+      "Ittsui : notre application en ligne, développée en interne",
+      "Démo de triage IA en direct, sur vos propres e-mails",
+      "Proposition présentée à un responsable du numérique du transport public français",
+      "Réponse sous 24 heures",
+    ],
   },
 
   /** On /lab and /studio: proposals and studies, not client work. */
@@ -476,6 +449,81 @@ const fr = {
     ] as [string, string][],
   },
 
+  lead: {
+    email: "E-mail professionnel",
+    needLabel: "De quoi avez-vous besoin ?",
+    needs: {
+      agent: "Agent IA ou automatisation",
+      mvp: "MVP web ou mobile",
+      creative: "IA créative pour ma marque",
+      whitelabel: "Marque blanche pour mon agence",
+      other: "Autre chose",
+    },
+    submit: "Obtenir mon prix fixe",
+    notice: "Réponse sous 24 heures. Pas de newsletter. Vos coordonnées servent uniquement à vous répondre.",
+    privacyLink: "Politique de confidentialité",
+    step2: "Étape 2 sur 2",
+    name: "Nom",
+    company: "Entreprise ou site web",
+    optional: "facultatif",
+    message: "Que devons-nous construire ou automatiser ?",
+    messagePlaceholder: "Exemple : nous passons 6 heures par semaine à rédiger des fiches produits en 3 langues.",
+    budgetLabel: "Budget",
+    budgets: { prototype: "D'abord le prototype à {price}", unsure: "Je ne sais pas encore" },
+    timelineLabel: "Délai",
+    timelines: { week: "Cette semaine", month: "Ce mois-ci", exploring: "Je me renseigne" },
+    send: "Envoyer ma demande",
+    sending: "Envoi…",
+    errors: {
+      email: "Indiquez une adresse e-mail valide.",
+      need: "Choisissez ce dont vous avez besoin.",
+      name: "Indiquez votre nom.",
+      invalid: "Vérifiez les champs signalés.",
+      rate_limited: "Trop d'envois en peu de temps. Réessayez dans quelques minutes.",
+      server: "L'envoi n'a pas abouti. Réessayez, ou écrivez à {email}.",
+      network: "Pas de connexion. Vérifiez votre réseau et réessayez.",
+    },
+  },
+  cta: {
+    header: "Prototype en 48 heures",
+    bar: "Prototype en 48 heures · {price}",
+  },
+  thankYou: {
+    title: "Bien reçu. Vous recevrez un prix fixe sous 24 heures.",
+    book: "Gagnez du temps : réservez 15 minutes maintenant",
+    next: "La suite",
+    steps: [
+      "Vous recevez un prix fixe et un périmètre par e-mail sous 24 heures.",
+      "Après votre accord, votre prototype est prêt en 48 heures.",
+      "Vous décidez de poursuivre ou non. Les {price} sont déduits si vous poursuivez.",
+    ],
+  },
+  homeStrip: {
+    text: "Besoin d'IA ou d'une application ? Un prototype fonctionnel en 48 heures pour {price}.",
+    cta: "Voir Kuchimoto Lab",
+  },
+  founder: {
+    title: "Qui le construit",
+    body: "Samuel Louissaint, fondateur. Développeur (RNCP web et mobile, 2021), avec un parcours en ingénierie partenaires et en vente technique sur les programmes Google Cloud IA/ML, X et GoDaddy, et peintre depuis dix ans. Je développe moi-même et fais appel à des spécialistes de confiance de mon réseau, en France, en Israël et en Asie, quand un projet demande plus de bras.",
+    photoAlt: "Samuel Louissaint",
+  },
+  faq: {
+    title: "Questions fréquentes",
+    items: [
+      ["Les {price} sont-ils vraiment déduits ?", "Oui, du projet complet si vous poursuivez."],
+      ["À qui appartient le code ?", "À vous, une fois payé."],
+      ["Signez-vous des accords de confidentialité (NDA) ?", "Oui."],
+      [
+        "Quels outils utilisez-vous ?",
+        "n8n, Make, les API d'OpenAI et d'Anthropic, Python, JavaScript et TypeScript, et des frameworks web et mobile.",
+      ],
+      [
+        "Où êtes-vous basés ?",
+        "À Paris, en travaillant à distance avec des clients en Europe et en Asie. Facturation depuis la France.",
+      ],
+      ["En combien de temps répondez-vous ?", "Sous 24 heures."],
+    ] as [string, string][],
+  },
   about: {
     label: "À propos",
     title: "Samuel Louissaint, fondateur",
@@ -501,6 +549,7 @@ const fr = {
     title: "Nous écrire",
     intro: "Choisissez le métier concerné : votre message arrive directement à la bonne personne.",
     direct: "Ou directement",
+    studio: "Kuchimoto Studio",
   },
 
   forms: {
@@ -607,7 +656,7 @@ const fr = {
 
   cookies: {
     title: "Cookies",
-    body: "Ce site n'utilise que des cookies nécessaires à son fonctionnement. Si nous ajoutons un jour une mesure d'audience, elle ne fonctionnera qu'avec votre accord, que vous pouvez retirer à tout moment.",
+    body: "Avec votre accord, nous utilisons Google Analytics et Google Ads pour mesurer les visites et les résultats de nos annonces. Refuser ne change rien au site, et vous pouvez changer d'avis à tout moment.",
     accept: "Accepter",
     refuse: "Refuser",
     more: "En savoir plus",

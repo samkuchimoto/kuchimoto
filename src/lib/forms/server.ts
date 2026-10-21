@@ -87,6 +87,39 @@ export class EmailNotConfiguredError extends Error {}
 const escapeHtml = (value: string) =>
   value.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
 
+export { escapeHtml };
+
+/** One email through Resend. Throws when it is not configured or refused. */
+export async function sendEmail({
+  from,
+  to,
+  subject,
+  text,
+  html,
+  replyTo,
+}: {
+  from: string;
+  to: string[];
+  subject: string;
+  text: string;
+  html: string;
+  replyTo?: string;
+}): Promise<void> {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) throw new EmailNotConfiguredError();
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ from, to, subject, text, html, ...(replyTo && { reply_to: replyTo }) }),
+  });
+  if (!response.ok) {
+    // Resend's reason ("domain is not verified"), never the key.
+    const reason = await response.text().catch(() => "");
+    throw new Error(`Resend responded ${response.status} ${reason.slice(0, 200)}`);
+  }
+}
+
+/** A submission to the company inbox (CONTACT_TO_EMAIL), as a table of fields. */
 export async function sendSubmission({
   subject,
   rows,
@@ -96,9 +129,8 @@ export async function sendSubmission({
   rows: [string, string][];
   replyTo?: string;
 }): Promise<void> {
-  const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_TO_EMAIL;
-  if (!apiKey || !to) throw new EmailNotConfiguredError();
+  if (!process.env.RESEND_API_KEY || !to) throw new EmailNotConfiguredError();
 
   const filled = rows.filter(([, value]) => value.trim() !== "");
   const text = [subject, "", ...filled.map(([label, value]) => `${label}: ${value}`)].join("\n");
@@ -109,19 +141,14 @@ export async function sendSubmission({
     )
     .join("")}</table>`;
 
-  const response = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
-    body: JSON.stringify({
-      from: process.env.CONTACT_FROM_EMAIL || "KUCHIMOTO <onboarding@resend.dev>",
-      to: to.split(",").map((address) => address.trim()),
-      subject,
-      text,
-      html,
-      ...(replyTo && { reply_to: replyTo }),
-    }),
+  await sendEmail({
+    from: process.env.CONTACT_FROM_EMAIL || "KUCHIMOTO <onboarding@resend.dev>",
+    to: to.split(",").map((address) => address.trim()),
+    subject,
+    text,
+    html,
+    replyTo,
   });
-  if (!response.ok) throw new Error(`Resend responded ${response.status}`);
 }
 
 /** Sends, and turns the outcome into the response the forms expect. */
