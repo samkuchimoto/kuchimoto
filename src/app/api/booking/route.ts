@@ -9,7 +9,7 @@ import { localizedPath, isLocale } from "@/i18n/config";
 import { BOOKING_SERVICES, HOME_SIZES, TIMES, SIZED_SERVICES } from "@/lib/forms/options";
 import { deliver, fail, rateLimited, reader, sameOrigin } from "@/lib/forms/server";
 import { MAX_AIRCON_UNITS, bookingTotal } from "@/lib/pricing";
-import { stripe } from "@/lib/stripe";
+import { stripe, thailandPaymentsEnabled } from "@/lib/stripe";
 
 const SERVICE_NAMES: Record<string, string> = {
   oneOff: "Ménage ponctuel",
@@ -69,7 +69,8 @@ export async function POST(request: Request) {
   if (!read.checked("terms")) invalid.push("terms");
 
   const total = service ? bookingTotal(service, size, units) : null;
-  const client = stripe();
+  // Off while THAILAND_CARD_PAYMENTS is false, even with Stripe keys set.
+  const client = thailandPaymentsEnabled() ? stripe() : null;
   const payNow = total !== null && client !== null;
   // Paying for a service that may start within 14 days needs the explicit
   // request to start early (Code de la consommation, L221-25).

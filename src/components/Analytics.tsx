@@ -33,6 +33,8 @@ export function Analytics() {
       {/* Before the page starts: the consent defaults come first, and gtag()
           exists for the thank-you page's conversion as soon as it renders.
           The library then reads the queue in order. */}
+      {/* App Router: allowed because this renders in the root layout ([lang]/layout.tsx); the rule predates it. */}
+      {/* eslint-disable-next-line @next/next/no-before-interactive-script-outside-document */}
       <Script id="gtag-setup" strategy="beforeInteractive">
         {SETUP}
       </Script>

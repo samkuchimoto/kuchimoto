@@ -5,9 +5,10 @@ import { localizedPath } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getLang } from "@/i18n/server";
 import { euroRange, fill, wholeEuros } from "@/lib/format";
-import { leadFormProps } from "@/lib/leads/props";
+import { leadFormProps, payPath } from "@/lib/leads/props";
 import { pageMetadata } from "@/lib/seo";
-import { Container } from "@/components/ui";
+import { prototypePaymentsEnabled } from "@/lib/stripe";
+import { ButtonLink, Container } from "@/components/ui";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { PresetButton } from "@/components/PrototypeCta";
 import { ArtGallery, type Artwork } from "@/components/ArtGallery";
@@ -42,6 +43,8 @@ export default async function Studio() {
   const price = wholeEuros(LAB.prototype, lang);
   const form = leadFormProps(lang);
   const art = artworks(t.art.alts);
+  // "Pay €490 and start" once Stripe is set up (lib/stripe.ts).
+  const pay = prototypePaymentsEnabled() ? payPath(lang, "studio") : null;
 
   return (
     <>
@@ -106,8 +109,13 @@ export default async function Studio() {
               </p>
               <p className="mt-1 text-xs text-ink-soft">{t.prototype.note}</p>
             </div>
-            <div className="shrink-0">
+            <div className="flex shrink-0 flex-wrap gap-3">
               <PresetButton need="creative">{t.prototype.cta}</PresetButton>
+              {pay && (
+                <ButtonLink href={pay} accent="lab" variant="outline">
+                  {fill(dict.pay.button, { price })}
+                </ButtonLink>
+              )}
             </div>
           </div>
 

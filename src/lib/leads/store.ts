@@ -116,3 +116,76 @@ export async function recordEmails(id: string, notified: boolean, autoreply: str
     console.error("[lead] could not record the email outcome", error);
   }
 }
+
+// ---------------------------------------------------------------- payments
+
+/** A paid Checkout Session (the 48-hour prototype), from the Stripe webhook. */
+export type PaymentFields = {
+  sessionId: string;
+  kind: string;
+  amount: number;
+  currency: string;
+  email: string;
+  name: string;
+  phone: string;
+  address: string;
+  source: string;
+  lang: string;
+  leadEmail: string;
+  leadId: string;
+  customer: string;
+  paymentIntent: string;
+  invoice: string;
+  livemode: boolean;
+};
+
+let paymentsReady: Promise<unknown> | null = null;
+
+function paymentsDb() {
+  const sql = neon(url()!);
+  paymentsReady ??= sql`
+    CREATE TABLE IF NOT EXISTS payments (
+      session_id text PRIMARY KEY,
+      created_at timestamptz NOT NULL DEFAULT now(),
+      kind text NOT NULL,
+      amount integer NOT NULL,
+      currency text NOT NULL,
+      email text, name text, phone text, address text,
+      source text, lang text, lead_email text, lead_id text,
+      customer text, payment_intent text, invoice text,
+      livemode boolean NOT NULL,
+      notified boolean NOT NULL DEFAULT false
+    )`.catch((error) => {
+    paymentsReady = null;
+    throw error;
+  });
+  return { sql, ready: paymentsReady };
+}
+
+/**
+ * Saves a payment once: Stripe may send the same event again, so the
+ * session id is the key. Returns whether its email has gone out already.
+ */
+export async function savePayment(p: PaymentFields): Promise<{ notified: boolean }> {
+  const { sql, ready } = paymentsDb();
+  await ready;
+  await sql`
+    INSERT INTO payments (session_id, kind, amount, currency, email, name, phone, address, source, lang,
+      lead_email, lead_id, customer, payment_intent, invoice, livemode)
+    VALUES (${p.sessionId}, ${p.kind}, ${p.amount}, ${p.currency}, ${orNull(p.email)}, ${orNull(p.name)}, ${orNull(p.phone)},
+      ${orNull(p.address)}, ${orNull(p.source)}, ${orNull(p.lang)}, ${orNull(p.leadEmail)}, ${orNull(p.leadId)},
+      ${orNull(p.customer)}, ${orNull(p.paymentIntent)}, ${orNull(p.invoice)}, ${p.livemode})
+    ON CONFLICT (session_id) DO NOTHING`;
+  const rows = await sql`SELECT notified FROM payments WHERE session_id = ${p.sessionId}`;
+  return { notified: Boolean(rows[0]?.notified) };
+}
+
+export async function markPaymentNotified(sessionId: string): Promise<void> {
+  try {
+    const { sql, ready } = paymentsDb();
+    await ready;
+    await sql`UPDATE payments SET notified = true WHERE session_id = ${sessionId}`;
+  } catch (error) {
+    console.error("[payment] could not record the email", error);
+  }
+}

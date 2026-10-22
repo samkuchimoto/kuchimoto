@@ -63,6 +63,14 @@ const en: Dictionary = {
       title: "Request received",
       description: "Your request is received: you'll get a fixed price within 24 hours.",
     },
+    pay: {
+      title: "Pay for the 48-hour AI prototype",
+      description: "48-hour AI prototype, €490 fixed price, deducted from the full build if you continue.",
+    },
+    paymentSuccess: {
+      title: "Payment received",
+      description: "Your payment for the 48-hour AI prototype.",
+    },
   },
 
   nav: {
@@ -508,6 +516,21 @@ const en: Dictionary = {
       ["Where are you based?", "Paris, working remotely with clients across Europe and Asia. Invoiced from France."],
       ["How fast do you reply?", "Within 24 hours."],
     ],
+  },
+  pay: {
+    button: "Pay {price} and start",
+    label: "Payment",
+    title: "48-hour AI prototype",
+    summary: "Working prototype on your task in 48 hours. Deducted from the full build if you continue.",
+    price: "{price}, fixed price",
+    secure: "Payment handled by Stripe.",
+    loading: "Loading the payment…",
+    error: "The payment form couldn't load. Try again in a moment.",
+    closed: "Online payment isn't open yet. Tell us the task: we reply within 24 hours.",
+    closedLink: "Describe my task",
+    success: "Payment received. I'll email you within 24 hours to start your prototype.",
+    pending: "This payment isn't complete.",
+    retry: "Back to the payment",
   },
   about: {
     label: "About",

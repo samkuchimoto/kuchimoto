@@ -4,8 +4,9 @@ import { ITTSUI_URL, LAB } from "@/config/site";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getLang } from "@/i18n/server";
 import { fill, wholeEuros } from "@/lib/format";
-import { demoPath, leadFormProps } from "@/lib/leads/props";
+import { demoPath, leadFormProps, payPath } from "@/lib/leads/props";
 import { pageMetadata } from "@/lib/seo";
+import { prototypePaymentsEnabled } from "@/lib/stripe";
 import { ButtonLink, Container } from "@/components/ui";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { PresetButton } from "@/components/PrototypeCta";
@@ -34,6 +35,8 @@ export default async function Lab() {
   const cardPrice = { agent: price, mvp: wholeEuros(LAB.mvpFrom, lang), whitelabel: "" };
   const form = leadFormProps(lang);
   const demo = demoPath(lang);
+  // "Pay €490 and start" once Stripe is set up (lib/stripe.ts).
+  const pay = prototypePaymentsEnabled() ? payPath(lang, "lab") : null;
 
   return (
     <>
@@ -77,8 +80,13 @@ export default async function Lab() {
                 <li key={key} className="flex flex-col bg-paper p-6 sm:p-8">
                   <h3 className="text-xl">{fill(card.title, values)}</h3>
                   <p className="mt-4 text-ink-soft">{fill(card.body, values)}</p>
-                  <div className="mt-auto pt-8">
+                  <div className="mt-auto flex flex-wrap gap-3 pt-8">
                     <PresetButton need={key}>{fill(card.cta, values)}</PresetButton>
+                    {key === "agent" && pay && (
+                      <ButtonLink href={pay} accent="lab" variant="outline">
+                        {fill(dict.pay.button, { price })}
+                      </ButtonLink>
+                    )}
                   </div>
                 </li>
               );

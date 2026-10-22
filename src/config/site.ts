@@ -112,3 +112,11 @@ export const LAB = {
   mvpFrom: 1500,
   budgets: { mid: [1500, 5000], high: [5000, 12000] },
 } as const;
+
+/**
+ * Card payment for Happy Homes Thailand bookings on this site (api/booking).
+ * Off: Stripe's keys exist now for the Lab's 48-hour prototype, and these
+ * bookings stay email requests (happyhomesthailand.com takes them, at its
+ * own prices). Turning it on would charge THAILAND_PRICES above.
+ */
+export const THAILAND_CARD_PAYMENTS = false;

@@ -5,7 +5,7 @@ import { getDictionary } from "@/i18n/dictionaries";
 import { getLang } from "@/i18n/server";
 import { baht } from "@/lib/format";
 import { pageMetadata } from "@/lib/seo";
-import { paymentsEnabled } from "@/lib/stripe";
+import { thailandPaymentsEnabled } from "@/lib/stripe";
 import { ButtonLink, Container, PageHeader } from "@/components/ui";
 import { CountryTabs, NoHousingNotice } from "@/components/happy-homes";
 import { BookingForm } from "@/components/forms/BookingForm";
@@ -121,7 +121,7 @@ export default async function Thailand() {
           <h2 id="booking" className="text-3xl">
             {dict.booking.title}
           </h2>
-          <p className="mt-3 text-ink-soft">{paymentsEnabled() ? dict.booking.intro : dict.booking.introRequest}</p>
+          <p className="mt-3 text-ink-soft">{thailandPaymentsEnabled() ? dict.booking.intro : dict.booking.introRequest}</p>
           <p className="mt-3 text-sm text-ink-soft">
             {dict.booking.alsoOn}{" "}
             <a
@@ -139,7 +139,7 @@ export default async function Thailand() {
               lang={lang}
               t={dict.booking}
               f={dict.forms}
-              paymentsEnabled={paymentsEnabled()}
+              paymentsEnabled={thailandPaymentsEnabled()}
               termsHref={localizedPath(lang, "/cgv")}
               privacyHref={localizedPath(lang, "/confidentialite")}
               contactEmail={CONTACT.email}

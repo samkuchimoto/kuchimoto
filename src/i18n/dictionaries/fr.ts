@@ -65,6 +65,14 @@ const fr = {
       title: "Demande reçue",
       description: "Votre demande est bien reçue : vous recevrez un prix fixe sous 24 heures.",
     },
+    pay: {
+      title: "Payer le prototype IA en 48 heures",
+      description: "Prototype IA en 48 heures, 490 € prix fixe, déduit du projet complet si vous poursuivez.",
+    },
+    paymentSuccess: {
+      title: "Paiement reçu",
+      description: "Votre paiement du prototype IA en 48 heures.",
+    },
   },
 
   nav: {
@@ -523,6 +531,21 @@ const fr = {
       ],
       ["En combien de temps répondez-vous ?", "Sous 24 heures."],
     ] as [string, string][],
+  },
+  pay: {
+    button: "Payer {price} et démarrer",
+    label: "Paiement",
+    title: "Prototype IA en 48 heures",
+    summary: "Un prototype fonctionnel sur votre tâche en 48 heures. Déduit du projet complet si vous poursuivez.",
+    price: "{price}, prix fixe",
+    secure: "Paiement traité par Stripe.",
+    loading: "Chargement du paiement…",
+    error: "Le paiement n'a pas pu se charger. Réessayez dans un instant.",
+    closed: "Le paiement en ligne n'est pas encore ouvert. Décrivez-nous la tâche : nous répondons sous 24 heures.",
+    closedLink: "Décrire ma tâche",
+    success: "Paiement reçu. Je vous écris sous 24 heures pour démarrer votre prototype.",
+    pending: "Ce paiement n'est pas finalisé.",
+    retry: "Revenir au paiement",
   },
   about: {
     label: "À propos",

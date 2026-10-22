@@ -13,6 +13,11 @@ export function demoPath(lang: Locale): { href: string; lang: "fr" | "en" } {
   return lang === "fr" ? { href: "/demo-triage", lang: "fr" } : { href: "/en/demo-triage", lang: "en" };
 }
 
+/** The prototype's pay page in the visitor's language, saying where they clicked. */
+export function payPath(lang: Locale, from: "lab" | "studio" | "thank-you"): string {
+  return `${localizedPath(lang, "/pay/prototype")}?from=${from}`;
+}
+
 /** /merci in French, /en/thank-you and /ja/thank-you. */
 export function thanksPath(lang: Locale): string {
   return lang === "fr" ? "/merci" : `/${lang}/thank-you`;
