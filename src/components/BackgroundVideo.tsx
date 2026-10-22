@@ -6,7 +6,9 @@
 // the image optimiser, whose first AVIF encode of a large poster takes far
 // too long). A hero's poster is preloaded and its video fetched once the
 // page has loaded and the browser is idle; a band waits until it nears the
-// screen, poster included. The video then fades in over the poster, VP9
+// screen, poster included. The video then fades in over the poster (no
+// poster attribute of its own: a second, larger poster painted after load
+// would count as the page's largest paint), VP9
 // WebM where the browser plays it, H.264 MP4 otherwise. Visitors who ask
 // for reduced motion or data saving keep the poster only. Decorative:
 // hidden from screen readers.
@@ -85,7 +87,6 @@ export function BackgroundVideo({ name, hero = false, overlay }: { name: string;
           autoPlay
           playsInline
           preload="auto"
-          poster={poster}
           onPlaying={() => setPlaying(true)}
           className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${playing ? "opacity-100" : "opacity-0"}`}
         >
