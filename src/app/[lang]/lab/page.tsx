@@ -12,6 +12,8 @@ import { LeadForm } from "@/components/forms/LeadForm";
 import { PresetButton } from "@/components/PrototypeCta";
 import { StrategicNotes } from "@/components/StrategicNotes";
 import { Faq, Founder, ProofStrip } from "@/components/offers";
+import { BackgroundVideo } from "@/components/BackgroundVideo";
+import { HERO_FORM_CARD, HERO_OVERLAY } from "@/components/hero";
 
 /**
  * Kuchimoto Lab, a Google Ads landing page (/en/lab). The lead form's first
@@ -40,16 +42,18 @@ export default async function Lab() {
 
   return (
     <>
-      <section id="start" aria-labelledby="lab-title" className="border-b hairline">
+      <section id="start" aria-labelledby="lab-title" className="relative isolate overflow-hidden border-b hairline">
+        {/* The station that turns into an agent network, painted (public/video). */}
+        <BackgroundVideo name="lab-station" hero overlay={HERO_OVERLAY} />
         <Container className="grid gap-6 pt-5 pb-8 sm:gap-8 sm:py-14 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:py-20">
           <div>
-            <p className="eyebrow hidden text-lab sm:block">{t.label}</p>
-            <h1 id="lab-title" className="text-[1.6rem] leading-[1.2] sm:mt-5 sm:text-5xl">
+            <p className="eyebrow hidden text-paper/80 sm:block">{t.label}</p>
+            <h1 id="lab-title" className="text-[1.6rem] leading-[1.2] text-paper sm:mt-5 sm:text-5xl">
               {t.title}
             </h1>
-            <p className="mt-3 text-[0.95rem] leading-normal text-ink-soft sm:mt-6 sm:text-lg sm:leading-relaxed">{fill(t.intro, { price })}</p>
+            <p className="mt-3 text-[0.95rem] leading-normal text-paper/90 sm:mt-6 sm:text-lg sm:leading-relaxed">{fill(t.intro, { price })}</p>
           </div>
-          <div>
+          <div className={HERO_FORM_CARD}>
             <LeadForm {...form} id="lead-hero" role="hero" source="lab" preset="agent" />
             <p className="mt-6 text-sm">
               <Link href={demo.href} hrefLang={demo.lang} className="font-medium text-lab underline underline-offset-4 hover:no-underline">

@@ -86,6 +86,7 @@ const fr = {
       happyHomes: "Happy Homes",
       bambootails: "BambooTails",
       lab: "Kuchimoto Lab",
+      ittsui: "Ittsui",
       about: "À propos",
       contact: "Contact",
     },

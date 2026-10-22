@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CONTACT } from "@/config/site";
+import { CONTACT, ittsuiUrl } from "@/config/site";
 import { localizedPath, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { Container, Logo, Todo } from "@/components/ui";
@@ -46,6 +46,11 @@ export function Footer({ lang, dict }: { lang: Locale; dict: Dictionary }) {
               <Link href={href("/lab")} className={link}>
                 Kuchimoto Lab
               </Link>
+            </li>
+            <li>
+              <a href={ittsuiUrl(lang)} className={link}>
+                Ittsui
+              </a>
             </li>
           </ul>
         </nav>

@@ -12,7 +12,8 @@ import { ButtonLink, Container } from "@/components/ui";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { PresetButton } from "@/components/PrototypeCta";
 import { ArtGallery, type Artwork } from "@/components/ArtGallery";
-import { HeroVideo } from "@/components/HeroVideo";
+import { BackgroundVideo } from "@/components/BackgroundVideo";
+import { HERO_FORM_CARD, HERO_OVERLAY } from "@/components/hero";
 import { Faq, Founder, publicFileExists } from "@/components/offers";
 
 /**
@@ -50,29 +51,34 @@ export default async function Studio() {
   return (
     <>
       <section id="start" aria-labelledby="studio-title" className="relative isolate overflow-hidden border-b hairline">
-        {/* Samuel's samurai painting, animated (public/video). */}
-        <HeroVideo src="/video/studio-hero.mp4" poster="/video/studio-hero-poster.jpg" posterSmall="/video/studio-hero-poster-768.jpg" />
+        {/* Samuel's painting and the brush stroke, animated (public/video). */}
+        <BackgroundVideo name="studio-brush" hero overlay={HERO_OVERLAY} />
         <Container className="grid gap-6 pt-5 pb-8 sm:gap-8 sm:py-14 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:py-20">
           <div>
-            <p className="eyebrow hidden text-lab sm:block">{t.label}</p>
-            <h1 id="studio-title" className="text-[1.6rem] leading-[1.2] sm:mt-5 sm:text-5xl">
+            <p className="eyebrow hidden text-paper/80 sm:block">{t.label}</p>
+            <h1 id="studio-title" className="text-[1.6rem] leading-[1.2] text-paper sm:mt-5 sm:text-5xl">
               {t.title}
             </h1>
-            <p className="mt-3 text-[0.95rem] leading-normal text-ink-soft sm:mt-6 sm:text-lg sm:leading-relaxed">{fill(t.intro, { price })}</p>
+            <p className="mt-3 text-[0.95rem] leading-normal text-paper/90 sm:mt-6 sm:text-lg sm:leading-relaxed">{fill(t.intro, { price })}</p>
           </div>
-          {/* On a solid card from lg up, where the wash lets the painting through. */}
-          <div className="lg:border lg:hairline lg:bg-paper lg:p-8 lg:shadow-[0_24px_48px_-32px_rgba(0,0,0,0.35)]">
+          <div className={HERO_FORM_CARD}>
             <LeadForm {...form} id="lead-hero" role="hero" source="studio" preset="creative" />
           </div>
         </Container>
       </section>
 
       <section id="art" aria-labelledby="art-title">
+        {/* The workshop band: the painting on its easel, loaded on approach. */}
+        <div className="relative isolate overflow-hidden">
+          <BackgroundVideo name="studio-workshop" overlay="bg-ink/60" />
+          <Container className="flex min-h-72 items-center py-16 sm:min-h-[26rem]">
+            <h2 id="art-title" className="max-w-3xl text-3xl text-paper sm:text-5xl">
+              {t.art.title}
+            </h2>
+          </Container>
+        </div>
         <Container className="py-16 sm:py-20">
-          <h2 id="art-title" className="text-2xl sm:text-3xl">
-            {t.art.title}
-          </h2>
-          <p className="mt-4 max-w-2xl text-ink-soft">{t.art.body}</p>
+          <p className="max-w-2xl text-ink-soft">{t.art.body}</p>
           {art.length > 0 && (
             <ArtGallery
               images={art}

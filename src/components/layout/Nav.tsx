@@ -11,24 +11,25 @@ import { useEffect, useState } from "react";
 import { useSelectedLayoutSegment, useSelectedLayoutSegments } from "next/navigation";
 import { localeMeta, locales, localizedPath, type Locale } from "@/i18n/config";
 
-export type NavItem = { href: string; label: string; segment: string | null };
+/** external: another site (Ittsui), never the current page. */
+export type NavItem = { href: string; label: string; segment: string | null; external?: boolean };
 
 function useIsActive() {
   const segment = useSelectedLayoutSegment();
-  return (item: NavItem) => item.segment === segment;
+  return (item: NavItem) => !item.external && item.segment === segment;
 }
 
 export function NavLinks({ items, label }: { items: NavItem[]; label: string }) {
   const isActive = useIsActive();
   return (
-    <nav aria-label={label} className="hidden lg:block">
+    <nav aria-label={label} className="hidden xl:block">
       <ul className="flex items-center gap-7 text-sm">
         {items.map((item) => (
           <li key={item.href}>
             <Link
               href={item.href}
               aria-current={isActive(item) ? "page" : undefined}
-              className={`border-b py-1 transition-colors ${
+              className={`border-b py-1 whitespace-nowrap transition-colors ${
                 isActive(item) ? "border-ink text-ink" : "border-transparent text-ink-soft hover:text-ink"
               }`}
             >
@@ -95,7 +96,7 @@ export function MobileMenu({
   }, [segment]);
 
   return (
-    <div className="lg:hidden">
+    <div className="xl:hidden">
       <button
         type="button"
         aria-expanded={open}

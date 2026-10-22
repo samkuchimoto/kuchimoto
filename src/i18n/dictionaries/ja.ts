@@ -86,6 +86,7 @@ const ja: Dictionary = {
       happyHomes: "Happy Homes",
       bambootails: "BambooTails",
       lab: "Kuchimoto Lab",
+      ittsui: "Ittsui",
       about: "プロフィール",
       contact: "お問い合わせ",
     },

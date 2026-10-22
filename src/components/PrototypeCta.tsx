@@ -27,7 +27,7 @@ export function HeaderPrototypeButton({ label, fallbackHref }: { label: string; 
     <button
       type="button"
       onClick={() => goToLeadForm() || router.push(fallbackHref)}
-      className="hidden min-h-11 items-center bg-lab px-4 text-sm font-medium text-paper transition-opacity hover:opacity-90 sm:inline-flex"
+      className="hidden min-h-11 items-center bg-lab px-4 text-sm font-medium whitespace-nowrap text-paper transition-opacity hover:opacity-90 md:inline-flex"
     >
       {label}
     </button>

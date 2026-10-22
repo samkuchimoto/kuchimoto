@@ -4,6 +4,8 @@
 // so it cannot go live unnoticed. Fill these in, push, and every page
 // that uses them updates.
 
+import type { Locale } from "@/i18n/config";
+
 export const SITE_URL = "https://kuchimoto.com";
 
 /**
@@ -91,6 +93,9 @@ export const BAMBOOTAILS = {
 };
 
 export const ITTSUI_URL = "https://www.ittsui.fr/";
+
+/** Ittsui in the visitor's language: French at the root, then /en and /ja. */
+export const ittsuiUrl = (lang: Locale) => (lang === "fr" ? ITTSUI_URL : `${ITTSUI_URL}${lang}`);
 
 /** Happy Homes Thailand's own site, where bookings reach us by email. */
 export const HAPPY_HOMES_THAILAND = { url: "https://happyhomesthailand.com", domain: "happyhomesthailand.com" };

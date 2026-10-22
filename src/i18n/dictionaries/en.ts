@@ -84,6 +84,7 @@ const en: Dictionary = {
       happyHomes: "Happy Homes",
       bambootails: "BambooTails",
       lab: "Kuchimoto Lab",
+      ittsui: "Ittsui",
       about: "About",
       contact: "Contact",
     },
