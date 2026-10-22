@@ -127,7 +127,11 @@ export async function POST(request: Request) {
 
   if (event.type === "checkout.session.completed" || event.type === "checkout.session.async_payment_succeeded") {
     const session = event.data.object;
-    return session.metadata?.kind === "prototype" ? prototypePaid(session) : bookingPaid(session);
+    if (session.metadata?.kind === "prototype") return prototypePaid(session);
+    // Happy Homes Thailand bookings are the only baht payments. Anything else
+    // on this Stripe account (Ittsui's subscriptions) has its own webhook.
+    if (session.currency === "thb") return bookingPaid(session);
+    return new Response("ok");
   }
   return new Response("ok");
 }
