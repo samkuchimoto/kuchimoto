@@ -5,13 +5,13 @@
 // band. The poster comes first, as two JPEGs made in advance (not through
 // the image optimiser, whose first AVIF encode of a large poster takes far
 // too long). A hero's poster is preloaded and its video fetched once the
-// page has loaded and the browser is idle; a band waits until it nears the
-// screen, poster included. The video then fades in over the poster (no
-// poster attribute of its own: a second, larger poster painted after load
-// would count as the page's largest paint), VP9
-// WebM where the browser plays it, H.264 MP4 otherwise. Visitors who ask
-// for reduced motion or data saving keep the poster only. Decorative:
-// hidden from screen readers.
+// page has loaded and the browser is idle; a band waits until a quarter of
+// it is on screen, poster included. The video then fades in over the
+// poster, VP9 WebM where the browser plays it, H.264 MP4 otherwise. It has
+// no poster attribute of its own: a second, larger poster painted after
+// load would count as the page's largest paint. Visitors who ask for
+// reduced motion or data saving keep the poster only. Decorative: hidden
+// from screen readers.
 
 "use client";
 
