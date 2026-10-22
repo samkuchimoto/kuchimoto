@@ -21,9 +21,13 @@ export function stripe(): Stripe | null {
   return client;
 }
 
-/** The prototype's pay page and "Pay €490 and start" buttons. */
+/** The prototype's pay page (test keys work there, for trying it out). */
 export const prototypePaymentsEnabled = () =>
   Boolean(process.env.STRIPE_SECRET_KEY && process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+
+/** The "Pay €490 and start" buttons: live keys only, so visitors never land on a test checkout. */
+export const prototypeButtonsShown = () =>
+  prototypePaymentsEnabled() && Boolean(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY?.startsWith("pk_live_"));
 
 /** Card payment in the Thailand booking form. */
 export const thailandPaymentsEnabled = () => THAILAND_CARD_PAYMENTS && Boolean(process.env.STRIPE_SECRET_KEY);

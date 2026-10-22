@@ -6,7 +6,7 @@ import { getLang } from "@/i18n/server";
 import { fill, wholeEuros } from "@/lib/format";
 import { demoPath, leadFormProps, payPath } from "@/lib/leads/props";
 import { pageMetadata } from "@/lib/seo";
-import { prototypePaymentsEnabled } from "@/lib/stripe";
+import { prototypeButtonsShown } from "@/lib/stripe";
 import { ButtonLink, Container } from "@/components/ui";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { PresetButton } from "@/components/PrototypeCta";
@@ -36,7 +36,7 @@ export default async function Lab() {
   const form = leadFormProps(lang);
   const demo = demoPath(lang);
   // "Pay €490 and start" once Stripe is set up (lib/stripe.ts).
-  const pay = prototypePaymentsEnabled() ? payPath(lang, "lab") : null;
+  const pay = prototypeButtonsShown() ? payPath(lang, "lab") : null;
 
   return (
     <>

@@ -7,7 +7,7 @@ import { getLang } from "@/i18n/server";
 import { euroRange, fill, wholeEuros } from "@/lib/format";
 import { leadFormProps, payPath } from "@/lib/leads/props";
 import { pageMetadata } from "@/lib/seo";
-import { prototypePaymentsEnabled } from "@/lib/stripe";
+import { prototypeButtonsShown } from "@/lib/stripe";
 import { ButtonLink, Container } from "@/components/ui";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { PresetButton } from "@/components/PrototypeCta";
@@ -45,7 +45,7 @@ export default async function Studio() {
   const form = leadFormProps(lang);
   const art = artworks(t.art.alts);
   // "Pay €490 and start" once Stripe is set up (lib/stripe.ts).
-  const pay = prototypePaymentsEnabled() ? payPath(lang, "studio") : null;
+  const pay = prototypeButtonsShown() ? payPath(lang, "studio") : null;
 
   return (
     <>

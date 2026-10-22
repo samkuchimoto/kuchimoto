@@ -9,7 +9,7 @@ import type { Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { fill, wholeEuros } from "@/lib/format";
 import { payPath, thanksPath } from "@/lib/leads/props";
-import { prototypePaymentsEnabled } from "@/lib/stripe";
+import { prototypeButtonsShown } from "@/lib/stripe";
 import { ButtonLink, Container } from "@/components/ui";
 import { BookingEmbed, LeadConversion } from "@/components/ThankYou";
 
@@ -29,7 +29,7 @@ export function ThankYouPage({ lang }: { lang: Locale }) {
   const price = wholeEuros(LAB.prototype, lang);
   const booking = process.env.NEXT_PUBLIC_BOOKING_URL;
   // Under the booking: "Pay €490 and start", once Stripe is set up.
-  const pay = prototypePaymentsEnabled() ? payPath(lang, "thank-you") : null;
+  const pay = prototypeButtonsShown() ? payPath(lang, "thank-you") : null;
 
   return (
     <Container className="py-12 sm:py-20">
