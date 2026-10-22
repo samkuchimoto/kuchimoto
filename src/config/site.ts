@@ -22,6 +22,13 @@ export const COMPANY = {
   /** Publisher and director of publication. */
   director: "Samuel Louissaint",
   /**
+   * The entreprise individuelle Samuel's invoices are issued by (registered
+   * at the RNE since 3 June 2020, APE 6201Z). Printed on the Stripe invoices
+   * only: he chose to keep it off the site's pages.
+   */
+  invoiceIssuer: "Samuel Louissaint EI",
+  siret: "883 934 358 00010",
+  /**
    * The company being formed (2026-10-20, Samuel's call that the process
    * is under way). "de création" rather than "d'immatriculation": that
    * word means the Wyoming filing is submitted; switch to it then.

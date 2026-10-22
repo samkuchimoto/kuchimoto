@@ -4,7 +4,7 @@
 // secret. The price is set here, never taken from the browser. Paid, Stripe
 // sends the visitor to /payment-success and calls api/stripe/webhook.
 
-import { LAB } from "@/config/site";
+import { COMPANY, LAB } from "@/config/site";
 import { isLocale, localizedPath } from "@/i18n/config";
 import { fail, rateLimited, sameOrigin } from "@/lib/forms/server";
 import { prototypePaymentsEnabled, stripe } from "@/lib/stripe";
@@ -51,7 +51,11 @@ export async function POST(request: Request) {
         },
       ],
       customer_creation: "always",
-      invoice_creation: { enabled: true, invoice_data: { footer: "TVA non applicable, art. 293 B du CGI" } },
+      // Who issues the invoice, then the VAT exemption (franchise en base de TVA).
+      invoice_creation: {
+        enabled: true,
+        invoice_data: { footer: `${COMPANY.invoiceIssuer} · SIRET ${COMPANY.siret} · TVA non applicable, art. 293 B du CGI` },
+      },
       billing_address_collection: "required",
       locale: "auto",
       return_url: `${origin}${localizedPath(lang, "/payment-success")}?session_id={CHECKOUT_SESSION_ID}`,
