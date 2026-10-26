@@ -448,6 +448,7 @@ const en: Dictionary = {
 
   lead: {
     email: "Work email",
+    phone: "Phone or WhatsApp",
     needLabel: "What do you need?",
     needs: {
       agent: "AI agent or automation",
@@ -473,6 +474,7 @@ const en: Dictionary = {
     sending: "Sending…",
     errors: {
       email: "Enter a valid email address.",
+      phone: "Enter your phone number, with the country code.",
       need: "Choose what you need.",
       name: "Enter your name.",
       invalid: "Please check the fields marked.",

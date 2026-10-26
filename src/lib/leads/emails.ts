@@ -31,8 +31,9 @@ export async function notify(
     subject,
     replyTo: lead.email,
     rows: [
-      ["Status", complete ? "Complete (step 2 sent)" : "Partial (step 1 only: email and need)"],
+      ["Status", complete ? "Complete (step 2 sent)" : "Partial (step 1 only: email, phone and need)"],
       ["Email", lead.email],
+      ["Phone", lead.phone ?? ""],
       ["Need", need],
       ["Name", lead.name ?? ""],
       ["Company or website", lead.company ?? ""],

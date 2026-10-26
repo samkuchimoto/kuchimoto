@@ -35,6 +35,8 @@ import { Honeypot, Status, inputClass } from "./Fields";
 import { Chips } from "./Chips";
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// 7 to 15 digits, with +, spaces, dots, dashes or brackets around them.
+const PHONE = (value: string) => /^\+?[0-9\s().-]+$/.test(value) && /^\d{7,15}$/.test(value.replace(/\D/g, ""));
 
 export type LeadFormProps = {
   lang: Locale;
@@ -55,7 +57,7 @@ export type LeadFormProps = {
   accentClass?: string;
 };
 
-type Errors = Partial<Record<"email" | "need" | "name", string>>;
+type Errors = Partial<Record<"email" | "phone" | "need" | "name", string>>;
 
 export function LeadForm({
   lang,
@@ -74,6 +76,7 @@ export function LeadForm({
   const [step, setStep] = useState<1 | 2>(1);
   const [need, setNeed] = useState<Need | "">(preset ?? "");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [budget, setBudget] = useState<Budget | "">("");
   const [timeline, setTimeline] = useState<Timeline | "">("");
   const [errors, setErrors] = useState<Errors>({});
@@ -124,6 +127,7 @@ export function LeadForm({
       const fields = result.fields ?? [];
       setErrors({
         ...(fields.includes("email") && { email: t.errors.email }),
+        ...(fields.includes("phone") && { phone: t.errors.phone }),
         ...(fields.includes("need") && { need: t.errors.need }),
         ...(fields.includes("name") && { name: t.errors.name }),
       });
@@ -138,10 +142,12 @@ export function LeadForm({
     setFailure(null);
     const found: Errors = {
       ...(!EMAIL.test(email.trim()) && { email: t.errors.email }),
+      ...(!PHONE(phone.trim()) && { phone: t.errors.phone }),
       ...(!need && { need: t.errors.need }),
     };
     setErrors(found);
     if (found.email) return event.currentTarget.querySelector<HTMLInputElement>('input[name="email"]')?.focus();
+    if (found.phone) return event.currentTarget.querySelector<HTMLInputElement>('input[name="phone"]')?.focus();
     if (found.need) return event.currentTarget.querySelector<HTMLInputElement>('input[name="need"]')?.focus();
 
     setSending(true);
@@ -226,6 +232,30 @@ export function LeadForm({
               </p>
             )}
           </div>
+          <div>
+            <label htmlFor={`${id}-phone`} className="block text-sm font-medium">
+              {t.phone}
+            </label>
+            <input
+              id={`${id}-phone`}
+              name="phone"
+              type="tel"
+              inputMode="tel"
+              autoComplete="tel"
+              required
+              placeholder="+33 6 12 34 56 78"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              aria-invalid={errors.phone ? true : undefined}
+              aria-describedby={errors.phone ? `${id}-phone-error` : undefined}
+              className={`mt-1.5 ${inputClass}`}
+            />
+            {errors.phone && (
+              <p id={`${id}-phone-error`} className="mt-1.5 text-sm font-medium text-danger">
+                {errors.phone}
+              </p>
+            )}
+          </div>
           <Chips id={`${id}-need`} name="need" legend={t.needLabel} options={needOptions} value={need} onChange={setNeed} error={errors.need} />
           {failure && <Status tone="error">{failure}</Status>}
           <div>
@@ -244,6 +274,7 @@ export function LeadForm({
         <form onSubmit={sendStep2} noValidate className="relative space-y-5">
           {shared}
           <input type="hidden" name="email" value={email.trim()} />
+          <input type="hidden" name="phone" value={phone.trim()} />
           <input type="hidden" name="need" value={need} />
           {partial && (
             <>

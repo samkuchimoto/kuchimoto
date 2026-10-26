@@ -460,6 +460,7 @@ const fr = {
 
   lead: {
     email: "E-mail professionnel",
+    phone: "Téléphone ou WhatsApp",
     needLabel: "De quoi avez-vous besoin ?",
     needs: {
       agent: "Agent IA ou automatisation",
@@ -485,6 +486,7 @@ const fr = {
     sending: "Envoi…",
     errors: {
       email: "Indiquez une adresse e-mail valide.",
+      phone: "Indiquez votre numéro de téléphone, avec l'indicatif du pays.",
       need: "Choisissez ce dont vous avez besoin.",
       name: "Indiquez votre nom.",
       invalid: "Vérifiez les champs signalés.",
