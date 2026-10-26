@@ -59,7 +59,6 @@ export async function POST(request: Request) {
   ) as Record<TrackingField, string>;
   const lead: LeadFields = {
     email: read.email() ?? "",
-    phone: read.text("phone", 40),
     need: read.oneOf("need", NEEDS) ?? "",
     business: read.oneOf("business", LEAD_BUSINESSES) ?? (source === "studio" ? "studio" : "lab"),
     source,
@@ -77,8 +76,6 @@ export async function POST(request: Request) {
 
   const invalid: string[] = [];
   if (!lead.email) invalid.push("email");
-  // Required since 2026-10-26: Samuel calls leads back.
-  if (!/^\+?[0-9\s().-]+$/.test(lead.phone) || !/^\d{7,15}$/.test(lead.phone.replace(/\D/g, ""))) invalid.push("phone");
   if (!lead.need) invalid.push("need");
   if (step === 2 && !lead.name) invalid.push("name");
   if (invalid.length) return fail("invalid", 400, invalid);

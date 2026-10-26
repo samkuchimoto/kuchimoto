@@ -11,7 +11,6 @@ import type { TrackingField } from "./options";
 
 export type LeadFields = {
   email: string;
-  phone: string;
   need: string;
   business: string;
   source: string;
@@ -53,10 +52,7 @@ function db() {
       gclid text,
       notified boolean NOT NULL DEFAULT false,
       autoreply text
-    )`
-    // Leads tables made before the phone was asked for get the column.
-    .then(() => sql`ALTER TABLE leads ADD COLUMN IF NOT EXISTS phone text`)
-    .catch((error) => {
+    )`.catch((error) => {
     ready = null;
     throw error;
   });
@@ -71,9 +67,9 @@ export async function savePartial(lead: LeadFields): Promise<{ id: string; token
   await ready;
   const token = randomBytes(18).toString("base64url");
   const rows = await sql`
-    INSERT INTO leads (token, status, email, phone, need, business, source, page, lang,
+    INSERT INTO leads (token, status, email, need, business, source, page, lang,
       landing_page, referrer, utm_source, utm_medium, utm_campaign, utm_term, utm_content, gclid)
-    VALUES (${token}, 'partial', ${lead.email}, ${orNull(lead.phone)}, ${lead.need}, ${lead.business}, ${lead.source}, ${lead.page}, ${lead.lang},
+    VALUES (${token}, 'partial', ${lead.email}, ${lead.need}, ${lead.business}, ${lead.source}, ${lead.page}, ${lead.lang},
       ${orNull(lead.landing_page)}, ${orNull(lead.referrer)}, ${orNull(lead.utm_source)}, ${orNull(lead.utm_medium)},
       ${orNull(lead.utm_campaign)}, ${orNull(lead.utm_term)}, ${orNull(lead.utm_content)}, ${orNull(lead.gclid)})
     RETURNING id`;
@@ -91,7 +87,7 @@ export async function saveComplete(lead: LeadFields, partial: { id: string; toke
   if (partial && /^[0-9a-f-]{36}$/i.test(partial.id)) {
     const rows = await sql`
       UPDATE leads SET status = 'complete', updated_at = now(),
-        email = ${lead.email}, phone = ${orNull(lead.phone)}, need = ${lead.need}, business = ${lead.business},
+        email = ${lead.email}, need = ${lead.need}, business = ${lead.business},
         name = ${orNull(lead.name)}, company = ${orNull(lead.company)}, message = ${orNull(lead.message)},
         budget = ${orNull(lead.budget)}, timeline = ${orNull(lead.timeline)}
       WHERE id = ${partial.id} AND token = ${partial.token} AND status = 'partial'
@@ -100,9 +96,9 @@ export async function saveComplete(lead: LeadFields, partial: { id: string; toke
   }
   const token = randomBytes(18).toString("base64url");
   const rows = await sql`
-    INSERT INTO leads (token, status, email, phone, need, business, source, page, lang, name, company, message, budget, timeline,
+    INSERT INTO leads (token, status, email, need, business, source, page, lang, name, company, message, budget, timeline,
       landing_page, referrer, utm_source, utm_medium, utm_campaign, utm_term, utm_content, gclid)
-    VALUES (${token}, 'complete', ${lead.email}, ${orNull(lead.phone)}, ${lead.need}, ${lead.business}, ${lead.source}, ${lead.page}, ${lead.lang},
+    VALUES (${token}, 'complete', ${lead.email}, ${lead.need}, ${lead.business}, ${lead.source}, ${lead.page}, ${lead.lang},
       ${orNull(lead.name)}, ${orNull(lead.company)}, ${orNull(lead.message)}, ${orNull(lead.budget)}, ${orNull(lead.timeline)},
       ${orNull(lead.landing_page)}, ${orNull(lead.referrer)}, ${orNull(lead.utm_source)}, ${orNull(lead.utm_medium)},
       ${orNull(lead.utm_campaign)}, ${orNull(lead.utm_term)}, ${orNull(lead.utm_content)}, ${orNull(lead.gclid)})

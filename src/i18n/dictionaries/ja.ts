@@ -441,7 +441,6 @@ const ja: Dictionary = {
 
   lead: {
     email: "仕事用メールアドレス",
-    phone: "電話番号（WhatsApp可）",
     needLabel: "ご希望の内容",
     needs: {
       agent: "AIエージェント・自動化",
@@ -467,7 +466,6 @@ const ja: Dictionary = {
     sending: "送信中…",
     errors: {
       email: "正しいメールアドレスを入力してください。",
-      phone: "国番号を含めて電話番号を入力してください。",
       need: "ご希望の内容を選んでください。",
       name: "お名前を入力してください。",
       invalid: "入力内容をご確認ください。",
