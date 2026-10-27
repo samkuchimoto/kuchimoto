@@ -144,7 +144,7 @@ const fr = {
     where: {
       title: "Où nous travaillons",
       france: ["France", "Studio"],
-      thailand: ["Thaïlande", "Pattaya : opérationnel aujourd'hui · Autres villes prochainement"],
+      thailand: ["Thaïlande", "Bangkok, Pattaya et Chiang Mai"],
       canada: ["Canada", "À venir, à partir de juillet 2028"],
       usa: ["États-Unis", "À venir : Denver et Floride, à partir de janvier 2029"],
     },
@@ -163,8 +163,8 @@ const fr = {
     countries: {
       thailande: {
         name: "Thaïlande",
-        status: "Pattaya : opérationnel aujourd'hui · Autres villes prochainement",
-        body: "Une plateforme de gestion de la maison opérée par KUCHIMOTO LLC (Wyoming, États-Unis), en cours de création. Fini les femmes de ménage, piscinistes et jardiniers à gérer séparément : un seul abonnement, des équipes partenaires locales vérifiées, et des photos de contrôle après chaque passage.",
+        status: "Bangkok, Pattaya et Chiang Mai",
+        body: "Une plateforme de réservation de ménage : fini les femmes de ménage, piscinistes et jardiniers à gérer séparément : un seul abonnement, des équipes partenaires locales vérifiées, et des photos de contrôle après chaque passage.",
       },
       canada: {
         name: "Canada",
@@ -198,7 +198,7 @@ const fr = {
   thailand: {
     label: "Happy Homes Thaïlande",
     title: "Ménage et Villa Care à Pattaya",
-    status: "Pattaya : opérationnel aujourd'hui. Autres villes prochainement.",
+    status: "Bangkok, Pattaya et Chiang Mai.",
     intro: "Des prix fixes, connus avant de réserver. Les villas sont chiffrées d'après des photos.",
     bookOnline: "Réserver sur happyhomesthailand.com",
     photoAlt: "Photo : une villa avec piscine à Pattaya",

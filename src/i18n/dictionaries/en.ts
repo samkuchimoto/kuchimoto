@@ -142,7 +142,7 @@ const en: Dictionary = {
     where: {
       title: "Where we work",
       france: ["France", "Studio"],
-      thailand: ["Thailand", "Pattaya: live today · More cities soon"],
+      thailand: ["Thailand", "Bangkok, Pattaya and Chiang Mai"],
       canada: ["Canada", "Upcoming, from July 2028"],
       usa: ["United States", "Upcoming: Denver and Florida, from January 2029"],
     },
@@ -161,8 +161,8 @@ const en: Dictionary = {
     countries: {
       thailande: {
         name: "Thailand",
-        status: "Pattaya: live today · More cities soon",
-        body: "A home-management and dispatch platform operated by KUCHIMOTO LLC (Wyoming, United States), formation in progress. No more managing separate maids, pool technicians and gardeners: one subscription, vetted local partner teams, and photo verification after every visit.",
+        status: "Bangkok, Pattaya and Chiang Mai",
+        body: "A cleaning booking platform. No more managing separate maids, pool technicians and gardeners: one subscription, vetted local partner teams, and photo verification after every visit.",
       },
       canada: {
         name: "Canada",
@@ -195,7 +195,7 @@ const en: Dictionary = {
   thailand: {
     label: "Happy Homes Thailand",
     title: "Housekeeping and Villa Care in Pattaya",
-    status: "Pattaya: live today. More cities soon.",
+    status: "Bangkok, Pattaya and Chiang Mai.",
     intro: "Fixed prices, known before you book. Villas are quoted from photos.",
     bookOnline: "Book on happyhomesthailand.com",
     photoAlt: "Photo: a villa with a pool in Pattaya",
