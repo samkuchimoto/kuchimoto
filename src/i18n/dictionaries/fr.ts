@@ -16,12 +16,12 @@ const fr = {
     happyHomes: {
       title: "Happy Homes, services à domicile",
       description:
-        "Ménage de villas et de condos, entretien de piscines et de jardins : à Pattaya aujourd'hui, à Bangkok et au Canada à partir de juillet 2028, à Denver et en Floride à partir de janvier 2029.",
+        "Ménage de villas et de condos, entretien de piscines et de jardins : à Pattaya aujourd'hui, au Canada à partir de juillet 2028, à Denver et en Floride à partir de janvier 2029.",
     },
     thailand: {
       title: "Happy Homes Thaïlande, ménage et Villa Care à Pattaya",
       description:
-        "Ménage de villas et de condos à Pattaya, à prix fixes, et Villa Care, la formule mensuelle pour les propriétaires absents. Réservation en ligne. Bangkok à partir de juillet 2028.",
+        "Ménage de villas et de condos à Pattaya, à prix fixes, et Villa Care, la formule mensuelle pour les propriétaires absents. Réservation en ligne.",
     },
     canada: {
       title: "Happy Homes Canada, à partir de juillet 2028",
@@ -144,7 +144,7 @@ const fr = {
     where: {
       title: "Où nous travaillons",
       france: ["France", "Studio"],
-      thailand: ["Thaïlande", "Pattaya aujourd'hui. Bangkok : à venir, à partir de juillet 2028"],
+      thailand: ["Thaïlande", "Pattaya : opérationnel aujourd'hui · Autres villes prochainement"],
       canada: ["Canada", "À venir, à partir de juillet 2028"],
       usa: ["États-Unis", "À venir : Denver et Floride, à partir de janvier 2029"],
     },
@@ -198,7 +198,7 @@ const fr = {
   thailand: {
     label: "Happy Homes Thaïlande",
     title: "Ménage et Villa Care à Pattaya",
-    status: "Pattaya : ouvert. Bangkok : à venir, à partir de juillet 2028.",
+    status: "Pattaya : opérationnel aujourd'hui. Autres villes prochainement.",
     intro: "Des prix fixes, connus avant de réserver. Les villas sont chiffrées d'après des photos.",
     bookOnline: "Réserver sur happyhomesthailand.com",
     photoAlt: "Photo : une villa avec piscine à Pattaya",

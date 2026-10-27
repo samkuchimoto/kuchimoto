@@ -16,12 +16,12 @@ const ja: Dictionary = {
     happyHomes: {
       title: "Happy Homes、ハウスサービス",
       description:
-        "ヴィラやコンドミニアムの清掃、プールと庭の手入れ。現在はパタヤで、2028年7月からバンコクとカナダ、2029年1月からデンバーとフロリダで。",
+        "ヴィラやコンドミニアムの清掃、プールと庭の手入れ。現在はパタヤで、2028年7月からカナダ、2029年1月からデンバーとフロリダで。",
     },
     thailand: {
       title: "Happy Homes タイ、パタヤの清掃とVilla Care",
       description:
-        "パタヤのヴィラとコンドミニアムの清掃を定額で。留守中のオーナー向け月額プラン「Villa Care」も。オンライン予約。バンコクは2028年7月から。",
+        "パタヤのヴィラとコンドミニアムの清掃を定額で。留守中のオーナー向け月額プラン「Villa Care」も。オンライン予約。",
     },
     canada: {
       title: "Happy Homes カナダ、2028年7月から",
@@ -144,7 +144,7 @@ const ja: Dictionary = {
     where: {
       title: "事業地域",
       france: ["フランス", "スタジオ"],
-      thailand: ["タイ", "現在はパタヤ。バンコク：2028年7月から開始予定"],
+      thailand: ["タイ", "パタヤ：営業中・ほかの都市も近日"],
       canada: ["カナダ", "2028年7月から開始予定"],
       usa: ["アメリカ", "デンバーとフロリダ：2029年1月から開始予定"],
     },
@@ -197,7 +197,7 @@ const ja: Dictionary = {
   thailand: {
     label: "Happy Homes タイ",
     title: "パタヤの清掃とVilla Care",
-    status: "パタヤ：営業中。バンコク：2028年7月から開始予定。",
+    status: "パタヤ：営業中。ほかの都市も近日。",
     intro: "料金は定額で、ご予約の前にわかります。ヴィラは写真をもとにお見積もりします。",
     bookOnline: "happyhomesthailand.comで予約する",
     photoAlt: "写真：パタヤのプール付きヴィラ",

@@ -14,12 +14,12 @@ const en: Dictionary = {
     happyHomes: {
       title: "Happy Homes, home services",
       description:
-        "Villa and condo housekeeping, pool and garden upkeep: in Pattaya today, in Bangkok and Canada from July 2028, in Denver and Florida from January 2029.",
+        "Villa and condo housekeeping, pool and garden upkeep: in Pattaya today, in Canada from July 2028, in Denver and Florida from January 2029.",
     },
     thailand: {
       title: "Happy Homes Thailand, housekeeping and Villa Care in Pattaya",
       description:
-        "Fixed-price villa and condo housekeeping in Pattaya, and Villa Care, the monthly package for owners who are away. Book online. Bangkok from July 2028.",
+        "Fixed-price villa and condo housekeeping in Pattaya, and Villa Care, the monthly package for owners who are away. Book online.",
     },
     canada: {
       title: "Happy Homes Canada, from July 2028",
@@ -142,7 +142,7 @@ const en: Dictionary = {
     where: {
       title: "Where we work",
       france: ["France", "Studio"],
-      thailand: ["Thailand", "Pattaya today. Bangkok: upcoming, from July 2028"],
+      thailand: ["Thailand", "Pattaya: live today · More cities soon"],
       canada: ["Canada", "Upcoming, from July 2028"],
       usa: ["United States", "Upcoming: Denver and Florida, from January 2029"],
     },
@@ -195,7 +195,7 @@ const en: Dictionary = {
   thailand: {
     label: "Happy Homes Thailand",
     title: "Housekeeping and Villa Care in Pattaya",
-    status: "Pattaya: open. Bangkok: upcoming, from July 2028.",
+    status: "Pattaya: live today. More cities soon.",
     intro: "Fixed prices, known before you book. Villas are quoted from photos.",
     bookOnline: "Book on happyhomesthailand.com",
     photoAlt: "Photo: a villa with a pool in Pattaya",
