@@ -163,8 +163,8 @@ const ja: Dictionary = {
     countries: {
       thailande: {
         name: "タイ",
-        status: "現在はパタヤ。バンコク：2028年7月から開始予定",
-        body: "ヴィラとコンドミニアムの清掃、そして留守中のオーナー向けの月額プラン「Villa Care」。オンラインで予約、お支払い。",
+        status: "パタヤ：営業中・ほかの都市も近日",
+        body: "KUCHIMOTO LLC（米国ワイオミング州、設立手続き中）が運営する、住まいの管理と手配のプラットフォーム。清掃スタッフ、プール業者、庭師を別々に手配する必要はありません。ひとつの月額プラン、審査済みの現地パートナーチーム、そして訪問ごとの写真による確認。",
       },
       canada: {
         name: "カナダ",
@@ -178,6 +178,7 @@ const ja: Dictionary = {
       },
     },
     tabsLabel: "国",
+    liveSite: "Happy Homes Thailand のサイトへ（happyhomesthailand.com）",
     more: {
       title: "その他のサービス",
       intro: "対応は国によって異なります。お気軽にご相談ください。",

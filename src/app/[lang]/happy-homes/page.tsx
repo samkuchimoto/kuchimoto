@@ -4,6 +4,7 @@ import { localizedPath } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getLang } from "@/i18n/server";
 import { pageMetadata } from "@/lib/seo";
+import { HAPPY_HOMES_THAILAND } from "@/config/site";
 import { ButtonLink, Container, PageHeader } from "@/components/ui";
 import { COUNTRIES, CountryTabs, NoHousingNotice } from "@/components/happy-homes";
 
@@ -29,10 +30,10 @@ export default async function HappyHomes() {
           {COUNTRIES.map((country) => {
             const c = t.countries[country];
             return (
-              <li key={country} className="bg-paper">
+              <li key={country} className="flex flex-col bg-paper">
                 <Link
                   href={localizedPath(lang, `/happy-homes/${country}`)}
-                  className="flex h-full flex-col p-8 transition-colors hover:bg-washi"
+                  className="flex flex-1 flex-col p-8 transition-colors hover:bg-washi"
                 >
                   <h3 className="text-2xl">{c.name}</h3>
                   <p className="eyebrow mt-3 text-hh">{c.status}</p>
@@ -41,6 +42,19 @@ export default async function HappyHomes() {
                     {dict.common.learnMore} <span aria-hidden>→</span>
                   </p>
                 </Link>
+                {/* Outside the card link: a link can't hold another link. */}
+                {country === "thailande" && (
+                  <div className="px-8 pb-8">
+                    <a
+                      href={HAPPY_HOMES_THAILAND.url}
+                      target="_blank"
+                      rel="noopener"
+                      className="inline-flex items-center gap-1.5 border border-hh px-4 py-2 text-sm font-medium text-hh transition-colors hover:bg-hh hover:text-paper"
+                    >
+                      {t.liveSite} <span aria-hidden>↗</span>
+                    </a>
+                  </div>
+                )}
               </li>
             );
           })}

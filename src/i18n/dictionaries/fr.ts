@@ -163,8 +163,8 @@ const fr = {
     countries: {
       thailande: {
         name: "Thaïlande",
-        status: "Pattaya aujourd'hui. Bangkok : à venir, juillet 2028",
-        body: "Ménage de villas et de condos, et Villa Care, la formule mensuelle pour les propriétaires absents. Réservation et paiement en ligne.",
+        status: "Pattaya : opérationnel aujourd'hui · Autres villes prochainement",
+        body: "Une plateforme de gestion de la maison opérée par KUCHIMOTO LLC (Wyoming, États-Unis), en cours de création. Fini les femmes de ménage, piscinistes et jardiniers à gérer séparément : un seul abonnement, des équipes partenaires locales vérifiées, et des photos de contrôle après chaque passage.",
       },
       canada: {
         name: "Canada",
@@ -178,6 +178,7 @@ const fr = {
       },
     } as Record<string, { name: string; status: string; body: string }>,
     tabsLabel: "Pays",
+    liveSite: "Accéder à Happy Homes Thailand (happyhomesthailand.com)",
     more: {
       title: "Autres services",
       intro: "Selon le pays, écrivez-nous pour en parler.",

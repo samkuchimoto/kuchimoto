@@ -161,8 +161,8 @@ const en: Dictionary = {
     countries: {
       thailande: {
         name: "Thailand",
-        status: "Pattaya today. Bangkok: upcoming, July 2028",
-        body: "Villa and condo housekeeping, and Villa Care, the monthly package for owners who are away. Book and pay online.",
+        status: "Pattaya: live today · More cities soon",
+        body: "A home-management and dispatch platform operated by KUCHIMOTO LLC (Wyoming, United States), formation in progress. No more managing separate maids, pool technicians and gardeners: one subscription, vetted local partner teams, and photo verification after every visit.",
       },
       canada: {
         name: "Canada",
@@ -176,6 +176,7 @@ const en: Dictionary = {
       },
     },
     tabsLabel: "Countries",
+    liveSite: "Go to Happy Homes Thailand (happyhomesthailand.com)",
     more: {
       title: "Other services",
       intro: "Depending on the country: write to us to talk it over.",
