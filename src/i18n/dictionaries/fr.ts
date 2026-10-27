@@ -164,7 +164,7 @@ const fr = {
       thailande: {
         name: "Thaïlande",
         status: "Bangkok, Pattaya et Chiang Mai",
-        body: "Une plateforme de réservation de ménage : fini les femmes de ménage, piscinistes et jardiniers à gérer séparément : un seul abonnement, des équipes partenaires locales vérifiées, et des photos de contrôle après chaque passage.",
+        body: "Une plateforme de réservation de ménage. Fini les femmes de ménage, piscinistes et jardiniers à gérer séparément : un seul abonnement, des équipes partenaires locales vérifiées, et des photos de contrôle après chaque passage.",
       },
       canada: {
         name: "Canada",
