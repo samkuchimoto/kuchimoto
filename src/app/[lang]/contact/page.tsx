@@ -52,16 +52,8 @@ export default async function Contact() {
               </dd>
             </div>
             <div>
-              <dt className="text-sm text-ink-soft">{dict.common.phone}</dt>
-              <dd className="mt-1 text-lg">
-                <a href={CONTACT.phoneHref} className="underline-offset-4 hover:underline">
-                  {CONTACT.phone[lang]}
-                </a>
-              </dd>
-            </div>
-            <div>
-              <dt className="text-sm text-ink-soft">{COMPANY.legalName}</dt>
-              <dd className="mt-1">{COMPANY.address}</dd>
+              <dt className="text-sm text-ink-soft">{COMPANY.publisher.name}</dt>
+              <dd className="mt-1">{COMPANY.publisher.office[lang]}</dd>
             </div>
           </dl>
         </aside>

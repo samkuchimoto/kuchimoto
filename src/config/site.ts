@@ -9,16 +9,11 @@ import type { Locale } from "@/i18n/config";
 export const SITE_URL = "https://kuchimoto.com";
 
 /**
- * The company and its people. The legal notice, the terms of sale and the
- * privacy policy name `publisher` (since 4 November 2026). `legalName`,
- * `status` and `address` are shown on the About and Contact pages only.
+ * The company: every page names `publisher`, Kuchimoto LLC, since 4 November
+ * 2026. No phone number or home address anywhere on the site.
  */
 export const COMPANY = {
   name: "KUCHIMOTO",
-  /** The person shown on the About and Contact pages. */
-  legalName: "Samuel Louissaint",
-  status: { fr: "Personne physique", en: "Individual", ja: "個人" },
-  address: "13 rue André Chénier, porte 506, 92260 Fontenay-aux-Roses, France",
   /** Publisher and director of publication. */
   director: "Samuel Louissaint",
   /**
@@ -28,14 +23,6 @@ export const COMPANY = {
    */
   invoiceIssuer: "Samuel Louissaint EI",
   siret: "883 934 358 00010",
-  /**
-   * The company, filed in Wyoming on 2 November 2026.
-   */
-  llc: {
-    fr: "Kuchimoto LLC, société à responsabilité limitée du Wyoming (États-Unis)",
-    en: "Kuchimoto LLC, a Wyoming limited liability company",
-    ja: "Kuchimoto LLC（米国ワイオミング州の有限責任会社）",
-  },
   /**
    * The publisher, provider and data controller on the legal pages, from the
    * Articles of Organization. No phone number or home address here.
@@ -72,12 +59,9 @@ export const COMPANY = {
   mediator: null as { name: string; address: string; url: string } | null,
 };
 
-/** Public contact details. The phone is written the French way on French
- *  pages and in international form on the others. */
+/** Public contact details. */
 export const CONTACT = {
   email: "samuel@kuchimoto.com",
-  phone: { fr: "07 43 79 88 60", en: "+33 7 43 79 88 60", ja: "+33 7 43 79 88 60" },
-  phoneHref: "tel:+33743798860",
 };
 
 /** Opening dates, written out where they are shown. */

@@ -43,10 +43,8 @@ export default async function About() {
           </h2>
           <dl className="mt-8 grid max-w-3xl gap-x-10 gap-y-5 text-sm sm:grid-cols-[auto_1fr]">
             {[
-              [rows.name, COMPANY.legalName],
-              [rows.status, COMPANY.status[lang]],
-              [rows.company, COMPANY.llc[lang]],
-              [rows.address, COMPANY.address],
+              [rows.company, COMPANY.publisher.identity[lang]],
+              [rows.address, COMPANY.publisher.office[lang]],
             ].map(([term, detail]) => (
               <div key={term} className="contents">
                 <dt className="text-ink-soft">{term}</dt>
