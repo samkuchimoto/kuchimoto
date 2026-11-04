@@ -102,6 +102,7 @@ const en: Dictionary = {
       cookies: "Manage cookies",
     },
     trademark: "BAMBOOTAILS is a trademark of Samuel Louissaint (INPI no. 5308274), used by KUCHIMOTO.",
+    operatedBy: "Operated by Kuchimoto LLC, a Wyoming limited liability company.",
     rights: (year: number) => `© ${year} KUCHIMOTO`,
   },
 

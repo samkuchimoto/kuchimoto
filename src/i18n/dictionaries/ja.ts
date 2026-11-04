@@ -104,6 +104,7 @@ const ja: Dictionary = {
       cookies: "Cookieの設定",
     },
     trademark: "BAMBOOTAILSはSamuel Louissaintの商標（INPI番号5308274）で、KUCHIMOTOが使用しています。",
+    operatedBy: "運営：Kuchimoto LLC（米国ワイオミング州の有限責任会社）",
     rights: (year: number) => `© ${year} KUCHIMOTO`,
   },
 

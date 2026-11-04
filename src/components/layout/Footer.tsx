@@ -97,7 +97,10 @@ export function Footer({ lang, dict }: { lang: Locale; dict: Dictionary }) {
       </Container>
       <div className="border-t hairline">
         <Container className="flex flex-col gap-3 py-6 text-xs text-ink-soft md:flex-row md:justify-between">
-          <p>{t.rights(new Date().getFullYear())}</p>
+          <div className="space-y-1">
+            <p>{t.rights(new Date().getFullYear())}</p>
+            <p>{t.operatedBy}</p>
+          </div>
           <p>{t.trademark}</p>
         </Container>
       </div>

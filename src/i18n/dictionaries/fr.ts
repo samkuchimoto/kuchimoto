@@ -104,6 +104,7 @@ const fr = {
       cookies: "Gérer les cookies",
     },
     trademark: "BAMBOOTAILS est une marque de Samuel Louissaint (INPI n° 5308274), utilisée par KUCHIMOTO.",
+    operatedBy: "Exploité par Kuchimoto LLC, société à responsabilité limitée du Wyoming (États-Unis).",
     rights: (year: number) => `© ${year} KUCHIMOTO`,
   },
 
