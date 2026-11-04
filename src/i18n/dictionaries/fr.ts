@@ -123,7 +123,7 @@ const fr = {
   home: {
     eyebrow: "Groupe & studio international",
     title: "KUCHIMOTO, groupe & studio international.",
-    intro: "KUCHIMOTO LLC (Wyoming, États-Unis), en cours de création.",
+    intro: "Kuchimoto LLC, société à responsabilité limitée du Wyoming (États-Unis).",
     divisions: {
       happyHomes: {
         label: "Services à domicile",

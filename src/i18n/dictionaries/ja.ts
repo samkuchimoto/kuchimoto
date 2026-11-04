@@ -123,7 +123,7 @@ const ja: Dictionary = {
   home: {
     eyebrow: "国際グループ＆スタジオ",
     title: "KUCHIMOTO、国際グループ＆スタジオ。",
-    intro: "KUCHIMOTO LLC（米国ワイオミング州）、設立手続き中。",
+    intro: "Kuchimoto LLC（米国ワイオミング州の有限責任会社）。",
     divisions: {
       happyHomes: {
         label: "ハウスサービス",

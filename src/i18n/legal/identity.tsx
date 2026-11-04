@@ -36,7 +36,7 @@ export function companyRows(lang: Locale, dict: Dictionary): [string, ReactNode]
   return [
     [l.name, COMPANY.legalName],
     [l.status, COMPANY.status[lang]],
-    [l.company, COMPANY.formation[lang]],
+    [l.company, COMPANY.llc[lang]],
     [l.address, COMPANY.address],
     [l.email, email],
     [l.phone, phone],

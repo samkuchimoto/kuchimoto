@@ -121,7 +121,7 @@ const en: Dictionary = {
   home: {
     eyebrow: "International group & studio",
     title: "KUCHIMOTO, an international group & studio.",
-    intro: "KUCHIMOTO LLC (Wyoming, United States), formation in progress.",
+    intro: "Kuchimoto LLC, a Wyoming limited liability company.",
     divisions: {
       happyHomes: {
         label: "Home services",

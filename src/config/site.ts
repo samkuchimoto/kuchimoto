@@ -11,9 +11,9 @@ export const SITE_URL = "https://kuchimoto.com";
 /**
  * Who publishes the site and provides its services, as the legal notice,
  * the terms of sale and the privacy policy state it. KUCHIMOTO will be a
- * US company, KUCHIMOTO LLC (Wyoming), not a French SAS; until its
- * registration details exist, that is Samuel Louissaint himself, as an
- * individual (2026-10-20). Put the LLC's details here once they arrive.
+ * US company, Kuchimoto LLC (Wyoming, filed 2 November 2026), not a French
+ * SAS; until its registration details are here, that is Samuel Louissaint
+ * himself, as an individual. Put the LLC's details here once they arrive.
  */
 export const COMPANY = {
   name: "KUCHIMOTO",
@@ -31,14 +31,13 @@ export const COMPANY = {
   invoiceIssuer: "Samuel Louissaint EI",
   siret: "883 934 358 00010",
   /**
-   * The company being formed (2026-10-20, Samuel's call that the process
-   * is under way). "de création" rather than "d'immatriculation": that
-   * word means the Wyoming filing is submitted; switch to it then.
+   * The company, filed in Wyoming on 2 November 2026. The legal name above
+   * stays until its filing number and registered address are in hand.
    */
-  formation: {
-    fr: "KUCHIMOTO LLC (Wyoming, États-Unis), en cours de création",
-    en: "KUCHIMOTO LLC (Wyoming, United States), formation in progress",
-    ja: "KUCHIMOTO LLC（米国ワイオミング州）、設立手続き中",
+  llc: {
+    fr: "Kuchimoto LLC, société à responsabilité limitée du Wyoming (États-Unis)",
+    en: "Kuchimoto LLC, a Wyoming limited liability company",
+    ja: "Kuchimoto LLC（米国ワイオミング州の有限責任会社）",
   },
   /** Where the site is hosted (Vercel, the platform it is deployed on). */
   host: {
