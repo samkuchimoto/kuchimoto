@@ -11,11 +11,11 @@ import { Todo } from "@/components/ui";
 
 const LABELS: Record<
   Locale,
-  { name: string; status: string; company: string; address: string; email: string; phone: string }
+  { company: string; office: string; email: string }
 > = {
-  fr: { name: "Nom", status: "Statut", company: "Société", address: "Adresse", email: "E-mail", phone: "Téléphone" },
-  en: { name: "Name", status: "Status", company: "Company", address: "Address", email: "Email", phone: "Phone" },
-  ja: { name: "氏名", status: "区分", company: "法人", address: "住所", email: "メール", phone: "電話" },
+  fr: { company: "Société", office: "Siège social", email: "E-mail" },
+  en: { company: "Company", office: "Registered office", email: "Email" },
+  ja: { company: "法人", office: "登録事務所", email: "メール" },
 };
 
 export function companyRows(lang: Locale, dict: Dictionary): [string, ReactNode][] {
@@ -27,18 +27,10 @@ export function companyRows(lang: Locale, dict: Dictionary): [string, ReactNode]
   ) : (
     <Todo>{dict.common.placeholderEmail}</Todo>
   );
-  const phone = (
-    <a href={CONTACT.phoneHref} className="underline underline-offset-4">
-      {CONTACT.phone[lang]}
-    </a>
-  );
 
   return [
-    [l.name, COMPANY.legalName],
-    [l.status, COMPANY.status[lang]],
-    [l.company, COMPANY.llc[lang]],
-    [l.address, COMPANY.address],
+    [l.company, COMPANY.publisher.identity[lang]],
+    [l.office, COMPANY.publisher.office[lang]],
     [l.email, email],
-    [l.phone, phone],
   ];
 }

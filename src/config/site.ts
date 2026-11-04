@@ -9,15 +9,13 @@ import type { Locale } from "@/i18n/config";
 export const SITE_URL = "https://kuchimoto.com";
 
 /**
- * Who publishes the site and provides its services, as the legal notice,
- * the terms of sale and the privacy policy state it. KUCHIMOTO will be a
- * US company, Kuchimoto LLC (Wyoming, filed 2 November 2026), not a French
- * SAS; until its registration details are here, that is Samuel Louissaint
- * himself, as an individual. Put the LLC's details here once they arrive.
+ * The company and its people. The legal notice, the terms of sale and the
+ * privacy policy name `publisher` (since 4 November 2026). `legalName`,
+ * `status` and `address` are shown on the About and Contact pages only.
  */
 export const COMPANY = {
   name: "KUCHIMOTO",
-  /** The person (later, the company) legally behind the site. */
+  /** The person shown on the About and Contact pages. */
   legalName: "Samuel Louissaint",
   status: { fr: "Personne physique", en: "Individual", ja: "個人" },
   address: "13 rue André Chénier, porte 506, 92260 Fontenay-aux-Roses, France",
@@ -31,13 +29,34 @@ export const COMPANY = {
   invoiceIssuer: "Samuel Louissaint EI",
   siret: "883 934 358 00010",
   /**
-   * The company, filed in Wyoming on 2 November 2026. The legal name above
-   * stays until its filing number and registered address are in hand.
+   * The company, filed in Wyoming on 2 November 2026.
    */
   llc: {
     fr: "Kuchimoto LLC, société à responsabilité limitée du Wyoming (États-Unis)",
     en: "Kuchimoto LLC, a Wyoming limited liability company",
     ja: "Kuchimoto LLC（米国ワイオミング州の有限責任会社）",
+  },
+  /**
+   * The publisher, provider and data controller on the legal pages, from the
+   * Articles of Organization. No phone number or home address here.
+   */
+  publisher: {
+    name: "Kuchimoto LLC",
+    identity: {
+      fr: "Kuchimoto LLC, société à responsabilité limitée du Wyoming (États-Unis), n° d'enregistrement 2026-002122100",
+      en: "Kuchimoto LLC, a Wyoming limited liability company, filing no. 2026-002122100",
+      ja: "Kuchimoto LLC（米国ワイオミング州の有限責任会社、登録番号 2026-002122100）",
+    },
+    office: {
+      fr: "30 N Gould St, Ste R, Sheridan, WY 82801, États-Unis",
+      en: "30 N Gould St, Ste R, Sheridan, WY 82801, USA",
+      ja: "30 N Gould St, Ste R, Sheridan, WY 82801, アメリカ合衆国",
+    },
+    director: {
+      fr: "Samuel Louissaint, associé unique et gérant",
+      en: "Samuel Louissaint, sole member and manager",
+      ja: "Samuel Louissaint（唯一のメンバー兼マネージャー）",
+    },
   },
   /** Where the site is hosted (Vercel, the platform it is deployed on). */
   host: {

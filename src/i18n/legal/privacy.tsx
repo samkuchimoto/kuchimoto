@@ -40,7 +40,7 @@ export function privacyContent(lang: Locale, dict: Dictionary) {
         title: "Responsable du traitement",
         body: (
           <p>
-            {f(`${COMPANY.legalName}, ${COMPANY.address}. Contact :`)} {mail}.
+            {f(`${COMPANY.publisher.name}, ${COMPANY.publisher.office[lang]}. Contact :`)} {mail}.
           </p>
         ),
       },
@@ -147,7 +147,7 @@ export function privacyContent(lang: Locale, dict: Dictionary) {
         title: "個人情報の管理者",
         body: (
           <p>
-            {COMPANY.legalName}、{COMPANY.address}。連絡先：{mail}
+            {COMPANY.publisher.name}、{COMPANY.publisher.office[lang]}。連絡先：{mail}
           </p>
         ),
       },
@@ -255,7 +255,7 @@ export function privacyContent(lang: Locale, dict: Dictionary) {
       title: "Data controller",
       body: (
         <p>
-          {COMPANY.legalName}, {COMPANY.address}. Contact: {mail}.
+          {COMPANY.publisher.name}, {COMPANY.publisher.office[lang]}. Contact: {mail}.
         </p>
       ),
     },

@@ -30,14 +30,14 @@ export function noticeContent(lang: Locale, dict: Dictionary) {
   if (lang === "fr") {
     const sections: LegalSection[] = [
       { title: "Éditeur du site", body: <CompanyIdentity rows={companyRows(lang, dict)} /> },
-      { title: "Directeur de la publication", body: <p>{COMPANY.director}.</p> },
+      { title: "Directeur de la publication", body: <p>{COMPANY.publisher.director[lang]}.</p> },
       { title: "Hébergeur", body: host },
       {
         title: "Propriété intellectuelle",
         body: (
           <>
             <p>
-              Les textes, illustrations et visuels de ce site appartiennent à {COMPANY.legalName} ou à leurs auteurs,
+              Les textes, illustrations et visuels de ce site appartiennent à {COMPANY.publisher.name} ou à leurs auteurs,
               sauf mention contraire. Toute reproduction sans autorisation écrite préalable est interdite.
             </p>
             <p>
@@ -68,14 +68,14 @@ export function noticeContent(lang: Locale, dict: Dictionary) {
   if (lang === "ja") {
     const sections: LegalSection[] = [
       { title: "サイト運営者", body: <CompanyIdentity rows={companyRows(lang, dict)} /> },
-      { title: "発行責任者", body: <p>{COMPANY.director}</p> },
+      { title: "発行責任者", body: <p>{COMPANY.publisher.director[lang]}</p> },
       { title: "ホスティング事業者", body: host },
       {
         title: "知的財産",
         body: (
           <>
             <p>
-              本サイトの文章、イラスト、画像は、特に記載がない限り、{COMPANY.legalName}
+              本サイトの文章、イラスト、画像は、特に記載がない限り、{COMPANY.publisher.name}
               または各制作者に帰属します。事前の書面による許可なく複製することを禁じます。
             </p>
             <p>
@@ -104,14 +104,14 @@ export function noticeContent(lang: Locale, dict: Dictionary) {
 
   const sections: LegalSection[] = [
     { title: "Publisher", body: <CompanyIdentity rows={companyRows(lang, dict)} /> },
-    { title: "Director of publication", body: <p>{COMPANY.director}.</p> },
+    { title: "Director of publication", body: <p>{COMPANY.publisher.director[lang]}.</p> },
     { title: "Host", body: host },
     {
       title: "Intellectual property",
       body: (
         <>
           <p>
-            The texts, illustrations and visuals on this site belong to {COMPANY.legalName} or to their authors, unless
+            The texts, illustrations and visuals on this site belong to {COMPANY.publisher.name} or to their authors, unless
             stated otherwise. Any reproduction without prior written permission is prohibited.
           </p>
           <p>

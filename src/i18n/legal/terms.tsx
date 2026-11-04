@@ -36,7 +36,7 @@ export function termsContent(lang: Locale, dict: Dictionary) {
         body: (
           <p>
             {f(
-              `Les présentes conditions générales de vente (CGV) s'appliquent aux prestations Happy Homes réservées sur le site kuchimoto.com entre ${COMPANY.legalName} (« le prestataire ») et toute personne physique agissant à des fins non professionnelles (« le client »). Toute réservation vaut acceptation des CGV en vigueur au jour de la réservation.`,
+              `Les présentes conditions générales de vente (CGV) s'appliquent aux prestations Happy Homes réservées sur le site kuchimoto.com entre ${COMPANY.publisher.name} (« le prestataire ») et toute personne physique agissant à des fins non professionnelles (« le client »). Toute réservation vaut acceptation des CGV en vigueur au jour de la réservation.`,
             )}
           </p>
         ),
@@ -116,7 +116,7 @@ export function termsContent(lang: Locale, dict: Dictionary) {
             </p>
             <div className="border hairline bg-washi p-5 text-sm">
               <p className="font-medium">Formulaire type de rétractation</p>
-              <p className="mt-2">{f(`À l'attention de ${COMPANY.legalName}, ${COMPANY.address}, e-mail :`)} {mail}</p>
+              <p className="mt-2">{f(`À l'attention de ${COMPANY.publisher.name}, ${COMPANY.publisher.office[lang]}, e-mail :`)} {mail}</p>
               <p className="mt-2">
                 {f("Je/Nous (*) vous notifie/notifions (*) par la présente ma/notre (*) rétractation du contrat portant sur la prestation de services ci-dessous :")}
               </p>
@@ -141,7 +141,7 @@ export function termsContent(lang: Locale, dict: Dictionary) {
         body: (
           <p>
             {f("Toute réclamation est à adresser par écrit au prestataire, par e-mail à")} {mail}{" "}
-            {f(`ou par courrier à ${COMPANY.address}.`)}
+            {f(`ou par courrier à ${COMPANY.publisher.office[lang]}.`)}
           </p>
         ),
       },
@@ -187,7 +187,7 @@ export function termsContent(lang: Locale, dict: Dictionary) {
         title: "目的",
         body: (
           <p>
-            本利用規約は、kuchimoto.comで予約されたHappy Homesのサービスについて、{COMPANY.legalName}
+            本利用規約は、kuchimoto.comで予約されたHappy Homesのサービスについて、{COMPANY.publisher.name}
             （以下「提供者」）と、事業以外の目的で行動する個人（以下「お客様」）との間に適用されます。ご予約をもって、予約日に有効な本規約に同意したものとみなします。
           </p>
         ),
@@ -264,7 +264,7 @@ export function termsContent(lang: Locale, dict: Dictionary) {
             <div className="border hairline bg-washi p-5 text-sm">
               <p className="font-medium">撤回の書式（ひな形）</p>
               <p className="mt-2">
-                宛先：{COMPANY.legalName}、{COMPANY.address}、メール：{mail}
+                宛先：{COMPANY.publisher.name}、{COMPANY.publisher.office[lang]}、メール：{mail}
               </p>
               <p className="mt-2">私（私たち）（*）は、以下のサービスの提供に関する私（私たち）（*）の契約を撤回することを、ここに通知します。</p>
               <p className="mt-2">
@@ -287,7 +287,7 @@ export function termsContent(lang: Locale, dict: Dictionary) {
         title: "苦情",
         body: (
           <p>
-            苦情は、{mail}へのメール、または{COMPANY.address}への郵送で、書面にて提供者にお送りください。
+            苦情は、{mail}へのメール、または{COMPANY.publisher.office[lang]}への郵送で、書面にて提供者にお送りください。
           </p>
         ),
       },
@@ -332,7 +332,7 @@ export function termsContent(lang: Locale, dict: Dictionary) {
       body: (
         <p>
           These general terms of sale apply to the Happy Homes services booked on kuchimoto.com between{" "}
-          {COMPANY.legalName} (&ldquo;the provider&rdquo;) and any individual acting for purposes outside their trade or
+          {COMPANY.publisher.name} (&ldquo;the provider&rdquo;) and any individual acting for purposes outside their trade or
           profession (&ldquo;the customer&rdquo;). Any booking means accepting the terms in force on the day of the booking.
         </p>
       ),
@@ -427,7 +427,7 @@ export function termsContent(lang: Locale, dict: Dictionary) {
           <div className="border hairline bg-washi p-5 text-sm">
             <p className="font-medium">Model withdrawal form</p>
             <p className="mt-2">
-              To {COMPANY.legalName}, {COMPANY.address}, email: {mail}
+              To {COMPANY.publisher.name}, {COMPANY.publisher.office[lang]}, email: {mail}
             </p>
             <p className="mt-2">
               I/We (*) hereby give notice that I/we (*) withdraw from my/our (*) contract for the provision of the
@@ -453,7 +453,7 @@ export function termsContent(lang: Locale, dict: Dictionary) {
       title: "Complaints",
       body: (
         <p>
-          Any complaint is to be sent to the provider in writing, by email to {mail} or by post to {COMPANY.address}.
+          Any complaint is to be sent to the provider in writing, by email to {mail} or by post to {COMPANY.publisher.office[lang]}.
         </p>
       ),
     },
