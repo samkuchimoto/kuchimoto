@@ -42,10 +42,9 @@ Drop a new file at the same path to replace an asset:
   the live scene fades in over it (desktops at once, phones at the first
   touch or scroll).
 - Videos: `public/videos/<name>.mp4` and `.webm`, each with `<name>-poster.jpg`.
-  `kuchimoto-horizon-reel` is the muted 12-second loop (crossfaded);
+  `reel-loop` is the muted 10-second cover (a montage of the studio reel);
   `kuchimoto-reel.mp4` plays with sound when PLAY REEL is clicked: the
-  same coast film in full, then the studio reel (joinery, orbital ring,
-  ripples), one 70 s film.
+  whole studio reel, then the coast monolith film, one 70 s film.
 - The ink film: `public/videos/kuchimoto-inoue-ink.mp4` and `.webm` (brush
   stroke and vermilion seal, looped), with `kuchimoto-inoue-ink-poster.jpg`
   as its first frame. Replace the three files to change the film.

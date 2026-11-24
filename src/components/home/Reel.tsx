@@ -9,21 +9,19 @@ import { Registration } from "@/components/ui/Registration";
 import { VideoLoop } from "@/components/ui/VideoLoop";
 
 // One reel.
-//   Cover (muted loop on the page): public/videos/kuchimoto-horizon-reel.mp4
-//   (+ .webm), the monolith on volcanic stone in coastal mist.
-//   Player (with sound, on click): public/videos/kuchimoto-reel.mp4, one film
-//   that opens on that same coast (20 s) and runs on into the studio reel
-//   (joinery opening on a vermilion core, ink on paper, an orbital ring,
-//   ripples on black stone water), 70 s in all. So a click never switches to
-//   a different video: it plays the cover in full, with sound, and continues.
+//   Cover (muted 10 s loop on the page): public/videos/reel-loop.mp4 (+ .webm),
+//   a montage of the studio reel: joinery, the ink drop, ripples, the ring.
+//   Player (with sound, on click): public/videos/kuchimoto-reel.mp4, one film:
+//   the whole studio reel (50 s), then the coast monolith film (20 s). So a
+//   click plays the footage the cover shows, in full, and runs on.
 const COVER = {
-  mp4: "/videos/kuchimoto-horizon-reel.mp4",
-  webm: "/videos/kuchimoto-horizon-reel.webm",
-  poster: "/videos/kuchimoto-horizon-reel-poster.jpg",
+  mp4: "/videos/reel-loop.mp4",
+  webm: "/videos/reel-loop.webm",
+  poster: "/videos/reel-loop-poster.jpg",
 };
 const FILM = { mp4: "/videos/kuchimoto-reel.mp4", poster: "/videos/kuchimoto-reel-poster.jpg" };
 
-/** PLAY ▶ REEL: the horizon loop on the page; a click opens the studio reel with sound. */
+/** PLAY ▶ REEL: the studio reel montage loops on the page; a click opens the full reel with sound. */
 export function Reel() {
   const [open, setOpen] = useState(false);
   const audio = useAudio();
@@ -74,7 +72,7 @@ export function Reel() {
         </span>
         <span className="sr-only">Play the full reel, with sound</span>
         <span aria-hidden="true" className="mono absolute bottom-3 left-4 text-washi sm:bottom-5 sm:left-5">
-          Horizon · Kuchimoto coast · 2026
+          Studio reel · 2026
         </span>
         {/* On a phone the two labels would meet along the bottom edge, so this one sits top right there. */}
         <span aria-hidden="true" className="mono absolute top-3 right-4 text-washi sm:top-auto sm:right-5 sm:bottom-5">
