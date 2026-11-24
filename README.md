@@ -43,8 +43,9 @@ Drop a new file at the same path to replace an asset:
   touch or scroll).
 - Videos: `public/videos/<name>.mp4` and `.webm`, each with `<name>-poster.jpg`.
   `kuchimoto-horizon-reel` is the muted 12-second loop (crossfaded);
-  `studio-reel-dynamic.mp4` (the full multi-cut studio reel: joinery,
-  orbital ring, ripples) plays with sound when PLAY REEL is clicked.
+  `kuchimoto-reel.mp4` plays with sound when PLAY REEL is clicked: the
+  same coast film in full, then the studio reel (joinery, orbital ring,
+  ripples), one 70 s film.
 - The ink film: `public/videos/kuchimoto-inoue-ink.mp4` and `.webm` (brush
   stroke and vermilion seal, looped), with `kuchimoto-inoue-ink-poster.jpg`
   as its first frame. Replace the three files to change the film.

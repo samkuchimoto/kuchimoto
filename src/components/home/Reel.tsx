@@ -8,18 +8,20 @@ import { Close, Play } from "@/components/ui/Icons";
 import { Registration } from "@/components/ui/Registration";
 import { VideoLoop } from "@/components/ui/VideoLoop";
 
-// Calm surface, kinetic core.
+// One reel.
 //   Cover (muted loop on the page): public/videos/kuchimoto-horizon-reel.mp4
-//   (+ .webm), a black monolith on volcanic stone in Pacific mist.
-//   Player (with sound, on click): public/videos/studio-reel-dynamic.mp4, the
-//   multi-cut studio reel: basalt joinery opening on a vermilion core, ink on
-//   washi, an orbital wireframe ring, ripples on black stone water.
+//   (+ .webm), the monolith on volcanic stone in coastal mist.
+//   Player (with sound, on click): public/videos/kuchimoto-reel.mp4, one film
+//   that opens on that same coast (20 s) and runs on into the studio reel
+//   (joinery opening on a vermilion core, ink on paper, an orbital ring,
+//   ripples on black stone water), 70 s in all. So a click never switches to
+//   a different video: it plays the cover in full, with sound, and continues.
 const COVER = {
   mp4: "/videos/kuchimoto-horizon-reel.mp4",
   webm: "/videos/kuchimoto-horizon-reel.webm",
   poster: "/videos/kuchimoto-horizon-reel-poster.jpg",
 };
-const FILM = { mp4: "/videos/studio-reel-dynamic.mp4", poster: "/videos/studio-reel-dynamic-poster.jpg" };
+const FILM = { mp4: "/videos/kuchimoto-reel.mp4", poster: "/videos/kuchimoto-reel-poster.jpg" };
 
 /** PLAY ▶ REEL: the horizon loop on the page; a click opens the studio reel with sound. */
 export function Reel() {
@@ -70,7 +72,7 @@ export function Reel() {
             <span className="text-[clamp(2.25rem,10vw,9rem)] font-light tracking-[-0.04em]">REEL</span>
           </span>
         </span>
-        <span className="sr-only">Play reel, with sound: the full studio reel</span>
+        <span className="sr-only">Play the full reel, with sound</span>
         <span aria-hidden="true" className="mono absolute bottom-3 left-4 text-washi sm:bottom-5 sm:left-5">
           Horizon · Kuchimoto coast · 2026
         </span>
