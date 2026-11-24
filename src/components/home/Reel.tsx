@@ -37,7 +37,7 @@ export function Reel() {
         onPointerLeave={() => {
           if (label.current) label.current.style.transform = "";
         }}
-        aria-label="Play the studio reel, with sound"
+        aria-label="Play reel, with sound: the horizon film"
         className="group relative block aspect-[4/5] w-full overflow-hidden rounded-[var(--radius-stage)] bg-sumi sm:aspect-[16/8]"
       >
         <VideoLoop
@@ -57,8 +57,8 @@ export function Reel() {
           </span>
           <span className="text-[clamp(3rem,10vw,9rem)] font-light tracking-[-0.04em]">REEL</span>
         </span>
-        <span className="mono absolute bottom-5 left-5 text-washi/70">Horizon · Kuchimoto coast · 2026</span>
-        <span className="mono absolute right-5 bottom-5 text-washi/70">Sound on ↗</span>
+        <span aria-hidden="true" className="mono absolute bottom-5 left-5 text-washi/70">Horizon · Kuchimoto coast · 2026</span>
+        <span aria-hidden="true" className="mono absolute right-5 bottom-5 text-washi/70">Sound on ↗</span>
       </button>
       <Registration className="mt-[5px]" />
       {open && <ReelModal onClose={() => setOpen(false)} />}
