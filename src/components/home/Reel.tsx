@@ -9,15 +9,16 @@ import { Registration } from "@/components/ui/Registration";
 import { VideoLoop } from "@/components/ui/VideoLoop";
 
 // One reel.
-//   Cover (muted 10 s loop on the page): public/videos/reel-loop.mp4 (+ .webm),
-//   a montage of the studio reel: joinery, the ink drop, ripples, the ring.
+//   Cover (muted 14 s loop on the page): public/videos/kuchimoto-reel-loop.mp4
+//   (+ .webm), the montage of the studio reel (joinery, the ink drop, ripples,
+//   the ring) then the coast monolith, blending back into the joinery.
 //   Player (with sound, on click): public/videos/kuchimoto-reel.mp4, one film:
 //   the whole studio reel (50 s), then the coast monolith film (20 s). So a
 //   click plays the footage the cover shows, in full, and runs on.
 const COVER = {
-  mp4: "/videos/reel-loop.mp4",
-  webm: "/videos/reel-loop.webm",
-  poster: "/videos/reel-loop-poster.jpg",
+  mp4: "/videos/kuchimoto-reel-loop.mp4",
+  webm: "/videos/kuchimoto-reel-loop.webm",
+  poster: "/videos/kuchimoto-reel-loop-poster.jpg",
 };
 const FILM = { mp4: "/videos/kuchimoto-reel.mp4", poster: "/videos/kuchimoto-reel-poster.jpg" };
 
