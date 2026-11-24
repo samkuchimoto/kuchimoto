@@ -6,7 +6,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { VideoLoop } from "@/components/ui/VideoLoop";
 
 // The ink film lives at public/videos/kuchimoto-inoue-ink.mp4 (a .webm
-// beside it is used too): a brush lays one dry sumi stroke on washi and a
+// beside it is used too): a brush lays one dry ink stroke on paper and a
 // vermilion drop lands beside it like a seal, then the page dissolves back
 // to the brush coming down (a seamless 8.9 s loop). Without the file, the
 // card shows its still.
@@ -18,17 +18,6 @@ const STILL = `${INK}-poster.jpg`;
 export function Philosophy() {
   return (
     <section className="defer-render relative isolate overflow-hidden pt-32 pb-28 sm:pt-44 sm:pb-40" aria-labelledby="philosophy-title">
-      {/* One dry-brush stroke in stone ink at 8%, behind everything: texture, never a barrier to reading. */}
-      <div
-        data-reveal=""
-        aria-hidden="true"
-        className="ink-wipe pointer-events-none absolute top-[34%] left-[-38%] -z-10 aspect-[5/2] w-[210%] overflow-hidden sm:top-[30%] sm:left-[-12%] sm:w-[124%] lg:top-[24%] lg:left-[-4%] lg:w-[108%]"
-      >
-        <Image src="/images/ink/sumi-dry-brush.svg" alt="" fill unoptimized className="object-contain opacity-[0.08]" />
-        {/* Washi drawn back like a brush moving right: a transform, so the wipe runs on the compositor. */}
-        <span className="ink-wipe-cover" />
-      </div>
-
       <div className="container-k">
         <Reveal>
           <h2 id="philosophy-title" className="display display-lg">
@@ -46,19 +35,19 @@ export function Philosophy() {
               ) : (
                 <Image
                   src={STILL}
-                  alt="A brush lays a dry sumi stroke on handmade washi paper"
+                  alt="A brush lays a dry ink stroke on handmade paper"
                   fill
                   quality={80}
                   sizes="(min-width: 1024px) 50vw, 100vw"
                   className="object-cover"
                 />
               )}
-              <span className="mono absolute bottom-4 left-4 text-ink/70">Sumi · Vermilion · Washi</span>
+              <span className="mono absolute bottom-4 left-4 text-ink/70">Ink on paper</span>
             </div>
           </Reveal>
           <Reveal className="lg:col-span-5 lg:col-start-8 lg:pt-6" delay={0.1}>
             <p className="text-[clamp(1.2rem,1.7vw,1.5rem)] leading-[1.45] tracking-[-0.01em]">
-              Kuchimoto is an independent creative and engineering house. Between Japanese stillness and
+              Kuchimoto is an independent creative and engineering house. Between stillness and
               uncompromised technical architecture, we design and build bespoke digital worlds, platforms, and software
               from first principles: 100% custom code, built to outlast cycles.
             </p>

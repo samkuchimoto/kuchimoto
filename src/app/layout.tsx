@@ -30,13 +30,13 @@ export const metadata: Metadata = {
     description: SITE.description,
     url: "/",
     locale: "en_US",
-    images: [{ url: "/og/kuchimoto-kigumi.jpg", width: 1200, height: 630, alt: "Kuchimoto: crafted in code, built to endure. Interlocking joinery in black lacquer, basalt and titanium" }],
+    images: [{ url: "/og/kuchimoto-crafted.jpg", width: 1200, height: 630, alt: "Kuchimoto: crafted in code, built to endure. Interlocking joinery in black lacquer, basalt and titanium" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Kuchimoto · Crafted in Code. Built to Endure.",
     description: SITE.description,
-    images: ["/og/kuchimoto-kigumi.jpg"],
+    images: ["/og/kuchimoto-crafted.jpg"],
   },
 };
 

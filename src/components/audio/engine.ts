@@ -1,13 +1,10 @@
-// The soundscape, synthesized in the browser with the Web Audio API: no
-// audio file is downloaded, so nothing can fail to load.
-//   Ambient: warm low-passed pink noise (distant rain, wind through cedar)
-//   and a slow drone on the Japanese Yo pentatonic scale, D3 E3 G3 A3 B3,
-//   each voice breathing on its own LFO, through a generated reverb.
-//   Touch: a muted hinoki tap on hover, a wood-block knock when the 3D
-//   sculpture is grabbed, a soft bell chime on click.
-
-const YO_LOW = [146.83, 164.81, 196.0, 220.0, 246.94]; // D3 E3 G3 A3 B3
-const YO_HIGH = [587.33, 659.25, 783.99, 880.0, 987.77]; // D5 E5 G5 A5 B5
+// The sound, synthesized in the browser with the Web Audio API: no audio
+// file is downloaded, so nothing can fail to load.
+//   Ambient: a quiet neutral room tone. Warm low-passed pink noise (distant
+//   rain) and a fainter band of air above it, each drifting on its own slow
+//   oscillator. No melody, no drone.
+//   Touch: a muted wooden tap on hover, and a knock when the 3D sculpture
+//   is struck or closes.
 
 const SILENT = 0.0001;
 
@@ -124,53 +121,20 @@ export class SoundEngine {
     this.lfo(0.043, 0.006, rainGain.gain, 1.3);
     noise.start();
 
-    // The Yo drone.
-    const drone = ctx.createGain();
-    drone.gain.value = 0.025;
-    const warm = ctx.createBiquadFilter();
-    warm.type = "lowpass";
-    warm.frequency.value = 1600;
-    drone.connect(warm);
-    warm.connect(this.ambient);
-
-    const delay = ctx.createDelay(2);
-    delay.delayTime.value = 0.48;
-    const feedback = ctx.createGain();
-    feedback.gain.value = 0.34;
-    const delayTone = ctx.createBiquadFilter();
-    delayTone.type = "lowpass";
-    delayTone.frequency.value = 1400;
-    const delaySend = ctx.createGain();
-    delaySend.gain.value = 0.35;
-    warm.connect(delaySend).connect(delay);
-    delay.connect(delayTone).connect(feedback).connect(delay);
-    delayTone.connect(this.ambient);
-
-    const droneReverb = ctx.createGain();
-    droneReverb.gain.value = 0.45;
-    warm.connect(droneReverb).connect(this.reverbSend);
-
-    YO_LOW.forEach((frequency, i) => {
-      const voice = ctx.createGain();
-      voice.gain.value = 0.45;
-      const osc = ctx.createOscillator();
-      osc.type = i % 2 === 0 ? "sine" : "triangle";
-      osc.frequency.value = frequency;
-      osc.detune.value = (Math.random() - 0.5) * 6;
-      osc.connect(voice).connect(drone);
-      osc.start();
-      // Each voice swells and fades on its own slow breath.
-      this.lfo(0.021 + i * 0.013 + Math.random() * 0.01, 0.38, voice.gain, Math.random() * 4);
-      // A faint octave above D and A for air.
-      if (i === 0 || i === 3) {
-        const shimmer = ctx.createOscillator();
-        shimmer.frequency.value = frequency * 2;
-        const shimmerGain = ctx.createGain();
-        shimmerGain.gain.value = 0.08;
-        shimmer.connect(shimmerGain).connect(drone);
-        shimmer.start();
-      }
-    });
+    // Air: a second, fainter noise band higher up, breathing on its own slow cycle.
+    const air = ctx.createBufferSource();
+    air.buffer = this.pinkNoise(7);
+    air.loop = true;
+    const airBand = ctx.createBiquadFilter();
+    airBand.type = "bandpass";
+    airBand.frequency.value = 3800;
+    airBand.Q.value = 0.6;
+    const airGain = ctx.createGain();
+    airGain.gain.value = 0.005;
+    air.connect(airBand).connect(airGain).connect(this.ambient);
+    this.lfo(0.029, 900, airBand.frequency, 2.1);
+    this.lfo(0.017, 0.0035, airGain.gain, 0.6);
+    air.start();
   }
 
   async enable() {
@@ -260,7 +224,7 @@ export class SoundEngine {
     body.stop(at + 0.06);
   }
 
-  /** A wood-block knock, for grabbing the sculpture. */
+  /** A knock, for striking the sculpture or its joinery closing. */
   knock() {
     this.wake();
     const at = this.ctx.currentTime + 0.005;
@@ -288,33 +252,6 @@ export class SoundEngine {
     const env = this.envelope(0.04, 0.001, 0.012, at);
     click.connect(band).connect(env).connect(this.fx);
     click.start(at);
-  }
-
-  /** A soft bell on one of the five Yo notes (random when none is given). */
-  chime(note?: number, level = 1) {
-    this.wake();
-    const index = note ?? Math.floor(Math.random() * YO_HIGH.length);
-    const base = YO_HIGH[index % YO_HIGH.length];
-    const at = this.ctx.currentTime + 0.01;
-    const partials: [number, number, number][] = [
-      [1, 0.05, 2.6],
-      [2.0, 0.018, 1.7],
-      [3.01, 0.01, 1.1],
-      [4.17, 0.005, 0.7],
-    ];
-    const send = this.ctx.createGain();
-    send.gain.value = 0.6;
-    send.connect(this.reverbSend);
-    for (const [ratio, peak, release] of partials) {
-      const osc = this.ctx.createOscillator();
-      osc.frequency.value = base * ratio;
-      const env = this.envelope(peak * level, 0.004, release, at);
-      osc.connect(env);
-      env.connect(this.fx);
-      env.connect(send);
-      osc.start(at);
-      osc.stop(at + release + 0.1);
-    }
   }
 
   close() {

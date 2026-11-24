@@ -55,7 +55,7 @@ function preloadPosters() {
  */
 export function KigumiStage({
   className = "",
-  label = "Fig. 01 · Kigumi study",
+  label = "Fig. 01 · Joinery study",
   priority = true,
 }: {
   className?: string;
@@ -99,7 +99,7 @@ export function KigumiStage({
       data-dark=""
       role="application"
       aria-roledescription="3D sculpture"
-      aria-label="Interactive 3D sculpture of interlocking joinery modules in black urushi lacquer, volcanic basalt and brushed titanium. Hold the mouse button, a finger or the space bar to open the joinery; drag or use the arrow keys to turn it."
+      aria-label="Interactive 3D sculpture of interlocking joinery modules in black lacquer, volcanic basalt and brushed titanium. Hold the mouse button, a finger or the space bar to open the joinery; drag or use the arrow keys to turn it."
       className={`stage-dark relative isolate touch-pan-y overflow-hidden rounded-[var(--radius-stage)] bg-sumi select-none [-webkit-touch-callout:none] ${quality ? "cursor-grab active:cursor-grabbing" : ""} ${className}`}
     >
       <picture>
@@ -120,21 +120,20 @@ export function KigumiStage({
             quality={quality}
             eventSource={ref}
             onReady={onReady}
-            onOpen={audio.chime}
             onSettle={audio.knock}
-            onStrike={audio.chime}
+            onStrike={audio.knock}
           />
         </div>
       )}
       <div className="pointer-events-none absolute inset-0 flex flex-col justify-between p-4 text-washi/70 sm:p-6">
         <div className="flex justify-between gap-4">
           <span className="mono">{label}</span>
-          <span className="mono hidden sm:block">Urushi · Basalt · Titanium</span>
+          <span className="mono hidden sm:block">Lacquer · Basalt · Titanium</span>
         </div>
         <div className="flex items-end justify-between gap-4">
           <span className="mono hidden motion-safe:pointer-fine:block">Interactive WebGL · Hold to open the joinery</span>
           <span className="mono hidden motion-safe:pointer-coarse:block">Interactive WebGL · Touch and hold</span>
-          <span className="mono hidden motion-reduce:block">Kigumi · Precision joinery</span>
+          <span className="mono hidden motion-reduce:block">Precision joinery</span>
           <span className="mono hidden sm:block">Scroll to explore ↓</span>
         </div>
       </div>

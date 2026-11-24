@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { SoundPad } from "@/components/lab/SoundPad";
+import { RoomTone } from "@/components/lab/RoomTone";
 import { Arrow } from "@/components/ui/Icons";
 import { PillLink } from "@/components/ui/PillLink";
 import { Registration } from "@/components/ui/Registration";
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   description:
     "Kuchimoto Lab: physics engines, procedural WebGL, generative Web Audio and the autonomous operations running across Kuchimoto's live platforms.",
   alternates: { canonical: "/lab" },
-  openGraph: { url: "/lab", title: "Lab · Kuchimoto", images: [{ url: "/og/kuchimoto-kigumi.jpg", width: 1200, height: 630 }] },
+  openGraph: { url: "/lab", title: "Lab · Kuchimoto", images: [{ url: "/og/kuchimoto-crafted.jpg", width: 1200, height: 630 }] },
 };
 
 const OPERATIONS = [
@@ -118,7 +118,7 @@ export default function LabPage() {
         </div>
         <div className="relative mt-12">
           <Registration count={5} tone="text-washi/40" className="absolute -top-[18px] right-0 left-0" />
-          <KigumiStage className="h-[min(120vw,560px)] shadow-[0_0_0_1px_var(--color-hairline-dark)] sm:h-[clamp(440px,74vh,820px)]" label="Exp. 02 · Kigumi physics" priority={false} />
+          <KigumiStage className="h-[min(120vw,560px)] shadow-[0_0_0_1px_var(--color-hairline-dark)] sm:h-[clamp(440px,74vh,820px)]" label="Exp. 02 · Joinery physics" priority={false} />
           <Registration count={5} tone="text-washi/40" className="absolute right-0 -bottom-[18px] left-0" />
         </div>
       </section>
@@ -128,16 +128,16 @@ export default function LabPage() {
           <Reveal className="lg:col-span-5">
             <p className="mono text-washi/50">Exp. 03 · Generative Web Audio</p>
             <h2 id="exp-03" className="display display-md mt-5">
-              Yo scale soundscape
+              Generated room tone
             </h2>
             <p className="mt-6 max-w-[48ch] leading-relaxed text-washi/70">
-              The site&apos;s ambient sound downloads nothing: pink noise filtered into distant rain, and a drone on
-              the Japanese Yo pentatonic scale (D, E, G, A, B), each voice breathing on its own slow oscillator. Turn
-              it on with the waveform pill at the top of the page, or strike a bell.
+              The site&apos;s ambient sound downloads nothing: pink noise filtered into distant rain, and a fainter
+              band of air above it, each drifting on its own slow oscillator. No melody, no loop to notice. Turn it
+              on with the waveform pill at the top of the page, or here.
             </p>
           </Reveal>
           <Reveal className="lg:col-span-6 lg:col-start-7" delay={0.08}>
-            <SoundPad />
+            <RoomTone />
           </Reveal>
         </div>
       </section>

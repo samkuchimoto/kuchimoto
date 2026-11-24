@@ -28,7 +28,7 @@ export function SoundToggle() {
         onClick={toggle}
         onPointerEnter={showHintOnce}
         aria-pressed={enabled}
-        aria-label={enabled ? "Sound on: Japanese ambient. Turn off" : "Sound off. Turn on Japanese ambient sound"}
+        aria-label={enabled ? "Sound on: ambient. Turn off" : "Sound off. Turn on ambient sound"}
         className="grid h-10 w-10 place-items-center rounded-full bg-surface text-ink shadow-[0_0_0_1px_var(--color-hairline)] transition-transform duration-300 hover:scale-105 active:scale-95"
       >
         {enabled ? (
@@ -47,7 +47,7 @@ export function SoundToggle() {
           hint ? "translate-x-0 opacity-100" : "translate-x-2 opacity-0"
         }`}
       >
-        {hint ? "Sound: Japanese Ambient" : ""}
+        {hint ? "Sound: Ambient" : ""}
       </span>
     </div>
   );

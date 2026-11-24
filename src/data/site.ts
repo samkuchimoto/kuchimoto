@@ -9,8 +9,8 @@ export const SITE = {
   address: ["30 N Gould St, Ste R", "Sheridan, WY 82801, USA"],
   addressLine: "30 N Gould St, Ste R, Sheridan, WY 82801, USA",
   region: "International Studio · Serving US & Global Clients",
-  title: "Kuchimoto · Custom software engineered with Japanese precision",
-  headline: "Custom software & digital architecture, engineered with Japanese precision.",
+  title: "Kuchimoto · Custom software engineered with precision",
+  headline: "Custom software & digital architecture, engineered with precision.",
   description:
     "Kuchimoto LLC builds custom websites, web applications and AI systems from first principles. No templates, no no-code. 100% source code ownership. Custom builds from $5,000.",
   metadataLine: "KUCHIMOTO LLC · WYOMING / GLOBAL · ART, ARCHITECTURE & CUSTOM SYSTEMS",
@@ -93,27 +93,19 @@ export const TRACK_OPTIONS = [
 
 export const PRINCIPLES = [
   {
-    kanji: "間",
-    name: "Ma",
-    gloss: "Intentional negative space",
+    name: "Negative space",
     body: "Space is a material. Calm pacing between bold moments lets the one thing that matters on a screen be seen.",
   },
   {
-    kanji: "木組",
-    name: "Kigumi",
-    gloss: "Precision joinery",
+    name: "Joinery",
     body: "No glue, no nails, no bloat. Every module is cut to fit the next, so the whole system holds without plugins.",
   },
   {
-    kanji: "渋い",
-    name: "Shibui",
-    gloss: "Quiet authority",
+    name: "Restraint",
     body: "Restraint over noise. Tactile materials and exact type say more than gradients and stock effects.",
   },
   {
-    kanji: "本物",
-    name: "Honmono",
-    gloss: "Real proof",
+    name: "Real proof",
     body: "Every project we show is a live production system on its own domain, documented by its real architecture.",
   },
 ] as const;

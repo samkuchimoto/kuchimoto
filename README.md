@@ -48,7 +48,7 @@ Drop a new file at the same path to replace an asset:
 - The ink film: `public/videos/kuchimoto-inoue-ink.mp4` and `.webm` (brush
   stroke and vermilion seal, looped), with `kuchimoto-inoue-ink-poster.jpg`
   as its first frame. Replace the three files to change the film.
-- Link previews (Facebook, LinkedIn, X): `public/og/kuchimoto-kigumi.jpg`
+- Link previews (Facebook, LinkedIn, X): `public/og/kuchimoto-crafted.jpg`
   and `public/og/<slug>.jpg`, 1200 × 630. Rename the file when the image
   changes: Facebook caches previews by image address.
 

@@ -123,7 +123,6 @@ export function InquiryForm({ email: initialEmail = "", track: initialTrack = ""
       const result = (await response.json().catch(() => ({}))) as { ok?: boolean; fields?: Errors };
       if (response.ok && result.ok) {
         setStatus("sent");
-        audio.chime(4);
         return;
       }
       if (result.fields) setErrors(result.fields);

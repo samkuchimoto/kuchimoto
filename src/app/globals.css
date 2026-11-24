@@ -305,33 +305,6 @@ html[data-js] [data-reveal][data-shown] {
   }
 }
 
-/* -------------------------------------------- philosophy brush stroke */
-html[data-js] .ink-wipe {
-  opacity: 1;
-  transform: none;
-}
-.ink-wipe-cover {
-  display: none;
-}
-html[data-js] .ink-wipe-cover {
-  display: block;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: -30%;
-  width: 135%;
-  background: linear-gradient(90deg, rgb(244 242 237 / 0) 0%, var(--color-washi) 22%);
-  transition: transform 2.8s var(--ease-out-expo) 0.15s;
-}
-html[data-js] .ink-wipe[data-shown] .ink-wipe-cover {
-  transform: translateX(100%);
-}
-@media (prefers-reduced-motion: reduce) {
-  html[data-js] .ink-wipe-cover {
-    display: none;
-  }
-}
-
 /* ------------------------------------------------------ sound waveform */
 .wave > i {
   display: block;

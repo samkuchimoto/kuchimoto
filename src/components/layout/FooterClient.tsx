@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useAudio } from "@/components/audio/AudioEngine";
 import { Arrow } from "@/components/ui/Icons";
 import { useScrollControl } from "./SmoothScroll";
 
@@ -44,14 +43,10 @@ export function QuickScope() {
 
 export function ScrollTop() {
   const { toTop } = useScrollControl();
-  const audio = useAudio();
   return (
     <button
       type="button"
-      onClick={() => {
-        audio.chime(0);
-        toTop();
-      }}
+      onClick={toTop}
       aria-label="Back to top"
       className="grid h-12 w-12 place-items-center rounded-full bg-ink text-washi transition-transform duration-300 hover:-translate-y-0.5"
     >

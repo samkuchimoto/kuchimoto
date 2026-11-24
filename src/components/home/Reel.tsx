@@ -33,10 +33,7 @@ export function Reel() {
       <button
         type="button"
         data-dark=""
-        onClick={() => {
-          audio.chime(2);
-          setOpen(true);
-        }}
+        onClick={() => setOpen(true)}
         onPointerEnter={audio.tap}
         onPointerMove={(e) => {
           if (e.pointerType !== "mouse" || !label.current) return;

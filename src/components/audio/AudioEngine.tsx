@@ -17,12 +17,8 @@ type Audio = {
   toggle: () => void;
   /** Hover: a muted wooden tap. Only when sound is on. */
   tap: () => void;
-  /** Grabbing the 3D sculpture: a wood-block knock. Only when sound is on. */
+  /** The 3D sculpture struck or closing: a knock. Only when sound is on. */
   knock: () => void;
-  /** Click: a soft chime. Only when sound is on. */
-  chime: (note?: number) => void;
-  /** A note the visitor asked for by pressing a sound pad: plays even when the ambience is off. */
-  play: (note: number) => void;
   /** Lower the ambience while another sound plays (true), bring it back (false). */
   duck: (on: boolean) => void;
 };
@@ -91,13 +87,9 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
       knock: () => {
         if (live()) engine.current!.knock();
       },
-      chime: (note?: number) => {
-        if (live()) engine.current!.chime(note);
-      },
-      play: (note: number) => getEngine().chime(note, 1.4),
       duck: (on: boolean) => engine.current?.duck(on),
     };
-  }, [enabled, apply, getEngine]);
+  }, [enabled, apply]);
 
   return <AudioContextReact.Provider value={value}>{children}</AudioContextReact.Provider>;
 }

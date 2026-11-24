@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description:
     "Kuchimoto Studio: custom websites, web applications and AI systems engineered from first principles. Fixed price on a written scope, from $5,000. You own 100% of the code.",
   alternates: { canonical: "/studio" },
-  openGraph: { url: "/studio", title: "Studio · Kuchimoto", images: [{ url: "/og/kuchimoto-kigumi.jpg", width: 1200, height: 630 }] },
+  openGraph: { url: "/studio", title: "Studio · Kuchimoto", images: [{ url: "/og/kuchimoto-crafted.jpg", width: 1200, height: 630 }] },
 };
 
 export default function StudioPage() {
@@ -54,7 +54,7 @@ export default function StudioPage() {
           <h2 id="principles-title" className="display display-lg lg:col-span-8">
             Four principles, cut into every build.
           </h2>
-          <p className="mono max-w-[40ch] text-ink-2 lg:col-span-4 lg:text-right">Shibui precision</p>
+          <p className="mono max-w-[40ch] text-ink-2 lg:col-span-4 lg:text-right">Restraint and precision</p>
         </div>
         <ol className="mt-14 grid border-t border-hairline-strong sm:grid-cols-2 lg:grid-cols-4">
           {PRINCIPLES.map((p, i) => (
@@ -66,11 +66,8 @@ export default function StudioPage() {
                 i > 0 ? "lg:border-l lg:pl-6" : "lg:pl-0"
               }`}
             >
-              <span lang="ja" className="block text-5xl font-light text-ink">
-                {p.kanji}
-              </span>
-              <h3 className="mt-8 text-2xl font-medium tracking-[-0.03em]">{p.name}</h3>
-              <p className="mono mt-1 text-ink-2">{p.gloss}</p>
+              <span className="mono block text-ink-2">{String(i + 1).padStart(2, "0")} /</span>
+              <h3 className="mt-6 text-2xl font-medium tracking-[-0.03em]">{p.name}</h3>
               <p className="mt-5 leading-relaxed text-ink-2">{p.body}</p>
             </Reveal>
           ))}
