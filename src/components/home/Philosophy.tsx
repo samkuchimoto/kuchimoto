@@ -6,9 +6,10 @@ import { Reveal } from "@/components/ui/Reveal";
 import { VideoLoop } from "@/components/ui/VideoLoop";
 
 // The ink film lives at public/videos/kuchimoto-inoue-ink.mp4 (a .webm
-// beside it is used too): a drop of sumi falls, settles into washi, rests,
-// and dissolves into the next drop, on a seamless loop. Without the file,
-// the card shows its still.
+// beside it is used too): a brush lays one dry sumi stroke on washi and a
+// vermilion drop lands beside it like a seal, then the page dissolves back
+// to the brush coming down (a seamless 8.9 s loop). Without the file, the
+// card shows its still.
 const INK = "/videos/kuchimoto-inoue-ink";
 const has = (file: string) => existsSync(join(process.cwd(), "public", file));
 const FILM = has(`${INK}.mp4`) ? { mp4: `${INK}.mp4`, webm: has(`${INK}.webm`) ? `${INK}.webm` : undefined } : null;
@@ -45,14 +46,14 @@ export function Philosophy() {
               ) : (
                 <Image
                   src={STILL}
-                  alt="A single drop of sumi ink held above handmade washi paper"
+                  alt="A brush lays a dry sumi stroke on handmade washi paper"
                   fill
                   quality={80}
                   sizes="(min-width: 1024px) 50vw, 100vw"
                   className="object-cover"
                 />
               )}
-              <span className="mono absolute bottom-4 left-4 text-ink/70">Sumi · Washi · Ma</span>
+              <span className="mono absolute bottom-4 left-4 text-ink/70">Sumi · Vermilion · Washi</span>
             </div>
           </Reveal>
           <Reveal className="lg:col-span-5 lg:col-start-8 lg:pt-6" delay={0.1}>
