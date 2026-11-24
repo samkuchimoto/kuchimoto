@@ -144,9 +144,10 @@ function ReelModal({ onClose }: { onClose: () => void }) {
       >
         Close <Close className="h-4 w-4" />
       </button>
-      {/* As wide as fits: never taller than the window. */}
+      {/* As wide as fits: never taller than the window. On a phone held sideways (a short window) it
+          takes nearly the full height and leaves the right edge to the Close button. */}
       <div
-        className="rise-in relative w-full max-w-[min(1400px,calc((100dvh-8rem)*16/9))]"
+        className="rise-in relative w-full max-w-[min(1400px,calc((100dvh-8rem)*16/9))] [@media(max-height:500px)]:max-w-[min(calc((100dvh-2rem)*16/9),calc(100vw-14.5rem))]"
         onClick={(e) => e.stopPropagation()}
       >
         <video

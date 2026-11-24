@@ -12,6 +12,10 @@ import { useEffect, useRef, useState } from "react";
  * once it plays, so there is no blank frame. Otherwise the poster is
  * fetched with the film.
  * Reduced motion gets the poster alone.
+ *
+ * One file is chosen when the film is fetched: the VP9 WebM where the
+ * browser plays it (smaller), and the H.264 MP4 on Apple devices, where
+ * H.264 is decoded in hardware and VP9 is not reliable.
  */
 export function VideoLoop({
   src,
@@ -35,18 +39,22 @@ export function VideoLoop({
 }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [showPoster, setShowPoster] = useState(false);
+  const { mp4, webm } = src;
 
   useEffect(() => {
     const video = ref.current;
     if (!video) return;
     const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    // Fetch the poster and the film, once. load() resets a playing video,
-    // so whichever observer fires first does it and the other skips it.
+    const apple = navigator.vendor === "Apple Computer, Inc.";
+    const file = webm && !apple && video.canPlayType('video/webm; codecs="vp9"') !== "" ? webm : mp4;
+    // Fetch the poster and the film, once. Setting a source resets a playing
+    // video, so whichever observer fires first does it and the other skips it.
     const fetchFilm = () => {
       if (!posterNow && !video.poster) video.poster = poster;
-      if (!still && video.preload !== "auto") {
+      if (!still && !video.getAttribute("src")) {
+        video.muted = true;
         video.preload = "auto";
-        video.load();
+        video.src = file;
       }
     };
     const near = new IntersectionObserver(
@@ -83,7 +91,7 @@ export function VideoLoop({
       seen.disconnect();
       approach.disconnect();
     };
-  }, [poster, margin, playMargin, posterNow]);
+  }, [mp4, webm, poster, margin, playMargin, posterNow]);
 
   return (
     <>
@@ -99,10 +107,7 @@ export function VideoLoop({
         preload="none"
         aria-label={label}
         aria-hidden={label ? undefined : true}
-      >
-        {src.webm && <source src={src.webm} type="video/webm" />}
-        <source src={src.mp4} type="video/mp4" />
-      </video>
+      />
     </>
   );
 }
