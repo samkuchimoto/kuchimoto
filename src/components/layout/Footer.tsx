@@ -1,108 +1,72 @@
 import Link from "next/link";
-import { CONTACT, ittsuiUrl } from "@/config/site";
-import { localizedPath, type Locale } from "@/i18n/config";
-import type { Dictionary } from "@/i18n/dictionaries";
-import { Container, Logo, Todo } from "@/components/ui";
-import { ManageCookiesButton } from "@/components/CookieBanner";
+import { Hanko } from "@/components/ui/Hanko";
+import { SITE } from "@/data/site";
+import { QuickScope, ScrollTop } from "./FooterClient";
 
-export function Footer({ lang, dict }: { lang: Locale; dict: Dictionary }) {
-  const t = dict.footer;
-  const href = (path: string) => localizedPath(lang, path);
-  const link = "text-sm text-ink-soft underline-offset-4 hover:text-ink hover:underline";
+const LINKS = [
+  { href: "/work", label: "Work" },
+  { href: "/studio", label: "Studio" },
+  { href: "/lab", label: "Lab" },
+  { href: "/contact", label: "Contact" },
+];
 
+export function Footer() {
   return (
-    <footer className="mt-24 border-t hairline bg-washi">
-      <Container className="grid gap-12 py-16 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
-        <div>
-          <Logo />
-          <p className="mt-5 max-w-xs text-sm text-ink-soft">{t.tagline}</p>
-          {/* No postal address here: it's Samuel's own, and it stays where the
-              law asks for it (legal notice, terms, privacy, contact page). */}
-          <p className="mt-5 text-sm">
-            {CONTACT.email ? (
-              <a href={`mailto:${CONTACT.email}`} className={link}>
-                {CONTACT.email}
-              </a>
-            ) : (
-              <Todo>{dict.common.placeholderEmail}</Todo>
-            )}
-          </p>
+    <footer className="relative bg-washi text-ink">
+      <div className="container-k">
+        <div className="grid gap-12 border-t border-hairline-strong pt-14 pb-16 md:grid-cols-12 md:gap-8 md:pt-20 md:pb-24">
+          <address className="not-italic md:col-span-3">
+            <p className="font-semibold tracking-[0.02em]">KUCHIMOTO LLC</p>
+            <p className="mt-3 leading-relaxed text-ink-2">
+              {SITE.address[0]}
+              <br />
+              {SITE.address[1]}
+            </p>
+            <p className="mono mt-5 max-w-[26ch] text-ink-2">{SITE.region}</p>
+          </address>
+
+          <div className="md:col-span-3">
+            <ul className="space-y-1.5">
+              {LINKS.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="text-lg transition-colors hover:text-ink-2">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <p className="mono mt-8 text-ink-2">Direct business inquiries</p>
+            <a href={`mailto:${SITE.email}`} className="mt-1 inline-block text-lg underline-offset-4 hover:underline">
+              {SITE.email}
+            </a>
+          </div>
+
+          <div className="md:col-span-6 lg:col-span-5 lg:col-start-8">
+            <h2 className="display text-[clamp(2.2rem,4vw,3.4rem)] leading-[1] tracking-[-0.035em]">
+              Have a platform
+              <br />
+              to build?
+            </h2>
+            <QuickScope />
+          </div>
         </div>
 
-        <nav aria-label={t.divisions}>
-          <p className="eyebrow text-ink-soft">{t.divisions}</p>
-          <ul className="mt-4 space-y-3">
-            <li>
-              <Link href={href("/happy-homes")} className={link}>
-                Happy Homes
-              </Link>
-            </li>
-            <li>
-              <Link href={href("/bambootails")} className={link}>
-                BambooTails
-              </Link>
-            </li>
-            <li>
-              <Link href={href("/lab")} className={link}>
-                Kuchimoto Lab
-              </Link>
-            </li>
-            <li>
-              <a href={ittsuiUrl(lang)} className={link}>
-                Ittsui
-              </a>
-            </li>
-          </ul>
-        </nav>
-
-        <nav aria-label={t.company}>
-          <p className="eyebrow text-ink-soft">{t.company}</p>
-          <ul className="mt-4 space-y-3">
-            <li>
-              <Link href={href("/a-propos")} className={link}>
-                {dict.nav.links.about}
-              </Link>
-            </li>
-            <li>
-              <Link href={href("/contact")} className={link}>
-                {dict.nav.links.contact}
-              </Link>
-            </li>
-          </ul>
-        </nav>
-
-        <nav aria-label={t.legal}>
-          <p className="eyebrow text-ink-soft">{t.legal}</p>
-          <ul className="mt-4 space-y-3">
-            <li>
-              <Link href={href("/mentions-legales")} className={link}>
-                {t.legalLinks.notice}
-              </Link>
-            </li>
-            <li>
-              <Link href={href("/cgv")} className={link}>
-                {t.legalLinks.terms}
-              </Link>
-            </li>
-            <li>
-              <Link href={href("/confidentialite")} className={link}>
-                {t.legalLinks.privacy}
-              </Link>
-            </li>
-            <li>
-              <ManageCookiesButton label={t.legalLinks.cookies} />
-            </li>
-          </ul>
-        </nav>
-      </Container>
-      <div className="border-t hairline">
-        <Container className="flex flex-col gap-3 py-6 text-xs text-ink-soft md:flex-row md:justify-between">
-          <div className="space-y-1">
-            <p>{t.rights(new Date().getFullYear())}</p>
-            <p>{t.operatedBy}</p>
+        <div className="flex flex-col gap-5 border-t border-hairline pt-6 pb-8 md:flex-row md:items-center md:justify-between">
+          <div className="flex items-center gap-4">
+            <Hanko className="h-8 w-5" title="口元, the Kuchimoto seal" />
+            <p className="mono text-ink-2">© 2026 KUCHIMOTO LLC. All rights reserved.</p>
           </div>
-          <p>{t.trademark}</p>
-        </Container>
+          <div className="mono flex flex-wrap items-center gap-x-6 gap-y-2 text-ink-2">
+            <Link href="/lab" className="hover:text-ink">
+              R&amp;D: kuchimoto.com/lab
+            </Link>
+            <span>100% Custom Code</span>
+            <Link href="/legal" className="hover:text-ink">
+              Legal &amp; Privacy
+            </Link>
+            <ScrollTop />
+          </div>
+        </div>
       </div>
     </footer>
   );

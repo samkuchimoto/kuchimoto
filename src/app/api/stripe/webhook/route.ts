@@ -11,9 +11,9 @@
 // A failed save or email answers 500, so Stripe tries again later.
 
 import type Stripe from "stripe";
-import { deliver, sendSubmission } from "@/lib/forms/server";
-import { markPaymentNotified, savePayment, storageConfigured } from "@/lib/leads/store";
-import { stripe } from "@/lib/stripe";
+import { markPaymentNotified, savePayment, storageConfigured } from "@/lib/server/db";
+import { sendSubmission } from "@/lib/server/mail";
+import { stripe } from "@/lib/server/stripe";
 
 function address(details: Stripe.Checkout.Session.CustomerDetails | null): string {
   const a = details?.address;
@@ -102,13 +102,17 @@ async function bookingPaid(session: Stripe.Checkout.Session): Promise<Response> 
   if (session.payment_status !== "paid") return new Response("ok");
   const rows = Object.entries(session.metadata ?? {}) as [string, string][];
   const amount = session.amount_total != null ? `${session.amount_total / 100} ${session.currency?.toUpperCase()}` : "";
-  const response = await deliver("stripe-webhook", {
-    subject: `Réservation payée · ${session.metadata?.Service ?? "Happy Homes Thaïlande"}`,
-    replyTo: session.customer_details?.email ?? undefined,
-    rows: [...rows, ["Payé", amount], ["Session Stripe", session.id]],
-  });
-  // A failed email makes Stripe retry later, so the booking is not lost.
-  if (!response.ok) return new Response("email failed", { status: 500 });
+  try {
+    await sendSubmission({
+      subject: `Réservation payée · ${session.metadata?.Service ?? "Happy Homes Thaïlande"}`,
+      replyTo: session.customer_details?.email ?? undefined,
+      rows: [...rows, ["Payé", amount], ["Session Stripe", session.id]],
+    });
+  } catch (error) {
+    // A failed email makes Stripe retry later, so the booking is not lost.
+    console.error("[stripe-webhook] email failed", error);
+    return new Response("email failed", { status: 500 });
+  }
   return new Response("ok");
 }
 

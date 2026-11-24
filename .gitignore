@@ -6,3 +6,6 @@ next-env.d.ts
 *.tsbuildinfo
 .env*
 !.env.example
+
+# Raw source assets (originals of public/images and public/videos)
+contents/

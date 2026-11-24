@@ -1,30 +1,14 @@
 import type { MetadataRoute } from "next";
-import { SITE_URL } from "@/config/site";
-import { locales, localizedPath } from "@/i18n/config";
-import { languageAlternates } from "@/lib/seo";
+import { PROJECTS } from "@/data/projects";
+import { SITE } from "@/data/site";
 
-const ROUTES = [
-  "/",
-  "/happy-homes",
-  "/happy-homes/thailande",
-  "/happy-homes/canada",
-  "/happy-homes/etats-unis",
-  "/bambootails",
-  "/lab",
-  "/studio",
-  "/a-propos",
-  "/contact",
-  "/mentions-legales",
-  "/cgv",
-  "/confidentialite",
-];
-
-/** Every page in both languages, each listing its translations. */
 export default function sitemap(): MetadataRoute.Sitemap {
-  return ROUTES.flatMap((path) => {
-    const languages = Object.fromEntries(
-      Object.entries(languageAlternates(path)).map(([lang, href]) => [lang, `${SITE_URL}${href}`]),
-    );
-    return locales.map((lang) => ({ url: `${SITE_URL}${localizedPath(lang, path)}`, alternates: { languages } }));
-  });
+  const now = new Date("2026-11-24");
+  const pages = ["", "/work", "/studio", "/lab", "/contact", "/legal"].map((path) => ({
+    url: `${SITE.url}${path}`,
+    lastModified: now,
+    priority: path === "" ? 1 : path === "/legal" ? 0.2 : 0.8,
+  }));
+  const work = PROJECTS.map((p) => ({ url: `${SITE.url}/work/${p.slug}`, lastModified: now, priority: 0.7 }));
+  return [...pages, ...work];
 }
