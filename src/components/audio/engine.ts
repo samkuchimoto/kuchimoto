@@ -194,6 +194,19 @@ export class SoundEngine {
     this.stopTimer = setTimeout(() => void this.ctx.suspend(), 700);
   }
 
+  /**
+   * Lower the ambience under another sound (the reel with its own audio) and
+   * bring it back after. Only the ambient layer moves: the master fade and
+   * the visitor's on/off choice are left as they are.
+   */
+  duck(on: boolean) {
+    const now = this.ctx.currentTime;
+    const g = this.ambient.gain;
+    g.cancelScheduledValues(now);
+    g.setValueAtTime(Math.max(g.value, SILENT), now);
+    g.exponentialRampToValueAtTime(on ? SILENT : 1, now + (on ? 0.4 : 1.2));
+  }
+
   /** Make sure the context runs, for a sound played while the ambience is off. */
   private wake() {
     if (this.stopTimer) {

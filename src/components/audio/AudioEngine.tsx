@@ -23,6 +23,8 @@ type Audio = {
   chime: (note?: number) => void;
   /** A note the visitor asked for by pressing a sound pad: plays even when the ambience is off. */
   play: (note: number) => void;
+  /** Lower the ambience while another sound plays (true), bring it back (false). */
+  duck: (on: boolean) => void;
 };
 
 const AudioContextReact = createContext<Audio | null>(null);
@@ -93,6 +95,7 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
         if (live()) engine.current!.chime(note);
       },
       play: (note: number) => getEngine().chime(note, 1.4),
+      duck: (on: boolean) => engine.current?.duck(on),
     };
   }, [enabled, apply, getEngine]);
 

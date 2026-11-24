@@ -8,13 +8,20 @@ import { Close, Play } from "@/components/ui/Icons";
 import { Registration } from "@/components/ui/Registration";
 import { VideoLoop } from "@/components/ui/VideoLoop";
 
-/**
- * Calm surface, kinetic core. The cover is the horizon loop: a black
- * monolith on volcanic stone in Pacific mist, muted, twelve seconds,
- * crossfaded so it never jumps. PLAY ▶ REEL opens the studio reel with its
- * sound: joinery opening on a vermilion core, an orbital ring, ripples on
- * black stone water.
- */
+// Calm surface, kinetic core.
+//   Cover (muted loop on the page): public/videos/kuchimoto-horizon-reel.mp4
+//   (+ .webm), a black monolith on volcanic stone in Pacific mist.
+//   Player (with sound, on click): public/videos/studio-reel-dynamic.mp4, the
+//   multi-cut studio reel: basalt joinery opening on a vermilion core, ink on
+//   washi, an orbital wireframe ring, ripples on black stone water.
+const COVER = {
+  mp4: "/videos/kuchimoto-horizon-reel.mp4",
+  webm: "/videos/kuchimoto-horizon-reel.webm",
+  poster: "/videos/kuchimoto-horizon-reel-poster.jpg",
+};
+const FILM = { mp4: "/videos/studio-reel-dynamic.mp4", poster: "/videos/studio-reel-dynamic-poster.jpg" };
+
+/** PLAY ▶ REEL: the horizon loop on the page; a click opens the studio reel with sound. */
 export function Reel() {
   const [open, setOpen] = useState(false);
   const audio = useAudio();
@@ -22,7 +29,7 @@ export function Reel() {
 
   return (
     <section className="defer-render container-k py-10 sm:py-16" aria-label="Studio reel">
-      <Registration className="mb-[5px]" />
+      <Registration count={5} tone="text-ink/35" className="mb-[5px]" />
       <button
         type="button"
         data-dark=""
@@ -30,60 +37,83 @@ export function Reel() {
           audio.chime(2);
           setOpen(true);
         }}
+        onPointerEnter={audio.tap}
         onPointerMove={(e) => {
           if (e.pointerType !== "mouse" || !label.current) return;
           const r = e.currentTarget.getBoundingClientRect();
-          const x = (e.clientX - r.left - r.width / 2) * 0.08;
-          const y = (e.clientY - r.top - r.height / 2) * 0.08;
+          const x = (e.clientX - r.left - r.width / 2) * 0.06;
+          const y = (e.clientY - r.top - r.height / 2) * 0.06;
           label.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
         }}
         onPointerLeave={() => {
           if (label.current) label.current.style.transform = "";
         }}
-        className="group relative block aspect-[4/5] w-full overflow-hidden rounded-[var(--radius-stage)] bg-sumi sm:aspect-[16/8]"
+        className="group relative block aspect-video w-full cursor-pointer overflow-hidden rounded-[var(--radius-stage)] bg-sumi"
       >
         <VideoLoop
-          src={{ mp4: "/videos/kuchimoto-horizon-reel.mp4", webm: "/videos/kuchimoto-horizon-reel.webm" }}
-          poster="/videos/kuchimoto-horizon-reel-poster.jpg"
-          className="absolute inset-0 h-full w-full object-cover object-[66%_50%] opacity-90 transition-transform duration-[1.6s] ease-[var(--ease-out-expo)] group-hover:scale-[1.02]"
+          src={COVER}
+          poster={COVER.poster}
+          posterNow
+          margin="200px"
+          playMargin="200px"
+          className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-sumi/20" />
+        <div className="absolute inset-0 bg-black/20 transition-colors duration-500 group-hover:bg-black/10" />
+        {/* The magnetic drift on the outer span, the hover scale on the inner one. */}
         <span
           ref={label}
-          className="absolute inset-0 flex items-center justify-center gap-[3vw] text-washi transition-transform duration-700 ease-[var(--ease-out-expo)]"
+          className="absolute inset-0 flex items-center justify-center text-washi transition-transform duration-700 ease-[var(--ease-out-expo)]"
           aria-hidden="true"
         >
-          <span className="text-[clamp(3rem,10vw,9rem)] font-light tracking-[-0.04em]">PLAY</span>
-          <span className="grid h-[clamp(56px,7vw,96px)] w-[clamp(88px,11vw,150px)] place-items-center rounded-full bg-surface text-ink transition-transform duration-500 group-hover:scale-110">
-            <Play className="h-[clamp(18px,2vw,28px)] w-[clamp(18px,2vw,28px)]" />
+          <span className="flex items-center gap-[3vw] transition-transform duration-300 group-hover:scale-105">
+            <span className="text-[clamp(2.25rem,10vw,9rem)] font-light tracking-[-0.04em]">PLAY</span>
+            <span className="grid h-[clamp(44px,7vw,96px)] w-[clamp(72px,11vw,150px)] place-items-center rounded-full bg-washi text-ink">
+              <Play className="h-[clamp(16px,2vw,28px)] w-[clamp(16px,2vw,28px)]" />
+            </span>
+            <span className="text-[clamp(2.25rem,10vw,9rem)] font-light tracking-[-0.04em]">REEL</span>
           </span>
-          <span className="text-[clamp(3rem,10vw,9rem)] font-light tracking-[-0.04em]">REEL</span>
         </span>
-        <span className="sr-only">Play reel, with sound: the studio reel</span>
-        <span aria-hidden="true" className="mono absolute bottom-5 left-5 text-washi/70">Horizon · Kuchimoto coast · 2026</span>
-        <span aria-hidden="true" className="mono absolute right-5 bottom-5 text-washi/70">Sound on ↗</span>
+        <span className="sr-only">Play reel, with sound: the full studio reel</span>
+        <span aria-hidden="true" className="mono absolute bottom-3 left-4 text-washi sm:bottom-5 sm:left-5">
+          Horizon · Kuchimoto coast · 2026
+        </span>
+        {/* On a phone the two labels would meet along the bottom edge, so this one sits top right there. */}
+        <span aria-hidden="true" className="mono absolute top-3 right-4 text-washi sm:top-auto sm:right-5 sm:bottom-5">
+          Play full reel · Sound on ↗
+        </span>
       </button>
-      <Registration className="mt-[5px]" />
+      <Registration count={5} tone="text-ink/35" className="mt-[5px]" />
       {open && <ReelModal onClose={() => setOpen(false)} />}
     </section>
   );
 }
 
 /**
- * The full reel with sound. Rendered into <body>: the reel section skips its
- * layout while off screen (content-visibility), which also makes it the box
- * that fixed elements inside it fill, so the player must live outside it.
+ * The full studio reel with sound, in a full-screen theatre. Rendered into
+ * <body>: the reel section skips its layout while off screen
+ * (content-visibility), which also makes it the box that fixed elements
+ * inside it fill, so the player must live outside it. While it is open the
+ * page does not scroll and the ambient soundscape steps back.
  */
 function ReelModal({ onClose }: { onClose: () => void }) {
   const close = useRef<HTMLButtonElement>(null);
+  const film = useRef<HTMLVideoElement>(null);
   const { lock, unlock } = useScrollControl();
+  const audio = useAudio();
+  const { duck } = audio;
 
   useEffect(() => {
     const previous = document.activeElement as HTMLElement | null;
+    const video = film.current;
     lock();
+    document.body.style.overflow = "hidden";
+    duck(true);
     close.current?.focus();
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        video?.pause();
+        onClose();
+      }
       if (e.key === "Tab") {
         e.preventDefault();
         close.current?.focus();
@@ -92,41 +122,46 @@ function ReelModal({ onClose }: { onClose: () => void }) {
     window.addEventListener("keydown", onKey);
     return () => {
       window.removeEventListener("keydown", onKey);
+      video?.pause();
+      duck(false);
+      document.body.style.overflow = "";
       unlock();
       previous?.focus();
     };
-  }, [lock, unlock, onClose]);
+  }, [lock, unlock, onClose, duck]);
 
   return createPortal(
     <div
       role="dialog"
       aria-modal="true"
       aria-label="Studio reel"
-      className="fade-in fixed inset-0 z-[80] flex items-center justify-center bg-sumi/95 p-4 backdrop-blur-sm sm:p-10"
+      className="fade-in fixed inset-0 z-50 flex items-center justify-center bg-sumi/95 p-4 backdrop-blur-md md:p-10"
       onClick={onClose}
     >
-      {/* As wide as fits: never taller than the window, Close button included. */}
+      <button
+        ref={close}
+        type="button"
+        onClick={onClose}
+        className="mono-12 absolute top-4 right-4 z-10 flex h-10 items-center gap-2 rounded-full bg-washi pr-3 pl-4 text-ink md:top-6 md:right-6"
+      >
+        Close <Close className="h-4 w-4" />
+      </button>
+      {/* As wide as fits: never taller than the window. */}
       <div
-        className="rise-in relative w-full max-w-[min(1400px,calc((100dvh-9rem)*16/9))]"
+        className="rise-in relative w-full max-w-[min(1400px,calc((100dvh-8rem)*16/9))]"
         onClick={(e) => e.stopPropagation()}
       >
         <video
+          ref={film}
           className="aspect-video w-full rounded-[var(--radius-card)] bg-black"
-          src="/videos/kuchimoto-studio-reel.mp4"
-          poster="/videos/kuchimoto-studio-reel-poster.jpg"
+          src={FILM.mp4}
+          poster={FILM.poster}
           controls
           autoPlay
           playsInline
+          muted={false}
           preload="none"
         />
-        <button
-          ref={close}
-          type="button"
-          onClick={onClose}
-          className="mono-12 absolute -top-14 right-0 flex h-10 items-center gap-2 rounded-full bg-surface pr-3 pl-4 text-ink"
-        >
-          Close <Close className="h-4 w-4" />
-        </button>
       </div>
     </div>,
     document.body,

@@ -27,8 +27,3 @@ export function canRun3D(): boolean {
   }
 }
 
-/** A desktop: a fine pointer that can hover, a wide window, and WebGL without reduced motion. */
-export function isDesktop(): boolean {
-  return window.matchMedia("(hover: hover) and (pointer: fine)").matches && window.innerWidth >= 1024 && canRun3D();
-}
-
