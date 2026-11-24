@@ -6,9 +6,9 @@ import { Reveal } from "@/components/ui/Reveal";
 import { VideoLoop } from "@/components/ui/VideoLoop";
 
 // The ink film lives at public/videos/kuchimoto-inoue-ink.mp4 (a .webm
-// beside it is used too): a drop of sumi falls and settles into washi. It
-// plays once each time the card comes into view, then rests on the ink in
-// the paper. Without the file, the card shows its still.
+// beside it is used too): a drop of sumi falls, settles into washi, rests,
+// and dissolves into the next drop, on a seamless loop. Without the file,
+// the card shows its still.
 const INK = "/videos/kuchimoto-inoue-ink";
 const has = (file: string) => existsSync(join(process.cwd(), "public", file));
 const FILM = has(`${INK}.mp4`) ? { mp4: `${INK}.mp4`, webm: has(`${INK}.webm`) ? `${INK}.webm` : undefined } : null;
@@ -41,7 +41,7 @@ export function Philosophy() {
           <Reveal className="lg:col-span-6">
             <div className="relative aspect-video overflow-hidden rounded-[var(--radius-card)] bg-[#d9d3c8] shadow-[0_30px_80px_-40px_rgb(17_17_19/0.45)]">
               {FILM ? (
-                <VideoLoop src={FILM} poster={STILL} once className="h-full w-full object-cover" />
+                <VideoLoop src={FILM} poster={STILL} className="h-full w-full object-cover" />
               ) : (
                 <Image
                   src={STILL}
