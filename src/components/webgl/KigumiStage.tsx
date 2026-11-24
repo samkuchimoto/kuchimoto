@@ -5,7 +5,7 @@ import { getImageProps } from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { preload } from "react-dom";
 import { useAudio } from "@/components/audio/AudioEngine";
-import { canRun3D, isLowPower, useInView } from "./useInView";
+import { isDesktop, useInView } from "./useInView";
 
 const KigumiScene = dynamic(() => import("./KigumiScene"), { ssr: false });
 
@@ -46,46 +46,35 @@ function preloadPosters() {
 }
 
 /**
- * The hero's dark viewport. It paints a still of the sculpture at once,
- * then loads the live WebGL scene (three.js) on the visitor's first move,
- * scroll or touch, or after three quiet seconds on a desktop, and fades it
- * in over the still. Off screen, the scene stops rendering. With reduced
- * motion or no WebGL, the still stays.
+ * The hero's dark viewport: the Kigumi sculpture. Every screen paints a
+ * still of it at once. On a desktop, three.js is imported on the visitor's
+ * first move, scroll or key (or after a quiet moment) and the live scene
+ * fades in over the still; off screen it stops rendering. Phones and
+ * tablets keep the still, breathing slowly in CSS, so their scroll never
+ * waits on WebGL.
  */
-export function KigumiStage({
-  className = "",
-  captions = true,
-  label = "Fig. 01 · Kigumi study",
-  priority = true,
-}: {
-  className?: string;
-  captions?: boolean;
-  label?: string;
-  /** Above the fold: preload the still and fetch it first. */
-  priority?: boolean;
-}) {
-  if (priority) preloadPosters();
+export function KigumiStage({ className = "" }: { className?: string }) {
+  preloadPosters();
   const ref = useRef<HTMLDivElement>(null);
   const visible = useInView(ref, "80px");
-  const [quality, setQuality] = useState<"high" | "low" | null>(null);
+  const [live, setLive] = useState(false);
   const [ready, setReady] = useState(false);
   const audio = useAudio();
 
   useEffect(() => {
-    if (!canRun3D()) return;
-    const low = isLowPower();
+    if (!isDesktop()) return;
     let fired = false;
-    const events = ["pointermove", "pointerdown", "wheel", "touchstart", "keydown", "scroll"] as const;
+    const events = ["pointermove", "pointerdown", "wheel", "keydown", "scroll"] as const;
     const fire = () => {
       if (fired) return;
       fired = true;
-      setQuality(low ? "low" : "high");
+      setLive(true);
       cleanup();
     };
-    const timer = low ? null : window.setTimeout(fire, 3000);
+    const timer = window.setTimeout(fire, 2500);
     events.forEach((e) => window.addEventListener(e, fire, { passive: true }));
     function cleanup() {
-      if (timer) window.clearTimeout(timer);
+      window.clearTimeout(timer);
       events.forEach((e) => window.removeEventListener(e, fire));
     }
     return cleanup;
@@ -96,12 +85,12 @@ export function KigumiStage({
   return (
     <div
       ref={ref}
-      tabIndex={quality ? 0 : -1}
+      tabIndex={live ? 0 : -1}
       data-dark=""
       role="application"
       aria-roledescription="3D sculpture"
-      aria-label="Interactive 3D sculpture of interlocking joinery modules in black lacquer, basalt and titanium. Drag to turn it, click to strike it, or use the arrow keys."
-      className={`relative isolate touch-pan-y overflow-hidden rounded-[var(--radius-stage)] bg-sumi select-none ${quality ? "cursor-grab active:cursor-grabbing" : ""} ${className}`}
+      aria-label="Interactive 3D sculpture of interlocking joinery modules in black urushi lacquer, volcanic basalt and brushed titanium. Hold the mouse button or the space bar to open the joinery; drag or use the arrow keys to turn it."
+      className={`stage-dark relative isolate touch-pan-y overflow-hidden rounded-[var(--radius-stage)] bg-sumi select-none ${live ? "cursor-grab active:cursor-grabbing" : ""} ${className}`}
     >
       <picture>
         <source media="(min-width: 640px)" srcSet={POSTER_WIDE.srcSet} sizes={POSTER_WIDE.sizes} />
@@ -109,40 +98,35 @@ export function KigumiStage({
         <img
           {...POSTER_TALL}
           alt=""
-          loading={priority ? "eager" : "lazy"}
-          fetchPriority={priority ? "high" : "auto"}
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${ready ? "opacity-0" : "opacity-100"}`}
+          loading="eager"
+          fetchPriority="high"
+          className={`stage-still absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${ready ? "opacity-0" : "opacity-100"}`}
         />
       </picture>
-      {quality && (
+      {live && (
         <div className={`absolute inset-0 transition-opacity duration-1000 ${ready ? "opacity-100" : "opacity-0"}`}>
           <KigumiScene
             active={visible}
-            quality={quality}
+            quality="high"
             eventSource={ref}
             onReady={onReady}
-            onGrab={audio.knock}
+            onOpen={audio.chime}
+            onSettle={audio.knock}
             onStrike={audio.chime}
           />
         </div>
       )}
-      {/* Vignette: keeps the captions legible and the edges quiet. */}
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{ background: "radial-gradient(120% 90% at 50% 45%, transparent 55%, rgb(11 11 13 / 0.55) 100%)" }}
-      />
-      {captions && (
-        <div className="pointer-events-none absolute inset-0 flex flex-col justify-between p-4 text-washi/70 sm:p-6">
-          <div className="flex justify-between gap-4">
-            <span className="mono">{label}</span>
-            <span className="mono hidden sm:block">Urushi · Sumi · Titanium</span>
-          </div>
-          <div className="flex items-end justify-between gap-4">
-            <span className="mono">Interactive WebGL · Drag to inspect</span>
-            <span className="mono hidden sm:block">Scroll to explore ↓</span>
-          </div>
+      <div className="pointer-events-none absolute inset-0 flex flex-col justify-between p-4 text-washi/70 sm:p-6">
+        <div className="flex justify-between gap-4">
+          <span className="mono">Fig. 01 · Kigumi study</span>
+          <span className="mono hidden sm:block">Urushi · Basalt · Titanium</span>
         </div>
-      )}
+        <div className="flex items-end justify-between gap-4">
+          <span className="mono hidden lg:pointer-fine:motion-safe:block">Interactive WebGL · Hold to open the joinery</span>
+          <span className="mono lg:pointer-fine:motion-safe:hidden">Kigumi · Precision joinery</span>
+          <span className="mono hidden sm:block">Scroll to explore ↓</span>
+        </div>
+      </div>
     </div>
   );
 }

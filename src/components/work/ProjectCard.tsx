@@ -47,7 +47,7 @@ export function ProjectCard({
         </span>
       </TapLink>
 
-      <p className="mono mt-5 text-ink-2">{project.category.join(" · ")}</p>
+      <p className={`mono text-ink-2 ${feature ? "mt-10" : "mt-5"}`}>{project.category.join(" · ")}</p>
       <div className="mt-2 flex items-start justify-between gap-6">
         <h3
           className={`font-medium tracking-[-0.035em] ${

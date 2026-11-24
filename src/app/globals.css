@@ -286,20 +286,20 @@ html[data-js] [data-reveal][data-shown] {
   will-change: transform;
 }
 
-/* ------------------------------------------------------- hero monolith */
-.monolith-stage {
+/* ------------------------------------------------- dark 3D stages */
+.stage-dark {
   background:
     radial-gradient(52% 78% at 58% 46%, rgb(74 74 80 / 0.3), transparent 72%),
     linear-gradient(180deg, #0b0b0d 0%, #0f0f12 62%, #0b0b0d 100%);
 }
 /* Phones keep the still: it breathes on the same nine-second tide as the live scene. */
 @media (prefers-reduced-motion: no-preference) {
-  .monolith-still {
+  .stage-still {
     transform-origin: 55% 55%;
-    animation: monolith-breathe 9s ease-in-out 1.2s infinite alternate;
+    animation: stage-breathe 9s ease-in-out 1.2s infinite alternate;
   }
 }
-@keyframes monolith-breathe {
+@keyframes stage-breathe {
   to {
     transform: scale(1.025);
   }

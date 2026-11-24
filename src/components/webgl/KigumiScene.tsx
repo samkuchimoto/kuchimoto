@@ -1,22 +1,24 @@
 "use client";
 
 // The Kigumi study: interlocking joinery modules in three materials, glossy
-// urushi lacquer, matte sumi basalt and brushed titanium, with one
-// vermilion inlay. Procedural geometry only (no model file): every beam,
-// block and rod is an instance of one of five shapes, so the whole
-// sculpture draws in about a dozen calls.
+// urushi lacquer, matte volcanic basalt and brushed titanium, with one
+// vermilion inlay. Procedural geometry only (no model file): every beam
+// and block is a chamfered extrusion, every rod a cylinder, each drawn as
+// instances, so the whole sculpture takes about a dozen draw calls.
 //
 // Physics, hand-written: each module springs toward a home on a slowly
 // turning ellipsoid, modules keep their distance, the cursor pushes them
-// aside and tilts them, a drag spins the whole cluster with inertia, and a
-// click strikes the ones nearby. All mutable state lives in one ref and is
-// only touched inside the frame loop and event handlers.
+// aside and tilts them, a drag spins the whole cluster with inertia.
+// Holding the pointer (or the space bar) explodes the joinery: every beam
+// slides out along its own axis and the cluster opens; release springs it
+// back together. A quick click strikes the modules nearby. All mutable
+// state lives in one ref and is only touched inside the frame loop and
+// event handlers.
 
 import { Canvas, useFrame, useThree, type RootState } from "@react-three/fiber";
 import { useEffect, useMemo, useRef, type RefObject } from "react";
 import * as THREE from "three";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
-import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
 import { seeded } from "./random";
 
 export type KigumiSceneProps = {
@@ -26,7 +28,11 @@ export type KigumiSceneProps = {
   /** The element that receives pointer and keyboard input. */
   eventSource: RefObject<HTMLElement | null>;
   onReady?: () => void;
-  onGrab?: () => void;
+  /** The joinery is fully open. */
+  onOpen?: () => void;
+  /** The joinery has closed again after opening. */
+  onSettle?: () => void;
+  /** A quick click struck the modules. */
   onStrike?: () => void;
 };
 
@@ -83,7 +89,18 @@ const AXIS_QUAT: Record<Axis, THREE.Quaternion> = {
 // ------------------------------------------------------------- layout (pure)
 
 type Slot = { geo: GeoKey; mat: MatKey; count: number };
-type BodyLayout = { parts: { key: string; index: number; local: THREE.Matrix4 }[]; euler: THREE.Euler; spin: THREE.Vector3; phase: number };
+type PartLayout = {
+  key: string;
+  index: number;
+  pos: THREE.Vector3;
+  quat: THREE.Quaternion;
+  /** Where the part goes when the joinery opens: along its own axis, away from the joint. */
+  slide: THREE.Vector3;
+};
+type BodyLayout = { parts: PartLayout[]; euler: THREE.Euler; spin: THREE.Vector3; phase: number };
+
+const AXIS_DIR: Record<Axis, [number, number, number]> = { x: [1, 0, 0], y: [0, 1, 0], z: [0, 0, 1] };
+const SLIDE = 1.0;
 
 function layout(count: number): { slots: [string, Slot][]; bodies: BodyLayout[] } {
   const rand = seeded(42);
@@ -91,14 +108,18 @@ function layout(count: number): { slots: [string, Slot][]; bodies: BodyLayout[] 
   const bodies: BodyLayout[] = [];
   for (let i = 0; i < count; i++) {
     const swap = i % 2 === 1;
-    const parts = ARCHETYPES[SEQUENCE[i % SEQUENCE.length]].map((part) => {
+    const parts = ARCHETYPES[SEQUENCE[i % SEQUENCE.length]].map((part, n) => {
       const mat: MatKey = swap && part.mat !== "titanium" ? (part.mat === "lacquer" ? "basalt" : "lacquer") : part.mat;
       const key = `${part.geo}:${mat}`;
       const slot = slots.get(key) ?? { geo: part.geo, mat, count: 0 };
       const index = slot.count;
       slots.set(key, { ...slot, count: slot.count + 1 });
-      const local = new THREE.Matrix4().compose(new THREE.Vector3(...part.pos), AXIS_QUAT[part.axis], new THREE.Vector3(1, 1, 1));
-      return { key, index, local };
+      const pos = new THREE.Vector3(...part.pos);
+      // Alternate directions, so neighbouring parts pull apart rather than travel together;
+      // parts set off-centre also move out along their offset.
+      const slide = new THREE.Vector3(...AXIS_DIR[part.axis]).multiplyScalar(n % 2 === 0 ? SLIDE : -SLIDE);
+      if (pos.lengthSq() > 0) slide.addScaledVector(pos.clone().normalize(), 0.32);
+      return { key, index, pos, quat: AXIS_QUAT[part.axis].clone(), slide };
     });
     bodies.push({
       parts,
@@ -112,9 +133,9 @@ function layout(count: number): { slots: [string, Slot][]; bodies: BodyLayout[] 
 
 /** Homes on a Fibonacci ellipsoid sized to the frame. */
 function homesFor(count: number, width: number, height: number): THREE.Vector3[] {
-  const rx = Math.min(width * 0.27, 4.1);
-  const ry = Math.min(height * 0.3, 2.1);
-  const rz = 1.6;
+  const rx = Math.min(width * 0.22, 3.4);
+  const ry = Math.min(height * 0.23, 1.55);
+  const rz = 1.4;
   const golden = Math.PI * (3 - Math.sqrt(5));
   return Array.from({ length: count }, (_, i) => {
     const y = 1 - (i / (count - 1)) * 2;
@@ -145,13 +166,41 @@ function basaltTexture(): THREE.DataTexture {
   return tex;
 }
 
+/** A box with every edge cut at 45 degrees: a rectangle with chamfered corners, extruded with a one-step bevel. */
+function chamferedBox(width: number, height: number, depth: number, c: number): THREE.BufferGeometry {
+  const w = width / 2;
+  const h = height / 2;
+  const shape = new THREE.Shape([
+    new THREE.Vector2(-w + c, -h),
+    new THREE.Vector2(w - c, -h),
+    new THREE.Vector2(w, -h + c),
+    new THREE.Vector2(w, h - c),
+    new THREE.Vector2(w - c, h),
+    new THREE.Vector2(-w + c, h),
+    new THREE.Vector2(-w, h - c),
+    new THREE.Vector2(-w, -h + c),
+  ]);
+  const inner = depth - 2 * c;
+  const geometry = new THREE.ExtrudeGeometry(shape, {
+    depth: inner,
+    steps: 1,
+    curveSegments: 1,
+    bevelEnabled: true,
+    bevelSegments: 1,
+    bevelThickness: c,
+    bevelSize: c,
+    bevelOffset: -c,
+  });
+  geometry.translate(0, 0, -inner / 2);
+  return geometry;
+}
+
 function createKit(quality: "high" | "low") {
-  const seg = quality === "high" ? 4 : 2;
   const geometries: Record<GeoKey, THREE.BufferGeometry> = {
-    beamA: new RoundedBoxGeometry(2.2, 0.48, 0.48, seg, 0.05),
-    beamB: new RoundedBoxGeometry(1.9, 0.4, 0.4, seg, 0.045),
-    beamC: new RoundedBoxGeometry(1.2, 0.44, 0.44, seg, 0.045),
-    block: new RoundedBoxGeometry(0.74, 0.74, 0.74, seg, 0.06),
+    beamA: chamferedBox(2.2, 0.48, 0.48, 0.05),
+    beamB: chamferedBox(1.9, 0.4, 0.4, 0.045),
+    beamC: chamferedBox(1.2, 0.44, 0.44, 0.045),
+    block: chamferedBox(0.74, 0.74, 0.74, 0.07),
     rod: new THREE.CylinderGeometry(0.12, 0.12, 2.6, quality === "high" ? 32 : 18).rotateZ(Math.PI / 2),
   };
   const bump = basaltTexture();
@@ -212,6 +261,12 @@ type Sim = {
   lastX: number;
   lastY: number;
   strike: boolean;
+  downAt: number;
+  explode: number;
+  explodeV: number;
+  explodeTarget: 0 | 1;
+  opened: boolean;
+  chimed: boolean;
   spinKick: THREE.Vector2;
   cluster: THREE.Quaternion;
   clusterW: THREE.Vector3;
@@ -226,11 +281,14 @@ type Sim = {
   axis: THREE.Vector3;
   m: THREE.Matrix4;
   part: THREE.Matrix4;
+  local: THREE.Matrix4;
+  at: THREE.Vector3;
 };
 
 const ONE = new THREE.Vector3(1, 1, 1);
 const Z = new THREE.Vector3(0, 0, 1);
-const INLAY_LOCAL = new THREE.Matrix4().makeTranslation(0.62, 0, 0);
+const INLAY_AT = new THREE.Vector3(0.62, 0, 0);
+const NO_TURN = new THREE.Quaternion();
 
 function createSim(bodies: BodyLayout[], homes: THREE.Vector3[]): Sim {
   return {
@@ -250,6 +308,12 @@ function createSim(bodies: BodyLayout[], homes: THREE.Vector3[]): Sim {
     lastX: 0,
     lastY: 0,
     strike: false,
+    downAt: 0,
+    explode: 0,
+    explodeV: 0,
+    explodeTarget: 0,
+    opened: false,
+    chimed: false,
     spinKick: new THREE.Vector2(),
     cluster: new THREE.Quaternion(),
     clusterW: new THREE.Vector3(),
@@ -263,6 +327,8 @@ function createSim(bodies: BodyLayout[], homes: THREE.Vector3[]): Sim {
     axis: new THREE.Vector3(),
     m: new THREE.Matrix4(),
     part: new THREE.Matrix4(),
+    local: new THREE.Matrix4(),
+    at: new THREE.Vector3(),
   };
 }
 
@@ -284,8 +350,24 @@ function step(
   homes: THREE.Vector3[],
   meshes: Meshes,
   slots: [string, Slot][],
+  events: { onOpen?: () => void; onSettle?: () => void },
 ) {
   const dt = Math.min(delta, 1 / 30);
+
+  // The joinery: a soft spring toward open or closed, a touch under critical so it lands with a little snap.
+  const k = sim.explodeTarget ? 6 : 10;
+  sim.explodeV += (k * (sim.explodeTarget - sim.explode) - 2 * Math.sqrt(k) * 0.72 * sim.explodeV) * dt;
+  sim.explode += sim.explodeV * dt;
+  const open = Math.max(sim.explode, 0);
+  if (sim.explodeTarget && open > 0.9 && !sim.chimed) {
+    sim.chimed = true;
+    events.onOpen?.();
+  }
+  if (open > 0.4) sim.opened = true;
+  if (!sim.explodeTarget && sim.opened && open < 0.05) {
+    sim.opened = false;
+    events.onSettle?.();
+  }
   const t = state.clock.elapsedTime;
   const camera = state.camera;
 
@@ -298,8 +380,9 @@ function step(
   sim.ray.set(sim.clusterW.x, sim.clusterW.y + 0.07, 0);
   integrate(sim, sim.cluster, sim.ray, dt);
 
-  // Where the cursor meets the z = 0 plane.
-  let cursorActive = sim.over;
+  // Where the cursor meets the z = 0 plane. While the joinery is held open, the cursor stops pushing,
+  // so the opening reads as one clean burst from the centre.
+  let cursorActive = sim.over && !sim.down;
   if (cursorActive) {
     sim.ray.set(sim.ndc.x, sim.ndc.y, 0.5).unproject(camera).sub(camera.position).normalize();
     const k = -camera.position.z / sim.ray.z;
@@ -314,6 +397,9 @@ function step(
     }
   }
 
+  // Tall frames step the camera back, so the assembly keeps its space around it.
+  camera.position.z += ((state.size.width < state.size.height ? 16.5 : 12) - camera.position.z) * 0.2;
+
   // Camera parallax, very slight.
   camera.position.x += ((sim.over ? sim.ndc.x * 0.5 : 0) - camera.position.x) * 0.04;
   camera.position.y += ((sim.over ? sim.ndc.y * 0.3 : 0) - camera.position.y) * 0.04;
@@ -323,7 +409,11 @@ function step(
   for (let i = 0; i < bodies.length; i++) {
     const b = bodies[i];
     const shape = layoutBodies[i];
+    // Open: the cluster spreads across the frame, barely toward the eye.
     sim.home.copy(homes[i]).applyQuaternion(sim.cluster);
+    sim.home.x *= 1 + open * 0.75;
+    sim.home.y *= 1 + open * 0.75;
+    sim.home.z *= 1 + open * 0.15;
     sim.home.y += Math.sin(t * 0.55 + shape.phase) * 0.09;
 
     // Spring home, damped.
@@ -371,11 +461,16 @@ function step(
 
     sim.m.compose(b.p, b.q, ONE);
     for (const part of shape.parts) {
-      sim.part.multiplyMatrices(sim.m, part.local);
+      sim.at.copy(part.pos).addScaledVector(part.slide, open);
+      sim.local.compose(sim.at, part.quat, ONE);
+      sim.part.multiplyMatrices(sim.m, sim.local);
       meshes.instanced[part.key]?.setMatrixAt(part.index, sim.part);
     }
     if (i === 0 && meshes.inlay) {
-      meshes.inlay.matrix.multiplyMatrices(sim.m, INLAY_LOCAL);
+      // The inlay rides on the first beam, wherever it slides.
+      sim.at.copy(INLAY_AT).addScaledVector(shape.parts[0].slide, open);
+      sim.local.compose(sim.at, NO_TURN, ONE);
+      meshes.inlay.matrix.multiplyMatrices(sim.m, sim.local);
       meshes.inlay.matrixWorldNeedsUpdate = true;
     }
   }
@@ -388,7 +483,7 @@ function step(
 
 // ------------------------------------------------------------------ react
 
-function Sculpture({ quality, eventSource, onReady, onGrab, onStrike }: Omit<KigumiSceneProps, "active">) {
+function Sculpture({ quality, eventSource, onReady, onOpen, onSettle, onStrike }: Omit<KigumiSceneProps, "active">) {
   const viewport = useThree((s) => s.viewport);
   const count = quality === "high" ? 15 : 9;
   const kit = useMemo(() => createKit(quality), [quality]);
@@ -418,10 +513,7 @@ function Sculpture({ quality, eventSource, onReady, onGrab, onStrike }: Omit<Kig
       const dy = e.clientY - s.lastY;
       s.lastX = e.clientX;
       s.lastY = e.clientY;
-      if (!s.dragging && Math.hypot(e.clientX - s.startX, e.clientY - s.startY) > 6) {
-        s.dragging = true;
-        onGrab?.();
-      }
+      if (!s.dragging && Math.hypot(e.clientX - s.startX, e.clientY - s.startY) > 6) s.dragging = true;
       if (s.dragging) {
         s.spinKick.x += dx;
         s.spinKick.y += dy;
@@ -429,22 +521,27 @@ function Sculpture({ quality, eventSource, onReady, onGrab, onStrike }: Omit<Kig
     };
     const down = (e: PointerEvent) => {
       const s = get();
-      if (!s) return;
+      if (!s || e.button !== 0) return;
       toNdc(s, e);
       s.down = true;
       s.dragging = false;
+      s.downAt = performance.now();
+      s.explodeTarget = 1;
+      s.chimed = false;
       s.startX = s.lastX = e.clientX;
       s.startY = s.lastY = e.clientY;
     };
     const release = (strike: boolean) => {
       const s = get();
       if (!s) return;
-      if (strike && s.down && !s.dragging) {
+      // A quick click (not a hold, not a drag) also strikes the modules nearby.
+      if (strike && s.down && !s.dragging && performance.now() - s.downAt < 260) {
         s.strike = true;
         onStrike?.();
       }
       s.down = false;
       s.dragging = false;
+      s.explodeTarget = 0;
     };
     const up = () => release(true);
     const cancel = () => release(false);
@@ -461,11 +558,16 @@ function Sculpture({ quality, eventSource, onReady, onGrab, onStrike }: Omit<Kig
       else if (e.key === "ArrowUp") s.spinKick.y -= 40;
       else if (e.key === "ArrowDown") s.spinKick.y += 40;
       else if (e.key === "Enter" || e.key === " ") {
-        s.ndc.set(0, 0);
-        s.strike = true;
-        onStrike?.();
+        if (!e.repeat) {
+          s.explodeTarget = 1;
+          s.chimed = false;
+        }
       } else return;
       e.preventDefault();
+    };
+    const keyUp = (e: KeyboardEvent) => {
+      const s = get();
+      if (s && (e.key === "Enter" || e.key === " ")) s.explodeTarget = 0;
     };
     el.addEventListener("pointermove", move);
     el.addEventListener("pointerdown", down);
@@ -473,6 +575,7 @@ function Sculpture({ quality, eventSource, onReady, onGrab, onStrike }: Omit<Kig
     el.addEventListener("pointercancel", cancel);
     el.addEventListener("pointerleave", leave);
     el.addEventListener("keydown", key);
+    el.addEventListener("keyup", keyUp);
     return () => {
       el.removeEventListener("pointermove", move);
       el.removeEventListener("pointerdown", down);
@@ -480,12 +583,13 @@ function Sculpture({ quality, eventSource, onReady, onGrab, onStrike }: Omit<Kig
       el.removeEventListener("pointercancel", cancel);
       el.removeEventListener("pointerleave", leave);
       el.removeEventListener("keydown", key);
+      el.removeEventListener("keyup", keyUp);
     };
-  }, [eventSource, onGrab, onStrike]);
+  }, [eventSource, onStrike]);
 
   useFrame((state, delta) => {
     sim.current ??= createSim(shape.bodies, homes);
-    step(sim.current, state, delta, shape.bodies, homes, meshes.current, shape.slots);
+    step(sim.current, state, delta, shape.bodies, homes, meshes.current, shape.slots, { onOpen, onSettle });
     if (sim.current.frames === 3) onReady?.();
   });
 
@@ -524,22 +628,21 @@ function setupEnvironment({ gl, scene }: RootState) {
   pmrem.dispose();
 }
 
-export default function KigumiScene({ active, quality, eventSource, onReady, onGrab, onStrike }: KigumiSceneProps) {
+export default function KigumiScene({ active, quality, eventSource, onReady, onOpen, onSettle, onStrike }: KigumiSceneProps) {
   return (
     <Canvas
       frameloop={active ? "always" : "never"}
       dpr={quality === "high" ? [1, 1.75] : [1, 1.35]}
       camera={{ position: [0, 0, 12], fov: 30, near: 0.1, far: 60 }}
-      gl={{ antialias: true, powerPreference: "high-performance", alpha: false, stencil: false }}
+      gl={{ antialias: true, powerPreference: "high-performance", alpha: true, stencil: false }}
       onCreated={setupEnvironment}
       style={{ position: "absolute", inset: 0 }}
     >
-      <color attach="background" args={["#0b0b0d"]} />
       <directionalLight position={[-5, 6, 7]} intensity={2.2} color="#fff4e8" />
       <directionalLight position={[6, 2.5, -4]} intensity={2.4} color="#ffffff" />
       <directionalLight position={[3, -4, -6]} intensity={7} color="#28427b" />
       <pointLight position={[0, -4, 4]} intensity={6} distance={14} color="#ffd9bd" />
-      <Sculpture quality={quality} eventSource={eventSource} onReady={onReady} onGrab={onGrab} onStrike={onStrike} />
+      <Sculpture quality={quality} eventSource={eventSource} onReady={onReady} onOpen={onOpen} onSettle={onSettle} onStrike={onStrike} />
     </Canvas>
   );
 }

@@ -9,9 +9,11 @@ import { Registration } from "@/components/ui/Registration";
 import { VideoLoop } from "@/components/ui/VideoLoop";
 
 /**
- * The horizon reel: a black monolith on volcanic stone in Pacific mist.
- * A muted twelve-second loop (crossfaded, so it never jumps) plays while
- * the stage is on screen; PLAY ▶ REEL opens the full film with its sound.
+ * Calm surface, kinetic core. The cover is the horizon loop: a black
+ * monolith on volcanic stone in Pacific mist, muted, twelve seconds,
+ * crossfaded so it never jumps. PLAY ▶ REEL opens the studio reel with its
+ * sound: joinery opening on a vermilion core, an orbital ring, ripples on
+ * black stone water.
  */
 export function Reel() {
   const [open, setOpen] = useState(false);
@@ -57,7 +59,7 @@ export function Reel() {
           </span>
           <span className="text-[clamp(3rem,10vw,9rem)] font-light tracking-[-0.04em]">REEL</span>
         </span>
-        <span className="sr-only">Play reel, with sound: the horizon film</span>
+        <span className="sr-only">Play reel, with sound: the studio reel</span>
         <span aria-hidden="true" className="mono absolute bottom-5 left-5 text-washi/70">Horizon · Kuchimoto coast · 2026</span>
         <span aria-hidden="true" className="mono absolute right-5 bottom-5 text-washi/70">Sound on ↗</span>
       </button>
@@ -110,11 +112,12 @@ function ReelModal({ onClose }: { onClose: () => void }) {
       >
         <video
           className="aspect-video w-full rounded-[var(--radius-card)] bg-black"
-          src="/videos/kuchimoto-horizon-reel-sound.mp4"
-          poster="/videos/kuchimoto-horizon-reel-poster.jpg"
+          src="/videos/kuchimoto-studio-reel.mp4"
+          poster="/videos/kuchimoto-studio-reel-poster.jpg"
           controls
           autoPlay
           playsInline
+          preload="none"
         />
         <button
           ref={close}

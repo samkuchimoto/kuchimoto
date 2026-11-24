@@ -5,7 +5,7 @@ import { getImageProps } from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { preload } from "react-dom";
 import { useAudio } from "@/components/audio/AudioEngine";
-import { canRun3D, useInView } from "./useInView";
+import { isDesktop, useInView } from "./useInView";
 
 const MonolithScene = dynamic(() => import("./MonolithScene"), { ssr: false });
 
@@ -45,20 +45,24 @@ function preloadPosters() {
   });
 }
 
-/** A desktop: a fine pointer that can hover, a wide window, and WebGL without reduced motion. */
-function isDesktop(): boolean {
-  return window.matchMedia("(hover: hover) and (pointer: fine)").matches && window.innerWidth >= 1024 && canRun3D();
-}
-
 /**
- * The hero's dark viewport. Every screen paints a still of the monolith at
- * once. On a desktop, three.js is imported on the visitor's first move,
+ * The monolith's dark viewport (the Lab's open-air study). Every screen
+ * paints a still of the monolith at once. On a desktop, three.js is imported on the visitor's first move,
  * scroll or key (or after a quiet moment) and the live scene fades in over
  * the still; off screen it stops rendering. Phones and tablets keep the
  * still, breathing slowly in CSS, so their scroll never waits on WebGL.
  */
-export function MonolithStage({ className = "" }: { className?: string }) {
-  preloadPosters();
+export function MonolithStage({
+  className = "",
+  label = "Fig. 01 · Monolith, open-air study",
+  priority = true,
+}: {
+  className?: string;
+  label?: string;
+  /** Above the fold: preload the still and fetch it first. */
+  priority?: boolean;
+}) {
+  if (priority) preloadPosters();
   const ref = useRef<HTMLDivElement>(null);
   const visible = useInView(ref, "80px");
   const [live, setLive] = useState(false);
@@ -94,7 +98,7 @@ export function MonolithStage({ className = "" }: { className?: string }) {
       role="application"
       aria-roledescription="3D sculpture"
       aria-label="Interactive 3D sculpture: two interlocking stones, volcanic basalt below and black urushi lacquer above, held by a vermilion pin. Hold the mouse button or the space bar to open the gap between them; the arrow keys turn it."
-      className={`monolith-stage relative isolate touch-pan-y overflow-hidden rounded-[var(--radius-stage)] bg-sumi select-none ${live ? "cursor-grab active:cursor-grabbing" : ""} ${className}`}
+      className={`stage-dark relative isolate touch-pan-y overflow-hidden rounded-[var(--radius-stage)] bg-sumi select-none ${live ? "cursor-grab active:cursor-grabbing" : ""} ${className}`}
     >
       <picture>
         <source media="(min-width: 640px)" srcSet={POSTER_WIDE.srcSet} sizes={POSTER_WIDE.sizes} />
@@ -102,9 +106,9 @@ export function MonolithStage({ className = "" }: { className?: string }) {
         <img
           {...POSTER_TALL}
           alt=""
-          loading="eager"
-          fetchPriority="high"
-          className={`monolith-still absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${ready ? "opacity-0" : "opacity-100"}`}
+          loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : "auto"}
+          className={`stage-still absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${ready ? "opacity-0" : "opacity-100"}`}
         />
       </picture>
       {live && (
@@ -114,7 +118,7 @@ export function MonolithStage({ className = "" }: { className?: string }) {
       )}
       <div className="pointer-events-none absolute inset-0 flex flex-col justify-between p-4 text-washi/70 sm:p-6">
         <div className="flex justify-between gap-4">
-          <span className="mono">Fig. 01 · Monolith, open-air study</span>
+          <span className="mono">{label}</span>
           <span className="mono hidden sm:block">Basalt · Urushi · Vermilion pin</span>
         </div>
         <div className="flex items-end justify-between gap-4">

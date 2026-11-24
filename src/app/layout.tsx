@@ -26,17 +26,17 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Kuchimoto",
-    title: "Kuchimoto · Form. Silence. Living Systems.",
+    title: "Kuchimoto · Crafted in Code. Built to Endure.",
     description: SITE.description,
     url: "/",
     locale: "en_US",
-    images: [{ url: "/og/kuchimoto-monolith.jpg", width: 1200, height: 630, alt: "Kuchimoto: a basalt and black lacquer monolith held by a vermilion pin" }],
+    images: [{ url: "/og/kuchimoto-kigumi.jpg", width: 1200, height: 630, alt: "Kuchimoto: crafted in code, built to endure. Interlocking joinery in black lacquer, basalt and titanium" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kuchimoto · Form. Silence. Living Systems.",
+    title: "Kuchimoto · Crafted in Code. Built to Endure.",
     description: SITE.description,
-    images: ["/og/kuchimoto-monolith.jpg"],
+    images: ["/og/kuchimoto-kigumi.jpg"],
   },
 };
 

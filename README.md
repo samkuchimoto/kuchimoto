@@ -25,7 +25,7 @@ npm run lint     # ESLint, then a check that no em dash is used anywhere
 | The seven projects and their case studies | `src/data/projects.ts` |
 | Pages | `src/app/` (`/`, `/work`, `/work/[slug]`, `/studio`, `/lab`, `/contact`, `/legal`) |
 | Home sections | `src/components/home/` |
-| 3D hero monolith (basalt, urushi, vermilion pin), the coastal mist shader, the Lab's Kigumi physics | `src/components/webgl/` |
+| 3D hero Kigumi sculpture (hold to open the joinery), the Lab's monolith, the coastal mist shader | `src/components/webgl/` |
 | Sound (Web Audio, no audio files) | `src/components/audio/` |
 | Header, menu, footer, preloader, sumi route curtain, smooth scroll | `src/components/layout/` |
 | Scope inquiry form and its API | `src/components/contact/InquiryForm.tsx`, `src/app/api/inquire/route.ts` |
@@ -37,18 +37,18 @@ npm run lint     # ESLint, then a check that no em dash is used anywhere
 Drop a new file at the same path to replace an asset:
 
 - Project images: `public/images/projects/<slug>.jpg` (about 1600 px wide).
-- Studio images: `public/images/studio/`. `monolith-poster.jpg` (wide) and
-  `monolith-poster-tall.jpg` (phones) are stills of the live hero scene:
+- Studio images: `public/images/studio/`. `kigumi-poster.jpg` (wide) and
+  `kigumi-poster-tall.jpg` (phones) are stills of the live hero scene:
   phones keep the still, desktops fade the live scene in over it.
-  `kigumi-poster*.jpg` do the same for the Lab's Kigumi experiment.
+  `monolith-poster*.jpg` do the same for the Lab's monolith.
 - Videos: `public/videos/<name>.mp4` and `.webm`, each with `<name>-poster.jpg`.
   `kuchimoto-horizon-reel` is the muted 12-second loop (crossfaded);
-  `kuchimoto-horizon-reel-sound.mp4` plays with sound in the modal.
-- The ink film: drop `public/videos/kuchimoto-inoue-ink.mp4` (and a `.webm`
-  if you have one) and replace `kuchimoto-inoue-ink-poster.jpg` with its
-  first frame. The manifesto card switches from the still to the film on the
-  next build.
-- Link previews (Facebook, LinkedIn, X): `public/og/kuchimoto-monolith.jpg`
+  `kuchimoto-studio-reel.mp4` (joinery, orbital ring, ripples) plays with
+  sound when PLAY REEL is clicked.
+- The ink film: `public/videos/kuchimoto-inoue-ink.mp4` and `.webm` (brush
+  stroke and vermilion seal, looped), with `kuchimoto-inoue-ink-poster.jpg`
+  as its first frame. Replace the three files to change the film.
+- Link previews (Facebook, LinkedIn, X): `public/og/kuchimoto-kigumi.jpg`
   and `public/og/<slug>.jpg`, 1200 × 630. Rename the file when the image
   changes: Facebook caches previews by image address.
 

@@ -27,10 +27,8 @@ export function canRun3D(): boolean {
   }
 }
 
-/** Phones and tablets get the lighter scene. */
-export function isLowPower(): boolean {
-  const coarse = window.matchMedia("(pointer: coarse)").matches;
-  const small = window.innerWidth < 768;
-  const cores = navigator.hardwareConcurrency ?? 8;
-  return coarse || small || cores <= 4;
+/** A desktop: a fine pointer that can hover, a wide window, and WebGL without reduced motion. */
+export function isDesktop(): boolean {
+  return window.matchMedia("(hover: hover) and (pointer: fine)").matches && window.innerWidth >= 1024 && canRun3D();
 }
+

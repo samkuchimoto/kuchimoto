@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description:
     "Seven live production platforms engineered and operated by Kuchimoto LLC: physics engines, global service platforms, B2B recruiting and staffing, civic commerce, luxury commerce and a mobile app.",
   alternates: { canonical: "/work" },
-  openGraph: { url: "/work", title: "Work · Kuchimoto", images: [{ url: "/og/kuchimoto-monolith.jpg", width: 1200, height: 630 }] },
+  openGraph: { url: "/work", title: "Work · Kuchimoto", images: [{ url: "/og/kuchimoto-kigumi.jpg", width: 1200, height: 630 }] },
 };
 
 export default function WorkPage() {

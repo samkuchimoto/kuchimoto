@@ -8,14 +8,14 @@ import { Registration } from "@/components/ui/Registration";
 import { Reveal } from "@/components/ui/Reveal";
 import { VideoLoop } from "@/components/ui/VideoLoop";
 import { MistField } from "@/components/webgl/MistField";
-import { KigumiStage } from "@/components/webgl/KigumiStage";
+import { MonolithStage } from "@/components/webgl/MonolithStage";
 
 export const metadata: Metadata = {
   title: "Lab",
   description:
     "Kuchimoto Lab: physics engines, procedural WebGL, generative Web Audio and the autonomous operations running across Kuchimoto's live platforms.",
   alternates: { canonical: "/lab" },
-  openGraph: { url: "/lab", title: "Lab · Kuchimoto", images: [{ url: "/og/kuchimoto-monolith.jpg", width: 1200, height: 630 }] },
+  openGraph: { url: "/lab", title: "Lab · Kuchimoto", images: [{ url: "/og/kuchimoto-kigumi.jpg", width: 1200, height: 630 }] },
 };
 
 const OPERATIONS = [
@@ -108,17 +108,18 @@ export default function LabPage() {
           <div>
             <p className="mono text-washi/50">Exp. 02 · Procedural WebGL</p>
             <h2 id="exp-02" className="display display-md mt-5">
-              Kigumi physics study
+              Monolith, open-air study
             </h2>
           </div>
           <p className="max-w-[52ch] leading-relaxed text-washi/70">
-            Joinery modules in urushi lacquer, basalt and titanium, sprung to a turning ellipsoid. No model file:
-            five procedural shapes, instanced, a dozen draw calls for the whole sculpture. Drag it, strike it, or use the arrow keys.
+            Two chamfered volumes, volcanic basalt and black urushi, locked by a stepped scarf joint around one
+            vermilion pin. No model, texture or HDR file: the stone grain and the open-air light are made in code.
+            Hold to open the gap; on a desktop, the eye follows your cursor.
           </p>
         </div>
         <div className="relative mt-12">
           <Registration count={5} tone="text-washi/40" className="absolute -top-[18px] right-0 left-0" />
-          <KigumiStage className="h-[min(120vw,560px)] shadow-[0_0_0_1px_var(--color-hairline-dark)] sm:h-[clamp(440px,74vh,820px)]" label="Exp. 02 · Kigumi physics" priority={false} />
+          <MonolithStage className="h-[min(120vw,560px)] shadow-[0_0_0_1px_var(--color-hairline-dark)] sm:h-[clamp(440px,74vh,820px)]" label="Exp. 02 · Monolith, open-air study" priority={false} />
           <Registration count={5} tone="text-washi/40" className="absolute right-0 -bottom-[18px] left-0" />
         </div>
       </section>

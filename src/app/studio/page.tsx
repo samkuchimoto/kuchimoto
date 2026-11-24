@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description:
     "Kuchimoto Studio: custom websites, web applications and AI systems engineered from first principles. Fixed price on a written scope, from $5,000. You own 100% of the code.",
   alternates: { canonical: "/studio" },
-  openGraph: { url: "/studio", title: "Studio · Kuchimoto", images: [{ url: "/og/kuchimoto-monolith.jpg", width: 1200, height: 630 }] },
+  openGraph: { url: "/studio", title: "Studio · Kuchimoto", images: [{ url: "/og/kuchimoto-kigumi.jpg", width: 1200, height: 630 }] },
 };
 
 export default function StudioPage() {
