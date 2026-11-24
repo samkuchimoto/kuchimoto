@@ -13,7 +13,7 @@ export const SITE = {
   headline: "Custom software & digital architecture, engineered with Japanese precision.",
   description:
     "Kuchimoto LLC builds custom websites, web applications and AI systems from first principles. No templates, no no-code. 100% source code ownership. Custom builds from $5,000.",
-  metadataLine: "WYOMING, USA · GLOBAL OPERATIONS · CUSTOM BUILDS FROM $5,000",
+  metadataLine: "KUCHIMOTO LLC · WYOMING / GLOBAL · ART, ARCHITECTURE & CUSTOM SYSTEMS",
 } as const;
 
 export const NAV = [
@@ -37,8 +37,8 @@ export const TRACKS: {
   {
     id: "flagship",
     index: "01",
-    title: "Flagship Avant-Garde Website",
-    body: "Custom Next.js + WebGL/Motion brand & conversion architecture.",
+    title: "Flagship Digital Worlds & Websites",
+    body: "Bespoke design, WebGL craft, sub-second custom architecture.",
     price: "From $5,000",
     duration: "3–4 weeks",
     includes: [
@@ -51,8 +51,8 @@ export const TRACKS: {
   {
     id: "application",
     index: "02",
-    title: "Custom Web Application / SaaS MVP",
-    body: "Full-stack platforms, dashboards, Stripe billing, auth, and custom APIs.",
+    title: "Production Platforms & Applications",
+    body: "Full-stack web/mobile systems, real-time engines, end-to-end engineering.",
     price: "From $10,000",
     duration: "4–8 weeks",
     includes: [
@@ -65,8 +65,8 @@ export const TRACKS: {
   {
     id: "ai",
     index: "03",
-    title: "AI Workflows & Technical Infrastructure",
-    body: "Custom AI agents, interactive calculators/engines, and automated operations.",
+    title: "AI & Custom Technical Infrastructure",
+    body: "Autonomous workflows, computational tools, sovereign architecture.",
     price: "Custom Scope",
     duration: "Scoped in writing",
     includes: [
@@ -78,18 +78,15 @@ export const TRACKS: {
   },
 ];
 
-export const NON_NEGOTIABLES = [
-  "100% Source Code Ownership",
-  "Zero No-Code or Plugin Bloat",
-  "Sub-Second Edge Performance",
-  "Direct Principal Engineering",
-] as const;
+/** The one quiet line under the commissions index. */
+export const COMMISSION_NOTE =
+  "Engagements by written scope · Commissions from $5,000 · 100% source code ownership · Zero no-code dependencies";
 
 export const BUDGETS = ["$5,000 – $10,000", "$10,000 – $25,000", "$25,000 – $50,000", "$50,000+"] as const;
 export const TIMELINES = ["As soon as possible", "Within 1–3 months", "Within 3–6 months", "Exploring for now"] as const;
 export const TRACK_OPTIONS = [
-  { id: "flagship", label: "Flagship website" },
-  { id: "application", label: "Web application / SaaS" },
+  { id: "flagship", label: "Digital world / website" },
+  { id: "application", label: "Platform / application" },
   { id: "ai", label: "AI & infrastructure" },
   { id: "unsure", label: "Not sure yet" },
 ] as const;

@@ -24,6 +24,7 @@ export function ProjectCard({
       <TapLink
         href={href}
         track
+        data-dark={project.image.dark ? "" : undefined}
         className={`group relative block overflow-hidden rounded-[var(--radius-card)] ${
           feature ? "aspect-[4/5] sm:aspect-[16/9] lg:aspect-[21/9]" : "aspect-[4/3] sm:aspect-[16/11]"
         }`}

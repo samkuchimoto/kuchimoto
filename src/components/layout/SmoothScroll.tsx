@@ -1,12 +1,13 @@
 "use client";
 
-import Lenis from "lenis";
+import type Lenis from "lenis";
 import { usePathname } from "next/navigation";
 import { createContext, useContext, useEffect, useMemo, useRef } from "react";
 
-// Inertial scroll with Lenis on pointer devices. Touch keeps the phone's
-// own native scroll (Lenis leaves it alone by default), and reduced motion
-// gets plain scrolling. Menus and modals pause it through useScrollLock.
+// Inertial scroll with Lenis on mouse and trackpad devices only. Phones and
+// tablets keep their own native scroll and never load the work of starting
+// Lenis (it measures the page and restyles the root), and reduced motion
+// gets plain scrolling. Menus and modals pause it through useScrollControl.
 
 type ScrollControl = { lock: () => void; unlock: () => void; toTop: () => void };
 
@@ -17,11 +18,17 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const instance = new Lenis({ autoRaf: true, lerp: 0.1, wheelMultiplier: 1 });
-    lenis.current = instance;
+    if (window.matchMedia("(prefers-reduced-motion: reduce), (pointer: coarse)").matches) return;
+    let instance: Lenis | null = null;
+    let cancelled = false;
+    void import("lenis").then(({ default: LenisClass }) => {
+      if (cancelled) return;
+      instance = new LenisClass({ autoRaf: true, lerp: 0.1, wheelMultiplier: 1 });
+      lenis.current = instance;
+    });
     return () => {
-      instance.destroy();
+      cancelled = true;
+      instance?.destroy();
       lenis.current = null;
     };
   }, []);

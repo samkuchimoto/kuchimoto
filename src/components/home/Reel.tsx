@@ -7,7 +7,11 @@ import { Close, Play } from "@/components/ui/Icons";
 import { Registration } from "@/components/ui/Registration";
 import { VideoLoop } from "@/components/ui/VideoLoop";
 
-/** The studio reel: a muted ten-second loop; PLAY ▶ REEL opens the full reel with sound. */
+/**
+ * The horizon reel: a black monolith on volcanic stone in Pacific mist.
+ * A muted twelve-second loop (crossfaded, so it never jumps) plays while
+ * the stage is on screen; PLAY ▶ REEL opens the full film with its sound.
+ */
 export function Reel() {
   const [open, setOpen] = useState(false);
   const audio = useAudio();
@@ -37,9 +41,9 @@ export function Reel() {
         className="group relative block aspect-[4/5] w-full overflow-hidden rounded-[var(--radius-stage)] bg-sumi sm:aspect-[16/8]"
       >
         <VideoLoop
-          src={{ mp4: "/videos/reel-loop.mp4", webm: "/videos/reel-loop.webm" }}
-          poster="/videos/reel-loop-poster.jpg"
-          className="absolute inset-0 h-full w-full object-cover opacity-90 transition-transform duration-[1.6s] ease-[var(--ease-out-expo)] group-hover:scale-[1.02]"
+          src={{ mp4: "/videos/kuchimoto-horizon-reel.mp4", webm: "/videos/kuchimoto-horizon-reel.webm" }}
+          poster="/videos/kuchimoto-horizon-reel-poster.jpg"
+          className="absolute inset-0 h-full w-full object-cover object-[66%_50%] opacity-90 transition-transform duration-[1.6s] ease-[var(--ease-out-expo)] group-hover:scale-[1.02]"
         />
         <div className="absolute inset-0 bg-sumi/20" />
         <span
@@ -53,7 +57,7 @@ export function Reel() {
           </span>
           <span className="text-[clamp(3rem,10vw,9rem)] font-light tracking-[-0.04em]">REEL</span>
         </span>
-        <span className="mono absolute bottom-5 left-5 text-washi/70">Studio reel · 2026</span>
+        <span className="mono absolute bottom-5 left-5 text-washi/70">Horizon · Kuchimoto coast · 2026</span>
         <span className="mono absolute right-5 bottom-5 text-washi/70">Sound on ↗</span>
       </button>
       <Registration className="mt-[5px]" />
@@ -96,8 +100,8 @@ function ReelModal({ onClose }: { onClose: () => void }) {
       <div className="rise-in relative w-full max-w-[1400px]" onClick={(e) => e.stopPropagation()}>
         <video
           className="aspect-video w-full rounded-[var(--radius-card)] bg-black"
-          src="/videos/reel-full.mp4"
-          poster="/videos/reel-full-poster.jpg"
+          src="/videos/kuchimoto-horizon-reel-sound.mp4"
+          poster="/videos/kuchimoto-horizon-reel-poster.jpg"
           controls
           autoPlay
           playsInline

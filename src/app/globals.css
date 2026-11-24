@@ -105,11 +105,6 @@ html.lenis body {
     letter-spacing: -0.035em;
     line-height: 1;
   }
-  /* A washi outline painted under the glyphs, so a stroke behind reads as passing behind. */
-  .ink-halo {
-    -webkit-text-stroke: 0.14em var(--color-washi);
-    paint-order: stroke fill;
-  }
   .container-k {
     width: 100%;
     margin-inline: auto;
@@ -140,7 +135,7 @@ html.lenis body {
   z-index: 100;
   background: var(--color-sumi);
   color: var(--color-washi);
-  animation: pl-lift 0.55s var(--ease-in-out-quint) 0.65s forwards;
+  animation: pl-lift 0.6s var(--ease-in-out-quint) 0.6s forwards;
   will-change: transform;
 }
 .preloader-bar {
@@ -159,7 +154,7 @@ html.lenis body {
   background: var(--color-washi);
   transform-origin: left center;
   transform: scaleX(0);
-  animation: pl-fill 0.65s var(--ease-in-out-quint) forwards;
+  animation: pl-fill 0.6s var(--ease-in-out-quint) forwards;
 }
 .preloader-bar > b {
   position: absolute;
@@ -168,7 +163,7 @@ html.lenis body {
   width: 8px;
   height: 3px;
   background: var(--color-vermilion);
-  animation: pl-spark 0.65s var(--ease-in-out-quint) forwards;
+  animation: pl-spark 0.6s var(--ease-in-out-quint) forwards;
 }
 .preloader-digit {
   display: inline-block;
@@ -180,7 +175,7 @@ html.lenis body {
   display: block;
   white-space: pre-line;
   line-height: 1em;
-  animation: pl-roll 0.65s steps(101, jump-none) forwards;
+  animation: pl-roll 0.6s steps(101, jump-none) forwards;
 }
 @keyframes pl-roll {
   to {
@@ -254,19 +249,63 @@ html[data-js] [data-reveal][data-shown] {
   }
 }
 
-/* --------------------------------------------------------- page enter */
-.page-enter {
-  animation: page-enter 0.7s var(--ease-out-expo) both;
+/* ------------------------------------------------------ route curtain
+ * A sumi panel rises over the page on a link click, the next page renders
+ * beneath it, and it leaves upward (RouteCurtain). 0.45 s each way.
+ */
+.curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  background: var(--color-sumi);
+  transform: translateY(100%);
+  pointer-events: none;
+  will-change: transform;
 }
-@keyframes page-enter {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
+
+/* ------------------------------------------------------- hero monolith */
+.monolith-stage {
+  background:
+    radial-gradient(52% 78% at 58% 46%, rgb(74 74 80 / 0.3), transparent 72%),
+    linear-gradient(180deg, #0b0b0d 0%, #0f0f12 62%, #0b0b0d 100%);
+}
+/* Phones keep the still: it breathes on the same nine-second tide as the live scene. */
+@media (prefers-reduced-motion: no-preference) {
+  .monolith-still {
+    transform-origin: 55% 55%;
+    animation: monolith-breathe 9s ease-in-out 1.2s infinite alternate;
   }
 }
+@keyframes monolith-breathe {
+  to {
+    transform: scale(1.025);
+  }
+}
+
+/* -------------------------------------------- philosophy brush stroke */
+html[data-js] .ink-wipe {
+  opacity: 1;
+  transform: none;
+}
+.ink-wipe-cover {
+  display: none;
+}
+html[data-js] .ink-wipe-cover {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -30%;
+  width: 135%;
+  background: linear-gradient(90deg, rgb(244 242 237 / 0) 0%, var(--color-washi) 22%);
+  transition: transform 2.8s var(--ease-out-expo) 0.15s;
+}
+html[data-js] .ink-wipe[data-shown] .ink-wipe-cover {
+  transform: translateX(100%);
+}
 @media (prefers-reduced-motion: reduce) {
-  .page-enter {
-    animation: none;
+  html[data-js] .ink-wipe-cover {
+    display: none;
   }
 }
 

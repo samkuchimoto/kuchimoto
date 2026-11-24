@@ -13,7 +13,7 @@ export function VideoLoop({
   className = "",
   label,
 }: {
-  src: { mp4: string; webm: string };
+  src: { mp4: string; webm?: string };
   poster: string;
   className?: string;
   label?: string;
@@ -55,7 +55,7 @@ export function VideoLoop({
       aria-label={label}
       aria-hidden={label ? undefined : true}
     >
-      <source src={src.webm} type="video/webm" />
+      {src.webm && <source src={src.webm} type="video/webm" />}
       <source src={src.mp4} type="video/mp4" />
     </video>
   );

@@ -7,7 +7,7 @@ import { PillLink } from "@/components/ui/PillLink";
 import { Registration } from "@/components/ui/Registration";
 import { Reveal } from "@/components/ui/Reveal";
 import { VideoLoop } from "@/components/ui/VideoLoop";
-import { InkField } from "@/components/webgl/InkField";
+import { MistField } from "@/components/webgl/MistField";
 import { KigumiStage } from "@/components/webgl/KigumiStage";
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   description:
     "Kuchimoto Lab: physics engines, procedural WebGL, generative Web Audio and the autonomous operations running across Kuchimoto's live platforms.",
   alternates: { canonical: "/lab" },
-  openGraph: { url: "/lab", title: "Lab · Kuchimoto", images: [{ url: "/og/kuchimoto.jpg", width: 1200, height: 630 }] },
+  openGraph: { url: "/lab", title: "Lab · Kuchimoto", images: [{ url: "/og/kuchimoto-monolith.jpg", width: 1200, height: 630 }] },
 };
 
 const OPERATIONS = [
@@ -50,7 +50,7 @@ export default function LabPage() {
   return (
     <div data-dark="" className="bg-sumi text-washi">
       <section className="relative isolate overflow-hidden" aria-labelledby="lab-title">
-        <InkField />
+        <MistField />
         <div className="container-k relative pt-32 pb-24 sm:pt-44 sm:pb-36">
           <p className="mono text-washi/60">Kuchimoto Lab · Research &amp; development</p>
           <h1 id="lab-title" className="display mt-6 text-[clamp(4.5rem,17vw,16rem)] text-washi">

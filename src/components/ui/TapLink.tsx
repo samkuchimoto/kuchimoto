@@ -23,6 +23,8 @@ export function TapLink({
   style?: React.CSSProperties;
   children: React.ReactNode;
   "aria-label"?: string;
+  /** Marks a dark surface for the header's wordmark (see Header). */
+  "data-dark"?: string;
 }) {
   const audio = useAudio();
   const onPointerMove = track

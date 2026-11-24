@@ -13,8 +13,8 @@ const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
   display: "swap",
   weight: ["400", "500"],
-  // Small metadata labels only: not worth competing with the hero for bandwidth.
-  preload: false,
+  // Preloaded like the display face: the labels in the first screen use it,
+  // and a font found late in the stylesheet would hold the first paint.
 });
 
 export const metadata: Metadata = {
@@ -26,17 +26,17 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Kuchimoto",
-    title: "Kuchimoto · Crafted in Code. Built to Endure.",
+    title: "Kuchimoto · Form. Silence. Living Systems.",
     description: SITE.description,
     url: "/",
     locale: "en_US",
-    images: [{ url: "/og/kuchimoto.jpg", width: 1200, height: 630, alt: "Kuchimoto: crafted in code, built to endure" }],
+    images: [{ url: "/og/kuchimoto-monolith.jpg", width: 1200, height: 630, alt: "Kuchimoto: a basalt and black lacquer monolith held by a vermilion pin" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kuchimoto · Crafted in Code. Built to Endure.",
+    title: "Kuchimoto · Form. Silence. Living Systems.",
     description: SITE.description,
-    images: ["/og/kuchimoto.jpg"],
+    images: ["/og/kuchimoto-monolith.jpg"],
   },
 };
 

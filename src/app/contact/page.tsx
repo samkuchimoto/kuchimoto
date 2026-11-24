@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description:
     "Request a written scope and a fixed price for a custom website, web application or AI system. Custom builds from $5,000. Answer within 24 hours.",
   alternates: { canonical: "/contact" },
-  openGraph: { url: "/contact", title: "Start a project · Kuchimoto", images: [{ url: "/og/kuchimoto.jpg", width: 1200, height: 630 }] },
+  openGraph: { url: "/contact", title: "Start a project · Kuchimoto", images: [{ url: "/og/kuchimoto-monolith.jpg", width: 1200, height: 630 }] },
 };
 
 const one = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v) ?? "";

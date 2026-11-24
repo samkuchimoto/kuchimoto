@@ -17,7 +17,8 @@ export type Project = {
   /** One line for cards and the index. */
   short: string;
   filters: ProjectFilter[];
-  image: { src: string; alt: string; tone: string };
+  /** dark: the header's wordmark turns light while this image passes under it. */
+  image: { src: string; alt: string; tone: string; dark?: boolean };
   video?: { mp4: string; webm: string; poster: string };
   og: string;
   challenge: string;
@@ -42,6 +43,7 @@ export const PROJECTS: Project[] = [
       src: "/images/projects/manakael.jpg",
       alt: "A satellite radiator array in orbit above the curve of the Earth",
       tone: "#212329",
+      dark: true,
     },
     og: "/og/manakael.jpg",
     challenge:
@@ -246,6 +248,7 @@ export const PROJECTS: Project[] = [
       src: "/images/projects/ittsui-app.jpg",
       alt: "Two smartphones on a dark stone table beside a cup of tea, in dappled maple shade",
       tone: "#463528",
+      dark: true,
     },
     og: "/og/ittsui-app.jpg",
     challenge:

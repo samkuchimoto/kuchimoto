@@ -3,6 +3,7 @@
 import { AudioProvider } from "@/components/audio/AudioEngine";
 import { Attribution } from "./Attribution";
 import { RevealObserver } from "./RevealObserver";
+import { RouteCurtain } from "./RouteCurtain";
 import { SmoothScroll } from "./SmoothScroll";
 
 export function Providers({ children }: { children: React.ReactNode }) {
@@ -12,6 +13,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
         <Attribution />
         <RevealObserver />
         {children}
+        <RouteCurtain />
       </SmoothScroll>
     </AudioProvider>
   );
