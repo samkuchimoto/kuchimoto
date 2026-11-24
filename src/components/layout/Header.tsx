@@ -40,6 +40,17 @@ function useDarkUnderHeader(pathname: string): boolean {
   return dark;
 }
 
+/** True once the page has moved off its very top. */
+function useScrolled(): boolean {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return scrolled;
+}
+
 export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -48,6 +59,7 @@ export function Header() {
   const card = useRef<HTMLDivElement>(null);
   const button = useRef<HTMLButtonElement>(null);
   const dark = useDarkUnderHeader(pathname);
+  const scrolled = useScrolled();
 
   // A navigation closes the menu (adjusting state during render, not in an effect).
   if (open && openedAt !== pathname) {
@@ -83,8 +95,16 @@ export function Header() {
       <Link
         href="/"
         aria-label="Kuchimoto, home"
-        className={`fixed top-5 left-4 z-50 flex items-center gap-1.5 transition-colors duration-500 sm:top-7 sm:left-8 lg:left-[52px] ${
+        className={`fixed top-4 left-1 z-50 flex h-10 items-center gap-1.5 rounded-full px-3 transition-[color,background-color,box-shadow] duration-500 sm:top-6 sm:left-5 lg:left-[40px] ${
           dark ? "text-washi" : "text-ink"
+        } ${
+          // Once the page scrolls, the wordmark sits on a frosted pill like the controls on the right,
+          // so it never reads over a headline passing underneath.
+          scrolled
+            ? dark
+              ? "bg-sumi/60 shadow-[0_0_0_1px_var(--color-hairline-dark)] backdrop-blur-md"
+              : "bg-surface/85 shadow-[0_0_0_1px_var(--color-hairline)] backdrop-blur-md"
+            : ""
         }`}
         onPointerEnter={audio.tap}
       >
