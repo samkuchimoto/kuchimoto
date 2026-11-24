@@ -18,7 +18,7 @@ export function Reel() {
   const label = useRef<HTMLSpanElement>(null);
 
   return (
-    <section className="container-k py-10 sm:py-16" aria-label="Studio reel">
+    <section className="defer-render container-k py-10 sm:py-16" aria-label="Studio reel">
       <Registration className="mb-[5px]" />
       <button
         type="button"

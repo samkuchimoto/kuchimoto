@@ -12,7 +12,7 @@ const LINKS = [
 
 export function Footer() {
   return (
-    <footer className="relative bg-washi text-ink">
+    <footer className="defer-render relative bg-washi text-ink">
       <div className="container-k">
         <div className="grid gap-12 border-t border-hairline-strong pt-14 pb-16 md:grid-cols-12 md:gap-8 md:pt-20 md:pb-24">
           <address className="not-italic md:col-span-3">

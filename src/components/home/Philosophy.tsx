@@ -15,7 +15,7 @@ const STILL = `${INK}-poster.jpg`;
 
 export function Philosophy() {
   return (
-    <section className="relative isolate overflow-hidden pt-32 pb-28 sm:pt-44 sm:pb-40" aria-labelledby="philosophy-title">
+    <section className="defer-render relative isolate overflow-hidden pt-32 pb-28 sm:pt-44 sm:pb-40" aria-labelledby="philosophy-title">
       {/* One dry-brush stroke in stone ink at 8%, behind everything: texture, never a barrier to reading. */}
       <div
         data-reveal=""

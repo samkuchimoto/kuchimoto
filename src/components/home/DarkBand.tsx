@@ -12,7 +12,7 @@ const LINKS = [
 /** The dark band: coastal mist over sumi water, the name, one open question, three ways on. */
 export function DarkBand() {
   return (
-    <section data-dark="" className="relative isolate overflow-hidden bg-sumi text-washi" aria-label="Kuchimoto">
+    <section data-dark="" className="defer-render relative isolate overflow-hidden bg-sumi text-washi" aria-label="Kuchimoto">
       <MistField />
       <div className="container-k relative flex min-h-[80vh] flex-col justify-end pt-40 pb-12 sm:min-h-[94vh] sm:pb-16">
         <p className="mono flex items-center justify-center gap-3 text-washi/70">

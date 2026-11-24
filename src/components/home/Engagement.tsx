@@ -10,7 +10,7 @@ import { COMMISSION_NOTE, TRACKS } from "@/data/site";
  */
 export function Engagement() {
   return (
-    <section className="container-k pt-28 pb-24 sm:pt-44 sm:pb-32" aria-labelledby="commissions-title">
+    <section className="defer-render container-k pt-28 pb-24 sm:pt-44 sm:pb-32" aria-labelledby="commissions-title">
       <Reveal>
         <h2 id="commissions-title" className="display display-lg">
           Commissions &amp; Systems.

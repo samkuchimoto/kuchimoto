@@ -7,7 +7,7 @@ import { PROJECTS } from "@/data/projects";
 export function SelectedWork() {
   const [flagship, ...rest] = PROJECTS;
   return (
-    <section className="container-k pt-24 pb-10 sm:pt-36" aria-labelledby="work-title">
+    <section className="defer-render container-k pt-24 pb-10 sm:pt-36" aria-labelledby="work-title">
       <div className="grid gap-6 lg:grid-cols-12 lg:items-end">
         <h2 id="work-title" className="display display-lg lg:col-span-8">
           Selected Work
