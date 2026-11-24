@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { useAudio } from "@/components/audio/AudioEngine";
 import { useScrollControl } from "@/components/layout/SmoothScroll";
 import { Close, Play } from "@/components/ui/Icons";
@@ -66,6 +67,11 @@ export function Reel() {
   );
 }
 
+/**
+ * The full reel with sound. Rendered into <body>: the reel section skips its
+ * layout while off screen (content-visibility), which also makes it the box
+ * that fixed elements inside it fill, so the player must live outside it.
+ */
 function ReelModal({ onClose }: { onClose: () => void }) {
   const close = useRef<HTMLButtonElement>(null);
   const { lock, unlock } = useScrollControl();
@@ -89,7 +95,7 @@ function ReelModal({ onClose }: { onClose: () => void }) {
     };
   }, [lock, unlock, onClose]);
 
-  return (
+  return createPortal(
     <div
       role="dialog"
       aria-modal="true"
@@ -97,7 +103,11 @@ function ReelModal({ onClose }: { onClose: () => void }) {
       className="fade-in fixed inset-0 z-[80] flex items-center justify-center bg-sumi/95 p-4 backdrop-blur-sm sm:p-10"
       onClick={onClose}
     >
-      <div className="rise-in relative w-full max-w-[1400px]" onClick={(e) => e.stopPropagation()}>
+      {/* As wide as fits: never taller than the window, Close button included. */}
+      <div
+        className="rise-in relative w-full max-w-[min(1400px,calc((100dvh-9rem)*16/9))]"
+        onClick={(e) => e.stopPropagation()}
+      >
         <video
           className="aspect-video w-full rounded-[var(--radius-card)] bg-black"
           src="/videos/kuchimoto-horizon-reel-sound.mp4"
@@ -115,6 +125,7 @@ function ReelModal({ onClose }: { onClose: () => void }) {
           Close <Close className="h-4 w-4" />
         </button>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
