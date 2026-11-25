@@ -46,9 +46,9 @@ Drop a new file at the same path to replace an asset:
   then the coast monolith);
   `kuchimoto-reel.mp4` plays with sound when PLAY REEL is clicked: the
   whole studio reel, then the coast monolith film, one 70 s film.
-- The ink film: `public/videos/kuchimoto-inoue-ink.mp4` and `.webm` (brush
-  stroke and vermilion seal, looped), with `kuchimoto-inoue-ink-poster.jpg`
-  as its first frame. Replace the three files to change the film.
+- The manifesto card: `public/videos/ink-to-code.mp4` and `.webm` (an ink drop on
+  paper spreading into circuit lines, 10 s loop), with `ink-to-code-poster.jpg`.
+  Replace the three files to change the film.
 - Link previews (Facebook, LinkedIn, X): `public/og/kuchimoto-crafted.jpg`
   and `public/og/<slug>.jpg`, 1200 × 630. Rename the file when the image
   changes: Facebook caches previews by image address.
