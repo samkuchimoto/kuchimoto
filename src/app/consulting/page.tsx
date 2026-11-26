@@ -87,21 +87,21 @@ export default function ConsultingPage() {
 
       <section className="container-k pt-28 sm:pt-40" aria-labelledby="study-title">
         <div className="rounded-[var(--radius-card)] bg-sumi p-8 text-washi sm:p-14" data-dark="">
-          <p className="mono text-washi/60">Field study · in progress</p>
+          <p className="mono text-washi/60">Independent research · in progress</p>
           <h2 id="study-title" className="display display-md mt-6 max-w-[22ch]">
             Biochar, soil water and carbon credits in West Africa.
           </h2>
           <p className="mt-8 max-w-[60ch] text-lg leading-relaxed text-washi/80">
-            A West African biochar producer turns farm and processing residues into biochar. For farmers, the problem is
+            West African biochar producers turn farm and processing residues into biochar. For farmers, the problem is
             not always how much rain falls; sometimes it is how much of that water the soil can hold. The questions we
-            are working through:
+            are investigating:
           </p>
           <ul className="mt-8 grid gap-6 sm:grid-cols-2">
             {[
               ["Which fields gain most", "Biochar's effect on water retention depends on soil texture. It should be matched to the soil and the problem, not spread on every field."],
               ["Growth without undoing the benefit", "Feedstock that stays genuine waste, methane and emissions under control, and the heat of pyrolysis put to use instead of wasted."],
               ["Credits that hold up", "Standards such as Puro.earth, Verra VM0044 and Isometric require audited feedstock, lab tests and a traceable, non-burning end use."],
-              ["What the leaders do", "What the two leading producers worldwide do that a West African producer does not yet, and whether it should."],
+              ["What the leaders do", "What West African producers could learn from international industry leaders."],
             ].map(([title, body]) => (
               <li key={title} className="border-t border-washi/20 pt-5">
                 <h3 className="text-xl font-medium tracking-[-0.02em]">{title}</h3>

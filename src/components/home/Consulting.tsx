@@ -38,7 +38,7 @@ export function Consulting() {
       </ol>
 
       <TapLink href="/consulting" className="group mono-12 mt-8 inline-flex items-center gap-2 text-ink">
-        Fields, method and a field study
+        Fields, method and independent research
         <Arrow className="h-4 w-4 transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:translate-x-1.5" />
       </TapLink>
     </section>
