@@ -6,7 +6,7 @@ import { CONSULTING } from "@/data/site";
 export const metadata: Metadata = {
   title: "Strategic consulting",
   description:
-    "Technology strategy for ecology, science and niche markets: agritech, soil and water, biochar and carbon removal, food systems, energy. Africa first, Japan and other emerging markets next. First enquiry free.",
+    "Technology strategy for ecology, science and niche markets: agritech, soil and water, biochar and carbon removal, food systems, energy, and software for Japanese small businesses that export. Africa first, Japan and other niche markets next. First enquiry free.",
   alternates: { canonical: "/consulting" },
   openGraph: { url: "/consulting", title: "Strategic consulting · Kuchimoto", images: [{ url: "/og/kuchimoto-crafted.jpg", width: 1200, height: 630 }] },
 };
@@ -125,7 +125,6 @@ export default function ConsultingPage() {
           </h2>
           <div className="lg:col-span-5 lg:col-start-8">
             <p className="text-lg leading-relaxed">{CONSULTING.fee}</p>
-            <p className="mt-4 leading-relaxed text-ink-2">{CONSULTING.founding}</p>
             <div className="mt-8">
               <PillLink href="/contact?track=consulting#inquiry" tone="dark">
                 Request a consultation

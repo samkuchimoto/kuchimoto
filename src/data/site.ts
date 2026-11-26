@@ -129,13 +129,14 @@ export const BLOCKERS = [
  */
 export const CONSULTING = {
   title: "Strategic consulting",
-  lead: "Technology strategy for ecology, science and niche markets. Africa first; Japan and other emerging markets next.",
-  who: "For African technology companies, and for US, European and Asian firms entering African markets.",
+  lead: "Technology strategy for ecology, science and niche markets. Africa first; Japan and other niche markets next.",
+  who: "For African technology companies, and for US, European and Asian firms entering African markets. In Japan, for small businesses that export and need software and technology advice to sell abroad.",
   fields: [
     "Agritech, soil and water",
     "Biochar and carbon removal",
     "Food systems and surplus",
     "Energy and niche industrial technology",
+    "Software for export",
   ],
   method: [
     {
@@ -162,7 +163,6 @@ export const CONSULTING = {
     "An engineering studio behind the advice: what the strategy needs can be built",
   ],
   fee: "First enquiry free. Consultations from $2,000, priced on the requirement, not on hours.",
-  founding: "Now open: three founding consultations in Africa at no fee, in exchange for a referral.",
 } as const;
 
 export const PRINCIPLES = [
