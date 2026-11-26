@@ -38,6 +38,8 @@ function leadsDb() {
       )`;
     await sql`ALTER TABLE leads ADD COLUMN IF NOT EXISTS ref text`;
     await sql`ALTER TABLE leads ADD COLUMN IF NOT EXISTS fbclid text`;
+    // 26 November 2026: the form's detail answers (fields, markets, blockers, website today, WhatsApp, note).
+    await sql`ALTER TABLE leads ADD COLUMN IF NOT EXISTS details jsonb`;
   })().catch((error) => {
     leadsReady = null;
     throw error;
@@ -56,6 +58,8 @@ export type LeadRow = {
   source: string;
   page: string;
   attribution: Record<string, string>;
+  /** The optional detail answers, kept as they were given. */
+  details?: Record<string, unknown>;
 };
 
 const orNull = (value: string | undefined) => (value ? value.slice(0, 500) : null);
@@ -67,12 +71,12 @@ export async function saveLead(lead: LeadRow): Promise<string> {
   const token = randomBytes(18).toString("base64url");
   const rows = await sql`
     INSERT INTO leads (token, status, email, need, business, source, page, lang, name, company, message, budget, timeline,
-      landing_page, referrer, utm_source, utm_medium, utm_campaign, utm_term, utm_content, gclid, ref, fbclid)
+      landing_page, referrer, utm_source, utm_medium, utm_campaign, utm_term, utm_content, gclid, ref, fbclid, details)
     VALUES (${token}, 'complete', ${lead.email}, ${lead.need}, 'studio', ${lead.source}, ${lead.page}, 'en',
       ${orNull(lead.name)}, ${orNull(lead.company)}, ${lead.message.slice(0, 5000)}, ${orNull(lead.budget)}, ${orNull(lead.timeline)},
       ${orNull(a.landing_page)}, ${orNull(a.referrer)}, ${orNull(a.utm_source)}, ${orNull(a.utm_medium)},
       ${orNull(a.utm_campaign)}, ${orNull(a.utm_term)}, ${orNull(a.utm_content)}, ${orNull(a.gclid)},
-      ${orNull(a.ref)}, ${orNull(a.fbclid)})
+      ${orNull(a.ref)}, ${orNull(a.fbclid)}, ${lead.details ? JSON.stringify(lead.details) : null}::jsonb)
     RETURNING id`;
   return rows[0].id as string;
 }

@@ -11,12 +11,15 @@ import { InquirySchema, MIN_FILL_MS, type Inquiry } from "@/lib/inquiry";
 import { recordEmails, saveLead, storageConfigured } from "@/lib/server/db";
 import { rateLimited, sameOrigin } from "@/lib/server/guard";
 import { EmailNotConfiguredError, escapeHtml, sendEmail, sendSubmission } from "@/lib/server/mail";
-import { TRACK_OPTIONS } from "@/data/site";
+import { BLOCKERS, MARKETS, SECTORS, TRACK_OPTIONS } from "@/data/site";
 
 const fail = (error: string, status: number, fields?: Record<string, string>) =>
   Response.json({ ok: false, error, fields }, { status });
 
 const trackLabel = (id: string) => TRACK_OPTIONS.find((t) => t.id === id)?.label ?? id;
+/** The labels of several choices, for the email: "Africa, Japan". */
+const labels = (list: readonly { id: string; label: string }[], chosen: string[]) =>
+  chosen.map((id) => list.find((o) => o.id === id)?.label ?? id).join(", ");
 
 async function notify(inquiry: Inquiry, id: string | null, stored: string): Promise<boolean> {
   const a = inquiry.attribution;
@@ -32,6 +35,12 @@ async function notify(inquiry: Inquiry, id: string | null, stored: string): Prom
         ["Budget", inquiry.budget],
         ["Timeline", inquiry.timeline ?? ""],
         ["Scope", inquiry.scope],
+        ["Fields", labels(SECTORS, inquiry.sectors)],
+        ["Markets", labels(MARKETS, inquiry.markets)],
+        ["Hardest parts", labels(BLOCKERS, inquiry.blockers)],
+        ["Website or app today", inquiry.current],
+        ["WhatsApp", inquiry.whatsapp],
+        ["Note", inquiry.note],
         ["Form", inquiry.source],
         ["Page", inquiry.page],
         ["Shared by (ref)", a.ref ?? ""],
@@ -60,7 +69,9 @@ async function autoReply(inquiry: Inquiry): Promise<string> {
   const first = inquiry.name.split(/\s+/)[0] ?? "";
   const paragraphs = [
     `Hi ${first},`,
-    `Thanks for your request about ${trackLabel(inquiry.track).toLowerCase()}. You'll get a fixed price and scope from me within 24 hours.`,
+    inquiry.track === "consulting"
+      ? "Thanks for your request for a strategic consultation. You'll get a written answer from me within 24 hours, with what I'd look at first and what it would cost."
+      : `Thanks for your request about ${trackLabel(inquiry.track).toLowerCase()}. You'll get a fixed price and scope from me within 24 hours.`,
     "If you have a document, screenshot or example, reply to this email with it.",
   ];
   const signature = ["Samuel Louissaint", "Founder, Kuchimoto LLC", "kuchimoto.com | samuel@kuchimoto.com"];
@@ -124,6 +135,14 @@ export async function POST(request: Request) {
         source: inquiry.source,
         page: inquiry.page,
         attribution: inquiry.attribution,
+        details: {
+          sectors: inquiry.sectors,
+          markets: inquiry.markets,
+          blockers: inquiry.blockers,
+          current: inquiry.current,
+          whatsapp: inquiry.whatsapp,
+          note: inquiry.note,
+        },
       });
       stored = "Yes";
     } catch (error) {

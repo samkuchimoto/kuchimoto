@@ -19,6 +19,7 @@ export const SITE = {
 export const NAV = [
   { href: "/", label: "Home" },
   { href: "/work", label: "Work", count: "07" },
+  { href: "/consulting", label: "Consulting" },
   { href: "/studio", label: "Studio" },
   { href: "/contact", label: "Contact" },
 ] as const;
@@ -82,14 +83,87 @@ export const TRACKS: {
 export const COMMISSION_NOTE =
   "Engagements by written scope · Commissions from $5,000 · 100% source code ownership · Zero no-code dependencies";
 
-export const BUDGETS = ["$5,000 – $10,000", "$10,000 – $25,000", "$25,000 – $50,000", "$50,000+"] as const;
+export const BUDGETS = ["$2,000 – $5,000", "$5,000 – $10,000", "$10,000 – $25,000", "$25,000 – $50,000", "$50,000+"] as const;
 export const TIMELINES = ["As soon as possible", "Within 1–3 months", "Within 3–6 months", "Exploring for now"] as const;
 export const TRACK_OPTIONS = [
+  { id: "consulting", label: "Strategic consultation" },
   { id: "flagship", label: "Digital world / website" },
   { id: "application", label: "Platform / application" },
   { id: "ai", label: "AI & infrastructure" },
   { id: "unsure", label: "Not sure yet" },
 ] as const;
+
+/* The inquiry form's detail questions (26 November 2026): what a written scope or a consultation needs, asked once, so no
+   discovery call is needed before the answer. All optional; several can be chosen. */
+export const SECTORS = [
+  { id: "agritech", label: "Agritech & soil" },
+  { id: "climate", label: "Climate & carbon removal" },
+  { id: "water", label: "Water" },
+  { id: "food", label: "Food systems" },
+  { id: "energy", label: "Energy" },
+  { id: "industry", label: "Industry & materials" },
+  { id: "science", label: "Science & health" },
+  { id: "other", label: "Something else" },
+] as const;
+export const MARKETS = [
+  { id: "africa", label: "Africa" },
+  { id: "japan", label: "Japan" },
+  { id: "asia", label: "Rest of Asia" },
+  { id: "europe", label: "Europe" },
+  { id: "americas", label: "The Americas" },
+  { id: "global", label: "Global" },
+] as const;
+/** Samuel's consultation method asks where a mission is blocked, factor by factor. */
+export const BLOCKERS = [
+  { id: "technology", label: "Technology" },
+  { id: "legal", label: "Legal & regulation" },
+  { id: "political", label: "Political" },
+  { id: "cultural", label: "Cultural" },
+  { id: "financial", label: "Financial" },
+  { id: "funding", label: "Funding strategy" },
+] as const;
+
+/**
+ * Strategic consulting (Samuel, 26 November 2026): technology strategy for ecology, technology and science, in Africa
+ * first, and in Japan and other niche markets. Priced on the requirement, not the hours.
+ */
+export const CONSULTING = {
+  title: "Strategic consulting",
+  lead: "Technology strategy for ecology, science and niche markets. Africa first; Japan and other emerging markets next.",
+  who: "For African technology companies, and for US, European and Asian firms entering African markets.",
+  fields: [
+    "Agritech, soil and water",
+    "Biochar and carbon removal",
+    "Food systems and surplus",
+    "Energy and niche industrial technology",
+  ],
+  method: [
+    {
+      title: "Benchmark",
+      body: "The two leading companies in your field worldwide: what they do that you don't yet, and whether you should follow them, and why.",
+    },
+    {
+      title: "Diagnosis",
+      body: "Your two hardest problems, in your market and worldwide: what you already do right, what can improve, and why in both cases.",
+    },
+    {
+      title: "Blockers",
+      body: "What you are trying to solve and what stops the mission: technology, legal, political, cultural, financial and funding strategy.",
+    },
+    {
+      title: "Plan",
+      body: "A written strategy you can act on. Where it needs software, the studio can build it.",
+    },
+  ],
+  adds: [
+    "Local market knowledge, and next-generation entrepreneurial input with roots and a cultural connection to the market",
+    "A strategic network across Africa, Europe and Asia",
+    "Hands-on ecological farming experience in Japan, France, Colombia, Spain and South Korea",
+    "An engineering studio behind the advice: what the strategy needs can be built",
+  ],
+  fee: "First enquiry free. Consultations from $2,000, priced on the requirement, not on hours.",
+  founding: "Now open: three founding consultations in Africa at no fee, in exchange for a referral.",
+} as const;
 
 export const PRINCIPLES = [
   {

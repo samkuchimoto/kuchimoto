@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { BUDGETS, TIMELINES, TRACK_OPTIONS } from "@/data/site";
+import { BLOCKERS, BUDGETS, MARKETS, SECTORS, TIMELINES, TRACK_OPTIONS } from "@/data/site";
 
 /** Free text that may land in a spreadsheet: a leading = + - @ would run as a formula. */
 const safeText = (max: number) =>
@@ -10,6 +10,15 @@ const safeText = (max: number) =>
     .transform((v) => v.replace(/^[=+@-]+/, "").trim());
 
 const trackIds = TRACK_OPTIONS.map((t) => t.id) as [string, ...string[]];
+const ids = (list: readonly { id: string }[]) => list.map((o) => o.id) as [string, ...string[]];
+/** Several choices from a fixed list, each at most once. */
+const picks = (list: readonly { id: string }[]) =>
+  z
+    .array(z.enum(ids(list)))
+    .max(list.length)
+    .optional()
+    .default([])
+    .transform((v) => [...new Set(v)]);
 
 export const InquirySchema = z.object({
   name: safeText(120).pipe(z.string().min(1, "Please tell us your name.")),
@@ -19,6 +28,19 @@ export const InquirySchema = z.object({
   budget: z.enum(BUDGETS, { message: "Please choose a budget range." }),
   timeline: z.enum(TIMELINES).optional(),
   scope: safeText(5000).pipe(z.string().min(20, "A few sentences on what you want built, please (20 characters or more).")),
+  // The detail questions (26 November 2026): all optional, so the form never blocks on them.
+  sectors: picks(SECTORS),
+  markets: picks(MARKETS),
+  blockers: picks(BLOCKERS),
+  current: safeText(300).optional().default(""),
+  whatsapp: z
+    .string()
+    .trim()
+    .max(30)
+    .regex(/^[+\d\s().-]*$/, "Digits, spaces and + only, please.")
+    .optional()
+    .default(""),
+  note: safeText(2000).optional().default(""),
   source: z.enum(["contact", "footer", "drawer"]).optional().default("contact"),
   page: z.string().max(300).optional().default(""),
   /** Honeypot: people never see it, bots fill it. */

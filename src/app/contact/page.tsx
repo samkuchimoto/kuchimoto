@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { InquiryForm } from "@/components/contact/InquiryForm";
 import { Hanko } from "@/components/ui/Hanko";
 import { SITE, TRACKS } from "@/data/site";
@@ -7,7 +8,7 @@ import { SITE, TRACKS } from "@/data/site";
 export const metadata: Metadata = {
   title: "Start a project",
   description:
-    "Request a written scope and a fixed price for a custom website, web application or AI system. Custom builds from $5,000. Answer within 24 hours.",
+    "Request a written scope and a fixed price for a custom website, web application or AI system, or a strategic consultation in ecology, technology and science. First enquiry free. Answer within 24 hours.",
   alternates: { canonical: "/contact" },
   openGraph: { url: "/contact", title: "Start a project · Kuchimoto", images: [{ url: "/og/kuchimoto-crafted.jpg", width: 1200, height: 630 }] },
 };
@@ -28,11 +29,20 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
             Start a project.
           </h1>
           <p className="mt-8 max-w-[40ch] text-[clamp(1.15rem,1.6vw,1.35rem)] leading-[1.5]">
-            Custom websites, web applications and AI systems, from $5,000. Tell us what you&apos;re building: you&apos;ll
-            get a written scope and a fixed price within 24 hours.
+            Strategic consulting in ecology, technology and science, and custom websites, web applications and AI
+            systems. Tell us what you&apos;re building or solving: you&apos;ll get a written answer within 24 hours. The
+            first enquiry is free.
           </p>
 
           <dl className="mt-12 border-t border-hairline-strong">
+            <div className="flex items-baseline justify-between gap-6 border-b border-hairline-strong py-4">
+              <dt className="text-[15px]">
+                <Link href="/consulting" className="underline-offset-4 hover:underline">
+                  Strategic consulting
+                </Link>
+              </dt>
+              <dd className="mono shrink-0 text-ink-2">From $2,000</dd>
+            </div>
             {TRACKS.map((t) => (
               <div key={t.id} className="flex items-baseline justify-between gap-6 border-b border-hairline-strong py-4">
                 <dt className="text-[15px]">{t.title}</dt>

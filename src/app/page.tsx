@@ -1,3 +1,4 @@
+import { Consulting } from "@/components/home/Consulting";
 import { DarkBand } from "@/components/home/DarkBand";
 import { Engagement } from "@/components/home/Engagement";
 import { Hero } from "@/components/home/Hero";
@@ -30,6 +31,7 @@ export default function Home() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION) }} />
       <Hero />
+      <Consulting />
       <Philosophy />
       <Reel />
       <SelectedWork />
