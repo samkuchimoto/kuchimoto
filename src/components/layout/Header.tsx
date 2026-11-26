@@ -120,7 +120,7 @@ export function Header() {
             onPointerEnter={audio.tap}
             className="group mono-12 flex h-10 items-center gap-3 rounded-full bg-ink pr-4 pl-5 font-medium text-washi shadow-[0_0_0_1px_rgb(255_255_255/0.1)] transition-colors hover:bg-black"
           >
-            Start a project
+            Inquire
             <span className="block h-[5px] w-[5px] rounded-full bg-vermilion transition-transform duration-300 group-hover:scale-[1.8]" />
           </Link>
         </Magnetic>
@@ -182,7 +182,7 @@ export function Header() {
             onClick={() => setOpen(false)}
             className="mono-12 mt-1 flex items-center justify-between rounded-[10px] bg-ink px-4 py-3.5 text-washi sm:hidden"
           >
-            Start a project
+            Inquire
             <span className="block h-[6px] w-[6px] rounded-full bg-vermilion" />
           </Link>
         </nav>

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useAudio } from "@/components/audio/AudioEngine";
 import { Arrow } from "@/components/ui/Icons";
 import Link from "next/link";
-import { BLOCKERS, BUDGETS, MARKETS, SECTORS, SITE, TIMELINES, TRACK_OPTIONS } from "@/data/site";
+import { BLOCKERS, MARKETS, SECTORS, SITE, TIMELINES, TRACK_OPTIONS } from "@/data/site";
 import { readAttribution } from "@/lib/attribution";
 
 type Status = "idle" | "sending" | "sent" | "error";
@@ -15,7 +15,8 @@ const field =
 
 /** Every field says whether it is required or optional (Baymard: marking only one kind leaves people guessing). */
 function Mark({ required }: { required?: boolean }) {
-  return required ? <span className="text-vermilion"> · required</span> : <span className="text-ink-2/60"> · optional</span>;
+  // Required reads in ink: the vermilion measured 4.49:1 at this size, under the 4.5:1 minimum.
+  return required ? <span className="text-ink"> · required</span> : <span className="text-ink-2"> · optional</span>;
 }
 
 function pillClass(on: boolean) {
@@ -156,11 +157,11 @@ function Text({
 /**
  * The inquiry (26 November 2026, Samuel: "fill out the form straight away, then register the email at the end; simple,
  * and get all the details, to reduce human coordination to the maximum"). Four steps in the order a client thinks:
- * what they need, the brief, budget and timing, then who they are, with the email last (Baymard: 18% of shoppers leave
- * a checkout that asks for an account first). Everything a written scope or a consultation needs is asked once, so the
- * answer can go out without a discovery call. Only five answers are required.
+ * what they need, the brief, timing, then who they are, with the email last (Baymard: 18% of shoppers leave a checkout
+ * that asks for an account first). No budget question since 27 November (less friction). Three answers are required:
+ * the brief, the name and the email. The footer's one-sentence problem arrives as 'brief' and starts the brief.
  */
-export function InquiryForm({ email: initialEmail = "", track: initialTrack = "" }: { email?: string; track?: string }) {
+export function InquiryForm({ email: initialEmail = "", track: initialTrack = "", brief = "" }: { email?: string; track?: string; brief?: string }) {
   const audio = useAudio();
   const shownAt = useRef(0);
   const [status, setStatus] = useState<Status>("idle");
@@ -169,7 +170,6 @@ export function InquiryForm({ email: initialEmail = "", track: initialTrack = ""
   const [sectors, setSectors] = useState<string[]>([]);
   const [markets, setMarkets] = useState<string[]>([]);
   const [blockers, setBlockers] = useState<string[]>([]);
-  const [budget, setBudget] = useState("");
   const [timeline, setTimeline] = useState("");
   const consulting = track === "consulting";
 
@@ -186,7 +186,6 @@ export function InquiryForm({ email: initialEmail = "", track: initialTrack = ""
       email: text("email"),
       company: text("company"),
       track: track || "unsure",
-      budget,
       timeline: timeline || undefined,
       scope: text("scope"),
       sectors,
@@ -205,7 +204,6 @@ export function InquiryForm({ email: initialEmail = "", track: initialTrack = ""
     // Checked in the order they appear, so the cursor goes to the first one on the page.
     const local: Errors = {};
     if (payload.scope.trim().length < 20) local.scope = "A few sentences on what you want built or solved, please (20 characters or more).";
-    if (!budget) local.budget = "Please choose a budget range.";
     if (!payload.name.trim()) local.name = "Please tell us your name.";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email.trim())) local.email = "Please enter a valid email address.";
     if (payload.whatsapp && !/^[+\d\s().-]*$/.test(payload.whatsapp)) local.whatsapp = "Digits, spaces and + only, please.";
@@ -241,8 +239,8 @@ export function InquiryForm({ email: initialEmail = "", track: initialTrack = ""
         <span className="block h-2.5 w-2.5 rounded-full bg-vermilion" aria-hidden="true" />
         <h2 className="display display-md mt-8">Received.</h2>
         <p className="mt-6 max-w-[46ch] text-lg leading-relaxed text-washi/80">
-          Your request is with Samuel. You&apos;ll get a written answer {consulting ? "on the consultation" : "with a scope and a fixed price"} within 24
-          hours, from {SITE.email}. A confirmation is on its way to your inbox now.
+          Your request is with Samuel. He will answer personally{consulting ? " on the consultation" : ""}, from {SITE.email}. A confirmation is on
+          its way to your inbox now.
         </p>
         <p className="mono mt-10 text-washi/50">Reply to that email with any document, screenshot or example.</p>
       </div>
@@ -283,6 +281,7 @@ export function InquiryForm({ email: initialEmail = "", track: initialTrack = ""
             required
             aria-invalid={Boolean(errors.scope)}
             aria-describedby={errors.scope ? "scope-error" : undefined}
+            defaultValue={brief}
             className={`${field} resize-y leading-relaxed`}
             placeholder={
               consulting
@@ -300,10 +299,7 @@ export function InquiryForm({ email: initialEmail = "", track: initialTrack = ""
         <Picks name="blockers" legend="Where is the hardest part?" options={BLOCKERS} value={blockers} onChange={setBlockers} />
       </Step>
 
-      <Step n="03" title="Budget and timing">
-        <div id="f-budget" tabIndex={-1} className="outline-none">
-          <Chips name="budget" legend="Budget" required options={BUDGETS.map((b) => ({ id: b, label: b }))} value={budget} onChange={setBudget} error={errors.budget} />
-        </div>
+      <Step n="03" title="Timing">
         <Chips name="timeline" legend="Timeline" options={TIMELINES.map((t) => ({ id: t, label: t }))} value={timeline} onChange={setTimeline} />
       </Step>
 
@@ -331,7 +327,7 @@ export function InquiryForm({ email: initialEmail = "", track: initialTrack = ""
 
       <div className="flex flex-col gap-5 border-t border-hairline-strong pt-8 sm:flex-row sm:items-center sm:justify-between">
         <p className="mono max-w-[44ch] text-ink-2">
-          First enquiry free. Consultations from $2,000, builds from $5,000. Your details are used only to answer this request (
+          Every engagement is scoped by written proposal. Your details are used only to answer this request (
           <Link href="/legal" className="underline underline-offset-2">
             privacy
           </Link>
@@ -344,7 +340,7 @@ export function InquiryForm({ email: initialEmail = "", track: initialTrack = ""
           className="group mono-12 inline-flex h-14 shrink-0 items-center justify-center gap-3 rounded-full bg-ink px-8 font-medium text-washi transition-colors hover:bg-black disabled:opacity-60"
         >
           <span className="block h-[6px] w-[6px] rounded-full bg-vermilion transition-transform duration-300 group-hover:scale-150" />
-          {status === "sending" ? "Sending…" : consulting ? "Request a consultation" : "Request a scope"}
+          {status === "sending" ? "Sending…" : consulting ? "Request a consultation" : "Send inquiry"}
           <Arrow className="h-4 w-4" />
         </button>
       </div>

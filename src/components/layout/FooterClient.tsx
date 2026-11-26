@@ -5,34 +5,35 @@ import { useState } from "react";
 import { Arrow } from "@/components/ui/Icons";
 import { useScrollControl } from "./SmoothScroll";
 
-/** An email opens the inquiry form with the address already filled in. */
+/** The problem in one sentence opens the inquiry form with the brief already started; the email comes last there. */
 export function QuickScope() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
+  const [brief, setBrief] = useState("");
   return (
     <form
       className="mt-8 flex h-16 items-center rounded-[14px] bg-surface pr-2 pl-6 shadow-[0_0_0_1px_var(--color-hairline)] focus-within:shadow-[0_0_0_1px_var(--color-ink)]"
       onSubmit={(e) => {
         e.preventDefault();
-        const value = email.trim();
-        router.push(value ? `/contact?email=${encodeURIComponent(value)}#inquiry` : "/contact#inquiry");
+        const value = brief.trim();
+        router.push(value ? `/contact?brief=${encodeURIComponent(value.slice(0, 1000))}#inquiry` : "/contact#inquiry");
       }}
     >
       <label htmlFor="quick-scope" className="sr-only">
-        Your email
+        The problem, in one sentence
       </label>
       <input
         id="quick-scope"
-        type="email"
-        autoComplete="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Enter your email to request a scope"
+        type="text"
+        autoComplete="off"
+        maxLength={1000}
+        value={brief}
+        onChange={(e) => setBrief(e.target.value)}
+        placeholder="Describe it in a sentence"
         className="h-full min-w-0 flex-1 bg-transparent text-base outline-none placeholder:text-ink-2/70"
       />
       <button
         type="submit"
-        aria-label="Request a scope"
+        aria-label="Continue to the inquiry form"
         className="grid h-12 w-12 shrink-0 place-items-center rounded-[10px] transition-colors hover:bg-washi"
       >
         <Arrow className="h-5 w-5" />

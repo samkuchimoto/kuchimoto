@@ -8,12 +8,12 @@ export const SITE = {
   email: "samuel@kuchimoto.com",
   address: ["30 N Gould St, Ste R", "Sheridan, WY 82801, USA"],
   addressLine: "30 N Gould St, Ste R, Sheridan, WY 82801, USA",
-  region: "International Studio · Serving US & Global Clients",
-  title: "Kuchimoto · Custom software engineered with precision",
-  headline: "Custom software & digital architecture, engineered with precision.",
+  region: "Research, strategy, design & custom systems",
+  title: "Kuchimoto · Strategy, design and custom software",
+  headline: "Independent strategic research, custom software and digital architecture.",
   description:
-    "Kuchimoto LLC builds custom websites, web applications and AI systems from first principles. No templates, no no-code. 100% source code ownership. Custom builds from $5,000.",
-  metadataLine: "KUCHIMOTO LLC · WYOMING / GLOBAL · ART, ARCHITECTURE & CUSTOM SYSTEMS",
+    "Kuchimoto LLC is an independent firm for strategic research, design and custom software. It investigates hard problems in ecology, agriculture, science and complex operations, and engineers systems when they are justified. 100% source code ownership.",
+  metadataLine: "KUCHIMOTO LLC · WYOMING / GLOBAL · RESEARCH, STRATEGY, DESIGN & CUSTOM SYSTEMS",
 } as const;
 
 export const NAV = [
@@ -31,17 +31,13 @@ export const TRACKS: {
   index: string;
   title: string;
   body: string;
-  price: string;
-  duration: string;
   includes: string[];
 }[] = [
   {
     id: "flagship",
     index: "01",
     title: "Flagship Digital Worlds & Websites",
-    body: "Bespoke design, WebGL craft, sub-second custom architecture.",
-    price: "From $5,000",
-    duration: "3–4 weeks",
+    body: "Bespoke design, visual direction, WebGL craft and custom architecture.",
     includes: [
       "Art direction, typography and a motion system of your own",
       "Custom Next.js build, with WebGL where it earns its place",
@@ -54,8 +50,6 @@ export const TRACKS: {
     index: "02",
     title: "Production Platforms & Applications",
     body: "Full-stack web/mobile systems, real-time engines, end-to-end engineering.",
-    price: "From $10,000",
-    duration: "4–8 weeks",
     includes: [
       "Product scope and data model, written before the first line of code",
       "Sign-in, roles, admin and audit trail",
@@ -68,8 +62,6 @@ export const TRACKS: {
     index: "03",
     title: "AI & Custom Technical Infrastructure",
     body: "Autonomous workflows, computational tools, sovereign architecture.",
-    price: "Custom Scope",
-    duration: "Scoped in writing",
     includes: [
       "Agents and automations around your real operations",
       "Interactive calculators and engineering engines",
@@ -80,13 +72,13 @@ export const TRACKS: {
 ];
 
 /** The one quiet line under the commissions index. */
-export const COMMISSION_NOTE =
-  "Engagements by written scope · Commissions from $5,000 · 100% source code ownership · Zero no-code dependencies";
+export const COMMISSION_NOTE = "Each commission scoped by written proposal · Engineered when justified · 100% source code ownership";
 
+/** Budget ranges of earlier inquiries. The form no longer asks (27 November 2026: less friction); kept so old leads validate. */
 export const BUDGETS = ["$2,000 – $5,000", "$5,000 – $10,000", "$10,000 – $25,000", "$25,000 – $50,000", "$50,000+"] as const;
 export const TIMELINES = ["As soon as possible", "Within 1–3 months", "Within 3–6 months", "Exploring for now"] as const;
 export const TRACK_OPTIONS = [
-  { id: "consulting", label: "Strategic consultation" },
+  { id: "consulting", label: "Consulting & research" },
   { id: "flagship", label: "Digital world / website" },
   { id: "application", label: "Platform / application" },
   { id: "ai", label: "AI & infrastructure" },
@@ -103,6 +95,7 @@ export const SECTORS = [
   { id: "energy", label: "Energy" },
   { id: "industry", label: "Industry & materials" },
   { id: "science", label: "Science & health" },
+  { id: "operations", label: "Complex operations" },
   { id: "other", label: "Something else" },
 ] as const;
 export const MARKETS = [
@@ -124,46 +117,64 @@ export const BLOCKERS = [
 ] as const;
 
 /**
- * Strategic consulting (Samuel, 26 November 2026): technology strategy for ecology, technology and science, in Africa
- * first, and in Japan and other niche markets. Priced on the requirement, not the hours.
+ * The two practices (27 November 2026, approved by Samuel): Strategic Consulting & Research, and Software Engineering &
+ * Digital Design. Independent, complementary: a diagnosis may end in a decision not to build software. No public prices,
+ * durations or response times: each engagement is defined by its own written proposal. Only claims that can be shown.
  */
 export const CONSULTING = {
+  practice: "Practice I · Strategic Consulting & Research",
   title: "Strategic consulting",
-  lead: "Technology strategy for ecology, science and niche markets. Africa first; Japan and other niche markets next.",
-  who: "For African technology companies, and for US, European and Asian firms entering African markets. In Japan, for small businesses that export and need software and technology advice to sell abroad.",
-  fields: [
-    "Agritech, soil and water",
-    "Biochar and carbon removal",
-    "Food systems and surplus",
-    "Energy and niche industrial technology",
-    "Software for export",
-  ],
+  lead: "Independent diagnosis of hard operational and technical problems: international benchmarking, constraint analysis and a prioritised roadmap. Depth in ecology, agriculture, science and complex operations.",
+  outcome:
+    "The recommendation may be an operational change, a field trial, a partnership, or a decision not to build software. When software is the answer, Practice II builds it.",
+  fields: ["Ecology & agriculture", "Soil & water", "Carbon removal", "Food systems", "Science", "Complex operations"],
   method: [
     {
       title: "Benchmark",
-      body: "The two leading companies in your field worldwide: what they do that you don't yet, and whether you should follow them, and why.",
+      body: "How the leading organisations in your field solve the same problem, what is worth adopting, and why.",
     },
     {
       title: "Diagnosis",
-      body: "Your two hardest problems, in your market and worldwide: what you already do right, what can improve, and why in both cases.",
+      body: "Your hardest problems, in your market and globally: what already works, what does not, and why.",
     },
     {
-      title: "Blockers",
-      body: "What you are trying to solve and what stops the mission: technology, legal, political, cultural, financial and funding strategy.",
+      title: "Constraints",
+      body: "What stands between the mission and the result: technology, regulation, politics, culture, finance and funding.",
     },
     {
-      title: "Plan",
-      body: "A written strategy you can act on. Where it needs software, the studio can build it.",
+      title: "Roadmap",
+      body: "A prioritised written plan. Software only where it is the right answer; then Practice II builds it.",
     },
   ],
   adds: [
-    "Local market knowledge, and next-generation entrepreneurial input with roots and a cultural connection to the market",
-    "A strategic network across Africa, Europe and Asia",
-    "Hands-on ecological farming experience in Japan, France, Colombia, Spain and South Korea",
-    "An engineering studio behind the advice: what the strategy needs can be built",
+    "Independent judgment: software is recommended only when it is the answer",
+    "Hands-on ecological farming experience in Japan, South Korea, France, Spain and Colombia",
+    "Seven live production systems designed, built and operated by the studio",
+    "Design and engineering in-house, when the plan needs to be built",
   ],
-  fee: "First enquiry free. Consultations from $2,000, priced on the requirement, not on hours.",
+  engagements:
+    "A first conversation, then a written proposal: a fixed-scope diagnostic, an advisory engagement, or a scoped engineering and design commission.",
+  cta: "Discuss a problem",
 } as const;
+
+export const ENGINEERING = {
+  practice: "Practice II · Software Engineering & Digital Design",
+} as const;
+
+/**
+ * Monographs: independent investigations from public sources, published under the studio's name. A company is never named
+ * or implied as a client; no private communications. Monograph 01 only (27 November 2026: no placeholders).
+ */
+export const MONOGRAPHS = [
+  {
+    slug: "industrial-biochar",
+    number: "01",
+    field: "Ecology",
+    title: "Industrial Biochar at Scale",
+    subtitle: "Agronomic value, feedstock integrity, and independent verification.",
+    status: "In progress · begun November 2026",
+  },
+] as const;
 
 export const PRINCIPLES = [
   {
@@ -172,7 +183,7 @@ export const PRINCIPLES = [
   },
   {
     name: "Joinery",
-    body: "No glue, no nails, no bloat. Every module is cut to fit the next, so the whole system holds without plugins.",
+    body: "No glue, no nails, no bloat. Every module is cut to fit the next, so the whole system holds on its own.",
   },
   {
     name: "Restraint",
@@ -187,17 +198,17 @@ export const PRINCIPLES = [
 export const PROCESS = [
   {
     index: "01",
-    title: "Scope call",
-    body: "Thirty minutes on what the system must do, who uses it and what it has to earn.",
+    title: "First conversation",
+    body: "What the system must do, who uses it and what it has to earn.",
   },
   {
     index: "02",
-    title: "Written scope, fixed price",
-    body: "Within 24 hours: a written scope and a fixed price. No hourly meter.",
+    title: "Written proposal",
+    body: "A written scope and a fixed price for it, with the commitments defined for this engagement. No hourly meter.",
   },
   {
     index: "03",
-    title: "Build in weekly releases",
+    title: "Build in releases",
     body: "You follow the work on a private preview address, release by release.",
   },
   {

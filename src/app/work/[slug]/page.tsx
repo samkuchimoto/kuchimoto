@@ -132,12 +132,12 @@ export default async function CaseStudy({ params }: PageProps<"/work/[slug]">) {
         </ul>
       </section>
 
-      <section className="container-k mt-24 sm:mt-36" aria-label="Start a project">
+      <section className="container-k mt-24 sm:mt-36" aria-label="Inquire">
         <div data-dark="" className="flex flex-col gap-8 rounded-[var(--radius-stage)] bg-sumi px-6 py-14 text-washi sm:px-12 sm:py-20 lg:flex-row lg:items-end lg:justify-between">
           <h2 className="display display-md max-w-[16ch]">Need a system built to this standard?</h2>
           <div className="flex flex-wrap gap-3">
             <PillLink href="/contact#inquiry" tone="ghost">
-              Start a project
+              Inquire
             </PillLink>
             <PillLink href={project.url} tone="ghost" external>
               Visit {project.domain} ↗

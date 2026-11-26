@@ -1,18 +1,19 @@
 import { Arrow } from "@/components/ui/Icons";
 import { Reveal } from "@/components/ui/Reveal";
 import { TapLink } from "@/components/ui/TapLink";
-import { COMMISSION_NOTE, TRACKS } from "@/data/site";
+import { COMMISSION_NOTE, ENGINEERING, TRACKS } from "@/data/site";
 
 /**
  * Commissions & Systems: the three ways to commission the studio, set as
  * an architectural index (hairline rows, wide margins) rather than a
- * pricing table. The $5,000 floor lives in the single note underneath.
+ * pricing table. No prices: each commission is scoped by written proposal (the note underneath).
  */
 export function Engagement() {
   return (
     <section className="defer-render container-k pt-28 pb-24 sm:pt-44 sm:pb-32" aria-labelledby="commissions-title">
       <Reveal>
-        <h2 id="commissions-title" className="display display-lg">
+        <p className="mono text-ink-2">{ENGINEERING.practice}</p>
+        <h2 id="commissions-title" className="display display-lg mt-6">
           Commissions &amp; Systems.
         </h2>
       </Reveal>

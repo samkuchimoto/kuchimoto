@@ -25,14 +25,14 @@ async function notify(inquiry: Inquiry, id: string | null, stored: string): Prom
   const a = inquiry.attribution;
   try {
     await sendSubmission({
-      subject: `[Inquiry][${inquiry.budget}] ${trackLabel(inquiry.track)} · ${inquiry.company || inquiry.name}`,
+      subject: `[Inquiry]${inquiry.budget ? `[${inquiry.budget}]` : ""} ${trackLabel(inquiry.track)} · ${inquiry.company || inquiry.name}`,
       replyTo: inquiry.email,
       rows: [
         ["Name", inquiry.name],
         ["Email", inquiry.email],
         ["Company or website", inquiry.company],
         ["Track", trackLabel(inquiry.track)],
-        ["Budget", inquiry.budget],
+        ["Budget", inquiry.budget ?? ""],
         ["Timeline", inquiry.timeline ?? ""],
         ["Scope", inquiry.scope],
         ["Fields", labels(SECTORS, inquiry.sectors)],
@@ -70,8 +70,8 @@ async function autoReply(inquiry: Inquiry): Promise<string> {
   const paragraphs = [
     `Hi ${first},`,
     inquiry.track === "consulting"
-      ? "Thanks for your request for a strategic consultation. You'll get a written answer from me within 24 hours, with what I'd look at first and what it would cost."
-      : `Thanks for your request about ${trackLabel(inquiry.track).toLowerCase()}. You'll get a fixed price and scope from me within 24 hours.`,
+      ? "Thanks for your request for a strategic consultation. I'll write back personally with what I'd look at first and how I'd scope it."
+      : `Thanks for your request about ${trackLabel(inquiry.track).toLowerCase()}. I'll write back personally with how I'd scope it.`,
     "If you have a document, screenshot or example, reply to this email with it.",
   ];
   const signature = ["Samuel Louissaint", "Founder, Kuchimoto LLC", "kuchimoto.com | samuel@kuchimoto.com"];
@@ -129,7 +129,7 @@ export async function POST(request: Request) {
         name: inquiry.name,
         company: inquiry.company,
         need: inquiry.track,
-        budget: inquiry.budget,
+        budget: inquiry.budget ?? "",
         timeline: inquiry.timeline ?? "",
         message: inquiry.scope,
         source: inquiry.source,

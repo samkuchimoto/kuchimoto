@@ -25,7 +25,8 @@ export const InquirySchema = z.object({
   email: z.string().trim().max(254).pipe(z.email("Please enter a valid email address.")),
   company: safeText(200).optional().default(""),
   track: z.enum(trackIds).optional().default("unsure"),
-  budget: z.enum(BUDGETS, { message: "Please choose a budget range." }),
+  // The form stopped asking on 27 November 2026; an older page may still send one.
+  budget: z.enum(BUDGETS).optional(),
   timeline: z.enum(TIMELINES).optional(),
   scope: safeText(5000).pipe(z.string().min(20, "A few sentences on what you want built, please (20 characters or more).")),
   // The detail questions (26 November 2026): all optional, so the form never blocks on them.

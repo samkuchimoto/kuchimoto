@@ -3,14 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { InquiryForm } from "@/components/contact/InquiryForm";
 import { Hanko } from "@/components/ui/Hanko";
-import { SITE, TRACKS } from "@/data/site";
+import { CONSULTING, ENGINEERING, SITE, TRACKS } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Start a project",
+  title: "Inquire",
   description:
-    "Request a written scope and a fixed price for a custom website, web application or AI system, or a strategic consultation in ecology, technology and science. First enquiry free. Answer within 24 hours.",
+    "Tell Kuchimoto the problem, with or without a technical specification: strategic consulting and research, or a software engineering and digital design commission. Each engagement is scoped by written proposal.",
   alternates: { canonical: "/contact" },
-  openGraph: { url: "/contact", title: "Start a project · Kuchimoto", images: [{ url: "/og/kuchimoto-crafted.jpg", width: 1200, height: 630 }] },
+  openGraph: { url: "/contact", title: "Inquire · Kuchimoto", images: [{ url: "/og/kuchimoto-crafted.jpg", width: 1200, height: 630 }] },
 };
 
 const one = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v) ?? "";
@@ -19,37 +19,41 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
   const params = await searchParams;
   const email = one(params.email).slice(0, 254);
   const track = one(params.track).slice(0, 20);
+  // The footer's one-sentence problem arrives here and starts the brief (27 November 2026).
+  const brief = one(params.brief).slice(0, 1000);
 
   return (
     <section className="container-k pt-32 pb-24 sm:pt-44 sm:pb-36" aria-labelledby="contact-title">
       <div className="grid gap-16 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-5">
-          <p className="mono text-ink-2">Direct scope inquiry</p>
+          <p className="mono text-ink-2">Direct inquiry</p>
           <h1 id="contact-title" className="display mt-6 text-[clamp(3.4rem,8vw,7rem)]">
-            Start a project.
+            Begin with the problem.
           </h1>
           <p className="mt-8 max-w-[40ch] text-[clamp(1.15rem,1.6vw,1.35rem)] leading-[1.5]">
-            Strategic consulting in ecology, technology and science, and custom websites, web applications and AI
-            systems. Tell us what you&apos;re building or solving: you&apos;ll get a written answer within 24 hours. The
-            first enquiry is free.
+            Tell us the problem, with or without a technical specification. Samuel answers personally, in writing: what
+            we would look at first, and how we would scope it.
           </p>
 
           <dl className="mt-12 border-t border-hairline-strong">
-            <div className="flex items-baseline justify-between gap-6 border-b border-hairline-strong py-4">
-              <dt className="text-[15px]">
+            <div className="border-b border-hairline-strong py-4">
+              <dt className="mono text-ink-2">{CONSULTING.practice}</dt>
+              <dd className="mt-2 text-[15px]">
                 <Link href="/consulting" className="underline-offset-4 hover:underline">
-                  Strategic consulting
+                  Diagnosis, benchmarking and roadmaps
                 </Link>
-              </dt>
-              <dd className="mono shrink-0 text-ink-2">From $2,000</dd>
+              </dd>
             </div>
-            {TRACKS.map((t) => (
-              <div key={t.id} className="flex items-baseline justify-between gap-6 border-b border-hairline-strong py-4">
-                <dt className="text-[15px]">{t.title}</dt>
-                <dd className="mono shrink-0 text-ink-2">{t.price}</dd>
-              </div>
-            ))}
+            <div className="border-b border-hairline-strong py-4">
+              <dt className="mono text-ink-2">{ENGINEERING.practice}</dt>
+              {TRACKS.map((t) => (
+                <dd key={t.id} className="mt-2 text-[15px]">
+                  {t.title}
+                </dd>
+              ))}
+            </div>
           </dl>
+          <p className="mono mt-4 text-ink-2">Each engagement is defined by its own written proposal.</p>
 
           <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-1">
             <div>
@@ -81,8 +85,8 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
           </div>
         </div>
 
-        <div id="inquiry" className="scroll-mt-28 lg:col-span-6 lg:col-start-7 lg:pt-4">
-          <InquiryForm email={email} track={track} />
+        <div id="inquiry" className="lg:col-span-6 lg:col-start-7 lg:pt-4">
+          <InquiryForm email={email} track={track} brief={brief} />
         </div>
       </div>
     </section>

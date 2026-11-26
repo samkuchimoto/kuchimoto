@@ -5,12 +5,12 @@ import { PillLink } from "@/components/ui/PillLink";
 import { Registration } from "@/components/ui/Registration";
 import { Reveal } from "@/components/ui/Reveal";
 import { VideoLoop } from "@/components/ui/VideoLoop";
-import { PRINCIPLES, PROCESS, SITE, TRACKS } from "@/data/site";
+import { ENGINEERING, PRINCIPLES, PROCESS, SITE, TRACKS } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Studio",
   description:
-    "Kuchimoto Studio: custom websites, web applications and AI systems engineered from first principles. Fixed price on a written scope, from $5,000. You own 100% of the code.",
+    "Kuchimoto Studio, Practice II: software engineering and digital design. Custom websites, platforms and AI systems engineered from first principles when they are justified, each scoped by written proposal. You own 100% of the code.",
   alternates: { canonical: "/studio" },
   openGraph: { url: "/studio", title: "Studio · Kuchimoto", images: [{ url: "/og/kuchimoto-crafted.jpg", width: 1200, height: 630 }] },
 };
@@ -19,7 +19,7 @@ export default function StudioPage() {
   return (
     <>
       <section className="container-k pt-32 sm:pt-44" aria-labelledby="studio-title">
-        <p className="mono text-ink-2">Kuchimoto Studio · Client services</p>
+        <p className="mono text-ink-2">{ENGINEERING.practice}</p>
         <h1 id="studio-title" className="display mt-6 text-[clamp(4rem,14vw,13rem)]">
           Studio
         </h1>
@@ -31,7 +31,7 @@ export default function StudioPage() {
           <div className="flex flex-col gap-5 lg:col-span-4 lg:col-start-9 lg:items-end">
             <p className="mono text-ink-2 lg:text-right">{SITE.metadataLine}</p>
             <PillLink href="/contact#inquiry" tone="dark">
-              Book a scope call
+              Inquire
             </PillLink>
           </div>
         </div>
@@ -83,7 +83,6 @@ export default function StudioPage() {
             <Reveal key={t.id} delay={i * 0.06} className="flex flex-col rounded-[var(--radius-card)] bg-surface p-7 shadow-[0_0_0_1px_var(--color-hairline)] sm:p-9">
               <div className="flex items-baseline justify-between">
                 <span className="mono text-ink-2">{t.index}</span>
-                <span className="mono text-ink-2">{t.duration}</span>
               </div>
               <h3 className="mt-8 text-[1.75rem] leading-[1.05] font-medium tracking-[-0.03em]">{t.title}</h3>
               <ul className="mt-8 space-y-3 border-t border-hairline pt-6">
@@ -94,7 +93,6 @@ export default function StudioPage() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-auto pt-10 text-2xl font-medium tracking-[-0.02em]">{t.price}</p>
             </Reveal>
           ))}
         </div>

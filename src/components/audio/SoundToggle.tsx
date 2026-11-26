@@ -5,9 +5,9 @@ import { useAudio } from "./AudioEngine";
 
 const HINT_KEY = "kuchimoto:sound-hint";
 
-/** The 40 px pill: three breathing bars when on, a dash when muted. */
+/** The 40 px pill: three breathing bars when on, three still bars while sound waits for the first tap, a dash when muted. */
 export function SoundToggle() {
-  const { enabled, toggle } = useAudio();
+  const { enabled, armed, toggle } = useAudio();
   const [hint, setHint] = useState(false);
 
   const showHintOnce = () => {
@@ -28,11 +28,13 @@ export function SoundToggle() {
         onClick={toggle}
         onPointerEnter={showHintOnce}
         aria-pressed={enabled}
-        aria-label={enabled ? "Sound on: ambient. Turn off" : "Sound off. Turn on ambient sound"}
+        aria-label={
+          enabled ? (armed ? "Sound on: starts with your first tap or key. Turn off" : "Sound on: ambient. Turn off") : "Sound off. Turn on ambient sound"
+        }
         className="grid h-10 w-10 place-items-center rounded-full bg-surface text-ink shadow-[0_0_0_1px_var(--color-hairline)] transition-transform duration-300 hover:scale-105 active:scale-95"
       >
         {enabled ? (
-          <span className="wave flex h-4 items-center gap-[3px]" data-on="true" aria-hidden="true">
+          <span className="wave flex h-4 items-center gap-[3px]" data-on={armed ? "false" : "true"} aria-hidden="true">
             <i />
             <i />
             <i />

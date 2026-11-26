@@ -30,8 +30,8 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
     body: (
       <>
         <p>
-          When you send the inquiry form: your name, email, company or website, the kind of project, budget, timeline
-          and the scope you describe. With it, where your visit began: a referral tag or campaign tags in the link you
+          When you send the inquiry form: your name, email, company or website, the kind of work, the
+          field, markets and timeline you choose, the brief you describe, and your WhatsApp number and note if you give them. With it, where your visit began: a referral tag or campaign tags in the link you
           followed, the page that sent you, and the first page you opened.
         </p>
         <p>We use these details only to answer your request, prepare a scope and follow up on it. We do not sell them.</p>

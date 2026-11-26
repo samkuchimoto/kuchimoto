@@ -14,6 +14,8 @@ const KEY = "kuchimoto:sound";
 type Audio = {
   /** The visitor wants sound. */
   enabled: boolean;
+  /** Sound is on but waits for the visitor's first tap or key (a returning visitor): nothing plays yet. */
+  armed: boolean;
   toggle: () => void;
   /** Hover: a muted wooden tap. Only when sound is on. */
   tap: () => void;
@@ -27,6 +29,7 @@ const AudioContextReact = createContext<Audio | null>(null);
 
 export function AudioProvider({ children }: { children: React.ReactNode }) {
   const [enabled, setEnabled] = useState(false);
+  const [armed, setArmed] = useState(false);
   const engine = useRef<SoundEngine | null>(null);
   const enabledRef = useRef(false);
 
@@ -39,6 +42,7 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
     (on: boolean) => {
       enabledRef.current = on;
       setEnabled(on);
+      setArmed(false);
       try {
         localStorage.setItem(KEY, on ? "on" : "off");
       } catch {
@@ -63,7 +67,9 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
     // Reading a stored preference after hydration is a sync from outside React.
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setEnabled(true);
+    setArmed(true);
     const start = () => {
+      setArmed(false);
       if (enabledRef.current) void getEngine().enable();
     };
     window.addEventListener("pointerdown", start, { once: true, capture: true });
@@ -80,6 +86,7 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
     const live = () => enabledRef.current && engine.current?.ctx.state === "running";
     return {
       enabled,
+      armed,
       toggle: () => apply(!enabledRef.current),
       tap: () => {
         if (live()) engine.current!.tap();
@@ -89,7 +96,7 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
       },
       duck: (on: boolean) => engine.current?.duck(on),
     };
-  }, [enabled, apply]);
+  }, [enabled, armed, apply]);
 
   return <AudioContextReact.Provider value={value}>{children}</AudioContextReact.Provider>;
 }

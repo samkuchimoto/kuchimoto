@@ -19,7 +19,7 @@ export default function NotFound() {
           Work <Arrow className="h-4 w-4" />
         </Link>
         <Link href="/contact" className="mono-12 inline-flex items-center gap-2 font-medium">
-          Start a project <Arrow className="h-4 w-4" />
+          Inquire <Arrow className="h-4 w-4" />
         </Link>
       </div>
     </section>

@@ -4,7 +4,7 @@ import { SITE } from "@/data/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date("2026-11-24");
-  const pages = ["", "/work", "/consulting", "/studio", "/lab", "/contact", "/legal"].map((path) => ({
+  const pages = ["", "/work", "/consulting", "/monographs", "/monographs/industrial-biochar", "/studio", "/lab", "/contact", "/legal"].map((path) => ({
     url: `${SITE.url}${path}`,
     lastModified: now,
     priority: path === "" ? 1 : path === "/legal" ? 0.2 : 0.8,

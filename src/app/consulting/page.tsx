@@ -1,42 +1,44 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { Arrow } from "@/components/ui/Icons";
 import { PillLink } from "@/components/ui/PillLink";
 import { Reveal } from "@/components/ui/Reveal";
-import { CONSULTING } from "@/data/site";
+import { CONSULTING, MONOGRAPHS } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Strategic consulting",
   description:
-    "Technology strategy for ecology, science and niche markets: agritech, soil and water, biochar and carbon removal, food systems, energy, and software for Japanese small businesses that export. Africa first, Japan and other niche markets next. First enquiry free.",
+    "Strategic consulting and independent research: diagnosis of hard operational and technical problems, international benchmarking, constraint analysis and prioritised roadmaps. Depth in ecology, agriculture, science and complex operations.",
   alternates: { canonical: "/consulting" },
   openGraph: { url: "/consulting", title: "Strategic consulting · Kuchimoto", images: [{ url: "/og/kuchimoto-crafted.jpg", width: 1200, height: 630 }] },
 };
 
 /**
- * Strategic consulting (26 November 2026). Samuel's own method, written as he works it: benchmark the two world
- * leaders, diagnose the two hardest problems, name the blockers factor by factor, then a plan the studio can build.
- * The field study is anonymous on purpose: a company is named here only once it has agreed in writing.
+ * Practice I, Strategic Consulting & Research (approved 27 November 2026). Samuel's method in four steps, what the
+ * studio can show for it, the monographs (independent research from public sources, no client named or implied), and
+ * how an engagement starts. No prices, durations or response times: each is defined in its own proposal.
  */
 export default function ConsultingPage() {
   return (
     <>
       <section className="container-k pt-32 sm:pt-44" aria-labelledby="consulting-title">
-        <p className="mono text-ink-2">Kuchimoto · Ecology, technology, science</p>
+        <p className="mono text-ink-2">{CONSULTING.practice}</p>
         <h1 id="consulting-title" className="display mt-6 text-[clamp(3.4rem,10vw,9.5rem)]">
           Strategic consulting.
         </h1>
         <div className="mt-10 grid gap-8 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <p className="text-[clamp(1.3rem,2vw,1.8rem)] leading-[1.35] tracking-[-0.02em]">{CONSULTING.lead}</p>
-            <p className="mt-6 max-w-[52ch] text-lg leading-relaxed text-ink-2">{CONSULTING.who}</p>
+            <p className="mt-6 max-w-[52ch] text-lg leading-relaxed text-ink-2">{CONSULTING.outcome}</p>
           </div>
           <div className="flex flex-col gap-5 lg:col-span-4 lg:col-start-9 lg:items-end">
-            <p className="mono text-ink-2 lg:text-right">{CONSULTING.fee}</p>
+            <p className="mono text-ink-2 lg:text-right">{CONSULTING.engagements}</p>
             <PillLink href="/contact?track=consulting#inquiry" tone="dark">
-              Request a consultation
+              {CONSULTING.cta}
             </PillLink>
           </div>
         </div>
-        <ul className="mt-14 flex flex-wrap gap-2" aria-label="Fields">
+        <ul className="mt-14 flex flex-wrap gap-2" aria-label="Areas of depth">
           {CONSULTING.fields.map((field) => (
             <li key={field} className="rounded-full px-4 py-2.5 text-[15px] shadow-[0_0_0_1px_var(--color-hairline-strong)]">
               {field}
@@ -85,49 +87,46 @@ export default function ConsultingPage() {
         </div>
       </section>
 
-      <section className="container-k pt-28 sm:pt-40" aria-labelledby="study-title">
-        <div className="rounded-[var(--radius-card)] bg-sumi p-8 text-washi sm:p-14" data-dark="">
-          <p className="mono text-washi/60">Independent research · in progress</p>
-          <h2 id="study-title" className="display display-md mt-6 max-w-[22ch]">
-            Biochar, soil water and carbon credits in West Africa.
+      <section className="container-k pt-28 sm:pt-40" aria-labelledby="monographs-title">
+        <div className="grid gap-6 lg:grid-cols-12 lg:items-end">
+          <h2 id="monographs-title" className="display display-lg lg:col-span-8">
+            <Link href="/monographs" className="underline-offset-8 hover:underline">
+              Monographs.
+            </Link>
           </h2>
-          <p className="mt-8 max-w-[60ch] text-lg leading-relaxed text-washi/80">
-            West African biochar producers turn farm and processing residues into biochar. For farmers, the problem is
-            not always how much rain falls; sometimes it is how much of that water the soil can hold. The questions we
-            are investigating:
-          </p>
-          <ul className="mt-8 grid gap-6 sm:grid-cols-2">
-            {[
-              ["Which fields gain most", "Biochar's effect on water retention depends on soil texture. It should be matched to the soil and the problem, not spread on every field."],
-              ["Growth without undoing the benefit", "Feedstock that stays genuine waste, methane and emissions under control, and the heat of pyrolysis put to use instead of wasted."],
-              ["Credits that hold up", "Standards such as Puro.earth, Verra VM0044 and Isometric require audited feedstock, lab tests and a traceable, non-burning end use."],
-              ["What the leaders do", "What West African producers could learn from international industry leaders."],
-            ].map(([title, body]) => (
-              <li key={title} className="border-t border-washi/20 pt-5">
-                <h3 className="text-xl font-medium tracking-[-0.02em]">{title}</h3>
-                <p className="mt-3 leading-relaxed text-washi/75">{body}</p>
-              </li>
-            ))}
-          </ul>
-          <p className="mono mt-12 max-w-[62ch] text-washi/60">
-            The same question runs through Goren Harvest, our own venture: turning what would be wasted into value.{" "}
-            <a href="https://gorenharvest.com" target="_blank" rel="noopener noreferrer" className="text-washi underline underline-offset-4">
-              gorenharvest.com
-            </a>
-          </p>
+          <p className="mono max-w-[40ch] text-ink-2 lg:col-span-4 lg:text-right">Independent Investigations</p>
         </div>
+        <ol className="mt-14 border-t border-hairline-strong">
+          {MONOGRAPHS.map((m) => (
+            <li key={m.slug} className="border-b border-hairline-strong">
+              <Link href={`/monographs/${m.slug}`} className="group grid gap-x-6 gap-y-3 py-10 md:grid-cols-12 md:items-baseline">
+                <span className="mono text-ink-2 md:col-span-2">
+                  {m.number} / {m.field}
+                </span>
+                <span className="text-[clamp(1.5rem,2.6vw,2.4rem)] leading-[1.05] font-medium tracking-[-0.035em] transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:translate-x-2 md:col-span-5">
+                  {m.title}
+                </span>
+                <span className="leading-relaxed text-ink-2 md:col-span-3">{m.subtitle}</span>
+                <span className="mono-12 inline-flex items-center gap-2 md:col-span-2 md:justify-self-end">
+                  Read
+                  <Arrow className="h-4 w-4 transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:translate-x-1.5" />
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ol>
       </section>
 
-      <section className="container-k pt-28 pb-24 sm:pt-40 sm:pb-36" aria-labelledby="fee-title">
+      <section className="container-k pt-28 pb-24 sm:pt-40 sm:pb-36" aria-labelledby="begin-title">
         <div className="grid gap-8 border-t border-hairline-strong pt-12 lg:grid-cols-12">
-          <h2 id="fee-title" className="display display-md lg:col-span-6">
-            First enquiry free.
+          <h2 id="begin-title" className="display display-md lg:col-span-6">
+            Begin with the problem.
           </h2>
           <div className="lg:col-span-5 lg:col-start-8">
-            <p className="text-lg leading-relaxed">{CONSULTING.fee}</p>
+            <p className="text-lg leading-relaxed">{CONSULTING.engagements}</p>
             <div className="mt-8">
               <PillLink href="/contact?track=consulting#inquiry" tone="dark">
-                Request a consultation
+                {CONSULTING.cta}
               </PillLink>
             </div>
           </div>

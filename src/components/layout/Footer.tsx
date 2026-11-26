@@ -5,7 +5,9 @@ import { QuickScope, ScrollTop } from "./FooterClient";
 
 const LINKS = [
   { href: "/work", label: "Work" },
+  { href: "/consulting", label: "Consulting" },
   { href: "/studio", label: "Studio" },
+  { href: "/monographs", label: "Monographs" },
   { href: "/lab", label: "Lab" },
   { href: "/contact", label: "Contact" },
 ];
@@ -43,9 +45,9 @@ export function Footer() {
 
           <div className="md:col-span-6 lg:col-span-5 lg:col-start-8">
             <h2 className="display text-[clamp(2.2rem,4vw,3.4rem)] leading-[1] tracking-[-0.035em]">
-              Have a platform
+              What problem
               <br />
-              to build?
+              are you solving?
             </h2>
             <QuickScope />
           </div>

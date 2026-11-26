@@ -32,6 +32,8 @@
 
 @layer base {
   html {
+    /* Headings reached by a link, the keyboard or find-in-page stop below the floating header pills (27 Nov 2026). */
+    scroll-padding-top: 6rem;
     background: var(--color-washi);
     color: var(--color-ink);
     -webkit-font-smoothing: antialiased;

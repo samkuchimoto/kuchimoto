@@ -29,8 +29,7 @@ export function Philosophy() {
           <Reveal className="lg:col-span-5 lg:col-start-8 lg:pt-6" delay={0.1}>
             <p className="text-[clamp(1.2rem,1.7vw,1.5rem)] leading-[1.45] tracking-[-0.01em]">
               Kuchimoto LLC builds production software, AI platforms, and avant-garde web architecture from the
-              ground up. No templates. No Webflow. No fragile plugins. You own 100% of the source code, engineered to
-              load in milliseconds and scale internationally.
+              ground up. You own 100% of the source code, built to scale internationally.
             </p>
             <div className="mt-10">
               <PillLink href="/studio">Explore the studio</PillLink>
