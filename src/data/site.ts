@@ -126,7 +126,7 @@ export const CONSULTING = {
   title: "Strategic consulting",
   lead: "Independent diagnosis of hard operational and technical problems: international benchmarking, constraint analysis and a prioritised roadmap. Depth in ecology, agriculture, science and complex operations.",
   outcome:
-    "The recommendation may be an operational change, a field trial, a partnership, or a decision not to build software. When software is the answer, Practice II builds it.",
+    "The recommendation may be an operational change, a field trial, a partnership, or a decision not to build software. When software is needed, our engineering and design studio can build it.",
   fields: ["Ecology & agriculture", "Soil & water", "Carbon removal", "Food systems", "Science", "Complex operations"],
   method: [
     {
@@ -143,7 +143,7 @@ export const CONSULTING = {
     },
     {
       title: "Roadmap",
-      body: "A prioritised written plan. Software only where it is the right answer; then Practice II builds it.",
+      body: "A prioritised written plan with practical recommendations and engineering support where needed.",
     },
   ],
   adds: [
